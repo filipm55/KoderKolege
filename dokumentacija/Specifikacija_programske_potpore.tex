@@ -1,56 +1,104 @@
 \chapter{Specifikacija programske potpore}
 		
-	\section{Funkcionalni zahtjevi}
+		
+\section{Funkcionalni zahtjevi}
+
+\textbf{\textit{dio 1. revizije}}\\
+
+\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
+
+\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
+
+
+\noindent \textbf{Dionici:}
+
+\begin{packed_enum}
+	\item Naručitelj
+	\item Voditelj natjecanja
+	\item Natjecatelj				
+	\item Administrator
+	\item Razvojni tim
+	
+\end{packed_enum}
+
+\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
+
+
+\begin{packed_enum}
+	\item  \underbar{Neregistrirani korisnik (inicijator) može:}
+	
+	\begin{packed_enum}
+		
+		\item pregledavati programske zadatke objavljene na stranici
+		\item vidjeti kalendar s dostupnim natjecanjima
+		\item pregledavati profile drugih korisnika (natjecatelja i vodietlja natjecanja)
+		\begin{packed_enum}
 			
-			\textbf{\textit{dio 1. revizije}}\\
+			\item  na profilu natjecatelja može vidjeti statistike o broju točno riješenih zadataka, broju isprobanih zadataka i 
+			pehare za osvojena natjecanja 
+			\item  na profilu voditelja može vidjeti popis učitanih zadataka i kalendar s popisom objavljenih natjecanja
 			
-			\textit{Navesti \textbf{dionike} koji imaju \textbf{interes u ovom sustavu} ili  \textbf{su nositelji odgovornosti}. To su prije svega korisnici, ali i administratori sustava, naručitelji, razvojni tim.}\\
-				
-			\textit{Navesti \textbf{aktore} koji izravno \textbf{koriste} ili \textbf{komuniciraju sa sustavom}. Oni mogu imati inicijatorsku ulogu, tj. započinju određene procese u sustavu ili samo sudioničku ulogu, tj. obavljaju određeni posao. Za svakog aktora navesti funkcionalne zahtjeve koji se na njega odnose.}\\
-			
-			
-			\noindent \textbf{Dionici:}
-			
-			\begin{packed_enum}
-				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
-				
-			\end{packed_enum}
-			
-			\noindent \textbf{Aktori i njihovi funkcionalni zahtjevi:}
-			
-			
-			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
-				
-				\begin{packed_enum}
-					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
-				
-					\end{packed_enum}
-					\item  funkcionalnost 3
-					
-				\end{packed_enum}
-			
-				\item  \underbar{Aktor 2 (sudionik) može:}
-				
-				\begin{packed_enum}
-					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					
-				\end{packed_enum}
-			\end{packed_enum}
-			
-			\eject 
-			
+		\end{packed_enum}
+		\item sortirati učitane zadatke na profilu voditelja natjecanja
+		\item poslati zahtjev za registracijom za koji mora priložiti sljedeće informacije: uloga za koju se prijavljuje (voditelj natjecanja ili natjecatelj), korisničko ime,
+		fotografija, lozinka, ime, prezime i email adresa
+		
+	\end{packed_enum}
+	
+	\item \underbar{Natjecatelj (inicijator) može:}
+	\begin{packed_enum}
+		
+		\item za vrijeme trajanja natjecanja:
+		\begin{packed_enum}
+			\item vidjeti aktualne zadatke
+			\item poslati datoteku s programskim kodom za svaki zadatak
+		\end{packed_enum}
+		\item nakon natjecanja:
+		\begin{packed_enum}
+			\item  vidjeti popis učitanih rješenja drugih natjecatelja
+			\item za svaki pojedini zadatak vidjeti popis svih natjecatelja koji su učitali rješenje za taj zadatak, broj točnih primjera po najboljem učitavanju od natjecatelja i
+			prosječno vrijeme izvršavanja po primjeru (???sta ovo znaci u tekstu???)
+			\item dohvatiti učitano rješenje za pojedini zadatak ukoliko je on u potpunosti točno riješen
+		\end{packed_enum}
+		
+		\item vježbati prethodno objavljene zadatke 
+		\begin{packed_enum}
+			\item učitati rješenje zadatka u aplikaciju
+		\end{packed_enum}
+		
+		\item pokrenuti virtualno natjecanje
+		
+	\end{packed_enum}
+	
+	\item \underbar{Voditelj natjecanja (inicijator) može:}
+	\begin{packed_enum}
+		
+		\item funkcionalnost 1
+		\item funkcionalnost 2
+		
+	\end{packed_enum}
+	
+	\item \underbar{Administrator (inicijator) može:}
+	\begin{packed_enum}
+		
+		\item vidjeti popis svih registriranih korisnika i njihovih osobnih podataka
+		\item mijenjati dodijeljena prava registriranim korisnicima
+		\item mijenjati osobne podatke registriranih korisnika
+		\item potvrditi/odbiti registracijski zahtjev za ulogu voditelja
+		
+	\end{packed_enum}
+	
+	\item  \underbar{Baza podataka (sudionik) može:}
+	
+	\begin{packed_enum}
+		
+		\item funkcionalnost 1
+		\item funkcionalnost 2
+		
+	\end{packed_enum}
+\end{packed_enum}
+
+\eject 
 			
 				
 			\subsection{Obrasci uporabe}
