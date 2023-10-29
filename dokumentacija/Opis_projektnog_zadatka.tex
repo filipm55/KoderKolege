@@ -2,10 +2,10 @@
 		
 		
 		
-		Tema našeg projektnog rada je izrada web aplikacije \textit{"BytePit"} koja omogućuje korisnicima sudjelovanje u programerskim natjecanjima i provjeru riješenih zadataka. Ideja je da naša stranica ima sve potrebno za obavljanje natjecanja poput registracije korisnika, uključivanje u natjecanje, pribavljanje zadataka, vrjednovanje priloženih rješenja, prikaz dosadašnjih uspjeha natjecatelja i još mnogo toga.
+		Tema našeg projektnog rada je izrada web aplikacije \textit{"BytePit"} koja omogućuje korisnicima sudjelovanje u programerskim natjecanjima i provjeru riješenih zadataka. Ideja je da naša stranica ima sve potrebno za obavljanje natjecanja poput registracije korisnika, uključivanje u natjecanje, pribavljanje zadataka, vrednovanje priloženih rješenja, prikaz dosadašnjih uspjeha natjecatelja i još mnogo toga.
 	
-		Neregistrirani korisnik može se registrirati definirajući registrira li se kao \textbf{voditelj} ili \textbf{natjecatelj}
-		Za registraciju korisnika potrebno je  unjeti \begin{packed_item}
+		Neregistrirani korisnik može se registrirati definirajući registrira li se kao \textbf{voditelj} ili \textbf{natjecatelj}.
+		Za registraciju korisnika potrebno je  unijeti \begin{packed_item}
 			\item korisničko ime
 			\item fotografiju
 			\item lozinku
@@ -13,11 +13,11 @@
 			\item prezime
 			\item email adresu
 		\end{packed_item}
-		Upješnost registracije potvrđuje se preko email adrdese dok dodatno voditelja potvrđuje i administrator.
+		Uspješnost registracije potvrđuje se preko email adrdese dok  voditelja dodatno potvrđuje i administrator.
 		
-		\textbf{\textit{Neregistrirani korisnik}} na web stranici može vidjeti kalendar s natjecanjima kojima je moguće pristupiti te pregledati zadatke na stranici. Također, omogućen mu je uvid u profile natjecatelja i voditelja. Svi registrirani korisnici automatski nasljeđuju sve ove mogućnosti koje neregistrirani korisnici imaju.
+		\textbf{\textit{Neregistrirani korisnik}} na web stranici može vidjeti kalendar s natjecanjima kojima je moguće pristupiti te pregledati zadatke na stranici. Također, omogućen mu je uvid u profile natjecatelja i voditelja. Svi registrirani korisnici automatski nasljeđuju sve mogućnosti koje neregistrirani korisnici imaju.
 		
-	    \textbf{\textit{Natjecatelj}} prisustuje natjecanjima te dobiva uvid u svoje rezultate. U svrhu pripreme za spomenuta natjecanja, na stranici su dostupni zadatci za vježbu te je dostupna opcija virtualnog natjecanja.
+	    \textbf{\textit{Natjecatelj}} prisustvuje natjecanjima te dobiva uvid u svoje rezultate. U svrhu pripreme za spomenuta natjecanja, na stranici su dostupni zadatci za vježbu te je dostupna opcija virtualnog natjecanja.
 	    
 	    \textbf{\textit{Voditelj}} ima veće ovlasti od natjecatelja. U njegovim rukama leži zadatak učitavanja novih zadataka na web aplikaciju te organizacija natjecanja. Kada voditelj izradi natjecanje, ono postaje vidljivo u kalendaru dostupnom natjecateljima. Dakle, zadatak voditelja je odrediti težinu natjecateljskog ispita, broj zadataka i dostupno vrijeme za rješavanje istih te postavljanje termina ispita. Ukoliko želi, voditelj može učitati sličicu pehara.  
 	    
@@ -33,9 +33,40 @@
 		
 		\noindent{\Large {Virtualno natjecanje}}\\
 		Virtualno natjecanje je koncept osmišljen kako bi natjecatelji mogli provjeriti koliko su se dobro pripremili za nadolazeće natjecanje. Dakle, kada korisnik želi provjeriti svoju spremnost samo ode u kalendar, odabere neko natjecanje koje je provedeno u prošlosti te pokrene virtualno natjecanje and njim. Tada će iz korisnikove perspective sve izgledati kao da on sudjeluje na tom natjecanju. Bit će mu pružen isti ispit I po završetku rješavanja biti će rangiran među natjecateljima koji su taj ispit službeno rješavali. Korisnik tako dobiva informaciju kakav bi bio njegov rezultat da je taj dan uistinu sudjelovao na natjecanju.\\
-		\noindent{\Large {Slične str,korisnost,upotreba str.}}\\
-		\eject
 		
+		\noindent\\
+		Već postojeća aplikacija vrlo slična ovoj je Edgar koji se koristi na FER-u za provođenje ispita i laboratorijskih vježbi.	S obzirom na to da je svrha te aplikacije ipak drugačija od naše, postoje neke značajne razlike. Dok se za registrirani pristup našoj aplikaciji korisnik sam prijavljuje i čeka potvrdu administratora, u Edgaru to čini administrator samostalno dodajući korisnike (kojima se kasnije dodijele njihovi pristupni podaci). Zbog same razlike u namjeni, predana rješenja se drugačije boduju (nekim stalnim brojem bodova, bez ovisnosti o vremenu). Također, studentu prijavljenom u sustav nije omogućen pregled tuđih rješenja kao što je to slučaj u našoj aplikaciji, kao ni pristup pojedinačnim zadacima: moguće je samo pokrenuti probni ispit ili vježbu, bez mogućnosti odabira pojedinog zadatka.
+		Ostale funkcionalnosti BytePita vrlo su slične Edgaru: uloge natjecatelja i studenta su slične, oni mogu učitavati i provjeravati svoj kod, pokrenuti probni ispit (u BytePitu virtualno natjecanje) kao i pristupiti ispitu (odnosno natjecanju). Koncept natjecanja i ispita vrlo je sličan - korisnicima su dostupni svi ispitni zadaci istovremeno, a po završetku se ti zadaci objavljuju na stranici za vježbu. 
+		Ono što u BytePitu predstavlja uloga voditelja, u Edgaru je asistent/profesor koji ima ovlasti objavljivanja tj. izrade zadataka i organizaciju ispita (odabir zadataka, trajanja).	\\
+		
+		\noindent{\Large {Slične str,korisnost,upotreba str.}}\\
+			%unos slike
+		\begin{figure}[H]
+			\includegraphics[scale=0.4]{slike/edgar1}
+			%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			\centering
+			\caption{Početna stranica i popis vježbi za ispite}
+			\label{fig:pocstr}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\includegraphics[scale=0.4]{slike/edgar3}
+			%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			\centering
+			\caption{Probni ispit}
+			\label{fig:ispit}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\includegraphics[scale=0.4]{slike/edgar2}
+			%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			\centering
+			\caption{Stranica sa statistikom}
+			\label{fig:stats}
+		\end{figure}
+		
+		\eject
+
 		
 		
 		\section{Primjeri u \LaTeX u}
