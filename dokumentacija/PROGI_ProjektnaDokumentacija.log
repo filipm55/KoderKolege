@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.24)  30 OCT 2023 15:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.24)  30 OCT 2023 15:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1702,15 +1702,6 @@ Overfull \hbox (0.94952pt too wide) in paragraph at lines 59--61
 []\OT1/jkp/m/n/12 za svaki po-je-dini za-da-tak vi-djeti po-pis svih na-tje-ca-
 te-lja koji su u[]citali
  []
-
-! Extra }, or forgotten \endgroup.
-l.92 			\end{packed_enum}}
-                          
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
