@@ -161,10 +161,125 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-						\noindent \underbar{\textbf{UC1 - Registracija}}
+					
+					
+						\noindent \underbar{\textbf{UC - Izrada natjecanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Neregistrirani korisnik
+						\item \textbf{Glavni sudionik: }Voditelj
+						\item  \textbf{Cilj:} Napraviti natjecanje za korisnike 
+						\item  \textbf{Sudionici:} Natjecatelji
+						\item  \textbf{Preduvjet:} Registrirani korisnik voditelj
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Voditelj odabire opciju izrade natjecanja
+							\item Odabire vrijeme početka i završetka natjecanja
+							\item Bira broj zadataka 
+							\item Unosi tekst zadatka
+							\item Bira broj bodova za zadatak 
+							\item Odabire po želji sličicu pehara 
+						\end{packed_enum}
+					\end{packed_item}
+					
+						\noindent \underbar{\textbf{UC Prijava u sustav}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Ghost
+						\item  \textbf{Cilj:} Dobiti pristup korisničkom sustavu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Registracija
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Unos korisničkog imena i lozinke
+							\item Potvrda od sustava o ispravnim podatcima
+							\item Pristup korisničkim opcijama
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Neispravno korisnicko ime ili lozinka
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva poruku o neispravnom korisnickom imenu ili lozinki
+							\end{packed_enum}
+
+						\end{packed_item}
+					\end{packed_item}
+					
+					
+					\noindent \underbar{\textbf{UC2 - Pregled kalendara}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik, Ghost
+						\item  \textbf{Cilj:} Pregled kalendara sa svim natjecanjima 
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Na pocetnoj stranici je prikazan tjedni kalendar
+							\item Korisnik/ghost odabire mjesečnu opciju prikaza kalendara
+							\item Otvara se stranica sa prikazom mjesečnog kalendara natjecanja
+							
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Ghost želi pristupiti natjecanju
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva poruku da je za nastavak potrebna registracija 
+
+							\end{packed_enum}
+
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+						\noindent \underbar{\textbf{UC1 - Pregled zadataka}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik, Ghost
+						\item  \textbf{Cilj:} Pregled svih zadataka u aplikaciji
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Na pocetnoj stranici korisnik/ghost odabire opciju pregled svih zadataka
+							\item Otvara se stranica s popisom svih zadataka
+							\item Korisnik/ghost odabire zadatak
+							\item Otvara se stranica sa zadatkom
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[4.a] Ghost (neregistrirani korisnik) želi predati riješenje zadatka 
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva poruku da je za nastavak potrebna registracija
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+						\noindent \underbar{\textbf{UC - Registracija}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } Ghost
 						\item  \textbf{Cilj:} Registracija novog korisnika
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:}  / 
@@ -247,8 +362,8 @@
 								
 							\end{packed_item}
 							
-							
 						\end{packed_item}
+						
 					\noindent \underbar{\textbf{UC3 - Pregled i uređivanje svih natjecanja \ zadataka}}
 						\begin{packed_item}
 							
@@ -268,9 +383,9 @@
 							\end{packed_enum}
 							
 							\item  \textbf{Opis mogućih odstupanja: - } 
-							
-							
+					
 						\end{packed_item}
+						
 					\noindent \underbar{\textbf{UC4 - Rješavanje prethodno objavljenih zadataka}}
 				\begin{packed_item}
 					
