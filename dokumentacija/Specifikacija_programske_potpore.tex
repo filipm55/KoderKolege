@@ -160,6 +160,57 @@
 							
 						\end{packed_item}
 					\end{packed_item}
+					
+						\noindent \underbar{\textbf{UC 1. -Registriraj novog korisnika}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: } neregistrirani korisnik
+						\item  \textbf{Cilj:} Registracija novog korisnika
+						\item  \textbf{Sudionici:} back-end
+						\item  \textbf{Preduvjet:}  / 
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Korisnik odabire opciju za registraciju
+							\item Otvara se form u koji upisuje podatke:
+								\item[] \begin{packed_enum}
+									\item korisničko ime
+									\item fotografija
+									\item lozinka
+									\item ime i prezime
+									\item email adresa
+								\end{packed_item}
+									
+							\item Back end provjerava jesu li korisničko ime i email već zauzeti
+							\item Ako nisu zauzeti, korisnik se upisuje u bazu sa "zaključanim" profilom
+							\item Učitava se stranica na kojoj piše da korisnik treba potvrditi mail
+							\item Back end šalje mail potvrde na mail korisnika
+							\item Korisnik potvrđuje registraciju
+							\item Back end "otključava" profil korisnika
+							\item Korisniku se šalje mail o uspješnoj registraciji
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a]Email/korisničko ime su već zauzeti
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva poruku da je mail/korisničko ime već korišten
+								\item Traži se ponovni upis podataka
+								
+							\end{packed_enum}
+							\item[7.a] Korisnik ne potvrđuje email u nekom zadanom roku
+							\item[] \begin{packed_enum}
+								
+								\item Nakon isteka roka, korisnik se briše iz baze podataka
+								
+							\end{packed_enum}
+
+							
+						\end{packed_item}
+					\end{packed_item}
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
