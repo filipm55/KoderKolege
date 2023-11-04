@@ -1,5 +1,6 @@
 import "./NavbarStyle.css"
 import logo from "./logo.svg"
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
 
@@ -9,26 +10,26 @@ const Navbar = () => {
         <i className="menu-icon">
           &#9776;
         </i>
-        <img src={logo} alt="Logo" className="logo" />
+       <Link to='/'> <img src={logo} alt="Logo" className="logo" /></Link>
         </div>
       <div className="middle">
-      <a href="/calendar" className="nav-link middle-link">
+      <Link to='/calendar' className="nav-link middle-link">
           Kalendar natjecanja
-        </a>
-        <a href="/users" className="nav-link middle-link">
+        </Link>
+        <Link to='/users' className="nav-link middle-link">
           Korisnici
-        </a>
-        <a href="/tasks" className="nav-link middle-link">
+        </Link>
+        <Link to='/tasks' className="nav-link middle-link">
           Zadaci za vježbu
-        </a>
+        </Link>
       </div>
       <div className="right">
-        <a href="/login" className="nav-link middle-link">
+        <Link to='/login' className="nav-link middle-link">
           Prijava
-        </a>
-        <a href="/registration" className="nav-link">
+        </Link>
+        <Link to='/registration' className="nav-link">
           Registracija
-        </a>
+        </Link>
       </div>
     </div>
   );
