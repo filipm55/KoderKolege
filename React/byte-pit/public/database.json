@@ -1,12 +1,12 @@
 {
-    "users": [
+  "users": [
     {
-        "username": "admin",
-        "password": "123456",
-        "name": "matea",
-        "surname": "cvetkovic",
-        "email": "doktorica.matea@gmail.com",
-        "id": 1
+      "username": "admin",
+      "password": "123456",
+      "name": "matea",
+      "surname": "cvetkovic",
+      "email": "doktorica.matea@gmail.com",
+      "id": 1
     }
-]
+  ]
 }

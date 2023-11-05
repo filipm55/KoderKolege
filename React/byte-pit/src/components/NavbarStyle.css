@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     padding-left: 10px;
-    
+    justify-self:flex-start;
   }
   
   .menu-icon {
@@ -29,23 +29,25 @@
   .right {
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    padding-left: 25px;
   }
   
   .middle {
     display: flex;
     align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
   }
   
   
   .nav-link {
     color: #fff;
     text-decoration: none;
-    margin-left: 20px;
+    margin: 10px;
   }
   
   .middle-link {
-    margin-left: 50px;
+    margin: 8px;
   }
   
   .nav-link:hover {
@@ -61,3 +63,11 @@
     }
   }
   
+  div.omotac {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+ 

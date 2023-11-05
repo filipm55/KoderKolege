@@ -12,24 +12,31 @@ const Navbar = () => {
         </i>
        <Link to='/'> <img src={logo} alt="Logo" className="logo" /></Link>
         </div>
+      <div className="omotac">
       <div className="middle">
-      <Link to='/calendar' className="nav-link middle-link">
-          Kalendar natjecanja
+        <p>|</p>
+        <Link to='/calendar' className="nav-link middle-link">
+          KALENDAR NATJECANJA
         </Link>
+        <p>|</p>
         <Link to='/users' className="nav-link middle-link">
-          Korisnici
+          KORISNICI
         </Link>
+        <p>|</p>
         <Link to='/tasks' className="nav-link middle-link">
-          Zadaci za vježbu
+          ZADACI ZA VJEŽBU
         </Link>
+        <p>|</p>
       </div>
+
       <div className="right">
         <Link to='/login' className="nav-link middle-link">
-          Prijava
+          PRIJAVA
         </Link>
         <Link to='/registration' className="nav-link">
-          Registracija
+          REGISTRACIJA
         </Link>
+      </div>
       </div>
     </div>
   );
