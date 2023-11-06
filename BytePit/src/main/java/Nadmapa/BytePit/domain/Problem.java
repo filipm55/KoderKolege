@@ -1,7 +1,6 @@
 package Nadmapa.BytePit.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +42,6 @@ public class Problem {
 
     public Problem(User problemMaker, String title, int points, Duration duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
-        Assert.notNull(points, "Problem must have a points");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
         Assert.notEmpty(inputExample, "Problem must have at least one input+output example");
@@ -79,8 +77,8 @@ public class Problem {
     }
 
     public void removeInputOutputExamples(String[] input){
-        for(int i=0; i<input.length; i++){
-            inputOutputExamples.remove(input[i]);
+        for (String inputExample: input) {
+            inputOutputExamples.remove(inputExample);
         }
     }
 

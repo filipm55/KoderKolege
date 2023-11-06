@@ -2,6 +2,8 @@ package Nadmapa.BytePit.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -16,7 +18,10 @@ public class Competition {
     @NotNull
     @ManyToOne
     private User competitionMaker; //treba napravit da u controlleru on primi i trenutno logiranog usera? https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
+    @Getter @Setter
+
     private LocalDateTime dateTimeOfBeginning; // + DateTimeFormatter? https://www.javatpoint.com/java-localdatetime
+    @Getter @Setter
     private LocalDateTime dateTimeOfEnding;
 
     private int numberOfProblems;
@@ -38,21 +43,6 @@ public class Competition {
 
     }
 
-    public LocalDateTime getDateTimeOfBeginning() {
-        return dateTimeOfBeginning;
-    }
-
-    public void setDateTimeOfBeginning(LocalDateTime dateTimeOfBeginning) {
-        this.dateTimeOfBeginning = dateTimeOfBeginning;
-    }
-
-    public LocalDateTime getDateTimeOfEnding() {
-        return dateTimeOfEnding;
-    }
-
-    public void setDateTimeOfEnding(LocalDateTime dateTimeOfEnding) {
-        this.dateTimeOfEnding = dateTimeOfEnding;
-    }
 
     public Set<Problem> getProblems() {
         return problems;
