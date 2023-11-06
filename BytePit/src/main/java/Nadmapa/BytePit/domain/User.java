@@ -1,35 +1,40 @@
 package Nadmapa.BytePit.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
 
-
 @Entity(name = "USER")
+@Table(name= "user")
 public class User {
 
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "username", unique = true)
    private String username;
    @Getter
    @Setter
+   @Column(name = "name")
    private String name;
    @Getter @Setter
+   @Column(name = "lastname")
    private String lastname;
    @Getter @Setter
+   @Column(name = "password")
    private String password;
    @Getter @Setter
-   @Column(unique=true)
+   @Column(name="email", unique=true)
    private String email;
 
    @Lob  //Large object anotacija
    //@Column(name = "image_data")
+   @Column(name= "image")
    private byte[] image;
 
+   @Enumerated(EnumType.STRING)
+   @Column(name="usertype")
    private UserType userType; //mozda bi se mogo stvorit privatni enum usertype -> ovisi o frontendu kako FORM funkcionira (za konstruktor)
    public User(){
 
@@ -43,9 +48,6 @@ public class User {
       this.image = image;
       this.userType = userType;
    }
-
-
-
 
    public byte[] getImage() { return image; }
 
@@ -63,7 +65,6 @@ public class User {
               ", lastname='" + lastname + '\'' +
               ", password='" + password + '\'' +
               ", email='" + email + '\'' +
-              ", image='" + Arrays.toString(image) + '\'' + // ovo je mozda sus
               ", userType='" + userType.toString() + '\'' +
               '}';
    }
