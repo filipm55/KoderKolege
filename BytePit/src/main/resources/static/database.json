@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "123456",
+      "name": "matea",
+      "surname": "cvetkovic",
+      "email": "doktorica.matea@gmail.com",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "name": "trps",
+      "surname": "cviki",
+      "username": "cvjetko",
+      "email": "cvjetaca@yahoo.com",
+      "password": "gitara",
+      "role": "natjecatelj",
+      "id": 2
+    },
+    {
+      "name": "Ime",
+      "surname": "Prezime",
+      "username": "korisnicko",
+      "email": "mail@gmail.com",
+      "password": "lozinka",
+      "role": "",
+      "file": null,
+      "id": 3
+    },
+    {
+      "name": "mmm",
+      "surname": "mmm",
+      "username": "korisnicko",
+      "email": "mail@gmail.com",
+      "password": "lozinka",
+      "role": "",
+      "file": null,
+      "id": 4
+    },
+    {
+      "name": "imeee",
+      "surname": "pre",
+      "username": "korisnickoime",
+      "email": "maill@asjdv.com",
+      "password": "lozinka",
+      "role": "",
+      "file": null,
+      "id": 5
+    }
+  ],
+  "zadaci": [
+    {
+      "title": "tesko",
+      "authorid": "1",
+      "author": "matea",
+      "body": "mdfewfikweojgoeršhk340woatea",
+      "id": 1
+    },
+    {
+      "title": "laksi",
+      "authorid": "2",
+      "author": "trpimir",
+      "body": "loremipsumloremipsumloremipsum",
+      "id": 2
+    }
+  ]
+}

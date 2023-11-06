@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2b6b333a.css",
+    "main.js": "/static/js/main.e9b1e630.js",
+    "static/media/Abel-Regular.ttf": "/static/media/Abel-Regular.3843f456cf56d275baf6.ttf",
+    "static/media/logo.svg": "/static/media/logo.91828fd768852dae2fb3caf05df9448c.svg",
+    "index.html": "/index.html",
+    "main.2b6b333a.css.map": "/static/css/main.2b6b333a.css.map",
+    "main.e9b1e630.js.map": "/static/js/main.e9b1e630.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b6b333a.css",
+    "static/js/main.e9b1e630.js"
+  ]
+}
