@@ -4,19 +4,25 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
 
-@Entity
+@Entity(name = "USER")
 public class User {
 
    @Id
    private String username;
-
+   @Getter
+   @Setter
    private String name;
+   @Getter @Setter
    private String lastname;
+   @Getter @Setter
    private String password;
+   @Getter @Setter
    @Column(unique=true)
    private String email;
 
@@ -38,45 +44,8 @@ public class User {
       this.userType = userType;
    }
 
-   public String getUsername() {
-      return username;
-   }
 
-   public void setUsername(String username) {
-      this.username = username;
-   }
 
-   public String getName() {
-      return name;
-   }
-
-   public void setName(String name) {
-      this.name = name;
-   }
-
-   public String getLastname() {
-      return lastname;
-   }
-
-   public void setLastname(String lastname) {
-      this.lastname = lastname;
-   }
-
-   public String getPassword() {
-      return password;
-   }
-
-   public void setPassword(String password) {
-      this.password = password;
-   }
-
-   public String getEmail() {
-      return email;
-   }
-
-   public void setEmail(String email) {
-      this.email = email;
-   }
 
    public byte[] getImage() { return image; }
 

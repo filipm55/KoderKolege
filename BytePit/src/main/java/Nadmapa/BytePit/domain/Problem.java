@@ -1,32 +1,53 @@
 package Nadmapa.BytePit.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.util.Assert;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
+@Entity (name = "PROBLEM")
 public class Problem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private final User problemMaker;
+    @OneToOne
+    private User problemMaker;
+    @Getter @Setter
     private String title;
+
+    @Getter @Setter
     private int points;
-
+    @Getter @Setter
     private Duration duration;
-
+    @Getter @Setter
     private String text;
-
+    @ElementCollection
+    @CollectionTable(name = "inputOutput_mapa", joinColumns = @JoinColumn(name = "problem_id"))
+    @MapKeyColumn(name = "kljuc")
+    @Column(name = "vrijednost")
     private Map<String, String> inputOutputExamples = new HashMap<>();
+    /*
+    U ovom primeru, mapa će biti mapirana u posebnu tabelu problem_inputOutputExamples. problem_id će biti strani ključ koji povezuje mapu sa entitetom Problem.
 
+    Ovo će omogućiti čuvanje mape u bazi podataka. */
+    @Getter @Setter
     private boolean isPrivate;
-
+    @Getter @Setter
     private ProblemType problemType;
 
     public Problem(User problemMaker, String title, int points, Duration duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+        Assert.hasText(title, "Problem must have a title");
+        Assert.notNull(points, "Problem must have a points");
+        Assert.notNull(duration, "Problem must have a duration");
+        Assert.hasText(text, "Problem must have a text");
+        Assert.notEmpty(inputExample, "Problem must have at least one input+output example");
+        Assert.notEmpty(outputExample, "Problem must have at least one input+output example");
         this.problemMaker=problemMaker;
         this.title = title;
         this.points = points;
@@ -37,37 +58,11 @@ public class Problem {
         this.problemType = problemType;
     }
 
-    public String getTitle() {
-        return title;
+    public Problem() {
+
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public Map<String, String> getInputOutputExamples() {
         return inputOutputExamples;
@@ -89,21 +84,6 @@ public class Problem {
         }
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
-    }
-
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
-    }
-
-    public ProblemType getProblemType() {
-        return problemType;
-    }
-
-    public void setProblemType(ProblemType problemType) {
-        this.problemType = problemType;
-    }
 
     @Override
     public String toString() {
