@@ -7,34 +7,31 @@ import lombok.Setter;
 import java.util.Arrays;
 
 @Entity(name = "USER")
-@Table(name= "user")
+@Table(name= "users_list")
 public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "username", unique = true)
+   private Long id;
+
+   @Getter
+   @Setter
    private String username;
    @Getter
    @Setter
-   @Column(name = "name")
    private String name;
    @Getter @Setter
-   @Column(name = "lastname")
    private String lastname;
    @Getter @Setter
-   @Column(name = "password")
    private String password;
    @Getter @Setter
-   @Column(name="email", unique=true)
    private String email;
 
    @Lob  //Large object anotacija
-   //@Column(name = "image_data")
-   @Column(name= "image")
    private byte[] image;
 
+   @Column(unique = true)
    @Enumerated(EnumType.STRING)
-   @Column(name="usertype")
    private UserType userType; //mozda bi se mogo stvorit privatni enum usertype -> ovisi o frontendu kako FORM funkcionira (za konstruktor)
    public User(){
 
