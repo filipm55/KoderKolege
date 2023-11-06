@@ -81,3 +81,15 @@ button:hover {
     background-color:rgb(226, 209, 182);
     color: black;
 }
+
+label.voditelj{
+    margin-right: 2vw;
+}
+
+p.fileError  {
+    color: red;
+    background-color: #ffebeb;
+    padding: 3px;
+    border-radius: 3px;
+    border: 1px red solid;
+}

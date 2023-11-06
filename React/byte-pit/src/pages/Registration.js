@@ -10,18 +10,73 @@ const Registration = () => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role,setRole] = useState('');
+    //const [fEmail, setFEmail] = useState(false)
+    var fEmail = false;
+    const [faultyEmail, setFaultyEmail] = useState(false);
+    const[fEmailMess,setFEmailMess]=useState('')
+    const [file, setFile] = useState(null);
+    var filee = null; //pokusaj prijenosa filea u json bazu - setFile ne radi, ni ovo ne radi :(
+    const [isError, setIsError] = useState(false)
+    const [errorMsg, setErrorMsg] = useState("");
 
     const submitFja = (e) => {
         e.preventDefault();
-        const user = {name: name, surname: surname, username: username, email: email, password:password};
-
-        sendData('http://localhost:8080/users', user);
+        checkEmail(email);
+        if(!fEmail){
+            const user = {name: name, surname: surname, username: username, email: email, password:password, role:role, file:filee};
+            sendData('http://localhost:8080/users', user);
+        }
+        else{
+            //no submit
+        }
     }
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+
+        // Checking if the file type is allowed or not
+        const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+        if (!allowedTypes.includes(selectedFile?.type)) {
+            setIsError(true);
+            setErrorMsg("Only JPEG, PNG, and GIF images are allowed!avi");
+            return;
+        }
+
+        setIsError(false);
+        setFile(selectedFile);
+        filee = selectedFile;
+    };
+
+    const checkEmail=(email)=> {
+        let br = 0;
+        let dot = 0;
+
+        for(let i in email) {
+            if (email[i] === "@") {
+                br ++;
+                for(let j = Number(i) + 1; j < email.length; j ++) {
+                    if (email[j] === ".") {
+                        dot ++;
+                    }
+                }
+            }
+        }
+        if (br !== 1) {
+            setFEmailMess("Email must have exactly one @!");
+            fEmail=true;
+            setFaultyEmail(true);
+        }
+        else if (dot === 0) {
+            setFEmailMess("Email must have at least one dot after @!");
+            fEmail=true;
+            setFaultyEmail(true);
+        }
+    };
     
     return (
         <div className="wrapper">
             <h2>Registracija</h2>
-            <form onSubmit = {submitFja}>
+            <form onSubmit ={submitFja}>
                 
                 <div className='kucica'><label>Ime:</label>
                     <input className = 'top' type = "text" value = {name} required onChange={(e) => setName(e.target.value)}></input>
@@ -32,13 +87,20 @@ const Registration = () => {
                 <div className='kucica'><label>Email:</label>
                     <input type = "text" value = {email} required onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
+                {faultyEmail && <p className='fileError'>{fEmailMess}</p>}
+
                 <div className='kucica'><label>Korisničko ime:</label>
                     <input type = "text" value = {username} required onChange={(e) => setUsername(e.target.value)}></input>
                 </div>
                 <div className='kucica'><label>Lozinka:</label>
                     <input type = "password" value = {password} required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
-                <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"/></div>
+                <div className='kucica'><label>Uloga:</label>
+                    <label htmlFor="natjecatelj"><input type="radio" id="natjecatelj" name="uloga" value="HTML" checked onChange={()=>setRole('natjecatelj')}/>natjecatelj</label>
+                    <label className="voditelj" htmlFor="voditelj"><input type="radio" id="voditelj" name="uloga" value="HTML" onChange={()=>setRole('voditelj')}/>voditelj</label>
+                    </div>
+                <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka" required  onChange={handleFileChange}/></div>
+                {isError && <p className='fileError'>{errorMsg}</p>}
                 <button className='submitGumb'>Registriraj me!</button>
 
             </form>

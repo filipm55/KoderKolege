@@ -1,0 +1,13 @@
+div.task-list{
+    background-color: rgba(100, 94, 94, 0.35);
+    border-radius: 10px;
+    padding:5px;
+    width:60vw;
+    align-items: center;
+}
+div.task{
+    width:40vw;
+}
+h2{
+    text-align: center;
+}
