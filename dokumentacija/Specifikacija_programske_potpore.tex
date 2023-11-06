@@ -130,7 +130,7 @@
 						
 						\item \textbf{Glavni sudionik: } Neregistrirani korisnik
 						\item  \textbf{Cilj:} Registracija novog korisnika
-						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Sudionici:} Baza podataka, Administrator
 						\item  \textbf{Preduvjet:}  / 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -488,10 +488,9 @@
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item UC11 - Virtualno natjecanje
+							\item UC12 - Virtualno natjecanje
 							\item Natjecatelj odabire opciju Prethodno natjecanje
 							\item Preusmjeravanje na kalendar 
-							\item Označena natjecanja na kojima je natjecatelj sudjelovao
 							\item Natjecatelj bira natjecanje
 							\item Natjecatelja se po završetku natjecanja rangira u odnosu na službene retultate originalnog natjecanja
 									
@@ -499,7 +498,7 @@
 						\item  \textbf{Opis mogućih odstupanja:  } 
 						\item[] \begin{packed_enum}
 							
-							\item[5.a] Natjecatelj odabire natjecanje u kojem nije sudjelovao
+							\item[4.a] Natjecatelj odabire natjecanje u kojem nije sudjelovao
 							
 							\item[] \begin{packed_enum}
 								
@@ -520,7 +519,7 @@
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item UC11 - Virtualno natjecanje
+							\item UC12 - Virtualno natjecanje
 							\item Natjecatelj odabire opciju Nasumično generirani zadatci
 							\item Aplikacija generira ravnomjerno zadatke po težini
 							
@@ -665,10 +664,85 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
+				\textbf{\textit{dio 1. revizije}}\
+							
 				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
-				\eject
+				\subsubsection{1) Registracija korisnika}
+				
+				\textbf{Opis dijagrama:}
+				Korisnik započinje registraciju odabirom opcije "Registracija" na korisničkom sučelju. Nakon što korisnik odabere tu opciju, poslužitelj aplikacije šalje zahtjev korisniku da unese sljedeće podatke:
+				
+				\begin{itemize}
+					\item (a) korisničko ime
+					\item (b) fotografiju
+					\item (c) lozinku
+					\item (d) ime i prezime
+					\item (e) email adresu
+					\item (f) odabir: voditelj natjecanja / natjecatelj
+				\end{itemize}
+				
+				Nakon što korisnik unese navedene podatke, potvrđuje svoju registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Prvo se provjerava dostupnost e-mail adrese u bazi podataka. U slučaju da je e-mail adresa već zauzeta, poslužitelj obavještava korisnika da registracija nije uspjela. U slučaju da je e-mail adresa dostupna, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Iz tog slučaja proizlaze dva nova scenarija:
+				
+				\begin{enumerate}
+					\item Korisnik potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
+					\item Korisnik ne potvrđuje registraciju - poslužitelj obavještava korisnika da registracija nije uspjela.
+				\end{enumerate}
+				
+				U slučaju da je e-mail adresa dostupna, ali korisnik se registrira kao "voditelj natjecanja," tada se e-mail zahtjev za potvrdom registracije šalje administratoru, a ne korisniku. Iz tog slučaja proizlaze dva scenarija:
+				
+				\begin{enumerate}
+					\item Administrator potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
+					\item Administrator ne potvrđuje registraciju - poslužitelj obavještava korisnika da registracija nije uspjela.
+				\end{enumerate}
+				
+				\textbf{Slika dijagrama:}
+				\begin{figure}[H]
+					\centering
+
+					\caption{Sekvencijski dijagram registracije korisnika.}
+				\end{figure}
+				
+				\subsubsection{2) Pregled i uređivanje korisnika}
+				
+				\textbf{Opis dijagrama:}
+				Administrator šalje zahtjev za pregled korisnika i njihovih podataka tako da klikne na link "Pregled svih korisnika". Poslužitelj šalje upit bazi podataka za podatke registriranih korisnika, a baza podataka vraća podatke o registriranim korisnicima. Otvara se stranica s popisom registriranih korisnika i njihovim podacima koje je moguće urediti. Kada administrator pošalje zahtjev za izmjenom podataka nekog korisnika, baza podataka provjerava je li narušen integritet jedinstvenosti, odnosno je li administrator promijenio korisničko ime u drugo korisničko ime koje već postoji u bazi podataka. Iz ovog scenarija proizlaze dva slučaja:
+				
+				\begin{enumerate}
+					    \item Promjenom nije narušen integritet - novi podaci se pohranjuju u bazu podataka. Administratoru se javlja da je promjena uspješna, te se istovremeno šalje e-mail putem mail-poslužitelja korisniku s njegovim novim podacima.
+					\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka), te se traži ponovni unos podataka.
+					\end{enumerate}
+					
+					\textbf{Slika dijagrama:}
+					\begin{figure}[H]
+					\centering
+
+					\caption{Sekvencijski dijagram pregleda i uređivanja korisnika.}
+					\end{figure}
+					
+					\subsubsection{3) Virtualno natjecanje}
+					
+					\textbf{Opis dijagrama:}
+					Kada natjecatelj klikne na link/gumb "Virtualno natjecanje", poslužitelj mu nudi mogućnost odabira između "Prethodno natjecanje" i "Nasumično generirani zadaci".
+					
+					Ako natjecatelj odabere "Prethodno natjecanje", poslužitelj ga preusmjerava na kalendar natjecanja, gdje natjecatelj može birati samo natjecanja na kojima je već sudjelovao. Kada natjecatelj odabere određeno natjecanje, poslužitelj komunicira s bazom podataka kako bi provjerio je li natjecatelj sudjelovao na tom natjecanju. Iz tog scenarija proizlaze dva slučaja:
+					
+					\begin{enumerate}
+					\item Natjecatelj nije prethodno sudjelovao na odabranom natjecanju, pa mu poslužitelj onemogućava pristup, te natjecatelj može odabrati drugo natjecanje.
+					\item Natjecatelj je prethodno sudjelovao na natjecanju, te mu je omogućen pristup. Na kraju Virtualnog natjecanja, natjecateljev virtualni rezultat uspoređuje se s rang listom stvarnog natjecanja (čije podatke poslužitelj dohvaća iz baze podataka), i rezultat se prikazuje natjecatelju.
+					\end{enumerate}
+					
+					Ako natjecatelj odabere opciju "Nasumično generirani zadaci", poslužitelj iz baze podataka dohvaća zadatke i generira ih ravnomjerno prema težini. Nakon generiranja zadataka, zadaci se prikazuju natjecatelju.
+					
+					\textbf{Slika dijagrama:}
+					\begin{figure}[H]
+					\centering
+					
+					\caption{Sekvencijski virtualnog natjecanja.}
+					\end{figure}
+			
+					
+				
+				
 	
 		\section{Ostali zahtjevi}
 		
