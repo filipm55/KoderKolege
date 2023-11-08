@@ -4,3 +4,4 @@
 *.out
 *.gz
 *.toc
+node_modules
