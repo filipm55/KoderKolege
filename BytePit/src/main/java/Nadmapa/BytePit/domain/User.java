@@ -30,7 +30,6 @@ public class User {
    @Lob  //Large object anotacija
    private byte[] image;
 
-   @Column(unique = true)
    @Enumerated(EnumType.STRING)
    private UserType userType; //mozda bi se mogo stvorit privatni enum usertype -> ovisi o frontendu kako FORM funkcionira (za konstruktor)
    public User(){

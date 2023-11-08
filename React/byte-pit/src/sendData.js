@@ -10,10 +10,10 @@ const sendData = (url, data) =>{
         })
         .then((res)=>{
             if(res.ok){
-                
+
             }
         })
-        .catch((e)=>{console.log(e.message)});
+        .catch((e)=>{console.log("hi"+e.message)});
 
 };
 

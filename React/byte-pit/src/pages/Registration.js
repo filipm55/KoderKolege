@@ -10,7 +10,7 @@ const Registration = () => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role,setRole] = useState('');
+    const [role,setRole] = useState('COMPETITOR');
     //const [fEmail, setFEmail] = useState(false)
     var fEmail = false;
     const [faultyEmail, setFaultyEmail] = useState(false);
@@ -23,9 +23,12 @@ const Registration = () => {
     const submitFja = (e) => {
         e.preventDefault();
         checkEmail(email);
+
         if(!fEmail){
-            const user = {name: name, surname: surname, username: username, email: email, password:password, role:role, file:filee};
-            sendData('http://localhost:8080/users', user);
+            const user = {name: name, lastname: surname, username: username, email: email, password:password, userType:role, image:null};
+            console.log(JSON.stringify(user));
+
+            sendData('/users', user);
         }
         else{
             //no submit
@@ -96,8 +99,8 @@ const Registration = () => {
                     <input type = "password" value = {password} required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div className='kucica'><label>Uloga:</label>
-                    <label htmlFor="natjecatelj"><input type="radio" id="natjecatelj" name="uloga" value="HTML" checked onChange={()=>setRole('natjecatelj')}/>natjecatelj</label>
-                    <label className="voditelj" htmlFor="voditelj"><input type="radio" id="voditelj" name="uloga" value="HTML" onChange={()=>setRole('voditelj')}/>voditelj</label>
+                    <label htmlFor="natjecatelj"><input type="radio" id="natjecatelj" name="uloga" value="HTML" checked={role==='COMPETITOR'} onChange={()=>setRole('COMPETITOR')}/>natjecatelj</label>
+                    <label className="voditelj" htmlFor="voditelj"><input type="radio" id="voditelj" name="uloga" checked={role==='COMPETITION_LEADER'} value="HTML" onChange={()=>setRole('COMPETITION_LEADER')}/>voditelj</label>
                     </div>
                 <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka" required  onChange={handleFileChange}/></div>
                 {isError && <p className='fileError'>{errorMsg}</p>}

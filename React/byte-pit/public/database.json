@@ -17,6 +17,56 @@
       "password": "gitara",
       "role": "natjecatelj",
       "id": 2
+    },
+    {
+      "name": "petra",
+      "surname": "kdsjf",
+      "username": "kdowjfo",
+      "email": "dksf@gds.",
+      "password": "sljkfjfopj",
+      "role": "",
+      "file": null,
+      "id": 3
+    },
+    {
+      "name": "hbedrbgf",
+      "surname": "ngvngf",
+      "username": "rgeg",
+      "email": "doktorica.matea@gmail.com",
+      "password": "efe",
+      "role": "voditelj",
+      "file": null,
+      "id": 4
+    },
+    {
+      "name": "ferrth",
+      "surname": "fdsegr",
+      "username": "dffg",
+      "email": "grethrrth@gds.",
+      "password": "grrgrgg",
+      "role": "natjecatelj",
+      "file": null,
+      "id": 5
+    },
+    {
+      "name": "fregtrh",
+      "surname": "etrghtrh",
+      "username": "trhttrf",
+      "email": "doktorica.matea@gmail.com",
+      "password": "ggrgre",
+      "role": "natjecatelj",
+      "file": null,
+      "id": 6
+    },
+    {
+      "name": "regtrf",
+      "surname": "fdb fg",
+      "username": "bgfb",
+      "email": "doktorica.matea@gmail.com",
+      "password": "fdbfb",
+      "role": "voditelj",
+      "file": null,
+      "id": 7
     }
   ],
   "zadaci": [
@@ -32,8 +82,7 @@
       "authorid": "2",
       "author": "trpimir",
       "body": "loremipsumloremipsumloremipsum",
-      "id":2
+      "id": 2
     }
-
   ]
 }
