@@ -28,7 +28,7 @@ const Registration = () => {
             const user = {name: name, lastname: surname, username: username, email: email, password:password, userType:role, image:null};
             console.log(JSON.stringify(user));
 
-            sendData('/users', user);
+            sendData('http://localhost:8080/users', user);
         }
         else{
             //no submit

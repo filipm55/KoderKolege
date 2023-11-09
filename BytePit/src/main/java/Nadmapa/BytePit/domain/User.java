@@ -16,6 +16,7 @@ public class User {
 
    @Getter
    @Setter
+   @Column(unique = true)
    private String username;
    @Getter
    @Setter
