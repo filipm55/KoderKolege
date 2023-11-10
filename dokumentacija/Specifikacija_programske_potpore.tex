@@ -681,19 +681,10 @@
 					\item (f) odabir: voditelj natjecanja / natjecatelj
 				\end{itemize}
 				
-				Nakon što korisnik unese navedene podatke, potvrđuje svoju registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Prvo se provjerava dostupnost e-mail adrese u bazi podataka. U slučaju da je e-mail adresa već zauzeta, poslužitelj obavještava korisnika da registracija nije uspjela. U slučaju da je e-mail adresa dostupna, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Iz tog slučaja proizlaze dva nova scenarija:
+				Nakon što korisnik unese navedene podatke, potvrđuje svoju registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Prvo se provjerava dostupnost e-mail adrese u bazi podataka. U slučaju da je e-mail adresa već zauzeta, poslužitelj obavještava korisnika da registracija nije uspjela.
+				U slučaju da je e-mail adresa dostupna, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Korisnik potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
 				
-				\begin{enumerate}
-					\item Korisnik potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
-					\item Korisnik ne potvrđuje registraciju - poslužitelj obavještava korisnika da registracija nije uspjela.
-				\end{enumerate}
-				
-				U slučaju da je e-mail adresa dostupna, ali korisnik se registrira kao "voditelj natjecanja," tada se e-mail zahtjev za potvrdom registracije šalje administratoru, a ne korisniku. Iz tog slučaja proizlaze dva scenarija:
-				
-				\begin{enumerate}
-					\item Administrator potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
-					\item Administrator ne potvrđuje registraciju - poslužitelj obavještava korisnika da registracija nije uspjela.
-				\end{enumerate}
+				U slučaju da se korisnik registrira kao "voditelj natjecanja," tada se e-mail zahtjev za potvrdom registracije šalje i administratoru. 
 				
 				\textbf{Slika dijagrama:}
 				\begin{figure}[H]
@@ -711,8 +702,8 @@
 				
 				\begin{enumerate}
 					    \item Promjenom nije narušen integritet - novi podaci se pohranjuju u bazu podataka. Administratoru se javlja da je promjena uspješna, te se istovremeno šalje e-mail putem mail-poslužitelja korisniku s njegovim novim podacima.
-					\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka), te se traži ponovni unos podataka.
-					\end{enumerate}
+						\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka), te se traži ponovni unos podataka.
+				\end{enumerate}
 					
 					\textbf{Slika dijagrama:}
 					\begin{figure}[H]
