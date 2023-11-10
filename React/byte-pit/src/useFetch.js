@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react';
 
+
 const useFetch = (url) => {
     //makes sure every change in data rerenders our page
     const [data, setData] = useState(null);
@@ -12,7 +13,8 @@ const useFetch = (url) => {
         fetch(url)
             .then(res => {
                 if (!res.ok) { // error coming back from server
-                    throw Error('problem pri učitavanju podataka');
+                    
+                    throw Error(res.statusText);
                 }
                 return res.json();
             })
@@ -20,9 +22,10 @@ const useFetch = (url) => {
                 setData(data);
                 setError(null);
             })
-            .catch(err => {
+            .catch(error => {
                 // auto catches network / connection error
-                setError(err.message);
+                console.error(error.message);
+                setError(error.message);
             })
     }, [])
     return { data, error };

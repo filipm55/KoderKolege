@@ -26,6 +26,7 @@ public class User {
    @Getter @Setter
    private String password;
    @Getter @Setter
+   @Column(unique = true)
    private String email;
 
    @Lob  //Large object anotacija
