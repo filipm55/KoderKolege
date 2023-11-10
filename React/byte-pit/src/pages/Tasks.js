@@ -5,7 +5,7 @@ import useFetch from "../useFetch";
 
 const Tasks = () => {
 
-     const {data:tasks, error} =useFetch('/problems')
+     const {data:tasks, error} =useFetch('http://localhost:8080/problems')
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //backend mora provjeravati i povezivati autora i zadatak?? moramo imat sa zadatka link na korisnika koji ga je objavio i obratno,
     // pri zahtjevu za dohvatom podataka o zadatku moraju tu biti i podaci o autoru (bar id i ime i prezime)

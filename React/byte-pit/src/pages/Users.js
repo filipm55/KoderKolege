@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import useFetch from "../useFetch";
 
 const Users = () => {
-    const {data:users, error} =useFetch('/users')
+    const {data:users, error} =useFetch('http://localhost:8080/users')
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //na svakom profilu moraju biti zadaci koje je objavio u obliku popisa, backend u odgovoru na ovaj zahtjev mora poslati uz podatke o autoru i podatke o
     //imenima zadataka te id-u zadatka (ako mu je to jedinstveni identifikator
