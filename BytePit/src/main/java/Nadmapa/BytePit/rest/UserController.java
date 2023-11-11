@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.rest;
 
 import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.domain.UserType;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
 import com.sun.tools.jconsole.JConsoleContext;
@@ -31,13 +32,22 @@ public class UserController {
 
     @PostMapping("")
     public ResponseEntity<String> createUser(@RequestBody User user){
-        emailservice.sendSimpleEmail(user.getEmail(),"Dobrodošli u BytePit!\n" +
+        String message="Bok " + user.getName() +  ", dobrodošli u BytePit!\n";
+        if(user.getUserType()== UserType.COMPETITOR){
+             message+="\n" +
+                     "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
+                     "\n" +
+                     "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
+                     "\n" +
+                     "Tim BytePit";
+        }
+        else message+="\n" +
+                "Radujemo se našoj suradnji\n" +
                 "\n" +
-                "Hvala vam što ste se registrirali. Vaš račun je uspješno aktiviran. Spremni ste za izazove natjecateljskog programiranja!\n" +
+                "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
                 "\n" +
-                "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
-                "\n" +
-                "Tim BytePit","Potvrda registracije");
+                "Tim BytePit";
+        emailservice.sendSimpleEmail(user.getEmail(),message,"Potvrda registracije");
         logger.info("Received request to create a user: {}", user);
         ResponseEntity<String> response = userService.createUser(user);
         logger.info("Response from userService: {}", response);

@@ -93,3 +93,11 @@ p.fileError  {
     border-radius: 3px;
     border: 1px red solid;
 }
+.warning{
+    color: red;
+    font-weight: bolder;
+}
+.success{
+    color: green;
+    font-weight: bolder;
+}

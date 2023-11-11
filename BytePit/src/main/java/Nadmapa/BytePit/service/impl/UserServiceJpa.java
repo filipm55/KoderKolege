@@ -53,7 +53,7 @@ public class UserServiceJpa implements UserService {
         logger.debug("Saving user...");
         User savedUser = userRepo.save(user);
         logger.info("User registration successful. Welcome, {}!", savedUser.getUsername());
-        return ResponseEntity.ok("Registracija uspjesna. Dobrodosli, " + savedUser.getUsername() + "!");
+        return ResponseEntity.ok("Dobrodosli, " + savedUser.getUsername() + "! Provjerite mail s uputama kako potvrditi account");
     }
 
 
