@@ -35,6 +35,7 @@ public class UserServiceJpa implements UserService {
             if (userRepo.existsByUsername(user.getUsername())) {
                 throw new RequestDeniedException("vec postoji natjecatelj s tim usernameom");
             }
+
             User savedUser = userRepo.save(user);
             return ResponseEntity.ok("Registracija uspjesna. Dobrodosli, " + savedUser.getUsername() + "!");
         } catch (RequestDeniedException ex) {

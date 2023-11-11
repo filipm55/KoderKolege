@@ -24,11 +24,29 @@ const Registration = () => {
         e.preventDefault();
         checkEmail(email);
 
-        if(!fEmail){
-            const user = {name: name, lastname: surname, username: username, email: email, password:password, userType:role, image:null};
+        if(!fEmail){ //KAD SAM RADIO SA SLIKOM CINI MI SE DA sendData() NE VALJA DOBRO SA SLIKAMA PA SAM GLEDO I OVAK SE TO RADI JEDINO STALNO HVATA ERROR ALI SE UPISUJE U BAZU I RADI
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('lastname', surname);
+            formData.append('username', username);
+            formData.append('email', email);
+            formData.append('password', password);
+            formData.append('userType', role);
+            formData.append('image', file);
+            const user = {name: name, lastname: surname, username: username, email: email, password:password, userType:role, image: file};
             console.log(JSON.stringify(user));
 
-            sendData('http://localhost:8080/users', user);
+           // sendData('http://localhost:8080/users', user);
+            fetch('http://localhost:8080/users', {
+                method: 'POST',
+                body: formData,
+            }).then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
         else{
             //no submit
@@ -38,10 +56,10 @@ const Registration = () => {
         const selectedFile = event.target.files[0];
 
         // Checking if the file type is allowed or not
-        const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+        const allowedTypes = ["image/jpeg"]; // STAVIO SAM SAMO JPEG JER JE ZIVOT TAK JEDNOSTAVNIJI ZA RADIT SA SLIKOM, Mislav, MOZDA U ONE DODATNE FUNKCIONALNOST TREBA UPISAT
         if (!allowedTypes.includes(selectedFile?.type)) {
             setIsError(true);
-            setErrorMsg("Only JPEG, PNG, and GIF images are allowed!avi");
+            setErrorMsg("Only JPEG");
             return;
         }
 

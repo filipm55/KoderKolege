@@ -11,11 +11,15 @@ const Users = () => {
             { error && <div>{ error }</div> }
             { users && <div className="task-list">
                 {users.map(user => (
+
                     <div className="task" key={user.id} >
                         <Link to={'/users/'+user.id}><h2>{ user.name + ' ' + user.lastname }</h2></Link>
                         <p>Podaci o korisniku:</p>
                         <p>{user.email}</p>
-                        <p>{user.user_type}</p>
+                        <p> <img
+                            src={`data:image/jpeg;base64,${user.image.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
+                            alt="User Image"
+                        /></p>
                     </div>
                 ))}
             </div> }
