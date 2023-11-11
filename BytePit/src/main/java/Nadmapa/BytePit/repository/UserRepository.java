@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User,String> {
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         return email.matches(regex);
     }
+
+    User findByUsername(String username);
 }
