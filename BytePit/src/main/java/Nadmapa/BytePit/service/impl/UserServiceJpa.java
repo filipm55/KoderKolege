@@ -56,5 +56,13 @@ public class UserServiceJpa implements UserService {
         return ResponseEntity.ok("Dobrodosli, " + savedUser.getUsername() + "! Provjerite mail s uputama kako potvrditi account");
     }
 
+    public boolean validateUser(String username, String password) {
+        User user = userRepo.findByUsername(username);
 
+        if (user != null && user.getPassword().equals(password)) {
+            return true;
+        }
+
+        return false;
+    }
 }
