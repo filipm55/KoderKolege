@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserService {
     List<User> listAll();
     ResponseEntity<String> createUser (User user);
+
+    boolean validateUser(String username, String password);
 }
