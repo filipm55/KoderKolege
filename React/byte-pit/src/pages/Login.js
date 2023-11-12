@@ -10,10 +10,10 @@ const Login = () => {
 
     const submitFja = async (e) => {
         e.preventDefault();
-        const user = { username, password }; 
+        const loginDTO = { username, password };
         
         try {
-            const response = await sendData('http://localhost:8080/login', user);
+            const response = await sendData('http://localhost:8080/login', loginDTO);
 
             if (typeof response === 'string') {
                 setMessage(response);

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class UserServiceJpa implements UserService {
         logger.info("User registration successful. Welcome, {}!", savedUser.getUsername());
         return ResponseEntity.ok("Dobrodosli, " + savedUser.getUsername() + "! Provjerite mail s uputama kako potvrditi account");
     }
-
+    @Transactional
     public boolean validateUser(String username, String password) {
         User user = userRepo.findByUsername(username);
 
