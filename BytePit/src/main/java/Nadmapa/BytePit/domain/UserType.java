@@ -1,5 +1,5 @@
 package Nadmapa.BytePit.domain;
 
 public enum UserType {
-    COMPETITOR, COMPETITION_LEADER
+    COMPETITOR, COMPETITION_LEADER, ADMIN
 }

@@ -1,8 +1,20 @@
+div.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+button.urediKorisnikeGumb {
+    margin-top: 30px;
+    font-size: 4vh;
+    border-radius: 7px;
+    border: 1px solid rgb(99, 98, 98);
+}
+
 div.task-list{
     padding:5px;
     width:60vw;
     align-items: center;
-    
 }
 div.task{
     width:50vw;
@@ -20,7 +32,7 @@ h2{
 
 
 img {
-    width: 30vw;
+    width: 20vw;
 }
 
 div.info {
@@ -42,3 +54,59 @@ h3.podaciokorisniku {
 .imeiprezime {
     text-decoration: none;
 }
+
+div.naslov{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.naslov button {
+    height: fit-content;
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid rgb(99, 98, 98);
+    margin: 10px;
+    font-size: 3vh;
+}
+
+div.gumbici {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+form.nestajuciForm {
+    border: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    justify-items: center;
+
+}
+
+form.nestajuciForm input {
+    margin: 0px;
+    padding: 0px;
+    width: 30vh;
+}
+
+div.izbor {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 30vh;
+}
+
+div.izbor p {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
