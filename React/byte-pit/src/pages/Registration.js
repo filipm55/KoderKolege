@@ -49,6 +49,8 @@ const Registration = () => {
             }).then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    setErrorMessage(data.message);
+                    setMessage('');
                 })
                 .catch((error) => {
                     console.error('Error:', error);
