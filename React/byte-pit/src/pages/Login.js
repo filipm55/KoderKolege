@@ -9,6 +9,8 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const submitFja = async (e) => {
+        setErrorMessage('')
+        setMessage('')
         e.preventDefault();
         const loginDTO = { username, password };
         
@@ -16,7 +18,7 @@ const Login = () => {
             const response = await sendData('http://localhost:8080/login', loginDTO);
 
             if (typeof response === 'string') {
-                setMessage(response);
+                setMessage(response);   //ovdjde je token...treba ga spremiti u localstorage i preko toga radidi sessione
                 setErrorMessage('');
             } else {
                 setMessage(response.message);
@@ -41,8 +43,8 @@ const Login = () => {
                     <input type="password" value={password} required onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <button className='submitGumb'>Prijavi me!</button>
-                {message && <p className='message'>{message}</p>}
-                {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+                {message && <p className='success'>{message}</p>}
+                {errorMessage && <p className='warning'>{errorMessage}</p>}
             </form>
         </div>
     );
