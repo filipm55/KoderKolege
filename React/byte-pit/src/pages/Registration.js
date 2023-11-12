@@ -19,6 +19,7 @@ const Registration = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const submitFja = async (e) => {
+        setErrorMessage('')
         e.preventDefault();
         checkEmail(email);
 
