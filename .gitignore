@@ -5,3 +5,5 @@
 *.gz
 *.toc
 node_modules
+target
+.idea

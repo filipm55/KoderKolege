@@ -1,30 +1,47 @@
 \chapter{Arhitektura i dizajn sustava}
-		
-		\textbf{\textit{dio 1. revizije}}\\
 
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+		\textit{ Arhitektura ima 3 podsustava:}
 	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+		\item 	\textit{Web preglednik}
+		\item 	\textit{Web aplikacija na web poslužitelju}
+		\item 	\textit{Baza podataka - PostgreSQL }		
 	\end{itemize}
 
-	
-		
 
-		
+\textit{\underline{Web preglednik} je ujedino i prevoditelj koda koji korisniku omogućuje pregledavanje sadržaja web aplikacije i interakciju s istim.}\\
+
+\textit{\underline{Web poslužitelj} prima HTTP (engl. Hyper
+Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informacije o tome što klijent traži, kao što su primjerice URL, GET, POST... i vraća dohvaćeni resurs ako ga ima te vraća statusni kod koji daje informacije o uspješnosti zahtjeva.}\\
+
+\textit{Tehnologije korištene u našoj aplikaciji temelje se na Spring Bootu i Reactu. Aplikacija se sastoji od serverske komponente napisane u Javi (Spring Boot) i klijentske komponente napisane u JavaScriptu (React). Za razvojno okruženje koristimo IntelliJ, a baza koju koristimo za spremanje podataka o registriranim korisnicima i sve informacije o natjecanjima je PostgrSQL.}\\
+
+\textit{\underline{Web aplikacija} temelji se na arhitekturi Model-View-Controller (MVC). Ova arhitektura omogućuje organizaciju aplikacije u tri ključne komponente:}
+
+\begin{itemize}
+    \item \textbf{Model}: Ova komponenta predstavlja poslovnu logiku i podatke aplikacije. Model je implementiran u Java programskom jeziku (Spring Boot) i odgovoran je za upravljanje podacima, komunikaciju s bazom podataka te izračune i obrade podataka.
+    
+    \item \textbf{View}: Komponenta za prikaz podataka korisnicima. Prikazi se generiraju u Reactu, a omogućuju korisnicima interakciju s aplikacijom putem web preglednika. Prikazi se oblikuju pomoću HTML-a, CSS-a i JavaScripta.
+    
+    \item \textbf{Controller}: Kontroler je posrednik između Modela i Viewa. Ova komponenta upravlja korisničkim zahtjevima, prima ulazne podatke od korisnika te izvršava odgovarajuće akcije u Modelu. Kontroler također određuje koji prikaz treba biti poslan korisnicima.\\
+\end{itemize}	
 
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
+
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		\textit{Koristimo relacijsku bazu podataka čije su gradivne jedinke tablice definirane imenom i skupom atributa za jednostavno upravljanje podacima. Baza podataka ove aplikacije sastoji se od sljedećih entiteta:}
+	\begin{itemize}
+		\item 	\textit{Korisnik}
+		\item 	\textit{Natjecanje}
+		\item 	\textit{Zadaci na natjecanju}
+		\item 	\textit{Zadatak}				
+	\end{itemize}
 		
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				\textit{\textbf{Korisnik} - entitet sadržava sve važne informacije o korisniku: Korisničko ime, lozinku, ime, prezime, sliku, email, tip korisnika (natjecatelj/voditelj). }
 				
 				
 				\begin{longtblr}[
@@ -35,12 +52,91 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \SetCell[c=3]{c}{\textbf{Users}}	 \\ \hline[3pt]
+					 \SetCell{LightGreen}id & INT	&   jedinstveni identifikator korisnika	\\ \hline
+					 \SetCell{LightBlue} username	& VARCHAR &   	izabrano korisničko ime\\ \hline 
+					 \SetCell{LightBlue}email & VARCHAR &  e-mail adresa korisnika \\ \hline 
+					 name & VARCHAR	&  	ime korisnika	\\ \hline 
+					 lastname & VARCHAR	&  	prezime korisnika	\\ \hline 
+					 image & BYTEA	&  	slika korisnika	\\ \hline							user-type & VARCHAR & natjecatelj ili voditelj natjecanja \\ \hline
+					 password & VARCHAR	&  	šifra korisnika	\\ \hline 
+\end{longtblr}
+
+
+				\textit{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja. }
+				
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Natjecanje}}	 \\ \hline[3pt]
+					 \SetCell{LightGreen}id & INT	&   jedinstveni identifikator natjecanja	\\ \hline
+					  date-time-of-beginning	& TIMESTAMP &   vrijeme početka natjecanja	\\ \hline 
+					 date-time-of-beginning	& TIMESTAMP &   vrijeme završetka natjecanja	\\ \hline  
+					 competition-maker-id & INT	&  	id voditelja natjecanja	\\ \hline 
+	 number-of-problems & INT	&  	broj zadataka u natjecanju	\\ \hline 
+				\end{longtblr}
+
+				\textit{\textbf{Zadatak} - entitet sadržava sve važne informacije o zadatku. Sadrži atribute id, trajanje natjecanja, booleanski atribut is-private, broj bodova koje je moguće ostvariti, tip problema, tekst zadatka, naslov i id korisnika koji je napravio zadatak. S entitetom Korisnik je u odnosu Many-To-One preko atributa problem-maker-id.}
+				
+		\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Zadak}}	 \\ \hline[3pt]
+					 \SetCell{LightGreen} id & INT	&   jedinstveni identifikator zadatka	\\ \hline
+				  \SetCell{LightBlue}problem-maker-id & INT	& identifikator vlasnika zadatka	\\ \hline 
+					 duration &  NUMERIC	& trajanje zadatka	\\ \hline 
+					 is-private &  BOOLEAN	& provjerava je li zadatak objavljen	\\ \hline 
+					 problem-type &  INT	&  ?	\\ \hline 
+					text &  VARCHAR	& tekst zadatka	\\ \hline 
+					 title &  NUMERIC	& naslov zadatka	\\ \hline 
+
+				\end{longtblr}
+
+				\textit{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka }
+
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Zadaci u natjecanju}}	 \\ \hline[3pt]
+					 \SetCell{LightBlue}competition-id & INT	&    identifikator natjecanja (natjecanje.id)	\\ \hline
+					 \SetCell{LightBlue} problem-id & INT	& identifikator zadatka	(problem.id) \\ \hline 
+				\end{longtblr} 
+
+
+				
+
+				\textit{\textbf{Input-output mapa} - entitet sadržava id zadatka te vrijednost i ključ, odnosno na ovaj način se mapiraju rješenja zadataka. }
+
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Input-output mapa}}	 \\ \hline[3pt]
+					 \SetCell{LightGreen}problem-id & INT	&  jedinstveni identifikator zadatka	\\ \hline
+					 vrijednost & VARCHAR	& ?  \\ \hline 
+					 ključ & VARCHAR	& ?  \\ \hline 
 				\end{longtblr}
 				
 				
