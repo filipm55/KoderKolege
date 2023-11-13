@@ -47,11 +47,25 @@ const Registration = () => {
             fetch('http://localhost:8080/users', {
                 method: 'POST',
                 body: formData,
-            }).then(response => response.json())
+            }).then(response => {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json(); // Parse as JSON
+                  } else {
+                    return response.text(); // Parse as text
+                  }
+            })
                 .then(data => {
                     console.log('Success:', data);
-                    setErrorMessage(data.message);
-                    setMessage('');
+                    if (typeof data === 'object') {
+                        // JSON response
+                        setMessage(''); 
+                        setErrorMessage(data.message);
+                    } else {
+                        // Text response
+                        setMessage(data);
+                        setErrorMessage('');
+                    }
                 })
                 .catch((error) => {
                     console.error('Error:', error);

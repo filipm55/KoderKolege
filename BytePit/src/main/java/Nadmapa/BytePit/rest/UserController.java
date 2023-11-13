@@ -71,30 +71,33 @@ public class UserController {
         user.setConfirmationHash(UUID.randomUUID().toString());
         user.setConfirmed(false);
 
-        String message="Bok " + user.getName() +  ", dobrodošli u BytePit!\n";
-        if(user.getUserType()== UserType.COMPETITOR){
-            message+="\n" +
-                    "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                     "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "\n" +
-                    "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
-                    "\n" +
-                    "Tim BytePit";
-        }
-        else message+="\n" +
-                "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
-                "Radujemo se našoj suradnji\n" +
-                "Tim BytePit";
 
-
-        emailservice.sendSimpleEmail(user.getEmail(),message,"Potvrda registracije");
-        if(user.getUserType()==UserType.COMPETITION_LEADER){
-            String adminmail = "bytepit.noreply@gmail.com";
-            String message2="Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
-                    "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash();
-            emailservice.sendSimpleEmail(adminmail,message2,"Netko želi biti voditelj");
-        }
         logger.info("Received request to create a user: {}", user);
         ResponseEntity<String> response = userService.createUser(user);
+        if(response.getStatusCode().is2xxSuccessful()){
+            String message="Bok " + user.getName() +  ", dobrodošli u BytePit!\n";
+            if(user.getUserType()== UserType.COMPETITOR){
+                message+="\n" +
+                        "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "\n" +
+                        "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
+                        "\n" +
+                        "Tim BytePit";
+            }
+            else message+="\n" +
+                    "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
+                    "Radujemo se našoj suradnji\n" +
+                    "Tim BytePit";
+
+
+            emailservice.sendSimpleEmail(user.getEmail(),message,"Potvrda registracije");
+            if(user.getUserType()==UserType.COMPETITION_LEADER){
+                String adminmail = "bytepit.noreply@gmail.com";
+                String message2="Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash();
+                emailservice.sendSimpleEmail(adminmail,message2,"Netko želi biti voditelj");
+            }
+        }
         logger.info("Response from userService: {}", response);
         return response;
     }
