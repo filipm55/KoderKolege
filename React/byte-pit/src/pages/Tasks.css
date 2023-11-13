@@ -1,7 +1,8 @@
-div.wrapper {
+div.wrrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: space-evenly;
 }
 
 button.urediKorisnikeGumb {
@@ -15,6 +16,7 @@ div.task-list{
     padding:5px;
     width:60vw;
     align-items: center;
+    margin-bottom: 20px;
 }
 div.task{
     width:50vw;

@@ -6,6 +6,7 @@ import './Tasks.css';
 const Users = () => {
     var [promjena, setPromjena] = useState(false);
     var uredi = new Map();
+    var postojeKorisnici = false;
     //funkcija koja salje bazi zahtjev za brisanjem korisnika sa id-em id
     var obrisiKorisnika = (id) => {
 
@@ -16,17 +17,21 @@ const Users = () => {
     //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //na svakom profilu moraju biti zadaci koje je objavio u obliku popisa, backend u odgovoru na ovaj zahtjev mora poslati uz podatke o autoru i podatke o
     //imenima zadataka te id-u zadatka (ako mu je to jedinstveni identifikator
+
     if (users) {
         users.map(user => {
             uredi.set(user.username, false);
         });
     }   
+
+    if (users && users.length !== 0) postojeKorisnici = true;
+
     var urediKorisnike = () => {
         setPromjena(true);
     }
 
     return (
-        <div className="wrapper">
+        <div className="wrrapper">
             { error && <div>{ error }</div> }
             { users && 
             <div className="task-list">
@@ -75,7 +80,7 @@ const Users = () => {
                     </div>
                 ))}
             </div> }
-            {!promjena && <button className="urediKorisnikeGumb" onClick={() => urediKorisnike()}>Uredi korisnike</button>}
+            {postojeKorisnici && !promjena && <button className="urediKorisnikeGumb" onClick={() => urediKorisnike()}>Uredi korisnike</button>}
         </div>
     );
 }
