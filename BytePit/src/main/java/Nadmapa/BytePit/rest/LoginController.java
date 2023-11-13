@@ -22,17 +22,18 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
         try {
-            boolean isValidUser = userService.validateUser(loginDTO.getUsername(), loginDTO.getPassword());
+            int isValidUser = userService.validateUser(loginDTO.getUsername(), loginDTO.getPassword());
 
-            if (isValidUser) {
-
-                String token = TokenService.createToken(loginDTO.getUsername());
-                return ResponseEntity.ok(token);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            switch (isValidUser){
+                case 1: String token = TokenService.createToken(loginDTO.getUsername());
+                         return ResponseEntity.ok(token);
+                case 0: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email not confirmed!");
+                case -1:  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                default: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
         }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
     }
 }

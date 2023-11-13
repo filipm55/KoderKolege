@@ -8,6 +8,7 @@ import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
 import Nadmapa.BytePit.service.impl.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,8 @@ public class UserController {
         List<User> allUsers = userService.listAll();
         return allUsers.stream().filter(User::getConfirmed).collect(Collectors.toList());
     }
+
+
 
 
     @PostMapping("")
@@ -100,4 +104,6 @@ public class UserController {
         return userService.getUserByUsername(TokenService.decodeToken(token).getSubject());
 
     }
+
+
 }

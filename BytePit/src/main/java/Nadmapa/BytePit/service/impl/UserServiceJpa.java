@@ -42,6 +42,9 @@ public class UserServiceJpa implements UserService {
         return userRepo.findByUsername(username);
     }
 
+
+
+
     @Override
     public ResponseEntity<String> createUser(User user) {
         final Logger logger = LoggerFactory.getLogger(UserServiceJpa.class);
@@ -74,13 +77,15 @@ public class UserServiceJpa implements UserService {
         return ResponseEntity.ok("Dobrodosli, " + savedUser.getUsername() + "! Provjerite mail s uputama kako potvrditi account");
     }
     @Transactional
-    public boolean validateUser(String username, String password) {
+    public int validateUser(String username, String password) { // AKO JE SVE OK ONDA VRACA 1, AKO NIJE CONFIRMED VRACA 0, A AKO NE POSTOJI ONDA VRACA -1
         User user = userRepo.findByUsername(username);
 
-        if (user != null && user.getPassword().equals(password) && user.getConfirmed()) { // DODAO SAM DA MORA BIT CONFIRMED DA BI SE MOGO ULOGIRAT (LOGIN ZOVE OVU FUNKCIJU)
-            return true;
+        if (user != null && user.getPassword().equals(password) ) {
+            if(user.getConfirmed()) return 1;
+            else return 0;
         }
 
-        return false;
+        return -1;
     }
+
 }

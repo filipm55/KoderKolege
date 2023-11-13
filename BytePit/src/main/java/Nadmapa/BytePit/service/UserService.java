@@ -12,9 +12,11 @@ public interface UserService {
 
     void saveUser(User user);
     @Transactional
-    boolean validateUser(String username, String password);
+    int validateUser(String username, String password);
 
     User getUserByConfirmationHash(String confirmationHash);
 
     User getUserByUsername(String username);
+
+
 }
