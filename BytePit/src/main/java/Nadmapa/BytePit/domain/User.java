@@ -34,6 +34,11 @@ public class User {
    @Column(unique = true)
    private String email;
 
+   private String confirmationHash;
+
+   private boolean confirmed;
+
+
 
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "image_id", referencedColumnName = "id")
@@ -72,6 +77,21 @@ public class User {
    public UserType getUserType() { return userType; }
 
    public void setUserType(UserType userType) { this.userType = userType;}
+
+   public String getConfirmationHash() {
+      return confirmationHash;
+   }
+
+   public void setConfirmationHash(String confirmationHash) {
+      this.confirmationHash = confirmationHash;
+   }
+   public boolean getConfirmed() {
+      return confirmed;
+   }
+
+   public void setConfirmed(boolean confirmed) {
+      this.confirmed = confirmed;
+   }
 
    @Override
    public String toString() {

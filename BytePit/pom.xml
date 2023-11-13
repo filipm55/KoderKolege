@@ -63,6 +63,10 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.2</version> <!-- Use the same version as jjwt-api -->
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

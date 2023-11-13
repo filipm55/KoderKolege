@@ -28,6 +28,16 @@ public class UserServiceJpa implements UserService {
     }
 
     @Override
+    public void saveUser(User user) {
+        userRepo.save(user);
+    }
+
+    @Override
+    public User getUserByConfirmationHash(String confirmationHash) {
+        return userRepo.findByConfirmationHash(confirmationHash);
+    }
+
+    @Override
     public ResponseEntity<String> createUser(User user) {
         final Logger logger = LoggerFactory.getLogger(UserServiceJpa.class);
 
