@@ -50,7 +50,7 @@ const Users = () => {
                                 <h3 className="podaciokorisniku">Podaci o korisniku:</h3>
                                 {!promjena  && 
                                     <div className="nekidio">
-                                        <p>Email:  {user.email}</p>                              
+                                        <p>Email:  {user.email}</p>
                                         <p>Korisničko ime:  {user.username}</p>
                                         <p>Uloga:  {user.userType}</p>
                                     </div>

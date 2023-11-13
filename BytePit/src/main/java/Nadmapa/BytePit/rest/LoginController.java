@@ -25,6 +25,7 @@ public class LoginController {
             boolean isValidUser = userService.validateUser(loginDTO.getUsername(), loginDTO.getPassword());
 
             if (isValidUser) {
+
                 String token = TokenService.createToken(loginDTO.getUsername());
                 return ResponseEntity.ok(token);
             } else {

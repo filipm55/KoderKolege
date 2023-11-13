@@ -15,4 +15,6 @@ public interface UserService {
     boolean validateUser(String username, String password);
 
     User getUserByConfirmationHash(String confirmationHash);
+
+    User getUserByUsername(String username);
 }

@@ -38,6 +38,11 @@ public class UserServiceJpa implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    @Override
     public ResponseEntity<String> createUser(User user) {
         final Logger logger = LoggerFactory.getLogger(UserServiceJpa.class);
 
@@ -72,7 +77,7 @@ public class UserServiceJpa implements UserService {
     public boolean validateUser(String username, String password) {
         User user = userRepo.findByUsername(username);
 
-        if (user != null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password) && user.getConfirmed()) { // DODAO SAM DA MORA BIT CONFIRMED DA BI SE MOGO ULOGIRAT (LOGIN ZOVE OVU FUNKCIJU)
             return true;
         }
 

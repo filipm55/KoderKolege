@@ -6,6 +6,7 @@ import Nadmapa.BytePit.domain.UserType;
 import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
+import Nadmapa.BytePit.service.impl.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -31,8 +33,9 @@ public class UserController {
     private EmailSenderService emailservice;
 
     @GetMapping("")
-    public List<User> listCompetitors(){
-        return userService.listAll();
+    public List<User> listConfirmedUsers(){
+        List<User> allUsers = userService.listAll();
+        return allUsers.stream().filter(User::getConfirmed).collect(Collectors.toList());
     }
 
 
@@ -90,5 +93,11 @@ public class UserController {
         ResponseEntity<String> response = userService.createUser(user);
         logger.info("Response from userService: {}", response);
         return response;
+    }
+
+    @GetMapping("/{token}")
+    public User getUserByToken(@PathVariable String token){
+        return userService.getUserByUsername(TokenService.decodeToken(token).getSubject());
+
     }
 }
