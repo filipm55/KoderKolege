@@ -8,14 +8,14 @@
 	\end{itemize}
 
 
-\textit{\underline{Web preglednik} je ujedino i prevoditelj koda koji korisniku omogućuje pregledavanje sadržaja web aplikacije i interakciju s istim.}\\
+{\underline{Web preglednik} je ujedino i prevoditelj koda koji korisniku omogućuje pregledavanje sadržaja web aplikacije i interakciju s istim.}
 
-\textit{\underline{Web poslužitelj} prima HTTP (engl. Hyper
-Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informacije o tome što klijent traži, kao što su primjerice URL, GET, POST... i vraća dohvaćeni resurs ako ga ima te vraća statusni kod koji daje informacije o uspješnosti zahtjeva.}\\
+{\underline{Web poslužitelj} prima HTTP (engl. Hyper
+Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informacije o tome što klijent traži, kao što su primjerice URL, GET, POST... i vraća dohvaćeni resurs ako ga ima te vraća statusni kod koji daje informacije o uspješnosti zahtjeva.}
 
-\textit{Tehnologije korištene u našoj aplikaciji temelje se na Spring Bootu i Reactu. Aplikacija se sastoji od serverske komponente napisane u Javi (Spring Boot) i klijentske komponente napisane u JavaScriptu (React). Za razvojno okruženje koristimo IntelliJ, a baza koju koristimo za spremanje podataka o registriranim korisnicima i sve informacije o natjecanjima je PostgrSQL.}\\
+{Tehnologije korištene u našoj aplikaciji temelje se na Spring Bootu i Reactu. Aplikacija se sastoji od serverske komponente napisane u Javi (Spring Boot) i klijentske komponente napisane u JavaScriptu (React). Za razvojno okruženje koristimo IntelliJ, a baza koju koristimo za spremanje podataka o registriranim korisnicima i sve informacije o natjecanjima je PostgrSQL.}
 
-\textit{\underline{Web aplikacija} temelji se na arhitekturi Model-View-Controller (MVC). Ova arhitektura omogućuje organizaciju aplikacije u tri ključne komponente:}
+{\underline{Web aplikacija} temelji se na arhitekturi Model-View-Controller (MVC). Ova arhitektura omogućuje organizaciju aplikacije u tri ključne komponente:}
 
 \begin{itemize}
     \item \textbf{Model}: Ova komponenta predstavlja poslovnu logiku i podatke aplikacije. Model je implementiran u Java programskom jeziku (Spring Boot) i odgovoran je za upravljanje podacima, komunikaciju s bazom podataka te izračune i obrade podataka.
@@ -30,7 +30,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 			
 
 			
-		\textit{Koristimo relacijsku bazu podataka čije su gradivne jedinke tablice definirane imenom i skupom atributa za jednostavno upravljanje podacima. Baza podataka ove aplikacije sastoji se od sljedećih entiteta:}
+		{Koristimo relacijsku bazu podataka čije su gradivne jedinke tablice definirane imenom i skupom atributa za jednostavno upravljanje podacima. Baza podataka ove aplikacije sastoji se od sljedećih entiteta:}
 	\begin{itemize}
 		\item 	\textit{Korisnik}
 		\item 	\textit{Natjecanje}
@@ -41,7 +41,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 			\subsection{Opis tablica}
 			
 
-				\textit{\textbf{Korisnik} - entitet sadržava sve važne informacije o korisniku: Korisničko ime, lozinku, ime, prezime, sliku, email, tip korisnika (natjecatelj/voditelj). }
+				{\textbf{Korisnik} - entitet sadržava sve važne informacije o korisniku: Korisničko ime, lozinku, ime, prezime, sliku, email, tip korisnika (natjecatelj/voditelj). }
 				
 				
 				\begin{longtblr}[
@@ -52,7 +52,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Users}}	 \\ \hline[3pt]
+					\hline \SetCell[c=3]{c}{\textbf{Korisnik}}	 \\ \hline[3pt]
 					 \SetCell{LightGreen}id & INT	&   jedinstveni identifikator korisnika	\\ \hline
 					 \SetCell{LightBlue} username	& VARCHAR &   	izabrano korisničko ime\\ \hline 
 					 \SetCell{LightBlue}email & VARCHAR &  e-mail adresa korisnika \\ \hline 
@@ -63,7 +63,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 \end{longtblr}
 
 
-				\textit{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja. }
+				{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja. }
 				
 				
 				\begin{longtblr}[
@@ -77,12 +77,12 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					\hline \SetCell[c=3]{c}{\textbf{Natjecanje}}	 \\ \hline[3pt]
 					 \SetCell{LightGreen}id & INT	&   jedinstveni identifikator natjecanja	\\ \hline
 					  date-time-of-beginning	& TIMESTAMP &   vrijeme početka natjecanja	\\ \hline 
-					 date-time-of-beginning	& TIMESTAMP &   vrijeme završetka natjecanja	\\ \hline  
+					 date-time-of-ending	& TIMESTAMP &   vrijeme završetka natjecanja	\\ \hline  
 					 competition-maker-id & INT	&  	id voditelja natjecanja	\\ \hline 
 	 number-of-problems & INT	&  	broj zadataka u natjecanju	\\ \hline 
 				\end{longtblr}
 
-				\textit{\textbf{Zadatak} - entitet sadržava sve važne informacije o zadatku. Sadrži atribute id, trajanje natjecanja, booleanski atribut is-private, broj bodova koje je moguće ostvariti, tip problema, tekst zadatka, naslov i id korisnika koji je napravio zadatak. S entitetom Korisnik je u odnosu Many-To-One preko atributa problem-maker-id.}
+				{\textbf{Zadatak} - entitet sadržava sve važne informacije o zadatku. Sadrži atribute id, trajanje natjecanja, booleanski atribut is-private, broj bodova koje je moguće ostvariti, tip problema, tekst zadatka, naslov i id korisnika koji je napravio zadatak. S entitetom Korisnik je u odnosu Many-To-One preko atributa problem-maker-id.}
 				
 		\begin{longtblr}[
 					label=none,
@@ -92,7 +92,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Zadak}}	 \\ \hline[3pt]
+					\hline \SetCell[c=3]{c}{\textbf{Zadatak}}	 \\ \hline[3pt]
 					 \SetCell{LightGreen} id & INT	&   jedinstveni identifikator zadatka	\\ \hline
 				  \SetCell{LightBlue}problem-maker-id & INT	& identifikator vlasnika zadatka	\\ \hline 
 					 duration &  NUMERIC	& trajanje zadatka	\\ \hline 
@@ -103,7 +103,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 
 				\end{longtblr}
 
-				\textit{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka }
+				{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka }
 
 				
 				\begin{longtblr}[
@@ -122,7 +122,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 
 				
 
-				\textit{\textbf{Input-output mapa} - entitet sadržava id zadatka te vrijednost i ključ, odnosno na ovaj način se mapiraju rješenja zadataka. }
+				{\textbf{Input-output mapa} - entitet sadržava id zadatka te vrijednost i ključ, odnosno na ovaj način se mapiraju rješenja zadataka. }
 
 				
 				\begin{longtblr}[
