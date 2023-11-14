@@ -42,7 +42,9 @@ public class UserController {
     @GetMapping("")
     public List<User> listConfirmedUsers(){
         List<User> allUsers = userService.listAll();
-        return allUsers.stream().filter(User::getConfirmed).collect(Collectors.toList());
+        return allUsers.stream()
+                .filter(user -> (user.getConfirmed() && user.getUserType()==UserType.COMPETITOR) ||  (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType()==UserType.COMPETITION_LEADER) )
+                .collect(Collectors.toList());
     }
 
 
@@ -75,6 +77,7 @@ public class UserController {
         user.setImage(image);
         user.setConfirmationHash(UUID.randomUUID().toString());
         user.setConfirmed(false);
+        user.setConfirmedByAdmin(false);
 
 
         logger.info("Received request to create a user: {}", user);
@@ -85,7 +88,7 @@ public class UserController {
             if(user.getUserType()== UserType.COMPETITOR){
                 message+="\n" +
                         "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "\n" +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash()+ "&email=" + user.getEmail()  + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
@@ -94,6 +97,8 @@ public class UserController {
 
             }
             else message+="\n" +
+                    "Molimo Vas da potvrdite račun preko ovog linka \n" +
+                    "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
                     "Radujemo se našoj suradnji\n" +
                     "Tim BytePit";
@@ -103,7 +108,7 @@ public class UserController {
             if(user.getUserType()==UserType.COMPETITION_LEADER){
                 String adminmail = "bytepit.noreply@gmail.com";
                 String message2="Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
                         "\n" +
                         "Moramo potvrditi u roku od 7 dana.";
                 emailservice.sendSimpleEmail(adminmail,message2,"Netko želi biti voditelj");

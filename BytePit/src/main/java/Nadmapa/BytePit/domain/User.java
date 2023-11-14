@@ -38,6 +38,7 @@ public class User {
 
    private boolean confirmed;
 
+   private boolean confirmedByAdmin;
 
 
    @OneToOne(cascade = CascadeType.ALL)
@@ -91,6 +92,14 @@ public class User {
 
    public void setConfirmed(boolean confirmed) {
       this.confirmed = confirmed;
+   }
+
+   public boolean getConfirmedByAdmin() {
+      return confirmedByAdmin;
+   }
+
+   public void setConfirmedByAdmin(boolean confirmedByAdmin) {
+      this.confirmedByAdmin = confirmedByAdmin;
    }
 
    public Long getId() { return id;}

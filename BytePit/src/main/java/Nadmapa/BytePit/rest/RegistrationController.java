@@ -21,25 +21,31 @@ public class RegistrationController {
     private UserService userService; // Prilagodite prema vašoj implementaciji
 
     @GetMapping("/confirm-registration")
-    public String confirmRegistration(@RequestParam("hash") String confirmationHash, Model model) {
+    public String confirmRegistration(@RequestParam("hash") String confirmationHash,@RequestParam("email") String userEmail, Model model) {
         User user = userService.getUserByConfirmationHash(confirmationHash);
         System.out.println("Received confirmationHash: " + confirmationHash);
 
-        if (user != null && user.getConfirmed() == false) {
-            user.setConfirmed(true);
+        if (user != null && (user.getConfirmed() == false && user.getEmail().equals(userEmail)) || (user.getConfirmedByAdmin() == false && !user.getEmail().equals(userEmail))) {
+            System.out.println("provjera : "  + userEmail + " a drugo "+ user.getEmail() + "a jesu li isti " + userEmail==user.getEmail() + user.getEmail().equals(userEmail) );
+            if(userEmail.equals(user.getEmail())) {
+                user.setConfirmed(true);
+            }
+            else {
+                user.setConfirmedByAdmin(true);
+            }
             userService.saveUser(user);
 
-            model.addAttribute("confirmationMessage", "Vaša registracija je uspješno potvrđena. Sada se možete prijaviti.");
+            if(user.getUserType()==UserType.COMPETITOR) model.addAttribute("confirmationMessage", "Vaša registracija je uspješno potvrđena. Sada se možete prijaviti.");
+            else model.addAttribute("confirmationMessage", "Vaša registracija je uspješno potvrđena. Sada još samo pričekajte da admin učini isto.");
             System.out.println("User: " + user);
-            System.out.println("User Confirmed: " + user.getConfirmed());
+
             if(user.getUserType()== UserType.COMPETITION_LEADER){
                 System.out.println("trebo bi se vracat sad mail??");
                 emailservice.sendSimpleEmail(user.getEmail(),"Admin vam je potvrdio registraciju","Sada ste voditelj");
             }
             // Prikazivanje stranice s porukom potvrde
             return "confirmation";
-        } else if (user != null && user.getConfirmed() == true) {
-            // Korisnik je već potvrdio registraciju, redirectajte ga na stranicu prijave
+        } else if (user != null && userEmail==user.getEmail() && user.getConfirmed() == true) {
             model.addAttribute("confirmationMessage", "Već ste potvrdili registraciju. Sada se možete prijaviti.");
 
             // Prikazivanje stranice s porukom potvrde

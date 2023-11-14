@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.domain.UserType;
 import Nadmapa.BytePit.repository.UserRepository;
 
 import Nadmapa.BytePit.service.UserService;
@@ -91,10 +92,10 @@ public class UserServiceJpa implements UserService {
         User user = userRepo.findByUsername(username);
 
         if (user != null && user.getPassword().equals(password) ) {
-            if(user.getConfirmed()) return 1;
+            if(user.getConfirmed() && user.getUserType()== UserType.COMPETITOR ) return 1;
+            else if (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType()== UserType.COMPETITION_LEADER )return 1;
             else return 0;
         }
-
         return -1;
     }
 
