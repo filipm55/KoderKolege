@@ -24,7 +24,7 @@
 		
 		\item pregledavati programske zadatke objavljene na stranici
 		\item vidjeti kalendar s dostupnim natjecanjima
-		\item pregledavati profile drugih korisnika (natjecatelja i vodietlja natjecanja)
+		\item pregledavati profile drugih korisnika (natjecatelja i vodietelja natjecanja)
 		\begin{packed_enum}
 			
 			\item  na profilu natjecatelja može vidjeti statistike o broju točno riješenih zadataka, broju isprobanih zadataka i 
@@ -59,7 +59,11 @@
 			\item učitati rješenje zadatka u aplikaciju
 		\end{packed_enum}
 		
-		\item pokrenuti virtualno natjecanje
+		\item pokrenuti virtualno natjecanje:
+		\begin{packed_enum}
+			\item odabirom prošlog natjecanja iz kalendara
+			\item odabirom opcije rješavanja nasumičnih zadataka iz prethodnih natjecanja
+		\end{packed_enum}
 		
 	\end{packed_enum}
 	
@@ -70,7 +74,7 @@
 		\item organizirati natjecanje:
 			\begin{packed_enum}
 				\item odabire vrijeme početka i završetka
-				\item odlučuje broj zadataka
+				\item određuje broj zadataka
 				\item odlučuje koji su zadaci aktivni 
 				\item po želji učitava sličicu pehara 
 			\end{packed_enum}
@@ -98,11 +102,13 @@
 		
 	\end{packed_enum}
 	
-	\item  \underbar{Baza podataka (sudionik) može:}
+	\item  \underbar{Baza podataka (sudionik):}
 	
 	\begin{packed_enum}
 		
 		\item pohranjuje sve podatke o registriranim korisnicima
+		\item briše podatke o korisnicima koji nisu potvredili registracijski mail unutar 24 sata 
+		\item briše podatke o voditeljima koje nije potvrdio administrator unutar 7 dana
 		\item pohranjuje opise svih zadataka i njihova rješenja
 		\item pohranjuje sve podatke o već završenim natjecanjima i njihove rang liste
 		
@@ -112,9 +118,7 @@
 \eject 
 			
 				
-			\subsection{Obrasci uporabe}
-				
-				\textbf{\textit{dio 1. revizije}}
+			\subsection{Obrasci uporabe}			
 				
 				\subsubsection{Opis obrazaca uporabe}
 				
@@ -140,10 +144,10 @@
 								\item odabire: voditelj natjecanja / natjecatelj
 								
 							\end{packed_enum}
-							\item Upisuje i odabire potrebne podatke			
-							\item Učitava se stranica na kojoj piše da korisnik treba potvrditi mail
-							\item Korisnik potvrđuje registraciju
-							\item Korisniku se šalje mail o uspješnoj registraciji
+							\item Upisuje i odabire potrebne podatke		
+							\item Korisnik dobiva poruku da potvrdi registraciju putem email adrese	
+							\item Korisniku se šalje mail za potvrdu registracije
+							\item Korisnik potvrđuje registraciju putem linka te se otvara stranica s porukom dobrodošlice
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -153,7 +157,7 @@
 							\item[2.a]Email/korisničko ime su već zauzeti
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik dobiva poruku da je mail/korisničko ime već korišten
+								\item Korisnik dobiva poruku da je mail/korisničko ime u upotrebi
 								\item Traži se ponovni upis podataka
 								
 							\end{packed_enum}
@@ -163,10 +167,10 @@
 								\item Administrator dobiva poruku u kojoj (ne)potvrđuje registraciju
 															
 							\end{packed_enum}
-							\item[4.a] Korisnik ne potvrđuje email
+							\item[5.a] Korisnik ne potvrđuje email unutar 24 sata
 							\item[] \begin{packed_enum}
 								
-								\item Korisnikov profil se ne aktivira
+								\item Korisnikov profil se briše iz baze podataka 
 								
 							\end{packed_enum}						
 							
@@ -195,17 +199,12 @@
 						
 						\item[] \begin{packed_item}
 							
-							\item[3.a] Neispravno korisnicko ime ili lozinka
+							\item[3.a] Neispravno korisničko ime ili lozinka
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik dobiva poruku o neispravnom korisnickom imenu ili lozinki
+								\item Korisnik dobiva poruku o neispravnom korisničkom imenu ili lozinki
 							\end{packed_enum}
 							
-							\item[3.b] Nepostojeće korisnicko ime
-							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva poruku da izvrši registraciju
-							\end{packed_enum}
 							
 							
 						\end{packed_item}
@@ -226,14 +225,14 @@
 							\item Korisnik odabire opciju Zadatci za vježbu
 							\item Otvara se stranica s popisom svih zadataka
 							\item Korisnik odabire zadatak
-							\item Otvara se stranica sa odabranim zadatkom te prikazuje se tekst zadatka 
+							\item Otvara se stranica sa odabranim zadatkom te se prikazuje tekst zadatka 
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 							
-							\item[4.a] Neregistrirani korisnik želi predati riješenje zadatka 
+							\item[4.a] Neregistrirani korisnik želi predati rješenje zadatka 
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva poruku da je za nastavak potrebna registracija
@@ -333,8 +332,8 @@
 							\item Prikazuju se podatci o natjecatelju:
 								\item[] \begin{packed_enum}
 								
-								\item Statistika o broju točno riješenik zadataka
-								\item Statiskita o broju isprobanih zadataka 
+								\item Statistika o broju točno riješenih zadataka
+								\item Statistika o broju isprobanih zadataka 
 								\item Pehari za osvojena natjecanja
 								
 							\end{packed_enum}
@@ -345,7 +344,7 @@
 					\noindent \underbar{\textbf{UC8 - Pregled svih voditelja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Korsinik
+						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Pregled podataka pojedinog voditelja
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} /
@@ -377,8 +376,8 @@
 							\item Prikazuju se podatci o voditelju:
 							\item[] \begin{packed_enum}
 								
-								\item Svi zadatci objavljeni od voditelja
-								\item Kalendar sa svim natjecanjima od voditelja
+								\item Svi objavljeni zadatci voditelja
+								\item Kalendar sa svim natjecanjima voditelja
 								
 							\end{packed_enum}
 							
@@ -392,7 +391,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Natjecanje
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  / 
+						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -400,8 +399,8 @@
 							\item Otvara se stranica s natjecanjem
 							\item U trenutku početka natjecanja, svi zadaci postaju vidljivi
 							\item Natjecatelj rješava zadatke unutar vremenskog ograničenja
-							\item Natjecatelj predaje riješenja zadataka
-.
+							\item Natjecatelj predaje rješenja zadataka
+							
 						\end{packed_enum}
 					\end{packed_item}
 
@@ -436,7 +435,7 @@
 							\item[2.d] Natjecatelj nije u potpunosti točno riješio zadatak 
 							\item[] \begin{packed_enum}
 								
-								\item Sustav onenemogučuje gumb
+								\item Sustav onemogućuje gumb
 								
 							\end{packed_enum}	
 						\end{packed_item}
@@ -449,7 +448,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Registrirani korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -458,16 +457,11 @@
 							\item[] \begin{packed_enum}
 								
 								\item Prethodno natjecanje
-								\item Nasumično generirani zadatci 
+								\item Nasumično odabrani zadaci 
 								
 							\end{packed_enum}
 						\end{packed_enum}
-						\item  \textbf{Opis mogućih odstupanja:  } 
-						\item[] \begin{packed_enum}
-							
-							\item[2.a] Kako bi natjecanje bilo prikazano, natjecatelj je morao pokrenuti natjecanje kada je bilo aktivno 
-							
-						\end{packed_enum}
+
 					\end{packed_item}										
 					
 					
@@ -477,7 +471,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Registrirani korisnik: natjecatelj, Sudjelovanje u natjecanju
+						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -488,33 +482,21 @@
 							\item Natjecatelja se po završetku natjecanja rangira u odnosu na službene retultate originalnog natjecanja
 									
 						\end{packed_enum}
-						\item  \textbf{Opis mogućih odstupanja:  } 
-						\item[] \begin{packed_enum}
-							
-							\item[4.a] Natjecatelj odabire natjecanje u kojem nije sudjelovao
-							
-							\item[] \begin{packed_enum}
-								
-								\item Sustav Obavještava natjecatelja da nije pristupio natjecanju te da odabere drugo natjecanje
-								
-							\end{packed_enum}
-							
-						\end{packed_enum}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC14 - Nasumično generirani zadatci}}
+					\noindent \underbar{\textbf{UC14 - Nasumično odabrani zadatci}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Registrirani korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							\item UC12 - Virtualno natjecanje
-							\item Natjecatelj odabire opciju Nasumično generirani zadatci
-							\item Aplikacija generira ravnomjerno zadatke po težini
+							\item Natjecatelj odabire opciju Nasumično odabrani zadaci
+							\item Aplikacija ravnomjerno odabire zadatke po težini
 							
 						\end{packed_enum}
 					\end{packed_item}
@@ -534,9 +516,9 @@
 							\item Otvara se stranica s popisom svih zadataka
 							\item Korisnik odabire zadatak	
 							\item Otvara se stranica sa zadatkom
-							\item Natjecatelj može pogledati riješenje zadatka		
-							\item Nakon riješavanja, natjecatelj odabire opciju za evaluaciju riješenja
-							\item Natjecatelj dobiva informaciju o točnosti svog riješenja
+							\item Natjecatelj može pogledati rješenje zadatka		
+							\item Nakon rješavanja, natjecatelj odabire opciju za evaluaciju rješenja
+							\item Natjecatelj dobiva informaciju o točnosti svog rješenja
 						\end{packed_enum}				
 					\end{packed_item}
 					
@@ -547,7 +529,7 @@
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Napraviti natjecanje za korisnike 
 						\item  \textbf{Sudionici:} Natjecatelji
-						\item  \textbf{Preduvjet:} Registrirani korisnik: voditelj
+						\item  \textbf{Preduvjet:} Ulogirani korisnik: voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -567,7 +549,7 @@
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Ispraviti pogreške ili dodati zadatke
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Registrirani korisnik: voditelj
+						\item  \textbf{Preduvjet:} Ulogirani korisnik: voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -585,7 +567,7 @@
 						\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Administrator
-						\item  \textbf{Cilj:} Učikovita administracija i održavanje sustava
+						\item  \textbf{Cilj:} Učinkovita administracija i održavanje sustava
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:}  Korisnik: administrator 
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -605,7 +587,7 @@
 							\item[3.a]Administrator narušava integritet jedinstvenosti (npr. mijenja korisničko ime u već postojeće)
 							\item[] \begin{packed_enum}
 								
-								\item Administrator dobiva poruku da je korisničko ime već korišteno
+								\item Administrator dobiva poruku da je korisničko ime već u uporabi
 								\item Traži se ponovni upis podataka
 								
 							\end{packed_enum}
@@ -620,7 +602,7 @@
 							\item \textbf{Glavni sudionik: } Administrator
 							\item  \textbf{Cilj:} Ispravljanje grešaka ili nesporazuma u natjecanju
 							\item  \textbf{Sudionici:} Baza podataka
-							\item  \textbf{Preduvjet:}  / 
+							\item  \textbf{Preduvjet:}  Korisnik: administrator 
 							\item  \textbf{Opis osnovnog tijeka:}
 							
 							\item[] \begin{packed_enum}
@@ -656,10 +638,8 @@
 				\eject		
 				
 			\subsection{Sekvencijski dijagrami}
-				
-				\textbf{\textit{dio 1. revizije}}\
-							
-				
+										
+														
 				\subsubsection{1) Registracija korisnika}
 				
 				\textbf{Opis dijagrama:}
@@ -674,8 +654,8 @@
 					\item (f) odabir: voditelj natjecanja / natjecatelj
 				\end{itemize}
 				
-				Nakon što korisnik unese navedene podatke, potvrđuje svoju registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Prvo se provjerava dostupnost e-mail adrese u bazi podataka. U slučaju da je e-mail adresa već zauzeta, poslužitelj obavještava korisnika da registracija nije uspjela.
-				U slučaju da je e-mail adresa dostupna, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Korisnik potvrđuje registraciju - novi podaci se pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
+				Nakon što korisnik unese navedene podatke, šalje zahtjev za registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Provjerava  se dostupnost e-mail adrese i korisničkog imena u bazi podataka. U slučaju da su e-mail adresa ili korisničko ime već zauzeti, poslužitelj obavještava korisnika da registracija nije uspjela.
+				U slučaju da su e-mail ili korisničko ime adresa dostupni, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Korisnik potvrđuje registraciju - podaci se trajno pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
 				
 				U slučaju da se korisnik registrira kao "voditelj natjecanja," tada se e-mail zahtjev za potvrdom registracije šalje i administratoru. 
 				
@@ -691,11 +671,11 @@
 				\subsubsection{2) Pregled i uređivanje korisnika}
 				
 				\textbf{Opis dijagrama:}
-				Administrator šalje zahtjev za pregled korisnika i njihovih podataka tako da klikne na link "Pregled svih korisnika". Poslužitelj šalje upit bazi podataka za podatke registriranih korisnika, a baza podataka vraća podatke o registriranim korisnicima. Otvara se stranica s popisom registriranih korisnika i njihovim podacima koje je moguće urediti. Kada administrator pošalje zahtjev za izmjenom podataka nekog korisnika, baza podataka provjerava je li narušen integritet jedinstvenosti, odnosno je li administrator promijenio korisničko ime u drugo korisničko ime koje već postoji u bazi podataka. Iz ovog scenarija proizlaze dva slučaja:
+				Administrator šalje zahtjev za pregled korisnika i njihovih podataka tako da klikne na link "Pregled svih korisnika". Poslužitelj šalje upit bazi podataka za podatke registriranih korisnika, a baza podataka vraća podatke o registriranim korisnicima. Otvara se stranica s popisom registriranih korisnika i njihovim podacima koje je moguće urediti ili izbrisati. Kada administrator pošalje zahtjev za izmjenom podataka nekog korisnika, baza podataka provjerava je li narušen integritet jedinstvenosti, odnosno je li administrator promijenio korisničko ime u drugo korisničko ime koje već postoji u bazi podataka. Iz ovog scenarija proizlaze dva slučaja:
 				
 				\begin{enumerate}
 					    \item Promjenom nije narušen integritet - novi podaci se pohranjuju u bazu podataka. Administratoru se javlja da je promjena uspješna, te se istovremeno šalje e-mail putem mail-poslužitelja korisniku s njegovim novim podacima.
-						\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka), te se traži ponovni unos podataka.
+						\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka).
 				\end{enumerate}
 					
 					\textbf{Slika dijagrama:}
@@ -710,16 +690,11 @@
 					\subsubsection{3) Virtualno natjecanje}
 					
 					\textbf{Opis dijagrama:}
-					Kada natjecatelj klikne na link/gumb "Virtualno natjecanje", poslužitelj mu nudi mogućnost odabira između "Prethodno natjecanje" i "Nasumično generirani zadaci".
+					Kada natjecatelj klikne na link/gumb "Virtualno natjecanje", poslužitelj mu nudi mogućnost odabira između "Prethodno natjecanje" i "Nasumično odabrani zadaci".
 					
-					Ako natjecatelj odabere "Prethodno natjecanje", poslužitelj ga preusmjerava na kalendar natjecanja, gdje natjecatelj može birati samo natjecanja na kojima je već sudjelovao. Kada natjecatelj odabere određeno natjecanje, poslužitelj komunicira s bazom podataka kako bi provjerio je li natjecatelj sudjelovao na tom natjecanju. Iz tog scenarija proizlaze dva slučaja:
+					Ako natjecatelj odabere "Prethodno natjecanje", poslužitelj ga preusmjerava na kalendar natjecanja, gdje natjecatelj može birati prethodna natjecanja.
 					
-					\begin{enumerate}
-					\item Natjecatelj nije prethodno sudjelovao na odabranom natjecanju, pa mu poslužitelj onemogućava pristup, te natjecatelj može odabrati drugo natjecanje.
-					\item Natjecatelj je prethodno sudjelovao na natjecanju, te mu je omogućen pristup. Na kraju Virtualnog natjecanja, natjecateljev virtualni rezultat uspoređuje se s rang listom stvarnog natjecanja (čije podatke poslužitelj dohvaća iz baze podataka), i rezultat se prikazuje natjecatelju.
-					\end{enumerate}
-					
-					Ako natjecatelj odabere opciju "Nasumično generirani zadaci", poslužitelj iz baze podataka dohvaća zadatke i generira ih ravnomjerno prema težini. Nakon generiranja zadataka, zadaci se prikazuju natjecatelju.
+					Ako natjecatelj odabere opciju "Nasumično odabrani zadaci", poslužitelj iz baze podataka dohvaća zadatke i odabire ih ravnomjerno prema težini. Nakon odabiranja zadataka, zadaci se prikazuju natjecatelju.
 					
 					\textbf{Slika dijagrama:}
 					\begin{figure}[H]
@@ -738,12 +713,13 @@
 			\begin{packed_item}
 				\item Sustav treba biti funkcionalan na bilo kojem web pregledniku 
 				\item Sustav mora biti brz i responzivan
-				\item Dohvat zadataka ili korisnika iz baze podataka mora se obaviti u konačnom vremenu (manji od 3 sekunde)
+				\item Dohvat zadataka ili korisnika iz baze podataka mora se obaviti u konačnom vremenu (manji od 5 sekunde)
 				\item Sustav mora podržavati hrvatsku abecedu pri unosu i prikazu tekstualnog sadržaja
 				\item Sustav mora podržavati rad jednog ili više korisnika istovremeno 
 				\item Sustav mora biti jednostavan za korištenje 
 				\item Pristup sustavu mora biti omogućen preko javne mreže pomoću HTTPS
-				\item Nadogradnja sustava ne smije narusiti postojece funkcionalnosti sustava 
+				\item Nadogradnja sustava ne smije narušiti postojeće funkcionalnosti sustava 
+				\item Sustav podržava format slike jpeg (maksimalna veličina 1048576 bajtova)
 			\end{packed_item}
 				
 			
