@@ -9,7 +9,24 @@ const Users = () => {
     var postojeKorisnici = false;
     //funkcija koja salje bazi zahtjev za brisanjem korisnika sa id-em id
     var obrisiKorisnika = (id) => {
-
+        fetch(`http://localhost:8080/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Ako je zahtjev uspješan (status kod 200-299), možete obraditi odgovor
+                    console.log("Uspješno izbirsan user s id-om: " + id);
+                }
+                else throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // Ovdje možete obraditi odgovor od servera (ako je potrebno)
+                console.log('Uspjeh:', data);
+            })
+            .catch(error => {
+                // Uhvatite i obradite bilo kakve greške prilikom slanja zahtjeva
+                console.error('Greška prilikom slanja DELETE zahtjeva:', error);
+            });
     };
 
 
@@ -41,7 +58,7 @@ const Users = () => {
                         <div className="naslov">
                             <Link className = "imeiprezime" to={'/users/'+user.id}><h2>{ user.name + ' ' + user.lastname }</h2></Link>
                             <div className="gumbici">
-                                {promjena && <button onClick={() => obrisiKorisnika(user.username)}>Obriši korisnika</button>}
+                                {promjena && <button onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
                             </div>
                         </div>
                         <hr/>

@@ -7,8 +7,8 @@ import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
 import Nadmapa.BytePit.service.impl.TokenService;
+import Nadmapa.BytePit.service.impl.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,8 @@ import java.util.stream.Collectors;
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    private final UserRegistrationService registrationService;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -33,6 +34,10 @@ public class UserController {
 
     @Autowired
     private EmailSenderService emailservice;
+    @Autowired
+    public UserController(UserRegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
 
     @GetMapping("")
     public List<User> listConfirmedUsers(){
@@ -73,7 +78,8 @@ public class UserController {
 
 
         logger.info("Received request to create a user: {}", user);
-        ResponseEntity<String> response = userService.createUser(user);
+        ResponseEntity<String> response = registrationService.createUser(user);
+        registrationService.checkIfUserIsConfirmedAfter24Hours(user);
         if(response.getStatusCode().is2xxSuccessful()){
             String message="Bok " + user.getName() +  ", dobrodošli u BytePit!\n";
             if(user.getUserType()== UserType.COMPETITOR){
@@ -107,6 +113,12 @@ public class UserController {
         return userService.getUserByUsername(TokenService.decodeToken(token).getSubject());
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+       return userService.deleteUserById(id);
+    }
+
 
 
 }

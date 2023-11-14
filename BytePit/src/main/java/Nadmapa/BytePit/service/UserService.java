@@ -19,4 +19,5 @@ public interface UserService {
     User getUserByUsername(String username);
 
 
+    ResponseEntity<String> deleteUserById(Long id);
 }
