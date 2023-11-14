@@ -1,30 +1,41 @@
-import { useState, useEffect } from 'react';
-import "./NavbarStyle.css"
-import logo from "./logo.svg"
-import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
+import React, { useState, useEffect } from 'react';
+import './NavbarStyle.css';
+import logo from './logo.svg';
+import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
 
   useEffect(() => {
-    const cookies = new Cookies();
-    const jwtToken = cookies.get('jwt_authorization');
-
     if (jwtToken) {
       setIsLoggedIn(true);
+
+      const fetchData = async () => {
+        try {
+          const url = `http://localhost:8080/users/${jwtToken}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          setUserData(data); // Set user data fetched from the backend
+        } catch (error) {
+          // Handle error if needed
+          console.error(error);
+        }
+      };
+
+      fetchData();
     } else {
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [jwtToken]);
 
   const logout = () => {
-    const cookies = new Cookies();
     cookies.remove('jwt_authorization');
-
     window.location.href = '/login'; // Redirect to the login page
-};
-
+  };
   return (
     <div className="navbar">
       <div className="left">
@@ -51,13 +62,17 @@ const Navbar = () => {
         </div>
 
         <div className="right">
-          {isLoggedIn ? (
+          {isLoggedIn && userData && (
             <Link to='/login' onClick={logout} className="nav-link middle-link">
              ODJAVA
             </Link>
-          ) : (
+          )}
+          {isLoggedIn && userData && (
+            <p> {userData && `${userData.name} ${userData.lastname}`} </p>
+          )}
+          {!isLoggedIn && (
             <Link to='/login' className="nav-link middle-link">
-              PRIJAVA
+            PRIJAVA
             </Link>
           )}
           {!isLoggedIn && (
