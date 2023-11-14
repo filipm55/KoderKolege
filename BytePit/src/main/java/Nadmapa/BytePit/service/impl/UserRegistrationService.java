@@ -35,10 +35,24 @@ public class UserRegistrationService {
 
 
     public void checkIfUserIsConfirmedAfter24Hours(User user) {
-        long delay = 0;
-        if(user.getUserType().equals(UserType.COMPETITOR))  delay = 24*60*60; //24 sata
-        if(user.getUserType().equals(UserType.COMPETITION_LEADER)) delay = 24*60*60*7; //7 dana
-        if(!user.getUserType().equals((UserType.ADMIN)))
-            executorService.schedule(() -> checkIfUserIsConfirmed(user), delay, TimeUnit.SECONDS);
+        long delay = 24*60*60;
+
+        if(!user.getUserType().equals((UserType.ADMIN))) executorService.schedule(() -> checkIfUserIsConfirmed(user), delay, TimeUnit.SECONDS); //ako nije admin za 24 sata mora confirmat!
+        if(user.getUserType().equals(UserType.COMPETITION_LEADER)){
+            delay = 24*60*60*7; //7 dana
+            executorService.schedule(() -> checkIfUserIsConfirmedByAdmin(user), delay, TimeUnit.SECONDS);
+        }
+    }
+
+    private void checkIfUserIsConfirmedByAdmin(User user) {
+        try{
+            user = userService.getUserByUsername(user.getUsername());
+            if(!user.getConfirmedByAdmin()){
+                System.out.println("Korisnika" + user.getUsername() + " administrator nije potvrdio unuta 7 dana, brišem ga");
+                userService.deleteUserById(user.getId());
+            }
+        }catch (Exception e){
+        }
+
     }
 }
