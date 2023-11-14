@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 public class TokenService {
 
-    //private static final String SECRET_KEY = "mySecretKey"; // Ovo mozemo bilo sto staviti
+    //private static final String SECRET_KEY = "mySecretKey"; 
 
 
     public static String createToken(String subject) {
