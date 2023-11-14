@@ -26,7 +26,7 @@ public class UserRegistrationService {
     public void checkIfUserIsConfirmed(User user) {
         user = userService.getUserByUsername(user.getUsername());
         if(!user.getConfirmed()){
-            System.out.println("Korisnik " + user.getUsername() + "nije potvrdio registraciju unutar 24 sata, brišem ga");
+            System.out.println("Korisnik " + user.getUsername() + " nije potvrdio registraciju unutar 24 sata, brišem ga");
             userService.deleteUserById(user.getId());
         }
         executorService.shutdown();

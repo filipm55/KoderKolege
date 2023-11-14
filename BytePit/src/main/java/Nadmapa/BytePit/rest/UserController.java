@@ -88,7 +88,10 @@ public class UserController {
                         "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
-                        "Tim BytePit";
+                        "Tim BytePit" +
+                        "\n" +
+                        "P.S. Imate 24 sata za potvrdu maila, nakon toga, vaš će korisnički račun biti izbrisan.";
+
             }
             else message+="\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
