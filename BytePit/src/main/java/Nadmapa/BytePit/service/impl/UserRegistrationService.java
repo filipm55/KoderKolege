@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.domain.UserType;
 import Nadmapa.BytePit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,10 @@ public class UserRegistrationService {
 
 
     public void checkIfUserIsConfirmedAfter24Hours(User user) {
-        long delay = 24*60*60; // u sekundama je, ako želite npr nakon minute onda je delay=60;
-        executorService.schedule(() -> checkIfUserIsConfirmed(user), delay, TimeUnit.SECONDS);
+        long delay = 0;
+        if(user.getUserType().equals(UserType.COMPETITOR))  delay = 24*60*60; //24 sata
+        if(user.getUserType().equals(UserType.COMPETITION_LEADER)) delay = 24*60*60*7; //7 dana
+        if(!user.getUserType().equals((UserType.ADMIN)))
+            executorService.schedule(() -> checkIfUserIsConfirmed(user), delay, TimeUnit.SECONDS);
     }
 }

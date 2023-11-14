@@ -89,7 +89,7 @@ public class UserController {
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
-                        "\n" +
+                        "\n\n" +
                         "P.S. Imate 24 sata za potvrdu maila, nakon toga, vaš će korisnički račun biti izbrisan.";
 
             }
@@ -103,7 +103,9 @@ public class UserController {
             if(user.getUserType()==UserType.COMPETITION_LEADER){
                 String adminmail = "bytepit.noreply@gmail.com";
                 String message2="Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash();
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() +
+                        "\n" +
+                        "Moramo potvrditi u roku od 7 dana.";
                 emailservice.sendSimpleEmail(adminmail,message2,"Netko želi biti voditelj");
             }
         }
