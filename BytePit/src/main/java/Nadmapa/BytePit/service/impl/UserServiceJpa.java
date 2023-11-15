@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceJpa implements UserService {
@@ -42,6 +43,11 @@ public class UserServiceJpa implements UserService {
     @Override
     public User getUserByUsername(String username) {
         return userRepo.findByUsername(username);
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepo.findById(id);
     }
 
     @Override

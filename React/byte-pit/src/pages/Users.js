@@ -43,9 +43,30 @@ const Users = () => {
 
     if (users && users.length !== 0) postojeKorisnici = true;
 
-    var urediKorisnike = () => {
+    var urediKorisnike = (id, formData) => {
+
         setPromjena(true);
     }
+
+    var proba = (id) => { // SAMO DA ISPROBAM MOGU LI SE PROMIJENITI PODACI, RADI, VI TREBATE SAMO OSIGURAT OVAJ DIO SA formDATA  DA TO PROCITA SA FRONTENDA
+        // IZ NEKOG RAZLOGA NE RADI KADA SE BUTTON NALAZI UNUTAR "nestajuciForm", A KAD SAM GA STAVIO VAN ONDA RADI
+        const formData = new FormData();
+        formData.append('name', "PROBNO IME1");
+        formData.append('lastname', "PROBNO PREZIME1");
+        formData.append('username', "PROBNI USERNAME1");
+        formData.append('email', "probniMail1@das.com");
+        formData.append('userType', "COMPETITION_LEADER");
+
+        fetch(`http://localhost:8080/users/${id}`, {
+            method: 'PUT',
+            body: formData,
+        }).then(response => {
+            console.log("USPJEH");
+        }).catch(error => {
+            console.log("NEUSPJEH");
+        });
+    }
+
 
     return (
         <div className="wrrapper">
@@ -87,12 +108,14 @@ const Users = () => {
                                     <input type="radio" id="voditelj" name="uloga"/><p>voditelj</p>
                                     </div>
                                     <button onClick={() => urediKorisnike()}>Spremi promjene</button>
+
                                 </form>}
                             </div>
                             <p> <img
                                 src={`data:image/jpeg;base64,${user.image.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
                                 alt="User Image"
                             /></p>
+                            <button onClick={() => proba(user.id)}>probni</button>
                         </div>
                     </div>
                 ))}

@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     List<User> listAll();
@@ -20,4 +21,7 @@ public interface UserService {
 
 
     ResponseEntity<String> deleteUserById(Long id);
+
+
+    Optional<User> getUserById(Long id);
 }

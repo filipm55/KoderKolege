@@ -9,6 +9,7 @@ import Nadmapa.BytePit.service.impl.EmailSenderService;
 import Nadmapa.BytePit.service.impl.TokenService;
 import Nadmapa.BytePit.service.impl.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,20 +36,19 @@ public class UserController {
 
     @Autowired
     private EmailSenderService emailservice;
+
     @Autowired
     public UserController(UserRegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 
     @GetMapping("")
-    public List<User> listConfirmedUsers(){
+    public List<User> listConfirmedUsers() {
         List<User> allUsers = userService.listAll();
         return allUsers.stream()
-                .filter(user -> (user.getConfirmed() && user.getUserType()==UserType.COMPETITOR) ||  (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType()==UserType.COMPETITION_LEADER) )
+                .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType() == UserType.COMPETITION_LEADER))
                 .collect(Collectors.toList());
     }
-
-
 
 
     @PostMapping("")
@@ -83,20 +84,19 @@ public class UserController {
         logger.info("Received request to create a user: {}", user);
         ResponseEntity<String> response = registrationService.createUser(user);
         registrationService.checkIfUserIsConfirmedAfter24Hours(user);
-        if(response.getStatusCode().is2xxSuccessful()){
-            String message="Bok " + user.getName() +  ", dobrodošli u BytePit!\n";
-            if(user.getUserType()== UserType.COMPETITOR){
-                message+="\n" +
+        if (response.getStatusCode().is2xxSuccessful()) {
+            String message = "Bok " + user.getName() + ", dobrodošli u BytePit!\n";
+            if (user.getUserType() == UserType.COMPETITOR) {
+                message += "\n" +
                         "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash()+ "&email=" + user.getEmail()  + "\n" +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
                         "\n\n" +
                         "P.S. Imate 24 sata za potvrdu maila, nakon toga, vaš će korisnički račun biti izbrisan.";
 
-            }
-            else message+="\n" +
+            } else message += "\n" +
                     "Molimo Vas da potvrdite račun preko ovog linka \n" +
                     "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
@@ -104,14 +104,14 @@ public class UserController {
                     "Tim BytePit";
 
 
-            emailservice.sendSimpleEmail(user.getEmail(),message,"Potvrda registracije");
-            if(user.getUserType()==UserType.COMPETITION_LEADER){
+            emailservice.sendSimpleEmail(user.getEmail(), message, "Potvrda registracije");
+            if (user.getUserType() == UserType.COMPETITION_LEADER) {
                 String adminmail = "bytepit.noreply@gmail.com";
-                String message2="Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
+                String message2 = "Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
                         "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
                         "\n" +
                         "Moramo potvrditi u roku od 7 dana.";
-                emailservice.sendSimpleEmail(adminmail,message2,"Netko želi biti voditelj");
+                emailservice.sendSimpleEmail(adminmail, message2, "Netko želi biti voditelj");
             }
         }
         logger.info("Response from userService: {}", response);
@@ -119,16 +119,76 @@ public class UserController {
     }
 
     @GetMapping("/{token}")
-    public User getUserByToken(@PathVariable String token){
+    public User getUserByToken(@PathVariable String token) {
         return userService.getUserByUsername(TokenService.decodeToken(token).getSubject());
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
-       return userService.deleteUserById(id);
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
+        return userService.deleteUserById(id);
     }
 
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id,
+                                             @RequestParam("name") String name,
+                                             @RequestParam("lastname") String lastname,
+                                             @RequestParam("username") String username,
+                                             @RequestParam("email") String email,
+                                             @RequestParam("userType") String userType) {
+        System.out.println("OVDJE SAM: " + id);
 
+
+        Optional<User> optionalUser = userService.getUserById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            String stariEmail = user.getEmail();
+
+            // Provjera i ažuriranje svakog polja korisnika ako je prisutno u primljenim podacima
+            if (!name.equals(user.getName())) {
+                user.setName(name);
+            }
+            if (!lastname.equals(user.getLastname())) {
+                user.setLastname(lastname);
+            }
+            if (!username.equals(user.getUsername())) {
+                user.setUsername(username);
+            }
+            if (!email.equals(user.getEmail())) {
+                user.setEmail(email);
+            }
+            if (!userType.toString().equals(user.getUserType().toString())) {
+                switch (userType) {
+                    case "COMPETITOR":
+                        user.setUserType(UserType.COMPETITOR);
+                        break;
+                    case "COMPETITION_LEADER":
+                        user.setConfirmedByAdmin(true);
+                        user.setUserType(UserType.COMPETITION_LEADER);
+                        break;
+                }
+            }
+
+            try{
+                userService.saveUser(user);
+            }catch(Exception e){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Neuspješan update korisnika s ID-om: " + id);
+            }
+            emailservice.sendSimpleEmail(stariEmail,"Poštovani,\n" +
+                    "Administrator je izmjenio vaše podatke.\n" +
+                    "Vaši novi podaci su:\n" +
+                    "\tIme: " + user.getName() +
+                    "\n\tPrezime: " + user.getLastname() +
+                    "\n\tKorisničko ime:" + user.getUsername() +
+                    "\n\tEmail: " + user.getEmail() +
+                    "\n\tTip: "+ user.getUserType().toString()
+                    ,"Izmjenjeni osobni podaci!");
+            return ResponseEntity.ok("Uspješan update podataka korisnika s ID-om: " + id);
+        }
+
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Korisnik s ID-om : " + id +" nije pronađen u bazi");
+    }
 }
