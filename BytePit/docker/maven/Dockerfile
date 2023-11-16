@@ -1,3 +1,4 @@
+
 # Container za izgradnju (build) aplikacije
 FROM openjdk:17-alpine AS builder
 
