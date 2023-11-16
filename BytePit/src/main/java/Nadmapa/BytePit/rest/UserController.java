@@ -89,7 +89,7 @@ public class UserController {
             if (user.getUserType() == UserType.COMPETITOR) {
                 message += "\n" +
                         "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
+                        "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
@@ -98,7 +98,7 @@ public class UserController {
 
             } else message += "\n" +
                     "Molimo Vas da potvrdite račun preko ovog linka \n" +
-                    "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
+                    "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
                     "Radujemo se našoj suradnji\n" +
                     "Tim BytePit";
@@ -108,7 +108,7 @@ public class UserController {
             if (user.getUserType() == UserType.COMPETITION_LEADER) {
                 String adminmail = "bytepit.noreply@gmail.com";
                 String message2 = "Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
-                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
+                        "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
                         "\n" +
                         "Moramo potvrditi u roku od 7 dana.";
                 emailservice.sendSimpleEmail(adminmail, message2, "Netko želi biti voditelj");
