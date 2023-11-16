@@ -44,7 +44,7 @@ const Registration = () => {
             console.log(JSON.stringify(user));
 
             // sendData('http://localhost:8080/users', user);
-            fetch('http://localhost:8080/users', {
+            fetch('https://bytepitb.onrender.com/users', {
                 method: 'POST',
                 body: formData,
             }).then(response => {

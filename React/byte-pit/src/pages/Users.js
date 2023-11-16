@@ -25,7 +25,7 @@ const Users = () => {
         if (jwtToken) {    
           const fetchData = async () => {
             try {
-              const url = `http://localhost:8080/users/${jwtToken}`;
+              const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
               const response = await fetch(url);
               const data = await response.json();
               setUserData(data); // Set user data fetched from the backend
@@ -42,7 +42,7 @@ const Users = () => {
 
     //funkcija koja salje bazi zahtjev za brisanjem korisnika sa id-em id
     var obrisiKorisnika = (id) => {
-        fetch(`http://localhost:8080/users/${id}`, {
+        fetch(`https://bytepitb.onrender.com/users/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -66,7 +66,7 @@ const Users = () => {
     };
 
 
-    const {data:users, error} = useFetch('http://localhost:8080/users')
+    const {data:users, error} = useFetch('https://bytepitb.onrender.com/users')
     //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //na svakom profilu moraju biti zadaci koje je objavio u obliku popisa, backend u odgovoru na ovaj zahtjev mora poslati uz podatke o autoru i podatke o
     //imenima zadataka te id-u zadatka (ako mu je to jedinstveni identifikator
@@ -102,7 +102,7 @@ const Users = () => {
         formData.append('email', email);
         formData.append('userType', role);
 
-        fetch(`http://localhost:8080/users/${id}`, {
+        fetch(`https://bytepitb.onrender.com/users/${id}`, {
             method: 'PUT',
             body: formData,
         }).then(response => {
@@ -124,7 +124,7 @@ const Users = () => {
         formData.append('email', "probniMail1@das.com");
 
 
-        fetch(`http://localhost:8080/users/${id}`, {
+        fetch(`https://bytepitb.onrender.com/users/${id}`, {
             method: 'PUT',
             body: formData,
         }).then(response => {
