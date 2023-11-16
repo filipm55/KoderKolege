@@ -28,7 +28,6 @@ const Navbar = () => {
 
       fetchData();
     } else {
-      setIsLoggedIn(false);
     }
   }, [jwtToken]);
 
@@ -70,12 +69,12 @@ const Navbar = () => {
           {isLoggedIn && userData && (
             <p> {userData && `${userData.name} ${userData.lastname}`} </p>
           )}
-          {!isLoggedIn && (
+          { !userData && (
             <Link to='/login' className="nav-link middle-link">
             PRIJAVA
             </Link>
           )}
-          {!isLoggedIn && (
+          {!userData && (
             <Link to='/registration' className="nav-link">
               REGISTRACIJA
             </Link>
