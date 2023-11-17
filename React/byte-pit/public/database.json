@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "123456",
+      "name": "matea",
+      "surname": "cvetkovic",
+      "email": "doktorica.matea@gmail.com",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "name": "trps",
+      "surname": "cviki",
+      "username": "cvjetko",
+      "email": "cvjetaca@yahoo.com",
+      "password": "gitara",
+      "role": "natjecatelj",
+      "id": 2
+    },
+    {
+      "name": "petra",
+      "surname": "kdsjf",
+      "username": "kdowjfo",
+      "email": "dksf@gds.",
+      "password": "sljkfjfopj",
+      "role": "",
+      "file": null,
+      "id": 3
+    },
+    {
+      "name": "hbedrbgf",
+      "surname": "ngvngf",
+      "username": "rgeg",
+      "email": "doktorica.matea@gmail.com",
+      "password": "efe",
+      "role": "voditelj",
+      "file": null,
+      "id": 4
+    },
+    {
+      "name": "ferrth",
+      "surname": "fdsegr",
+      "username": "dffg",
+      "email": "grethrrth@gds.",
+      "password": "grrgrgg",
+      "role": "natjecatelj",
+      "file": null,
+      "id": 5
+    },
+    {
+      "name": "fregtrh",
+      "surname": "etrghtrh",
+      "username": "trhttrf",
+      "email": "doktorica.matea@gmail.com",
+      "password": "ggrgre",
+      "role": "natjecatelj",
+      "file": null,
+      "id": 6
+    },
+    {
+      "name": "regtrf",
+      "surname": "fdb fg",
+      "username": "bgfb",
+      "email": "doktorica.matea@gmail.com",
+      "password": "fdbfb",
+      "role": "voditelj",
+      "file": null,
+      "id": 7
+    }
+  ],
+  "zadaci": [
+    {
+      "title": "tesko",
+      "authorid": "1",
+      "author": "matea",
+      "body": "mdfewfikweojgoeršhk340woatea",
+      "id": 1
+    },
+    {
+      "title": "laksi",
+      "authorid": "2",
+      "author": "trpimir",
+      "body": "loremipsumloremipsumloremipsum",
+      "id": 2
+    }
+  ]
+}

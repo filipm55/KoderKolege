@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+</head>
+<body>
+<h1>Potvrda registracije</h1>
+
+<div th:if="${confirmationMessage}">
+    <p th:text="${confirmationMessage}"></p>
+</div>
+
+<!-- Dodajte ostatak HTML-a po potrebi -->
+
+</body>
+</html>
