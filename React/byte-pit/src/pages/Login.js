@@ -26,7 +26,7 @@ const Login = () => {
         const loginDTO = { username, password };
         
         try {
-            const response = await sendData('https://bytepitb.onrender.com/login', loginDTO);
+            const response = await sendData('http://localhost:8080/login', loginDTO);
 
             if (typeof response === 'string') {
                 //setMessage(response);  
