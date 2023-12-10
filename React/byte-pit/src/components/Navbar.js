@@ -42,6 +42,7 @@ const Navbar = () => {
           &#9776;
         </i>
         <Link to='/'> <img src={logo} alt="Logo" className="logo" /></Link>
+        <h2 className="Bytepit">BYTEPIT</h2>
       </div>
       <div className="omotac">
         <div className="middle">

@@ -1,7 +1,10 @@
-import './Tasks.css';
+import './NoviTasks.css';
 import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import useFetch from "../useFetch";
+import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import CasinoIcon from '@mui/icons-material/Casino';
 
 const Tasks = () => {
 
@@ -10,7 +13,7 @@ const Tasks = () => {
     //backend mora provjeravati i povezivati autora i zadatak?? moramo imat sa zadatka link na korisnika koji ga je objavio i obratno,
     // pri zahtjevu za dohvatom podataka o zadatku moraju tu biti i podaci o autoru (bar id i ime i prezime)
     return (
-        <div className="wrapper">
+        /*<div className="wrapper">
             { error && <div>{ error }</div> }
             { tasks && <div className="task-list">
                 {tasks.map(task => (
@@ -19,7 +22,34 @@ const Tasks = () => {
                     </div>
                 ))}
             </div> }
+        </div>*/
+
+        <div className="body1">
+            <div className="kategorije">
+                <Link to='/tasks/virtual' className="link">
+                    <div className="kat">
+                        <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
+                        <h3>Kreiraj virtualno natjecanje</h3>
+                        <p>**opis**</p>
+                    </div>
+                </Link>
+                <Link to='/tasks/practice' className="link">
+                    <div className="kat">
+                        <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>
+                        <h3>Zadaci za vježbu</h3>
+                        <p>**opis**</p>
+                    </div>
+                </Link>
+                <Link to='/tasks/addTask' className="link">
+                    <div className="kat">
+                        <AddToQueueIcon sx={{ fontSize: 60 }} color="primary"/>
+                        <h3>Dodaj novi zadatak</h3>
+                        <p>**opis**</p>
+                    </div>
+                </Link>
+            </div>
         </div>
+
     );
 }
 
