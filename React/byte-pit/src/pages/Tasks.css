@@ -13,28 +13,46 @@ button.urediKorisnikeGumb {
 }
 
 div.task-list{
-    padding:5px;
-    width:60vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width:90vw;
     align-items: center;
     margin-bottom: 20px;
 }
 div.task{
-    width:50vw;
-    border: 1px solid black;
-    background-color:  rgba(100, 94, 94, 0.35);
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:fit-content;
+    height: fit-content;
+    margin: 30px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+div.task:hover {
+    border-bottom: 2px solid lightgray;
+    border-left: 1px solid lightgray;
     border-radius: 10px;
-    margin-top: 10px;
 }
-h2{
+
+h2#poseban{
     text-align: left;
-    font-size: 7vh;
+    font-size: 5.5vh;
     text-decoration: none;
+    margin-bottom: -10px;
 }
 
 
-img {
-    width: 20vw;
+img.profile {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    padding: 2px;
 }
 
 div.info {
@@ -47,6 +65,12 @@ div.info {
 div.tekstDio {
     align-self: flex-start;
     font-size: 3vh;
+    margin-left: 5px;
+    margin-top: -10px;
+}
+
+.ikona {
+    margin-bottom: -5px;
 }
 
 h3.podaciokorisniku {
@@ -67,16 +91,30 @@ div.naslov{
 
 div.naslov button {
     height: fit-content;
-    padding: 2px;
-    border-radius: 5px;
-    border: 1px solid rgb(99, 98, 98);
+    border-radius: 10px;
     margin: 10px;
     font-size: 3vh;
+    background-color:whitesmoke;
+    padding: 8px;
 }
+
+button.zadmina:hover {
+    background-color:#645e5edd;
+    color: white;
+}
+
 
 div.gumbici {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: -30px;
+}
+
+button.zadmina {
+    border: 0px solid white;
+    background-color: white;
 }
 
 form.nestajuciForm {
@@ -98,10 +136,12 @@ form.nestajuciForm input {
 div.izbor {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     justify-items: center;
-    width: 30vh;
+    width: 17vw;
+    margin-left: 8px;
+    margin-top: -20px;
 }
 
 div.izbor p {
@@ -112,3 +152,14 @@ div.izbor p {
     justify-items: center;
 }
 
+button#spremime{
+    padding: 10px;
+    border-radius: 12px;
+    background-color: rgba(199, 199, 199, 0.824);
+    color: black;
+}
+
+button#spremime:hover {
+    background-color:#645e5edd;
+    color: white;
+}

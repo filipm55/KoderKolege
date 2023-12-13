@@ -3,7 +3,9 @@ import useFetch from "../useFetch";
 import './Tasks.css';
 import Cookies from 'universal-cookie';
 import React, { useState, useEffect } from 'react';
-
+import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from '@mui/icons-material/Person';
+import FilterVintageIcon from '@mui/icons-material/FilterVintage';
 
 const Users = () => {
     var [promjena, setPromjena] = useState(false);
@@ -144,45 +146,52 @@ const Users = () => {
                 {users.map(user => (
                     <div className="task" key={user.id} >
                         <div className="naslov">
-                            <Link className = "imeiprezime" to={'/users/'+user.id}><h2>{ user.name + ' ' + user.lastname }</h2></Link>
+                            <Link className = "imeiprezime" to={'/users/'+user.id}><h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
                             {userData && userData.userType==="ADMIN" && (
                             <div className="gumbici">
-                                { <button onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
-                                {<button className="urediKorisnikeGumb" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                                {<button className="zadmina" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                                {<button  className="zadmina" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
+    
                             </div>
                             )}
                         </div>
                         <hr/>
                         <div className="info">
                             <div className="tekstDio">
-                                <h3 className="podaciokorisniku">Podaci o korisniku: </h3>
                                 {!mapa.get(user.username)  && 
                                     <div className="nekidio">
-                                        <p>Email:  {user.email}</p>
-                                        <p>Korisničko ime:  {user.username}</p>
-                                        <p>Uloga:  {user.userType}</p>
+                                        <p className="podatak"> <EmailIcon className="ikona"/> {user.email}</p>
+                                        <p className="podatak"><PersonIcon className="ikona"/> {user.username}</p>
+                                        <p className="podatak"><FilterVintageIcon className="ikona"></FilterVintageIcon> {user.userType}</p>
                                     </div>
                                  }
                                 {mapa.get(user.username) &&
                                 <form className="nestajuciForm">
-                                    <div className="kucica">
+                                    <div>
+                                    <div className="kucica4">
                                         <p>Ime: <input type = "text" defaultValue={user.name} onChange={(e) => setName(e.target.value)}></input></p>
                                     </div>
-                                    <div className="kucica">
+                                    <div className="kucica4">
                                     <p>Prezime: <input type = "text" defaultValue={user.lastname} onChange={(e) => setSurname(e.target.value)}></input></p>
                                     </div>
+                                    <div className="kucica4">
                                     <p>Email: <input type = "text" defaultValue={user.email} length = "20" onChange={(e) => setEmail(e.target.value)}></input></p>
-                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
-                                    <div className='izbor'><label>Uloga:</label>
-                                    <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
-                                                            onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>
-                                    <input type="radio" id="voditelj" name="uloga" checked={role === 'COMPETITION_LEADER'}
-                                                            onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
                                     </div>
-                                    <button onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+                                    <div className="kucica4">
+                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
+                                    </div>
+                                    <div className='izbor'><label>Uloga:</label>
+                                        <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
+                                                                onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>
+                                        <input type="radio" id="voditelj" name="uloga" checked={role === 'COMPETITION_LEADER'}
+                                                                onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
+                                    </div>
+                                    </div>
+                                    <button id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+                                    
                                 </form>}
                             </div>
-                            <p> <img
+                            <p> <img className="profile"
                                 src={`data:image/jpeg;base64,${user.image.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
                                 alt="User Image"
                             /></p>

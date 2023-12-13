@@ -48,14 +48,17 @@ input.top {
 }
 
 form button {
-    border-radius: 5px;
-    border: 0.5px solid gray;
+    border-radius: 6px;
+    border: 0px solid gray;
     background-color: rgb(117, 92, 92);
-    padding: 4px;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
     color:whitesmoke;
     font-weight: 300;
     margin: 10px;
     font-size: 16px;
+    align-self: center;
 }
 
 h2 {
