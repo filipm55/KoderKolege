@@ -1,5 +1,6 @@
 package Nadmapa.BytePit.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class Problem {
     private Long id;
     @NotNull
     @OneToOne
+    @JsonProperty("problemMaker")
     private User problemMaker;
     @Getter @Setter
     private String title;
@@ -23,7 +25,7 @@ public class Problem {
     @Getter @Setter
     private int points;
     @Getter @Setter
-    private Duration duration;
+    private String duration;
     @Getter @Setter
     private String text;
     @ElementCollection
@@ -40,7 +42,7 @@ public class Problem {
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(User problemMaker, String title, int points, Duration duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+    public Problem(User problemMaker, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
@@ -49,7 +51,20 @@ public class Problem {
         this.problemMaker=problemMaker;
         this.title = title;
         this.points = points;
-        this.duration = duration;
+
+        this.duration=duration;
+//        String[] parts = duration.split(":");
+//
+//        // Convert to Duration
+//        try {
+//            long minutes = Long.parseLong(parts[0]);
+//            long seconds = Long.parseLong(parts[1]);
+//
+//
+//            this.duration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+//        }catch(Error e)   {
+//            System.out.println("Krivo zadano trajanje");
+//        }
         this.text = text;
         addInputOutputExamples(inputExample, outputExample);
         this.isPrivate = isPrivate;
@@ -82,6 +97,73 @@ public class Problem {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getProblemMaker() {
+        return problemMaker;
+    }
+
+    public void setProblemMaker(User problemMaker) {
+        this.problemMaker = problemMaker;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setInputOutputExamples(Map<String, String> inputOutputExamples) {
+        this.inputOutputExamples = inputOutputExamples;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public ProblemType getProblemType() {
+        return problemType;
+    }
+
+    public void setProblemType(ProblemType problemType) {
+        this.problemType = problemType;
+    }
 
     @Override
     public String toString() {

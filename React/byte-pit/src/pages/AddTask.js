@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import sendData from "../sendData";
 import './AddTask.css';
+
 //import Cookies from "universal-cookie"
 //import { useHistory } from 'react-router-dom'; // Import useHistory
 
@@ -11,10 +12,64 @@ const AddTask = () => {
     const [taskText, setTaskText] = useState('');
     const [taskInput, setTaskInput] = useState('');
     const [taskOutput, setTaskOutput] = useState('');
+    // const [isError, setIsError] = useState(false);
+    // const [errorMsg, setErrorMsg] = useState('');
+    // const [message, setMessage] = useState('');
+    // const [errorMessage, setErrorMessage] = useState('');
     //const cookies = new Cookies();
 
     const submitFja = async (e) => {
         //fja za dodavanje zadatka u bazu
+        //setErrorMessage('')
+        e.preventDefault();
+        
+
+        const fakeUserZaSad = {  /////////?????????????????????????????????? za sad
+            name: "name",
+            lastname: "surname",
+            username: "username",
+            email: "email@gmail.com",
+            password: "password",
+            userType: "COMPETITOR",
+            image: null
+        };
+
+
+        const requestData = {
+            problemMaker: fakeUserZaSad,
+            title: taskName,
+            points: taskPoints,
+            duration: taskTime,
+            text: taskText,
+            inputExample: taskInput,
+            outputExample: taskOutput,
+            isPrivate: 1,              // !!!!!!!!!!!!!!!!!! takoder nije dodan unos ovog parametra a i nisam sig cemu sluzi
+            problemType: "EASY"   ///      !!!!!!!!!!!!!!!!!!!!!!!! za sad ? petra nije stavila unos kategorije treba dodati
+        };
+
+        console.log(JSON.stringify(requestData));
+        fetch('http://localhost:8080/problems', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+        })  .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            // If the response is OK, return the JSON data
+            return response.json();
+        })
+        .then(data => {
+            // Handle the JSON data
+            console.log('Server response:', data);
+            // Perform any additional actions based on the response
+        })
+        .catch(error => {
+            // Handle errors, including network errors or server errors
+            console.error('Error:', error.message);
+        });
     };
 
 
