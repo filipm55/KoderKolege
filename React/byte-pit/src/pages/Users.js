@@ -43,6 +43,7 @@ const Users = () => {
       }, [jwtToken]);
 
     //funkcija koja salje bazi zahtjev za brisanjem korisnika sa id-em id
+
     var obrisiKorisnika = (id) => {
         fetch(`http://localhost:8080/users/${id}`, {
             method: 'DELETE'
@@ -57,13 +58,12 @@ const Users = () => {
             .then(data => {
                 // Ovdje možete obraditi odgovor od servera (ako je potrebno)
                 console.log('Uspjeh:', data);
+                window.location.href = '/users'; // Redirect to the login page
             })
             .catch(error => {
                 // Uhvatite i obradite bilo kakve greške prilikom slanja zahtjeva
                 console.error('Greška prilikom slanja DELETE zahtjeva:', error);
             });
-
-            window.location.href = '/users'; // Redirect to the login page
 
     };
 
@@ -93,9 +93,9 @@ const Users = () => {
         //setPromjena(true);
     }
 
-    var urediKorisnika = (usernamee, id) => {
+    var urediKorisnika = (username, id) => {
         console.log(role);
-        uredi.set(usernamee, false);
+        uredi.set(username, false);
         setMapa(uredi);
         const formData = new FormData();
         formData.append('name', name);
@@ -109,13 +109,16 @@ const Users = () => {
             body: formData,
         }).then(response => {
             console.log("USPJEH");
+            window.location.href = '/users'; // Redirect to the login page
         }).catch(error => {
             console.log("NEUSPJEH");
         });
-        window.location.href = '/users'; // Redirect to the login page
+
 
 
     }
+
+
 
     var proba = (id) => { // SAMO DA ISPROBAM MOGU LI SE PROMIJENITI PODACI, RADI, VI TREBATE SAMO OSIGURAT OVAJ DIO SA formDATA  DA TO PROCITA SA FRONTENDA
         // IZ NEKOG RAZLOGA NE RADI KADA SE BUTTON NALAZI UNUTAR "nestajuciForm", A KAD SAM GA STAVIO VAN ONDA RADI
@@ -135,6 +138,8 @@ const Users = () => {
             console.log("NEUSPJEH");
         });
     }
+
+
 
 
     return (
@@ -188,6 +193,7 @@ const Users = () => {
                                     </div>
                                     </div>
                                     <button id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+
                                     
                                 </form>}
                             </div>

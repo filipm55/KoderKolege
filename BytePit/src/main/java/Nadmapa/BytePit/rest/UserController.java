@@ -137,7 +137,6 @@ public class UserController {
                                              @RequestParam("username") String username,
                                              @RequestParam("email") String email,
                                              @RequestParam("userType") String userType) {
-        System.out.println("OVDJE SAM: " + id);
 
 
         Optional<User> optionalUser = userService.getUserById(id);
