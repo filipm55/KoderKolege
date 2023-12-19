@@ -24,7 +24,7 @@ const AddTask = () => {
         e.preventDefault();
         
 
-        const fakeUserZaSad = {  /////////?????????????????????????????????? za sad
+        /* const fakeUserZaSad = {  /////////?????????????????????????????????? za sad
             name: "name",
             lastname: "surname",
             username: "username",
@@ -32,11 +32,11 @@ const AddTask = () => {
             password: "password",
             userType: "COMPETITOR",
             image: null
-        };
+        }; */
 
 
         const requestData = {
-            problemMaker: fakeUserZaSad,
+            problemMaker: "fakeusername",
             title: taskName,
             points: taskPoints,
             duration: taskTime,

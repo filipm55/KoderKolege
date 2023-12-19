@@ -16,9 +16,9 @@ public class Problem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @OneToOne
+    @Column(name="problem_maker_id",length=255)
     @JsonProperty("problemMaker")
-    private User problemMaker;
+    private String problemMaker;
     @Getter @Setter
     private String title;
 
@@ -42,7 +42,7 @@ public class Problem {
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(User problemMaker, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+    public Problem(String problemMaker, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
@@ -105,11 +105,11 @@ public class Problem {
         this.id = id;
     }
 
-    public User getProblemMaker() {
+    public String getProblemMaker() {
         return problemMaker;
     }
 
-    public void setProblemMaker(User problemMaker) {
+    public void setProblemMaker(String problemMaker) {
         this.problemMaker = problemMaker;
     }
 

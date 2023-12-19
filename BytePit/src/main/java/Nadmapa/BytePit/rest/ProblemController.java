@@ -29,8 +29,8 @@ public class ProblemController {
         @PostMapping("")
         public Problem createProblem(@RequestBody Problem problem){
             System.out.println("Pokusavamo spremit zadatak " + problem.getTitle() + "problem maker je " + problem.getProblemMaker());
-            userService.createUser(problem.getProblemMaker()); // ovo realno ne bi trebalo kad cemo spojit usera sa sessiona
-            problem.setProblemMaker(problem.getProblemMaker());
+            //userService.createUser(problem.getProblemMaker()); // ovo realno ne bi trebalo kad cemo spojit usera sa sessiona
+            //problem.setProblemMaker(problem.getProblemMaker());
             return problemService.createProblem(problem);
         }
 }
