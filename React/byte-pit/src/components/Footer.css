@@ -1,7 +1,8 @@
 
 footer {
-    background-color:#645e5e;
     color: white;
+    background: linear-gradient(to right, #b2a7a7, #786a6a); /* Gradient background */
+    box-shadow: 1px 2px 3px rgba(88, 59, 59, 0.1); /* Subtle box shadow */
 }
 
 .container {

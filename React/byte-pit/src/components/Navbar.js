@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NavbarStyle.css';
 import logo from './logo.svg';
+import logoUser from './user.svg';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
@@ -42,7 +43,7 @@ const Navbar = () => {
           &#9776;
         </i>
         <Link to='/'> <img src={logo} alt="Logo" className="logo" /></Link>
-        <h2 className="Bytepit" style={{ color: 'black', fontSize: 25, fontFamily: 'Inter'}}>BytePit</h2>
+        <h2 className="Bytepit" style={{ color: 'black', fontSize: 25}}>BytePit</h2>
 
       </div>
       <div className="omotac">
@@ -61,29 +62,34 @@ const Navbar = () => {
           </Link>
           <p>|</p>
         </div>
+      </div>
 
         <div className="right">
           {isLoggedIn && userData && (
-            <Link to='/login' onClick={logout} className="nav-link middle-link">
+            <Link to='/login' onClick={logout} className="nav-link-log middle-link">
              ODJAVA
             </Link>
           )}
           {isLoggedIn && userData && (
-            <p> {userData && `${userData.name} ${userData.lastname}`} </p>
+            <div class="user-info">
+            <Link to="/profile">
+              <img src={logoUser} className="logoUser" alt="User Logo" />
+            </Link>
+            <div>{userData && `${userData.name} ${userData.lastname}`}</div>
+          </div>
           )}
           { !userData && (
-            <Link to='/login' className="nav-link middle-link">
+            <Link to='/login' className="nav-link-log middle-link">
             PRIJAVA
             </Link>
           )}
           {!userData && (
-            <Link to='/registration' className="nav-link">
+            <Link to='/registration' className="nav-link-log">
               REGISTRACIJA
             </Link>
           )}
         </div>
       </div>
-    </div>
   );
 };
 
