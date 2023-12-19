@@ -1,6 +1,9 @@
-import { useState } from 'react';
 import sendData from "../sendData";
 import './AddTask.css';
+import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import React, { useState, useEffect } from 'react';
+
 
 //import Cookies from "universal-cookie"
 //import { useHistory } from 'react-router-dom'; // Import useHistory
@@ -12,17 +15,40 @@ const AddTask = () => {
     const [taskText, setTaskText] = useState('');
     const [taskInput, setTaskInput] = useState('');
     const [taskOutput, setTaskOutput] = useState('');
+    const [taskCategory, setTaskCategory] = useState('EASY')
     // const [isError, setIsError] = useState(false);
     // const [errorMsg, setErrorMsg] = useState('');
     // const [message, setMessage] = useState('');
     // const [errorMessage, setErrorMessage] = useState('');
     //const cookies = new Cookies();
 
+    const [userData, setUserData] = useState(null);
+    const cookies = new Cookies();
+    const jwtToken = cookies.get('jwt_authorization');
+  
+    useEffect(() => {
+      if (jwtToken) {  
+        const fetchData = async () => {
+          try {
+            const url = `http://localhost:8080/users/${jwtToken}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            setUserData(data); // Set user data fetched from the backend
+          } catch (error) {
+            // Handle error if needed
+            console.error(error);
+          }
+        };
+  
+        fetchData();
+      } else {
+      }
+    }, [jwtToken]);
+
     const submitFja = async (e) => {
         //fja za dodavanje zadatka u bazu
         //setErrorMessage('')
-        e.preventDefault();
-        
+        e.preventDefault();        
 
         /* const fakeUserZaSad = {  /////////?????????????????????????????????? za sad
             name: "name",
@@ -36,15 +62,15 @@ const AddTask = () => {
 
 
         const requestData = {
-            problemMaker: "fakeusername",
+            problemMaker: userData.username,
             title: taskName,
             points: taskPoints,
             duration: taskTime,
             text: taskText,
             inputExample: taskInput,
             outputExample: taskOutput,
-            isPrivate: 1,              // !!!!!!!!!!!!!!!!!! takoder nije dodan unos ovog parametra a i nisam sig cemu sluzi
-            problemType: "EASY"   ///      !!!!!!!!!!!!!!!!!!!!!!!! za sad ? petra nije stavila unos kategorije treba dodati
+            isPrivate: 1,              // !!!!!!!!!!!!!!!!!! ovo bi po meni defaultno trebalo biti 1 te nakon 
+            problemType: taskCategory   ///      !!!!!!!!!!!!!!!!!!!!!!!! za sad ? petra nije stavila unos kategorije treba dodati
         };
 
         console.log(JSON.stringify(requestData));
@@ -79,9 +105,17 @@ const AddTask = () => {
             <h2 id="novizd">Novi zadatak</h2>
             <form id="addTask" onSubmit={submitFja}>
                 <div id="lijeviDio">
-                    <div className="innput">
+                    <div className="input">
                         <label>Naziv zadatka:</label>
                         <input type="text" value={taskName} size ="40" required onChange={(e) => setTaskName(e.target.value)}></input>
+                    </div>
+                    <div className='input'>
+                        <label htmlFor="category">Težina zadatka:</label>
+                        <select id="category" name="category" value={taskCategory} onChange={(event) => setTaskCategory(event.target.value)}>
+                            <option value="EASY">Easy</option>
+                            <option value="MEDIUM">Medium</option>
+                            <option value="HARD">Hard</option>
+                        </select>
                     </div>
                     <div className="input">
                         <label>Broj bodova zadatka:</label>

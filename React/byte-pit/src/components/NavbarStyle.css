@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #645e5e;
-    color: #fff;
+    background-color: #7d7979;
+    color: #000000;
     padding: 10px 20px;
   }
   
@@ -14,11 +14,6 @@
     justify-self:flex-start;
   }
   
-  h2.Bytepit {
-    color:white;
-    font-weight: lighter;
-  }
-
   .menu-icon {
     font-size: 24px;
     cursor: pointer;
@@ -28,7 +23,7 @@
   }
   
   .logo {
-    max-width: 60px;
+    max-width: 40px;
   }
   
   .right {
@@ -46,10 +41,11 @@
   
   
   .nav-link {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     margin: 10px;
-  }
+    transition: color 0.3s ease; /* Adding smooth color transition */
+}
   
   .middle-link {
     margin: 8px;
@@ -57,6 +53,7 @@
   
   .nav-link:hover {
     text-decoration: underline;
+    color: #d3cccc; /* Change color on hover */
   }
   
   @media only screen and (max-width: 1024px) {

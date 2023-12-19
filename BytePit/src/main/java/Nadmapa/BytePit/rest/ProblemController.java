@@ -28,7 +28,9 @@ public class ProblemController {
 
         @PostMapping("")
         public Problem createProblem(@RequestBody Problem problem){
-            System.out.println("Pokusavamo spremit zadatak " + problem.getTitle() + "problem maker je " + problem.getProblemMaker());
+            System.out.println("Pokusavamo spremit zadatak " + problem.getTitle() + " problem maker je " + problem.getProblemMaker() +
+                    ", duration: " + problem.getDuration() + " priv: " + problem.isPrivate() + " points: " +  problem.getPoints()
+                    +" type: "+problem.getText()+" text: " + problem.getText());
             //userService.createUser(problem.getProblemMaker()); // ovo realno ne bi trebalo kad cemo spojit usera sa sessiona
             //problem.setProblemMaker(problem.getProblemMaker());
             return problemService.createProblem(problem);
