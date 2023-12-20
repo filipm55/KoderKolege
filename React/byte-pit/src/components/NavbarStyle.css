@@ -6,7 +6,7 @@
   align-items: center;
   background-color: #ffffff;
   color: #000000;
-  padding: 5px 20px;
+  padding: 5px 30px;
 }
 
 .omotac {
@@ -40,7 +40,8 @@
   }
   
   .logo {
-    max-width: 35px;
+    max-width: 30px;
+    margin-right: 7px;
   }
   
   
