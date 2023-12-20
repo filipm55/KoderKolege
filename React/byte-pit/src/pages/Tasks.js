@@ -5,13 +5,37 @@ import useFetch from "../useFetch";
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import CasinoIcon from '@mui/icons-material/Casino';
+import Cookies from 'universal-cookie';
 
 const Tasks = () => {
 
-     const {data:tasks, error} =useFetch('http://localhost:8080/problems')
+     const {data:tasks, error} =useFetch('http://localhost:8080/problems');
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //backend mora provjeravati i povezivati autora i zadatak?? moramo imat sa zadatka link na korisnika koji ga je objavio i obratno,
     // pri zahtjevu za dohvatom podataka o zadatku moraju tu biti i podaci o autoru (bar id i ime i prezime)
+    const [userData, setUserData] = useState(null);
+    const cookies = new Cookies();
+    const jwtToken = cookies.get('jwt_authorization');
+
+    useEffect(() => {
+        if (jwtToken) {    
+          const fetchData = async () => {
+            try {
+              const url = `http://localhost:8080/users/${jwtToken}`;
+              const response = await fetch(url);
+              const data = await response.json();
+              setUserData(data); // Set user data fetched from the backend
+            } catch (error) {
+              // Handle error if needed
+              console.error(error);
+            }
+          };
+    
+          fetchData();
+        } else {
+        }
+      }, [jwtToken]);
+    
     return (
         /*<div className="wrapper">
             { error && <div>{ error }</div> }
@@ -26,13 +50,13 @@ const Tasks = () => {
 
         <div className="body1">
             <div className="kategorije">
-                <Link to='/tasks/virtual' className="link">
+                {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/tasks/virtual' className="link">
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Kreiraj virtualno natjecanje</h3>
                         <p>**opis**</p>
                     </div>
-                </Link>
+                </Link>}
                 <Link to='/tasks/allTasks' className="link">
                     <div className="kat">
                         <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>

@@ -41,7 +41,6 @@ const Registration = () => {
                 userType: role,
                 image: file
             };
-            console.log(JSON.stringify(user));
 
             // sendData('http://localhost:8080/users', user);
             fetch('http://localhost:8080/users', {
@@ -114,7 +113,8 @@ const Registration = () => {
         };
 
         return (
-            <div className="wrapper">
+            <div>
+            {<div className="wrapper">
                 <h2>Registracija</h2>
 
                 <form onSubmit={submitFja}>
@@ -158,6 +158,7 @@ const Registration = () => {
                 </form>
                 {errorMessage && <div className="warning">{errorMessage}</div>}
                 {message && <div className="success">{message}</div>}
+            </div>}
             </div>
         );
     };
