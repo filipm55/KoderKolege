@@ -33,7 +33,7 @@ const Tasks = () => {
                         <p>**opis**</p>
                     </div>
                 </Link>
-                <Link to='/tasks/practice' className="link">
+                <Link to='/tasks/allTasks' className="link">
                     <div className="kat">
                         <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Zadaci za vježbu</h3>

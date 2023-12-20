@@ -1,14 +1,19 @@
 package Nadmapa.BytePit.rest;
 
 import Nadmapa.BytePit.domain.Problem;
+import Nadmapa.BytePit.domain.User;
 import Nadmapa.BytePit.repository.UserRepository;
 import Nadmapa.BytePit.service.ProblemService;
 
 import Nadmapa.BytePit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/problems")
@@ -35,4 +40,13 @@ public class ProblemController {
             //problem.setProblemMaker(problem.getProblemMaker());
             return problemService.createProblem(problem);
         }
+        @GetMapping("/{id}")
+         public Problem getTaskElements(@PathVariable Long id) {
+            Optional<Problem> problemOptional = problemService.getProblemById(id);
+
+            Problem problem = problemOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Problem not found"));
+            System.out.println(problem.getText());
+            return problem;
+
+         }
 }

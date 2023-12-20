@@ -10,6 +10,8 @@ import AddTask from './pages/AddTask'
 import Users from "./pages/Users";
 import Calendar from "./pages/Calendar";
 import User from "./pages/User";
+import AllTasks from './pages/AllTasks';
+import SolvingATask from './pages/SolvingATask';
 
 function App() {
 
@@ -27,6 +29,9 @@ function App() {
                 <Route exact path='/users' element={<Users />} />
                 <Route exact path='/calendar' element={<Calendar />} />
                 <Route exact path='/users/:id' element={<User />} />
+                <Route exact path='/user' element={<User />} />
+                <Route exact path='/tasks/allTasks' element={<AllTasks />} />
+                <Route exact path='/tasks/:id' element={<SolvingATask />} />
           </Routes>
         </div>
         <Footer />

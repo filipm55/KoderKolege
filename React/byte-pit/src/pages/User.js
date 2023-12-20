@@ -31,7 +31,7 @@ const User = () => {
         <div id="userbody">
         {user && 
         <div id="usercontent">
-            <div className="obojano"></div>
+            <div className="obojano"> bla</div>
             <div id = "gornjidio">
                 <div className="slikaIme">
                     <div className="slikaa"> 

@@ -71,8 +71,8 @@ const Navbar = () => {
             </Link>
           )}
           {isLoggedIn && userData && (
-            <div class="user-info">
-            <Link to="/profile">
+            <div className="user-info">
+            <Link to="/user">
               <img src={logoUser} className="logoUser" alt="User Logo" />
             </Link>
             <div>{userData && `${userData.name} ${userData.lastname}`}</div>
