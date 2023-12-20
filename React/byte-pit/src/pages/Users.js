@@ -93,9 +93,9 @@ const Users = () => {
         //setPromjena(true);
     }
 
-    var urediKorisnika = (username, id) => {
+    var urediKorisnika = (usernamee, id) => {
         console.log(role);
-        uredi.set(username, false);
+        uredi.set(usernamee, false);
         setMapa(uredi);
         const formData = new FormData();
         formData.append('name', name);
