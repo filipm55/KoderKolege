@@ -47,6 +47,11 @@ public class ProblemController {
             Problem problem = problemOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Problem not found"));
             System.out.println(problem.getText());
             return problem;
-
          }
+         @GetMapping("/byMakerId/{id}")
+         public List<Problem> getProblemsByProblemMakerId(@PathVariable String id) {
+            System.out.println("jesmo li tu? ");
+        // Call your service method to get problems based on problem_maker_id
+            return problemService.getProblemsByProblemMakerId(id);
+    }
 }

@@ -62,7 +62,7 @@ const AddTask = () => {
 
 
         const requestData = {
-            problemMaker: userData.username,
+            problemMaker: userData.id,
             title: taskName,
             points: taskPoints,
             duration: taskTime,

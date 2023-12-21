@@ -21,6 +21,7 @@ const Navbar = () => {
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data); // Set user data fetched from the backend
+          console.log(data.id);
         } catch (error) {
           // Handle error if needed
           console.error(error);
@@ -72,7 +73,7 @@ const Navbar = () => {
           )}
           {isLoggedIn && userData && (
             <div className="user-info">
-            <Link to="/user">
+            <Link to={`/users/${userData.id}`}>
               <img src={logoUser} className="logoUser" alt="User Logo" />
             </Link>
             <div>{userData && `${userData.name} ${userData.lastname}`}</div>

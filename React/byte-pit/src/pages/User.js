@@ -25,8 +25,10 @@ const User = () => {
             } 
         });
     }
-
-
+    const { data: tasks, error: tasksError } = useFetch(
+      `http://localhost:8080/problems/byMakerId/${id}`
+    );
+    
     return (  
         <div id="userbody">
         {user && 
@@ -99,15 +101,24 @@ const User = () => {
                 {!isCompetitor && <div id="zadaci">
                     <div>
                         <b>Popis objavljenih zadataka</b>
-                        <p>Sortiraj prema: 
+                        <p>Sortiraj prema:  OVO TRENUTNO NISTA NE RADI !!!!!!!!!!!!
                         <select>
                             <option>abecedno</option>
-                            <option>prezimenima voditelja</option>
+                            <option>prezimenima voditelja</option>{ /* ovo nema smisla??*/}
                             <option>rješenosti</option>
                             <option>popularnosti</option>
                         </select></p>
                     </div>
                     <p>**LISTA ZADATAKA**</p>
+                    {tasks && tasks.length > 0 ? (
+                <ul>
+                  {tasks.map(task => (
+                    <li key={task.id}>{task.title}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No tasks found.</p>
+              )}
                     
                 </div>}
         </div>}

@@ -18,7 +18,7 @@ public class Problem {
     @NotNull
     @Column(name="problem_maker_id",length=255)
     @JsonProperty("problemMaker")
-    private String problemMaker;
+    private String problemMakerId;
     @Getter @Setter
     private String title;
 
@@ -42,13 +42,13 @@ public class Problem {
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(String problemMaker, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+    public Problem(String problemMakerId, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
         Assert.notEmpty(inputExample, "Problem must have at least one input+output example");
         Assert.notEmpty(outputExample, "Problem must have at least one input+output example");
-        this.problemMaker=problemMaker;
+        this.problemMakerId=problemMakerId;
         this.title = title;
         this.points = points;
 
@@ -106,11 +106,11 @@ public class Problem {
     }
 
     public String getProblemMaker() {
-        return problemMaker;
+        return problemMakerId;
     }
 
     public void setProblemMaker(String problemMaker) {
-        this.problemMaker = problemMaker;
+        this.problemMakerId = problemMaker;
     }
 
     public String getTitle() {
