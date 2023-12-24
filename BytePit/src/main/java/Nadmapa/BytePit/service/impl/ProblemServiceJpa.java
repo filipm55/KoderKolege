@@ -32,5 +32,10 @@ public class ProblemServiceJpa implements ProblemService {
         return problemRepo.findById(String.valueOf(id));
     }
 
+    @Override
+    public List<Problem> getProblemsByProblemMakerId(String problem_maker_id) {
+        return problemRepo.findByProblemMakerId(problem_maker_id);
+    }
+
 
 }

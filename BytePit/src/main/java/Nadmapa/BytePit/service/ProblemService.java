@@ -13,4 +13,6 @@ public interface ProblemService {
     Problem createProblem (Problem problem);
 
     Optional<Problem> getProblemById(Long id);
+
+    List<Problem> getProblemsByProblemMakerId(String problem_maker_id);
 }
