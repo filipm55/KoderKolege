@@ -13,7 +13,7 @@
 {\underline{Web poslužitelj} prima HTTP (engl. Hyper
 Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informacije o tome što klijent traži, kao što su primjerice URL, GET, POST... i vraća dohvaćeni resurs ako ga ima te vraća statusni kod koji daje informacije o uspješnosti zahtjeva.}
 
-{Tehnologije korištene u našoj aplikaciji temelje se na Spring Bootu i Reactu. Aplikacija se sastoji od serverske komponente napisane u Javi (Spring Boot) i klijentske komponente napisane u JavaScriptu (React). Za razvojno okruženje koristimo IntelliJ, a baza koju koristimo za spremanje podataka o registriranim korisnicima i sve informacije o natjecanjima je PostgreSQL.}
+{Tehnologije korištene u našoj aplikaciji jesu Spring Boot i React. Aplikacija se sastoji od serverske komponente napisane u Javi (Spring Boot) i klijentske komponente napisane u JavaScriptu (React). Za razvojno okruženje koristimo IntelliJ, a baza koju koristimo za spremanje podataka o registriranim korisnicima i sve informacije o natjecanjima je PostgreSQL.}
 
 {\underline{Web aplikacija} temelji se na arhitekturi Model-View-Controller (MVC). Ova arhitektura omogućuje organizaciju aplikacije u tri ključne komponente:}
 
@@ -34,8 +34,10 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 	\begin{itemize}
 		\item 	\textit{Korisnik}
 		\item 	\textit{Natjecanje}
+		\item 	\textit{Zadatak}
 		\item 	\textit{Zadaci na natjecanju}
-		\item 	\textit{Zadatak}				
+		\item 	\textit{Primjeri za evaluaciju}	
+		\item 	\textit{Slike}		
 	\end{itemize}
 		
 			\subsection{Opis tablica}
@@ -110,7 +112,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 
 				\end{longtblr}
 
-				{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije o odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka }
+				{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije o odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka.}
 
 				
 				\begin{longtblr}[

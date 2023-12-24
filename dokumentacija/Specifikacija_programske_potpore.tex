@@ -25,13 +25,6 @@
 		\item pregledavati programske zadatke objavljene na stranici
 		\item vidjeti kalendar s dostupnim natjecanjima
 		\item pregledavati profile drugih korisnika (natjecatelja i vodietelja natjecanja)
-		\begin{packed_enum}
-			
-			\item  na profilu natjecatelja može vidjeti statistike o broju točno riješenih zadataka, broju isprobanih zadataka i 
-			pehare za osvojena natjecanja 
-			\item  na profilu voditelja može vidjeti popis učitanih zadataka i kalendar s popisom objavljenih natjecanja
-			
-		\end{packed_enum}
 		\item sortirati učitane zadatke na profilu voditelja natjecanja
 		\item poslati zahtjev za registracijom za koji mora priložiti sljedeće informacije: uloga za koju se prijavljuje (voditelj natjecanja ili natjecatelj), korisničko ime,
 		fotografija, lozinka, ime, prezime i email adresa
@@ -78,15 +71,7 @@
 				\item odlučuje koji su zadaci aktivni 
 				\item po želji učitava sličicu pehara 
 			\end{packed_enum}
-		\item izraditi zadatak:
-			\begin{packed_enum}
-				\item unosi naziv zadatka
-				\item unosi broj bodova (ovisan o težini zadatka)
-				\item određuje vremensko ograničenje izvršavanja zadatka
-				\item unosi tekst zadatka
-				\item unosi testne primjere za evaluaciju (provjeravaju ulaz i izlaz programa)
-				\item može zadatak postaviti kao privatan te on nakon završetka natjecanja automatski postaje javan
-			\end{packed_enum}
+		\item izraditi zadatak
 		\item uređivati vlastito objavljene zadatke i natjecanja (to ne mijenja prijašnje rezultate)
 
 	\end{packed_enum}
@@ -133,7 +118,7 @@
 						
 						\item[] \begin{packed_enum}
 							\item Korisnik odabire opciju za registraciju
-							\item Otvara se form u koji upisuje podatke:
+							\item Otvara se forma u koji upisuje podatke:
 							\item[] \begin{packed_enum}
 								
 								\item korisničko ime
@@ -181,7 +166,7 @@
 						\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Registrirani korisnik
+						\item \textbf{Glavni sudionik: }Neregistrirani korisnik
 						\item  \textbf{Cilj:} Dobiti pristup korisničkom sustavu
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Registracija
@@ -391,7 +376,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Natjecanje
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj 
+						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -448,7 +433,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -471,7 +456,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -490,7 +475,7 @@
 						\item \textbf{Glavni sudionik: } Natjecatelj
 						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Ulogirani korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -528,8 +513,8 @@
 						
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Napraviti natjecanje za korisnike 
-						\item  \textbf{Sudionici:} Natjecatelji
-						\item  \textbf{Preduvjet:} Ulogirani korisnik: voditelj
+						\item  \textbf{Sudionici:} Natjecatelji, baza podataka
+						\item  \textbf{Preduvjet:} Prijavljeni korisnik: voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -549,7 +534,7 @@
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Ispraviti pogreške ili dodati zadatke
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Ulogirani korisnik: voditelj
+						\item  \textbf{Preduvjet:} Prijavljeni korisnik: voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -563,7 +548,7 @@
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC18 - Pregled i uređivanje korisnika}}
+					\noindent \underbar{\textbf{UC18 - Pregled i uređivanje korisničkih podataka}}
 						\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Administrator
@@ -611,7 +596,7 @@
 								\item Administrator odabire natjecanje		
 								\item Otvaraju se podaci o natjecanju i popis zadataka tog natjecanja
 								\item Administrator uređuje podatke o natjecanju ili zadatke tog natjecanja
-								\item Administrator sprema promijene
+								\item Administrator sprema promjene
 							\end{packed_enum}					
 						\end{packed_item}
 						
@@ -715,8 +700,7 @@
 				\item Sustav mora biti brz i responzivan
 				\item Dohvat zadataka ili korisnika iz baze podataka mora se obaviti u konačnom vremenu (manji od 5 sekunde)
 				\item Sustav mora podržavati hrvatsku abecedu pri unosu i prikazu tekstualnog sadržaja
-				\item Sustav mora podržavati rad jednog ili više korisnika istovremeno 
-				\item Sustav mora biti jednostavan za korištenje 
+				\item Sustav mora podržavati rad jednog ili više korisnika istovremeno  
 				\item Pristup sustavu mora biti omogućen preko javne mreže pomoću HTTPS
 				\item Nadogradnja sustava ne smije narušiti postojeće funkcionalnosti sustava 
 				\item Sustav podržava format slike jpeg (maksimalna veličina 1048576 bajtova)
