@@ -46,7 +46,8 @@ const AllTasks = () => {
                     {tasksByDifficulty[difficulty].map((task, index) => (
                       <li key={task.id}>
                          <Link to={`/tasks/${task.id}`}>
-                            Zadatak_{index + 1}
+                            {/* Zadatak_{index + 1}        želimo li  zadatak1,zadatak2 ili imena zadataka */}
+                            {task.title}
                         </Link>
                      
                       </li>

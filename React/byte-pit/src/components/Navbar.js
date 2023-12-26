@@ -58,8 +58,12 @@ const Navbar = () => {
             KORISNICI
           </Link>
           <p>|</p>
-          <Link to='/tasks' className="nav-link middle-link">
-            ZADACI ZA VJEŽBU
+          {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/creation' className="nav-link middle-link">
+            KREIRAJ SADRŽAJ
+          </Link>}
+          <p>|</p>
+          <Link to='/practice' className="nav-link middle-link">
+            VJEŽBA
           </Link>
           <p>|</p>
         </div>

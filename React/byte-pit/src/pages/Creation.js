@@ -1,4 +1,4 @@
-import './NoviTasks.css';
+import './Creation.css';
 import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import useFetch from "../useFetch";
@@ -7,7 +7,7 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import CasinoIcon from '@mui/icons-material/Casino';
 import Cookies from 'universal-cookie';
 
-const Tasks = () => {
+const Creation = () => {
 
      const {data:tasks, error} =useFetch('http://localhost:8080/problems');
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
@@ -50,20 +50,13 @@ const Tasks = () => {
 
         <div className="body1">
             <div className="kategorije">
-                {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/tasks/virtual' className="link">
+                {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/createCompetition' className="link">
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
-                        <h3>Kreiraj virtualno natjecanje</h3>
+                        <h3>Kreiraj  natjecanje</h3>
                         <p>**opis**</p>
                     </div>
                 </Link>}
-                <Link to='/tasks/allTasks' className="link">
-                    <div className="kat">
-                        <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>
-                        <h3>Zadaci za vježbu</h3>
-                        <p>**opis**</p>
-                    </div>
-                </Link>
                 <Link to='/tasks/addTask' className="link">
                     <div className="kat">
                         <AddToQueueIcon sx={{ fontSize: 60 }} color="primary"/>
@@ -77,4 +70,4 @@ const Tasks = () => {
     );
 }
 
-export default Tasks;
+export default Creation;

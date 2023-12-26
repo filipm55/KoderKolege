@@ -42,17 +42,17 @@ public class Problem {
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(String problemMakerId, String title, int points, String duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+    public Problem(String problemMakerId, String title, int points, String duration, String text,Map<String, String> inputOutputExamples, boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
-        Assert.notEmpty(inputExample, "Problem must have at least one input+output example");
-        Assert.notEmpty(outputExample, "Problem must have at least one input+output example");
+        Assert.notEmpty(inputOutputExamples, "Problem must have at least one input+output example");
         this.problemMakerId=problemMakerId;
         this.title = title;
         this.points = points;
 
         this.duration=duration;
+        this.inputOutputExamples=inputOutputExamples;
 //        String[] parts = duration.split(":");
 //
 //        // Convert to Duration
@@ -66,7 +66,7 @@ public class Problem {
 //            System.out.println("Krivo zadano trajanje");
 //        }
         this.text = text;
-        addInputOutputExamples(inputExample, outputExample);
+        //addInputOutputExamples(inputExample, outputExample);
         this.isPrivate = isPrivate;
         this.problemType = problemType;
     }

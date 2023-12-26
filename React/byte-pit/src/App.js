@@ -5,7 +5,8 @@ import Home from './pages/Home'
 import Footer from './components/Footer'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
-import Tasks from './pages/Tasks'
+import Creation from './pages/Creation'
+import Practice from './pages/Practice'
 import AddTask from './pages/AddTask'
 import Users from "./pages/Users";
 import Calendar from "./pages/Calendar";
@@ -24,7 +25,8 @@ function App() {
                 <Route exact path='/' element={<Home />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/registration' element={<Registration />} />
-                <Route exact path='/tasks' element={<Tasks />} />
+                <Route exact path='/creation' element={<Creation />} />
+                <Route exact path='/practice' element={<Practice />} />
                 <Route exact path='/tasks/addTask' element={<AddTask />} />
                 <Route exact path='/users' element={<Users />} />
                 <Route exact path='/calendar' element={<Calendar />} />

@@ -13,8 +13,7 @@ const AddTask = () => {
     const [taskPoints, setTaskPoints] = useState('');
     const [taskTime, setTaskTime] = useState('');
     const [taskText, setTaskText] = useState('');
-    const [taskInput, setTaskInput] = useState('');
-    const [taskOutput, setTaskOutput] = useState('');
+    const [examplePairs, setExamplePairs] = useState([{ input: '', output: '' }]);
     const [taskCategory, setTaskCategory] = useState('EASY')
     // const [isError, setIsError] = useState(false);
     // const [errorMsg, setErrorMsg] = useState('');
@@ -26,6 +25,11 @@ const AddTask = () => {
     const cookies = new Cookies();
     const jwtToken = cookies.get('jwt_authorization');
   
+    const addExample = () => {
+        setExamplePairs([...examplePairs, { input: '', output: '' }]);
+    };
+
+
     useEffect(() => {
       if (jwtToken) {  
         const fetchData = async () => {
@@ -67,8 +71,9 @@ const AddTask = () => {
             points: taskPoints,
             duration: taskTime,
             text: taskText,
-            inputExample: taskInput,
-            outputExample: taskOutput,
+            inputOutputExamples: Object.fromEntries(
+                examplePairs.map(({ input, output }) => [input, output])
+            ),
             isPrivate: 1,              // !!!!!!!!!!!!!!!!!! ovo bi po meni defaultno trebalo biti 1 te nakon 
             problemType: taskCategory   ///      !!!!!!!!!!!!!!!!!!!!!!!! za sad ? petra nije stavila unos kategorije treba dodati
         };
@@ -90,6 +95,7 @@ const AddTask = () => {
         .then(data => {
             // Handle the JSON data
             console.log('Server response:', data);
+            window.history.back();
             // Perform any additional actions based on the response
         })
         .catch(error => {
@@ -132,19 +138,39 @@ const AddTask = () => {
                         </div>
                     </div>   
                     <div className="input">
-                        <label>Primjer za evaluaciju - ulaz:</label>
-                        <div className="input">
-                            <textarea value={taskInput} cols="100" rows="10" required onChange={(e) => setTaskInput(e.target.value)}></textarea>
-                        </div>
-                    </div>
-                    <div className="input">
-                        <label>Primjer za evaluaciju - izlaz:</label>
-                        <div className="input">
-                            <textarea value={taskOutput} cols="100" rows="10" required onChange={(e) => setTaskOutput(e.target.value)}></textarea>
-                        </div>
+                    <label>Primjer za evaluaciju - ulaz/izlaz:</label>
+                            {examplePairs.map((example, index) => (
+                                <div key={index} className="input">
+                                    <textarea
+                                        value={example.input}
+                                        cols="100"
+                                        rows="3"
+                                        required
+                                        onChange={(e) => {
+                                            const updatedExamplePairs = [...examplePairs];
+                                            updatedExamplePairs[index].input = e.target.value;
+                                            setExamplePairs(updatedExamplePairs);
+                                        }}
+                                    ></textarea>
+                                    <textarea
+                                        value={example.output}
+                                        cols="100"
+                                        rows="3"
+                                        required
+                                        onChange={(e) => {
+                                            const updatedExamplePairs = [...examplePairs];
+                                            updatedExamplePairs[index].output = e.target.value;
+                                            setExamplePairs(updatedExamplePairs);
+                                        }}
+                                    ></textarea>
+                                </div>
+                            ))}
+                            <button type="button" onClick={addExample}>Dodaj još primjera za evaluaciju</button>
+                        
                     </div>
                 </div>
                 <button className='submitGumb' id="addTask">Stvori zadatak</button>
+                
             </form>
             </div>
             <div id="pic">
