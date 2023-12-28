@@ -12,6 +12,8 @@ import Calendar from 'react-calendar'
 
 
 const User = () => {
+    const [sortingOption, setSortingOption] = useState('newest-first');
+    const [sortingTasks, setSortingTasks] = useState([]);
     var user;
     var isCompetitor = null;
     const { id } = useParams();
@@ -28,7 +30,45 @@ const User = () => {
     const { data: tasks, error: tasksError } = useFetch(
       `http://localhost:8080/problems/byMakerId/${id}`
     );
-    
+    const handleSortingChange = (e) => {
+        setSortingOption(e.target.value);
+    };
+
+    useEffect(() => {
+        // deault je 'newest-first', za <0 a ide prije b
+        if(tasks){
+            let sortedTasks = [...tasks];
+
+            if (sortingOption === 'oldest-first') {
+                sortedTasks.sort((a,b)=> a.id - b.id)
+            } else if (sortingOption === 'by-type-asc' || sortingOption === 'by-type-desc') {
+                var mult = 1;
+                var difficultyOrder;
+                if (sortingOption === 'by-type-asc') {
+                    difficultyOrder = {'EASY': 0, 'MEDIUM': 1, 'HARD': 2};
+                } else {
+                    difficultyOrder = {'EASY': 2, 'MEDIUM': 1, 'HARD': 0};
+                    mult = -1;
+                }
+                //najprije easy (i onda po bodovima, zatiim medium po bodovima, zatim teski po bodovima
+                sortedTasks.sort((a, b) => {
+                    if (a.problemType === b.problemType) {
+                        // If difficulty is the same, sort by points
+                        return (a.points - b.points) * mult;
+                    } else {
+                        // Sort by difficulty in ascending order
+                        return difficultyOrder[a.problemType] - difficultyOrder[b.problemType];
+                    }
+                });
+            }
+            else{
+                //default tj. newest first
+                sortedTasks.sort((a,b)=>-a.id+b.id);
+            }
+
+            setSortingTasks(sortedTasks);
+        }}, [sortingOption, tasks]);
+
     return (  
         <div id="userbody">
         {user && 
@@ -101,19 +141,23 @@ const User = () => {
                 {!isCompetitor && <div id="zadaci">
                     <div>
                         <b>Popis objavljenih zadataka</b>
-                        <p>Sortiraj prema:  OVO TRENUTNO NISTA NE RADI !!!!!!!!!!!!
-                        <select>
-                            <option>abecedno</option>
-                            <option>prezimenima voditelja</option>{ /* ovo nema smisla??*/}
-                            <option>rješenosti</option>
-                            <option>popularnosti</option>
+                        <p>Sortiraj prema:
+                        <select onChange={handleSortingChange}>
+                            <option value="newest-first">najnovije prvo</option>
+                            <option value="oldest-first">najstarije prvo</option>
+                            <option value="by-type-desc">težini - silazno</option>
+                            <option value="by-type-asc">težini - uzlazno</option>
                         </select></p>
                     </div>
                     <p>**LISTA ZADATAKA**</p>
-                    {tasks && tasks.length > 0 ? (
+                    {tasks && sortingTasks.length > 0 ? (
                 <ul>
-                  {tasks.map(task => (
-                    <li key={task.id}>{task.title}</li>
+                  {sortingTasks.map(task => (
+                    <li key={task.id}>
+                        <Link to={`/tasks/${task.id}`}>
+                            {task.title}
+                        </Link>
+                        <p>{task.points}, {task.problemType}</p></li>
                   ))}
                 </ul>
               ) : (
