@@ -59,10 +59,11 @@ const SolvingATask = () => {
         />
       </div>
       <h2 className="task-title">{task.title}</h2>
+
       <div className={`problem-type problem-type-${task.problemType.toLowerCase()}`}>
         {task.problemType}
       </div>
-      <p className="task-description">Opis: <br/>{task.text}</p>
+      <p className="task-description">({task.points} pts) <br/> {task.text}</p>
     
       <textarea
         className="solution-textarea"
