@@ -81,7 +81,7 @@ const User = () => {
                     </div>
                     <div id="imemail">
                         <h1 id = "imeprezime">{user.name} {user.lastname}</h1>
-                        <p>{user.email}</p>
+                        {/*<p>{user.email}</p>*/}
                     </div>
                 </div>
                 {isCompetitor && <div id="statistika">

@@ -24,7 +24,7 @@ div.input {
 }
 
 button#addTask {
-    font-size: 3.5vh;
+    font-size: 3vh;
     justify-self: center;
     background-color: whitesmoke;
     border: 1px solid black;
@@ -60,4 +60,8 @@ button#dodavanje:hover {
     color:white;
     border-radius: 3px;
     border: 0.5px solid black;
+}
+
+h2#novizd {
+    font-size: 6vh;
 }

@@ -167,7 +167,7 @@ const Users = () => {
                             <div className="tekstDio">
                                 {!mapa.get(user.username)  && 
                                     <div className="nekidio">
-                                        <p className="podatak"> <EmailIcon className="ikona"/> {user.email}</p>
+                                       {/* <p className="podatak"> <EmailIcon className="ikona"/> {user.email}</p>*/}
                                         <p className="podatak"><PersonIcon className="ikona"/> {user.username}</p>
                                         <p className="podatak"><FilterVintageIcon className="ikona"></FilterVintageIcon> {user.userType}</p>
                                     </div>
