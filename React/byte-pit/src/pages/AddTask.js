@@ -82,7 +82,7 @@ const AddTask = () => {
         fetch('http://localhost:8080/problems', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             },
             body: JSON.stringify(requestData),
         })  .then(response => {
