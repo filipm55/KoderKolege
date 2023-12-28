@@ -40,9 +40,6 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="left">
-        <i className="menu-icon">
-          &#9776;
-        </i>
         <Link to='/'> <img src={logo} alt="Logo" className="logo" /></Link>
         <h2 className="Bytepit" style={{ color: 'black', fontSize: 25}}>BytePit</h2>
 

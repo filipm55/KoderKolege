@@ -1,0 +1,106 @@
+.task-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .task-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .task-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  .solution-textarea {
+    width: calc(100% - 30px);
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .test-button {
+    padding: 15px 25px;
+    background-color: #70c873;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .test-button:hover {
+    background-color: #45a049;
+  }
+  
+  .test-result {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  .timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #938b8b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .timer span {
+    margin-left: 5px;
+  }
+  
+  .problem-type {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  .problem-type-easy {
+    background-color: #b4ddb5; /* Green for Easy */
+    color: white;
+  }
+  
+  .problem-type-medium {
+    background-color: #c0c0c0; /* Grey for Medium */
+    color: white;
+  }
+  
+  .problem-type-hard {
+    background-color: #efb5b0; /* Red for Hard */
+    color: white;
+  }
