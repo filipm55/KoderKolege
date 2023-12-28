@@ -13,6 +13,7 @@ import Calendar from "./pages/Calendar";
 import User from "./pages/User";
 import AllTasks from './pages/AllTasks';
 import SolvingATask from './pages/SolvingATask';
+import CreateCompetition from "./pages/CreateCompetition";
 
 function App() {
 
@@ -34,6 +35,9 @@ function App() {
                 <Route exact path='/user' element={<User />} />
                 <Route exact path='/tasks/allTasks' element={<AllTasks />} />
                 <Route exact path='/tasks/:id' element={<SolvingATask />} />
+              <Route exact path='/createCompetition' element={<CreateCompetition />} />
+
+
           </Routes>
         </div>
         <Footer />
