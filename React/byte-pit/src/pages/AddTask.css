@@ -4,7 +4,7 @@ div#addTask {
     justify-content: space-between;
     align-items: flex-start;
     width: 96vw;
-    height: 100%;
+    height: fit-content;
     margin-left: 2.5vw;
 }
 
@@ -24,7 +24,7 @@ div.input {
 }
 
 button#addTask {
-    font-size: 3vh;
+    font-size: 1rem;
     justify-self: center;
     background-color: whitesmoke;
     border: 1px solid black;
@@ -39,14 +39,14 @@ button#addTask:hover {
 
 div#pic {
     margin-left: 50px;
-    height: 160vh;
+    height: 46em;
     width: 70vw;
     background-image: url("../../public/pictures/pic3.jpg");
     background-size: contain;
     background-repeat: no-repeat;
     align-self: center;
     border-radius: 10px;
-    margin-top: 30px;
+    margin-top: 70px;
 }
 
 
