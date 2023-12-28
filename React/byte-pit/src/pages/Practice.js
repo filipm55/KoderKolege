@@ -50,13 +50,13 @@ const Practice = () => {
 
         <div className="body1">
             <div className="kategorije">
-                {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/virtual' className="link">
+                 <Link to='/virtual' className="link">
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
-                        <h3>Isprobaj virtualno natjecanje</h3>
+                        <h3>Virtualno natjecanje</h3>
                         <p>**opis**</p>
                     </div>
-                </Link>}
+                </Link>
                 <Link to='/tasks/allTasks' className="link">
                     <div className="kat">
                         <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>

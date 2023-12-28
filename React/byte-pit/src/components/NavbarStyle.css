@@ -101,3 +101,7 @@
     }
   }
   
+div#imeLink {
+  color: black;
+  text-decoration: none;
+}

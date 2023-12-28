@@ -80,11 +80,11 @@ const AddTask = () => {
 
         console.log(JSON.stringify(requestData));
         fetch('http://localhost:8080/problems', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
         })  .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -112,7 +112,7 @@ const AddTask = () => {
             <form id="addTask" onSubmit={submitFja}>
                 <div id="lijeviDio">
                     <div className="input">
-                        <label>Naziv zadatka:</label>
+                        <label>Naziv zadatka: </label>
                         <input type="text" value={taskName} size ="40" required onChange={(e) => setTaskName(e.target.value)}></input>
                     </div>
                     <div className='input'>
@@ -124,21 +124,21 @@ const AddTask = () => {
                         </select>
                     </div>
                     <div className="input">
-                        <label>Broj bodova zadatka:</label>
+                        <label>Broj bodova zadatka: </label>
                         <input type ="number" value={taskPoints} required onChange={(e) => setTaskPoints(e.target.value)}></input>
                     </div>
                     <div className="input">
-                        <label>Vremensko ograničenje izvršavanja:</label>
+                        <label>Vremensko ograničenje izvršavanja: </label>
                         <input type ="time" value={taskTime} required onChange={(e) => setTaskTime(e.target.value)}></input>
                     </div>
                     <div className="input">
-                        <label>Tekst zadatka:</label>             
+                        <label>Tekst zadatka: </label>             
                         <div className="input">
                             <textarea value={taskText} cols="100" rows="10" required onChange={(e) => setTaskText(e.target.value)}></textarea>
                         </div>
                     </div>   
                     <div className="input">
-                    <label>Primjer za evaluaciju - ulaz/izlaz:</label>
+                    <label>Primjer za evaluaciju - ulaz/izlaz: </label>
                             {examplePairs.map((example, index) => (
                                 <div key={index} className="input">
                                     <textarea
@@ -165,7 +165,7 @@ const AddTask = () => {
                                     ></textarea>
                                 </div>
                             ))}
-                            <button type="button" onClick={addExample}>Dodaj još primjera za evaluaciju</button>
+                            <button id ="dodavanje" type="button" onClick={addExample}>Dodaj još primjera za evaluaciju</button>
                         
                     </div>
                 </div>

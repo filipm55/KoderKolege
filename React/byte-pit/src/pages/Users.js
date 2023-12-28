@@ -149,9 +149,11 @@ const Users = () => {
             <div className="task-list">
             
                 {users.map(user => (
+                    
                     <div className="task" key={user.id} >
                         <div className="naslov">
-                            <Link className = "imeiprezime" to={'/users/'+user.id}><h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
+                        <Link className = "imeiprezime" to={'/users/'+user.id}>
+                            <h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
                             {userData && userData.userType==="ADMIN" && (
                             <div className="gumbici">
                                 {<button className="zadmina" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}

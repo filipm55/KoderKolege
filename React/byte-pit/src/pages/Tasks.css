@@ -45,6 +45,8 @@ h2#poseban{
     font-size: 5.5vh;
     text-decoration: none;
     margin-bottom: -10px;
+    margin-left: 3px;
+    color:rgb(56, 54, 54);
 }
 
 
@@ -118,13 +120,15 @@ button.zadmina {
 }
 
 form.nestajuciForm {
-    border: 0px;
+    border: 0px none inherit;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     justify-items: center;
-
+    background-color:inherit;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    margin-top: -16px;
 }
 
 form.nestajuciForm input {
@@ -157,6 +161,7 @@ button#spremime{
     border-radius: 12px;
     background-color: rgba(199, 199, 199, 0.824);
     color: black;
+    border: 0.5px solid gray;
 }
 
 button#spremime:hover {

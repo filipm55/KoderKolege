@@ -57,10 +57,13 @@ const Navbar = () => {
           <Link to='/users' className="nav-link middle-link">
             KORISNICI
           </Link>
-          <p>|</p>
-          {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/creation' className="nav-link middle-link">
-            KREIRAJ SADRŽAJ
-          </Link>}
+          
+          {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && 
+          <p>
+            |
+            <Link to='/creation' className="nav-link middle-link">
+              KREIRAJ SADRŽAJ
+            </Link></p>}
           <p>|</p>
           <Link to='/practice' className="nav-link middle-link">
             VJEŽBA
@@ -79,8 +82,9 @@ const Navbar = () => {
             <div className="user-info">
             <Link to={`/users/${userData.id}`}>
               <img src={logoUser} className="logoUser" alt="User Logo" />
-            </Link>
-            <div>{userData && `${userData.name} ${userData.lastname}`}</div>
+              </Link>
+            <Link to={`/users/${userData.id}`}>
+            <div className="nav-link middle-link">{userData && `${userData.name} ${userData.lastname}`}</div></Link>
           </div>
           )}
           { !userData && (

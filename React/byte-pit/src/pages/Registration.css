@@ -70,6 +70,7 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition */
+    margin-left: 36%;
   }
   
   .submitGumb:hover {

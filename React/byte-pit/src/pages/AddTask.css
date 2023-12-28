@@ -2,7 +2,7 @@ div#addTask {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 96vw;
     height: 100%;
     margin-left: 2.5vw;
@@ -29,6 +29,7 @@ button#addTask {
     background-color: whitesmoke;
     border: 1px solid black;
     color: black;
+    margin-left: 0px;
 }
 
 button#addTask:hover {
@@ -45,11 +46,18 @@ div#pic {
     background-repeat: no-repeat;
     align-self: center;
     border-radius: 10px;
+    margin-top: 30px;
 }
-
 
 
 label {
     color: rgb(43, 40, 40);
     font-weight: normal;
+}
+
+button#dodavanje:hover {
+    background-color: rgb(69, 69, 241);
+    color:white;
+    border-radius: 3px;
+    border: 0.5px solid black;
 }
