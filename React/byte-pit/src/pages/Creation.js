@@ -50,13 +50,13 @@ const Creation = () => {
 
         <div className="body1">
             <div className="kategorije">
-                {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && <Link to='/createCompetition' className="link">
+                <Link to='/createCompetition' className="link">
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Kreiraj  natjecanje</h3>
                         <p>**opis**</p>
                     </div>
-                </Link>}
+                </Link>
                 <Link to='/tasks/addTask' className="link">
                     <div className="kat">
                         <AddToQueueIcon sx={{ fontSize: 60 }} color="primary"/>
