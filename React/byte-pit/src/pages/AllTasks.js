@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './AllTasks.css';
-
+import useFetch from "../useFetch";
 
 
 const AllTasks = () => {
         const [data, setData] = useState([]);
         const [sort, setSort] = useState('ALL');
+        var problemMakerr = null;
+
+        const {data:users, error} = useFetch('http://localhost:8080/users');
+
       
         useEffect(() => {
           // Funkcija za dohvat podataka
@@ -24,6 +28,20 @@ const AllTasks = () => {
           fetchData();
           console.log(data);
         }, []); 
+
+        const findMaker = (makerId) => {
+          var mak = null;
+          if (users) {
+            users.forEach(user => {
+              if (user.id == makerId) {
+                mak = user;
+                problemMakerr=user;
+              }
+            });
+          }
+          console.log(mak);
+          return mak;
+        }
 
 
         const tasksByDifficulty = {
@@ -52,22 +70,35 @@ const AllTasks = () => {
                     </div>
                 </div>
                 <table className='popisZad'>
+                  <thead>
                   <tr id="vrh">
                     <td className='tName'>Ime zadatka</td>
                     <td>Težina zadatka</td>
                     <td>Broj bodova</td>
+                    <td>Autor zadatka</td>
                     <td></td>
                   </tr>
+                  </thead>
+                <tbody>
                 {Object.keys(tasksByDifficulty).map(difficulty => (
                       tasksByDifficulty[difficulty].map((task, index) => (
                         ((sort === 'ALL') || (sort === task.problemType)) && <tr key={task.id}>
                               <td className='tName'><Link className='taskName' to={`/tasks/${task.id}`}>{task.title}</Link></td>
                               <td>{task.problemType}</td>
                               <td>{task.points}</td>
+                              <td>
+                              {(task.problemMaker == 1) && <span>Admin</span>}
+                              {findMaker(task.problemMaker) && 
+                                <span>
+                                  <Link id ="korisnik" to={'/users/'+problemMakerr.id}>
+                                    {problemMakerr.name} {problemMakerr.lastname}
+                                  </Link>
+                                </span>}
+                              </td>
                               <td><Link className='taskName' to={`/tasks/${task.id}`}>RIJEŠI!</Link></td>
                         </tr>
                       ))
-                ))}</table>
+                ))}</tbody></table>
               </div>
             </div>
           );

@@ -65,3 +65,8 @@ button#dodavanje:hover {
 h2#novizd {
     font-size: 6vh;
 }
+
+input, textarea, select {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
