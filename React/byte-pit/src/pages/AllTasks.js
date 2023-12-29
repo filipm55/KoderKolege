@@ -26,7 +26,7 @@ const AllTasks = () => {
       
           // Poziv funkcije za dohvat podataka
           fetchData();
-          console.log(data);
+          //console.log(data);
         }, []); 
 
         const findMaker = (makerId) => {
@@ -39,7 +39,7 @@ const AllTasks = () => {
               }
             });
           }
-          console.log(mak);
+          //console.log(mak);
           return mak;
         }
 

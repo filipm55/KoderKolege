@@ -38,11 +38,11 @@ public class Problem {
 
     Ovo će omogućiti čuvanje mape u bazi podataka. */
     @Getter @Setter
-    private boolean isPrivate;
+    private Boolean isPrivate;
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(String problemMakerId, String title, int points, String duration, String text,Map<String, String> inputOutputExamples, boolean isPrivate, ProblemType problemType) {
+    public Problem(String problemMakerId, String title, int points, String duration, String text,Map<String, String> inputOutputExamples, Boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
@@ -149,11 +149,11 @@ public class Problem {
         this.inputOutputExamples = inputOutputExamples;
     }
 
-    public boolean isPrivate() {
+    public Boolean isPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(boolean aPrivate) {
+    public void setPrivate(Boolean aPrivate) {
         isPrivate = aPrivate;
     }
 
