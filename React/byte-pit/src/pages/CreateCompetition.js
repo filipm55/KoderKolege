@@ -86,15 +86,18 @@ const CreateCompetition = () => {
 
         setIsError(false);
         setErrorMsg("");
-        const selectedProblemIds = selectedProblems.map((problemId) => ({ id: problemId }));
+        //const selectedProblemIds = selectedProblems.map((problemId) => ({ id: problemId }));
+        //console.log(selectedProblemIds);
+        //console.log(problems.filter(problem => selectedProblems.includes(problem.id)));
+
 
         const requestData = {
             competitionMaker: userData.id,
             dateTimeOfBeginning: startTime,
             dateTimeOfEnding: endTime,
-            numberOfProblems: numOfProblems,
+            //numberOfProblems: numOfProblems,
             slicicaPehara: picture,
-            selectedProblemIds: selectedProblemIds
+            problems:  Array.from(new Set(problems.filter(problem => selectedProblems.includes(problem.id))))
         };
         console.log(requestData);
 
