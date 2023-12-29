@@ -80,8 +80,8 @@ const Navbar = () => {
             <Link to={`/users/${userData.id}`}>
               <img src={logoUser} className="logoUser" alt="User Logo" />
               </Link>
-            <Link to={`/users/${userData.id}`} style={{ textDecoration: 'none' }}>
-            <div className="nav-link middle-link" >{userData && `${userData.name} ${userData.lastname}`}</div></Link>
+            <Link to={`/users/${userData.id}`}>
+            <div className="nav-link middle-link">{userData && `${userData.name} ${userData.lastname}`}</div></Link>
           </div>
           )}
           { !userData && (
