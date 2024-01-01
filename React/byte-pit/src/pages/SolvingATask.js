@@ -34,13 +34,25 @@ const SolvingATask = () => {
 
   const handleTestSolution = async () => {
     try {
-
-      setTestResult('Passed!');
+      const response = await fetch(`http://localhost:8080/solution/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ solution }), 
+      });
+  
+      if (response.ok) {
+        setTestResult('Passed!');
+      } else {
+        setTestResult('Failed to test solution');
+      }
     } catch (error) {
       console.error('Error testing solution:', error);
-      setTestResult('Failed to test solution'); 
+      setTestResult('Failed to test solution');
     }
   };
+  
 
   if (!task) {
     return <div>Loading...</div>;
