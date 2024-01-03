@@ -1,10 +1,11 @@
 package Nadmapa.BytePit.service;
 
 import Nadmapa.BytePit.domain.Competition;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface CompetitionService {
     List<Competition> listAll();
-    Competition createCompetition (Competition competition);
+    ResponseEntity<String> createCompetition (Competition competition);
 }

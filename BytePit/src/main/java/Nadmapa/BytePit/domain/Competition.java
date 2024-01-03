@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "COMPETITION")
@@ -13,30 +14,40 @@ public class Competition {
 
     @Id
     @GeneratedValue
+    @Getter
     private Long id;
 
     @NotNull
     @ManyToOne
-    private User competitionMaker; //treba napravit da u controlleru on primi i trenutno logiranog usera? https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
     @Getter @Setter
+    private User competitionMaker; //treba napravit da u controlleru on primi i trenutno logiranog usera? https://stackoverflow.com/questions/31159075/how-to-find-out-the-currently-logged-in-user-in-spring-boot
 
+
+    @Getter @Setter
     private LocalDateTime dateTimeOfBeginning; // + DateTimeFormatter? https://www.javatpoint.com/java-localdatetime
     @Getter @Setter
     private LocalDateTime dateTimeOfEnding;
 
+    @Getter @Setter
     private int numberOfProblems;
+    @Getter
     @ManyToMany
-    private Set<Problem> problems;
+    private Set<Problem> problems = new HashSet<>();
 
-    private boolean slicicaPehara; // ? ja i dalje ne kuzim sta je to
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trophyPicture", referencedColumnName = "id")
+    private Image trophyPicture;
+    @Getter @Setter
+    private boolean slicica_pehara = false;
 
-    public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, boolean slicicaPehara) {
+    public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara) {
         this.competitionMaker =competitionMaker;
         this.dateTimeOfBeginning = dateTimeOfBeginning;
         this.dateTimeOfEnding = dateTimeOfEnding;
         this.problems = problems;
-        this.slicicaPehara = slicicaPehara;
+        this.trophyPicture = trophyPicture;
         this.numberOfProblems = problems.size();
+        this.slicica_pehara=slicica_pehara;
     }
 
     public Competition() {
@@ -44,24 +55,21 @@ public class Competition {
     }
 
 
-    public Set<Problem> getProblems() {
-        return problems;
-    }
-
     public void setProblems(Set<Problem> problems) {
         this.problems = problems;
-        this.numberOfProblems = problems.size();
     }
 
     public void addProblems(Set<Problem> problems){
-        for (Problem problem: problems) {
-            this.problems.add(problem);
-        }
+        this.problems.addAll(problems);
     }
     public void removeProblems(Set<Problem> problems){
         for (Problem problem: problems) {
             this.problems.remove(problem);
         }
+    }
+
+    public void setTrophyPicture(Image trophyPicture) {
+        this.trophyPicture = trophyPicture;
     }
 
 }

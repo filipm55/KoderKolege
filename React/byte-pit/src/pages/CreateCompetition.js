@@ -59,6 +59,7 @@ const CreateCompetition = () => {
         setIsError(false);
         setPicture(selectedFile);
     };
+
     const checkEndTime = (e) => {
         const newEndTime = e.target.value;
 
@@ -88,38 +89,40 @@ const CreateCompetition = () => {
         setErrorMsg("");
         //const selectedProblemIds = selectedProblems.map((problemId) => ({ id: problemId }));
 
-        const requestData = {
-            competitionMaker: userData.id,
-            dateTimeOfBeginning: startTime,
-            dateTimeOfEnding: endTime,
-            numberOfProblems: numOfProblems,
-            slicicaPehara: picture,
-            problems: Array.from(new Set(problems.filter(problem => selectedProblems.includes(problem.id))))
-        };
-        console.log(requestData);
+        const problemsArray = Array.from(new Set(problems.filter(problem => selectedProblems.includes(problem.id)).map(problem => problem.id)));
+
+        const formData = new FormData();
+        formData.append('competitionMaker', userData.id);
+        formData.append('dateTimeOfBeginning', startTime);
+        formData.append('dateTimeOfEnding', endTime);
+        formData.append('numberOfProblems', numOfProblems);
+        formData.append('trophyPicture', picture);
+        formData.append('problems', problemsArray);
+        console.log(formData);
 
         fetch('http://localhost:8080/competitions', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData),
+            body: formData,
         }).then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json(); // Parse as JSON
+            } else {
+                return response.text(); // Parse as text
             }
-            // If the response is OK, return the JSON data
-            return response.json();
         })
             .then(data => {
-                // Handle the JSON data
-                console.log('Server response:', data);
-                window.history.back();
-                // Perform any additional actions based on the response
+                console.log('Success:', data);
+                if (typeof data === 'object') {
+                    // JSON response
+                    setMessage('');
+                } else {
+                    // Text response
+                    setMessage(data);
+                }
             })
-            .catch(error => {
-                // Handle errors, including network errors or server errors
-                console.error('Error:', error.message);
+            .catch((error) => {
+                console.error('Error:', error);
             });
     };
     const handleTaskToggle = (taskId) => {
@@ -134,6 +137,8 @@ const CreateCompetition = () => {
         event.stopPropagation();
         setExpandedTask(taskId === expandedTask ? null : taskId);
     };
+
+
 
 
     return (

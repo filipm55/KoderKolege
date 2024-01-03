@@ -4,6 +4,7 @@ import Nadmapa.BytePit.domain.Competition;
 import Nadmapa.BytePit.repository.CompetitionRepository;
 import Nadmapa.BytePit.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -18,8 +19,9 @@ public class CompetitionServiceJpa implements CompetitionService {
     }
 
     @Override
-    public Competition createCompetition(Competition competition) {
-        Assert.notNull(competition,"Problem must be given");
-        return competitionRepo.save(competition);
+    public ResponseEntity<String> createCompetition(Competition competition) {
+        Competition competition1 = competitionRepo.save(competition);
+        return ResponseEntity.ok("Uspjesno stvoreno natjecanje s id-om:  " + competition1.getId() + "\n" +
+                "Competiton maker je : " + competition1.getCompetitionMaker().getUsername());
     }
 }
