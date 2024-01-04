@@ -82,7 +82,8 @@ const AllTasks = () => {
                 <tbody>
                 {Object.keys(tasksByDifficulty).map(difficulty => (
                       tasksByDifficulty[difficulty].map((task, index) => (
-                        ((sort === 'ALL') || (sort === task.problemType)) && <tr key={task.id}>
+                        ((sort === 'ALL') || (sort === task.problemType)) && !task.isPrivate &&
+                        <tr key={task.id}>
                               <td className='tName'><Link className='taskName' to={`/tasks/${task.id}`}>{task.title}</Link></td>
                               <td>{task.problemType}</td>
                               <td>{task.points}</td>
