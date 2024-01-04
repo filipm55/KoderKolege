@@ -39,9 +39,9 @@ div.kategorije {
 }
 
 div.kategorije div {
-    border-radius: 6px;
+    border-radius: 0.7rem;
     width: 27vw;
-    height: 45vh;
+    height: 40vh;
     display: flex;
     margin: 0 20px;
     flex-direction: column;
@@ -57,9 +57,9 @@ div.kategorije div {
 }
 
 div.kat {
-    border-radius: 6px;
+    border-radius: 0.7rem;
     width: 27vw;
-    height: 45vh;
+    height: 40vh;
     display: flex;
     margin: 0 20px;
     flex-direction: column;
@@ -102,7 +102,8 @@ div.kat p {
 
     div.kategorije div, div.kat {
         width: 100%;
-        height: 60%;
+        height: fit-content;
+        margin-bottom: 1rem;
     }
 
     div.kat h3 {

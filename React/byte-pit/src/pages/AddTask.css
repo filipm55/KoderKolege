@@ -70,3 +70,11 @@ input, textarea, select {
     border-radius: 3px;
     border: 1px solid #ccc;
 }
+
+@media screen and (max-width: 767px) {
+    div#pic {
+        width: 0px;
+    }
+
+
+}

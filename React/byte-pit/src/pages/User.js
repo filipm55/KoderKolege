@@ -149,7 +149,6 @@ const User = () => {
                             <option value="by-type-asc">težini - uzlazno</option>
                         </select></p>
                     </div>
-                    <p>**LISTA ZADATAKA**</p>
                     {tasks && sortingTasks.length > 0 ? (
                 <ul>
                   {sortingTasks.map(task => (

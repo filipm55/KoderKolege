@@ -109,7 +109,11 @@ div#imeLink {
   }
 
   .nav-link, .nav-link-log {
-    margin: 5px 0;
+    margin: 5px 5px;
+  }
+
+  .nav-link-log {
+    margin: 5px 1rem;
   }
 
   .logo {

@@ -5,7 +5,7 @@ function Footer() {
     return (
         <footer>
             <div className="container">
-            <p>&copy; {new Date().getFullYear()} BytePit</p>
+                <p>&copy; {new Date().getFullYear()} BytePit</p>
             </div>
         </footer>
     )

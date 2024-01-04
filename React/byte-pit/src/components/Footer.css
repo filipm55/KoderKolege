@@ -8,6 +8,6 @@ footer {
 .container {
     display: flex;
     align-items: center;
-    padding-left: 45%;
+    justify-content: center;
     height: fit-content;
 }
