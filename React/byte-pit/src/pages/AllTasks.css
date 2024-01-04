@@ -1,72 +1,85 @@
-#popis{
+/* Common styles for #popis */
+#popis {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   margin-left: 30px;
    align-items: flex-start;
    height: fit-content;
    margin-top: 20px;
 }
-.zadatcitezine{
+
+/* Styles for .zadatcitezine */
+.zadatcitezine {
    align-items: center;
    justify-content: center;
-   width:80%;
+   width: 90%; /* Adjusted width for mobile */
+   margin: 0 auto; /* Centering the element */
 }
+
 
 .popisZad {
    border-collapse: collapse;
-   list-style-type:none;
+   list-style-type: none;
 }
 
-td{
+td {
    text-align: center;
    font-size: 1.2rem;
 }
 
+
 table {
-   width: 80%;
+   width: 90%; /* Adjusted width for mobile */
    border: 1px solid darkgray;
+   margin: 20px auto; /* Centering the table */
 }
 
+
 tr#vrh {
-   background-color: rgba(169, 169, 169, 0.667); /* Gradient background */
+   background-color: rgba(169, 169, 169, 0.667);
    border: none;
 }
+
 
 tr#vrh td {
    border: none;
-   font-size: 4vh;
+   font-size: 3vh; /* Adjusted font size for mobile */
 }
 
 tr {
    border: 1px solid darkgray;
-   margin-top: 200px;
 }
+
 
 td.tName {
    text-align: left;
    padding-left: 9px;
 }
 
+
 .taskName {
    text-decoration: none;
-   color:black;
+   color: black;
 }
 
-.taskName:hover, #korisnik:hover  {
+
+.taskName:hover,
+#korisnik:hover {
    text-decoration: underline;
-   color:rgb(46, 46, 203); ;
+   color: rgb(46, 46, 203);
 }
+
 
 div#naslovSort {
    display: flex;
-   width: 80%;
-   justify-content: space-between;
-   align-items: flex-end;
+   flex-direction: column; /* Adjusted for mobile */
+   width: 90%; /* Adjusted width for mobile */
+   margin: 0 auto; /* Centering the element */
+   justify-content: center; /* Adjusted for mobile */
+   align-items: center; /* Adjusted for mobile */
 }
 
 #korisnik {
    text-decoration: none;
    color: black;
 }
-

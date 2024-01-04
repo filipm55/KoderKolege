@@ -91,3 +91,28 @@ div#imeLink {
   color: black;
   text-decoration: none;
 }
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .omotac {
+    order: 3;
+    margin-top: 10px;
+  }
+
+  .left, .middle, .right {
+    flex-direction: row;
+    margin: 10px 0;
+  }
+
+  .nav-link, .nav-link-log {
+    margin: 5px 0;
+  }
+
+  .logo {
+    margin: 0;
+  }
+}
