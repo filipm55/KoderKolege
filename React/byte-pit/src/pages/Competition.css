@@ -1,0 +1,63 @@
+.task-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between task buttons */
+    margin-top: 20px; /* Adjust margin-top for spacing */
+  }
+
+  .finish-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .task-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust the width of each task button */
+    height: 40px; /* Adjust the height of each task button */
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold; /* Ensure the number is bold */
+    transition: background-color 0.3s ease;
+  }
+  
+  .task-box:hover {
+    background-color: #ddd;
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
+
+  .task-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Adjust the width of each task button */
+    height: 40px; /* Adjust the height of each task button */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold; /* Ensure the number is bold */
+    transition: background-color 0.3s ease;
+    background-color: rgb(60, 59, 59);
+    color:white;
+  }
+
+  
+  .finish-button {
+    padding: 10px 10px;
+    background-color: #c87070;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .finish-button:hover {
+    background-color: #a04545;
+  }
+  

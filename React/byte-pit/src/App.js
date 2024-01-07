@@ -15,6 +15,7 @@ import AllTasks from './pages/AllTasks';
 import SolvingATask from './pages/SolvingATask';
 import CreateCompetition from "./pages/CreateCompetition";
 import JoinACompetition from "./pages/JoinACompetition";
+import Competition from "./pages/Competition"
 
 function App() {
 
@@ -38,9 +39,7 @@ function App() {
                 <Route exact path='/tasks/:id' element={<SolvingATask />} />
                 <Route exact path='/createCompetition' element={<CreateCompetition />} />
                 <Route exact path='/competitions/:competitionId' element={<JoinACompetition />} />
-
-
-
+                <Route exact path='/competitions/:competitionId/:taskId' element={<Competition />} />
           </Routes>
         </div>
         <Footer />
