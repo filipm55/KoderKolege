@@ -7,6 +7,7 @@ public class CodeSubmission {
     @Getter @Setter
     private String code;
 
-    // getters and setters
+    @Getter @Setter
+    private String input;
 }
 

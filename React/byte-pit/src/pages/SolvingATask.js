@@ -11,6 +11,8 @@ const SolvingATask = () => {
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
   const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
+  const [solutionError, setSolutionError] = useState(''); // New state for solution error
+  const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -40,23 +42,37 @@ const SolvingATask = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code: solution }),
+            body: JSON.stringify({ code: solution, input: userInput }), // Send code and input
       });
       console.log('Sending request:', response);  // Log the request being sent
 
-      if (response.ok) {
-        const result = await response.json();
-        setTestResult('Passed!');
-        setSolutionOutput(result.output); // Update the output state with the response from the server
-        console.log('Received response:', result);  // Log the received response
-      } else {
-        setTestResult('Failed to test solution');
-        setSolutionOutput(''); // Reset output if the test fails
-      }
+ if (response.ok) {
+      const result = await response.json();
+      const correctOutput = task?.inputOutputExamples?.[userInput]; // Safely access correctOutput
+
+          if (result.error) {
+            setTestResult('Failed!');
+            setSolutionError(result.error);
+            setSolutionOutput('');
+            } else if (result.output && correctOutput && result.output.trim() === correctOutput.trim()) {
+            setTestResult('Passed!');
+            setSolutionOutput(result.output);
+            setSolutionError('');
+          } else {
+            setTestResult('Failed!');
+            setSolutionOutput(result.output || '');
+            setSolutionError('Output does not match the expected output.');
+          }
+        } else {
+          setTestResult('Failed to test solution');
+          setSolutionOutput('');
+          setSolutionError('Failed to receive valid response from server');
+        }
     } catch (error) {
       console.error('Error testing solution:', error);
       setTestResult('Failed to test solution');
       setSolutionOutput(''); // Reset output on error
+      setSolutionError(error.message); // Set error from catch block
     }
   };
 
@@ -90,15 +106,40 @@ const SolvingATask = () => {
         rows={10}
       ></textarea>
 
+        <textarea
+            className="user-input-textarea"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Enter input here..."
+            rows={5}
+        ></textarea>
+
       <button className="test-button" onClick={handleTestSolution}>Testiraj</button>
 
       {testResult && <div className="test-result">Test Result: {testResult}</div>}
 
+        <div className="input-output-examples">
+        <h3>Input-Output Examples:</h3>
+        <ul>
+          {Object.entries(task.inputOutputExamples).map(([input, output], index) => (
+            <li key={index}>
+              <strong>Input:</strong> {input} <strong>Output:</strong> {output}
+            </li>
+          ))}
+        </ul>
+      </div>
       {/* Displaying the solution output */}
       {solutionOutput && (
         <div className="solution-output">
           <h3>Output:</h3>
           <pre>{solutionOutput}</pre>
+        </div>
+      )}
+      {/* Displaying the solution error */}
+      {solutionError && (
+        <div className="solution-error">
+          <h3>Error:</h3>
+          <pre>{solutionError}</pre>
         </div>
       )}
     </div>

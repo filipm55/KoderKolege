@@ -17,6 +17,6 @@ public class CodeExecutionController {
 
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
-        return codeExecutionService.execute(id, submission.getCode());
+        return codeExecutionService.execute(id, submission.getCode(), submission.getInput());
     }
 }
