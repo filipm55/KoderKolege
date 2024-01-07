@@ -77,7 +77,7 @@ const User = () => {
             <div id = "gornjidio">
                 <div className="slikaIme">
                     <div className="slikaa"> 
-                        <img className="okrugla" src={`data:image/jpeg;base64,${user.image.data}`} alt="User Image"/>
+                        <img className="okrugla" src={`data:image/jpeg;base64,${user.image?.data}`} alt="User Image"/>
                     </div>
                     <div id="imemail">
                         <h1 id = "imeprezime">{user.name} {user.lastname}</h1>

@@ -9,10 +9,12 @@ import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.ProblemService;
 import Nadmapa.BytePit.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,4 +79,20 @@ public class CompetitionController {
         //return competitionService.createCompetition(competition);
         return  competitionService.createCompetition(competition);
     }
+
+    @GetMapping("/{competitionId}")
+    public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
+        try {
+            Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
+            System.out.println(competitionId + " " + competition);
+            Set<Problem> problems = competition.getProblems();
+            return new ResponseEntity<>(problems, HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

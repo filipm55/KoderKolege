@@ -200,7 +200,7 @@ const Users = () => {
                                 </form>}
                             </div>
                             <p> <img className="profile"
-                                src={`data:image/jpeg;base64,${user.image.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
+                                src={`data:image/jpeg;base64,${user.image?.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
                                 alt="User Image"
                             /></p>
                         </div>

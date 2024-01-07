@@ -59,6 +59,10 @@ public class Competition {
         this.problems = problems;
     }
 
+    public Set<Problem> getProblems() {
+        return problems;
+    }
+
     public void addProblems(Set<Problem> problems){
         this.problems.addAll(problems);
     }

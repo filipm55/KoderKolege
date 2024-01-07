@@ -1,10 +1,10 @@
 import './Calendar.css';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
+import { Link } from 'react-router-dom';
+
 
 import useFetch from "../useFetch";
-import { type } from '@testing-library/user-event/dist/type';
-import { parseISO } from 'date-fns';
 
 const Cal = () => {
     //convertanje u datum ne radi, treba drugacije slat podatke ili ih drugacije convertat
@@ -84,13 +84,14 @@ const Cal = () => {
                     {competitions &&
                         competitions.map((comp) => (
                             <div key={comp.id}>
+                                {console.log(comp.id)}
                                 {isCompetitionUpcoming(comp) && (
                                 <p>ID: {comp.id} Start time: {formatDate(comp.dateTimeOfBeginning)} End time: {formatTime(comp.dateTimeOfEnding[3]) + ":" + formatTime(comp.dateTimeOfEnding[4])}
                                 
                                     {isCompetitionActive(comp) && (
-                                        <button onClick={() => console.log("klik")}>
-                                            Participate Now
-                                        </button>
+                                        <Link to={`/competitions/${comp.id}`}> Pridruži se 
+                                        </Link>
+                                        
                                     )}
                                 </p>)}
                             </div>
