@@ -22,6 +22,25 @@ const Users = () => {
     const [email, setEmail] = useState('');
     const [role, setRole] = useState('');
     const [userData, setUserData] = useState(null);
+    const [isError, setIsError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+    const emptyBlob = new Blob([''], { type: 'text/plain' });
+    const [file, setFile] = useState(emptyBlob);
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+
+        // Checking if the file type is allowed or not
+        const allowedTypes = ["image/jpeg"]; // STAVIO SAM SAMO JPEG JER JE ZIVOT TAK JEDNOSTAVNIJI ZA RADIT SA SLIKOM, Mislav, MOZDA U ONE DODATNE FUNKCIONALNOST TREBA UPISAT
+        if (!allowedTypes.includes(selectedFile?.type)) {
+            setIsError(true);
+            setErrorMsg("Only JPEG");
+            return;
+        }
+
+        setIsError(false);
+        setFile(selectedFile);
+    };
 
     useEffect(() => {
         if (jwtToken) {    
@@ -103,6 +122,7 @@ const Users = () => {
         formData.append('username', username);
         formData.append('email', email);
         formData.append('userType', role);
+        formData.append('image', file);
 
         fetch(`http://localhost:8080/users/${id}`, {
             method: 'PUT',
@@ -187,6 +207,10 @@ const Users = () => {
                                     <div className="kucica4">
                                     <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
                                     </div>
+                                        <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"
+                                                                                                         onChange={handleFileChange}/>
+                                        </div>
+                                        {isError && <p className='fileError'>{errorMsg}</p>}
                                     <div className='izbor'><label>Uloga:</label>
                                         <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
                                                                 onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>

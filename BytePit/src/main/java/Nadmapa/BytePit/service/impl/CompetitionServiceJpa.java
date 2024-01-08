@@ -33,4 +33,9 @@ public class CompetitionServiceJpa implements CompetitionService {
         return competitionRepo.findById(competitionId)
                 .orElseThrow(() -> new EntityNotFoundException("Competition not found"));
     }
+
+    @Override
+    public void saveCompetition(Competition competition) {
+        competitionRepo.save(competition);
+    }
 }

@@ -33,7 +33,7 @@ public class Competition {
     @Getter
     @ManyToMany
     private Set<Problem> problems = new HashSet<>();
-
+    @Getter @Setter
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trophyPicture", referencedColumnName = "id")
     private Image trophyPicture;

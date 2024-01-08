@@ -10,13 +10,15 @@ const CreateCompetition = () => {
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [numOfProblems, setNumOfProblems] = useState('');
-    const [picture, setPicture] = useState('');
+
     const [selectedProblems, setSelectedProblems] = useState([]);
     const [faultyEndTime, setFaultyEndTime] = useState(false);
     const [message, setMessage] = useState('');
     const [expandedTask, setExpandedTask] = useState([]);
     const [isError, setIsError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+    const emptyBlob = new Blob([''], { type: 'text/plain' });
+    const [picture, setPicture] = useState(emptyBlob);
 
 
     const [userData, setUserData] = useState(null);

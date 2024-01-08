@@ -136,11 +136,12 @@ public class UserController {
                                              @RequestParam("lastname") String lastname,
                                              @RequestParam("username") String username,
                                              @RequestParam("email") String email,
-                                             @RequestParam("userType") String userType) {
+                                             @RequestParam("userType") String userType,
+                                             @RequestParam("image") MultipartFile file) throws IOException {
 
 
         Optional<User> optionalUser = userService.getUserById(id);
-
+        boolean imageChanged = false;
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             String stariEmail = user.getEmail();
@@ -169,11 +170,19 @@ public class UserController {
                         break;
                 }
             }
+            if(!file.isEmpty() && !file.getBytes().equals(user.getImage().getData())){
+                user.getImage().setData(file.getBytes());
+                imageChanged=true;
+            }
 
             try{
                 userService.saveUser(user);
             }catch(Exception e){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Neuspješan update korisnika s ID-om: " + id);
+            }
+            String izmjenjenaSlika = "\n\tSlika profila vam nije promijenjena.";
+            if(imageChanged){
+                izmjenjenaSlika = "\n\tUz to, vaša slika profila je promijenjena.";
             }
             emailservice.sendSimpleEmail(stariEmail,"Poštovani,\n" +
                     "Administrator je izmjenio vaše podatke.\n" +
@@ -182,7 +191,7 @@ public class UserController {
                     "\n\tPrezime: " + user.getLastname() +
                     "\n\tKorisničko ime:" + user.getUsername() +
                     "\n\tEmail: " + user.getEmail() +
-                    "\n\tTip: "+ user.getUserType().toString()
+                    "\n\tTip: "+ user.getUserType().toString() + izmjenjenaSlika
                     ,"Izmjenjeni osobni podaci!");
             return ResponseEntity.ok("Uspješan update podataka korisnika s ID-om: " + id);
         }

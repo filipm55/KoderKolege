@@ -37,5 +37,10 @@ public class ProblemServiceJpa implements ProblemService {
         return problemRepo.findByProblemMakerId(problem_maker_id);
     }
 
+    @Override
+    public void saveProblem(Problem problem) {
+        problemRepo.save(problem);
+    }
+
 
 }

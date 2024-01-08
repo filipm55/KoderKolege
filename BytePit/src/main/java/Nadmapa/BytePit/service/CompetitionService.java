@@ -13,4 +13,6 @@ public interface CompetitionService {
 
 
     public Competition getCompetition(String competitionId);
+
+    void saveCompetition(Competition competition);
 }
