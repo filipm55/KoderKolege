@@ -5,15 +5,31 @@ import './SolvingATask.css';
 
 const SolvingATask = () => {
   const { id } = useParams();
+  const taskKey = `startTime_${id}`; // Unique key for each task
   const [task, setTask] = useState(null);
   const [durationMilliseconds, setDurationMilliseconds] = useState(0);
-
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
   const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
   const [solutionError, setSolutionError] = useState(''); // New state for solution error
   const [userInput, setUserInput] = useState('');
-  const [uploadedFile, setUploadedFile] = useState(null);
+  let fileInputRef = null;
+
+  const handleCountdownComplete = () => {
+    // Clear the stored value when countdown completes
+    localStorage.removeItem(taskKey);
+    setDurationMilliseconds(0);
+
+    if (durationMilliseconds === 0) {
+      const [minutes, seconds] = task.duration.split(':');
+      const totalMilliseconds = (parseInt(minutes, 10) * 60 + parseInt(seconds, 10)) * 1000;
+
+      setDurationMilliseconds(totalMilliseconds);
+      localStorage.setItem(taskKey, Date.now().toString());
+    }
+
+  };
+
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -26,6 +42,19 @@ const SolvingATask = () => {
 
         setTask(task);
         setDurationMilliseconds(totalMilliseconds);
+
+        const storedTime = parseInt(localStorage.getItem(taskKey));
+        if (storedTime && storedTime > 0) {
+          const elapsedTime = Date.now() - storedTime;
+          const remainingTime = totalMilliseconds - elapsedTime;
+          if (remainingTime > 0) {
+            setDurationMilliseconds(remainingTime);
+          } else {
+            setDurationMilliseconds(0);
+          }
+        } else {
+          localStorage.setItem(taskKey, Date.now().toString());
+        }
       } catch (error) {
         console.error('Error fetching task:', error);
         setTask(null);
@@ -34,8 +63,7 @@ const SolvingATask = () => {
     };
 
     fetchTaskById();
-  }, [id]);
-
+  }, [id, taskKey]);
   const handleTestSolution = async () => {
     try {
       const response = await fetch(`http://localhost:8080/solution/${id}`, {
@@ -77,20 +105,31 @@ const SolvingATask = () => {
     }
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setUploadedFile(file);
-  };
-
   const handleSubmitFile = async () => {
-    if (!uploadedFile) {
+    if (!fileInputRef || !fileInputRef.files || fileInputRef.files.length === 0) {
       console.error('No file uploaded');
       return;
     }
 
+    const uploadedFile = fileInputRef.files[0];
+
     try {
+      const timerElement = document.querySelector('.timer span');
+    const currentTime = timerElement.innerText;
+
+    const [currentMinutes, currentSeconds] = currentTime.split(':').map(Number);
+
+    const [totalMinutes, totalSeconds] = task.duration.split(':').map(Number);
+
+    const passedMinutes = totalMinutes - currentMinutes;
+    const passedSeconds = totalSeconds - currentSeconds;
+
+    const passedTimeInSeconds = passedMinutes * 60 + passedSeconds;
+    console.log(passedTimeInSeconds)
+
       const formData = new FormData();
       formData.append('file', uploadedFile);
+      formData.append('time', passedTimeInSeconds);
 
       const submitResponse = await fetch(`http://localhost:8080/submit/${id}`, {
         method: 'POST',
@@ -119,7 +158,7 @@ const SolvingATask = () => {
       <div className="timer">
         <Countdown
           date={Date.now() + durationMilliseconds}
-          onComplete={() => console.log('Time\'s up!')}
+          onComplete={handleCountdownComplete}
           renderer={({ minutes, seconds }) => (
             <span>{`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</span>
           )}
@@ -155,7 +194,7 @@ const SolvingATask = () => {
       <div className="upload-container">
         <input
           type="file"
-          onChange={handleFileUpload}
+          ref={(ref) => (fileInputRef = ref)}
           className="file-uploader"
         />
         <button className="submit-button" onClick={handleSubmitFile}>
