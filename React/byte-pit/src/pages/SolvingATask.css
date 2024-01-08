@@ -75,6 +75,10 @@
   .timer span {
     margin-left: 5px;
   }
+
+  .timer.red {
+    background-color: red;
+  }
   
   .problem-type {
     position: absolute;

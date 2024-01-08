@@ -7,7 +7,7 @@ import './SolvingATask.css';
 const Competition = () => {
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [task, setTask] = useState(null);
-  const [durationMilliseconds, setDurationMilliseconds] = useState(0);
+  const [countdownTime, setCountdownTime] = useState(0);
 
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
@@ -37,20 +37,42 @@ const Competition = () => {
   }, [competitionId]);
 
   useEffect(() => {
+    if (competitionInfo && competitionInfo.length > 0) {
+      let totalDuration = 0;
+
+      competitionInfo.forEach((task) => {
+        const [minutes, seconds] = task.duration.split(':');
+        totalDuration += parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
+      });
+
+      setCountdownTime(totalDuration * 1000); // Set the countdown time
+    }
+  }, [competitionInfo]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdownTime((prevTime) => {
+        if (prevTime <= 0) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prevTime - 1000;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const fetchTaskById = async () => {
       try {
         const response = await fetch(`http://localhost:8080/problems/${taskId}`);
         const task = await response.json();
-
-        const [minutes, seconds] = task.duration.split(':');
-        const totalMilliseconds = (parseInt(minutes, 10) * 60 + parseInt(seconds, 10)) * 1000;
-
         setTask(task);
-        setDurationMilliseconds(totalMilliseconds);
+
       } catch (error) {
         console.error('Error fetching task:', error);
         setTask(null);
-        setDurationMilliseconds(0);
       }
     };
 
@@ -121,10 +143,13 @@ const Competition = () => {
 
 
       <div className="task-container">
-      <div className="timer">
+      <div className={`timer ${countdownTime <= 60000 ? 'red' : ''}`}>
         <Countdown
-          date={Date.now() + durationMilliseconds}
-          onComplete={() => console.log('Time\'s up!')}
+          date={Date.now() + countdownTime}
+          onComplete={() => {
+            console.log("Time's up!");
+            document.querySelector('.finish-button').click();
+          }}
           renderer={({ minutes, seconds }) => (
             <span>{`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</span>
           )}
