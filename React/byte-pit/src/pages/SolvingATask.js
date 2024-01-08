@@ -64,7 +64,22 @@ const SolvingATask = () => {
 
     fetchTaskById();
   }, [id, taskKey]);
+
   const handleTestSolution = async () => {
+    const storedTime = parseInt(localStorage.getItem(taskKey));
+    const [minutes, seconds] = task.duration.split(':');
+    const totalMilliseconds = (parseInt(minutes, 10) * 60 + parseInt(seconds, 10)) * 1000;
+        if (storedTime && storedTime > 0) {
+          const elapsedTime = Date.now() - storedTime;
+          const remainingTime = totalMilliseconds - elapsedTime;
+          if (remainingTime > 0) {
+            setDurationMilliseconds(remainingTime);
+          } else {
+            setDurationMilliseconds(0);
+          }
+        } else {
+          localStorage.setItem(taskKey, Date.now().toString());
+        }
     try {
       const response = await fetch(`http://localhost:8080/solution/${id}`, {
         method: 'POST',
