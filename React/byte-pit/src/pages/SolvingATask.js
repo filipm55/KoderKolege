@@ -13,6 +13,7 @@ const SolvingATask = () => {
   const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
   const [solutionError, setSolutionError] = useState(''); // New state for solution error
   const [userInput, setUserInput] = useState('');
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -76,6 +77,39 @@ const SolvingATask = () => {
     }
   };
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    setUploadedFile(file);
+  };
+
+  const handleSubmitFile = async () => {
+    if (!uploadedFile) {
+      console.error('No file uploaded');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('file', uploadedFile);
+
+      const submitResponse = await fetch(`http://localhost:8080/submit/${id}`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (submitResponse.ok) {
+        // Handle success
+        console.log('File submitted successfully');
+        // Additional logic if needed after successful submission
+      } else {
+        // Handle failure
+        console.error('Failed to submit file');
+      }
+    } catch (error) {
+      console.error('Error submitting file:', error);
+    }
+  };
+
   if (!task) {
     return <div>Loading...</div>;
   }
@@ -106,6 +140,7 @@ const SolvingATask = () => {
         rows={10}
       ></textarea>
 
+        <div className='input-container'>
         <textarea
             className="user-input-textarea"
             value={userInput}
@@ -115,6 +150,18 @@ const SolvingATask = () => {
         ></textarea>
 
       <button className="test-button" onClick={handleTestSolution}>Testiraj</button>
+      </div>
+
+      <div className="upload-container">
+        <input
+          type="file"
+          onChange={handleFileUpload}
+          className="file-uploader"
+        />
+        <button className="submit-button" onClick={handleSubmitFile}>
+          Predaj
+        </button>
+      </div>
 
       {testResult && <div className="test-result">Test Result: {testResult}</div>}
 
