@@ -33,7 +33,20 @@
     font-family: 'Arial', sans-serif;
   }
   
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .user-input-textarea {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing between the elements */
+  }
+  
   .test-button {
+    flex: 0 0 auto; /* Prevent button from stretching */
     padding: 15px 25px;
     background-color: #70c873;
     color: white;
@@ -42,14 +55,11 @@
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease;
-    display: block;
-    margin: 0 auto;
   }
   
   .test-button:hover {
     background-color: #45a049;
   }
-  
   .test-result {
     margin-top: 30px;
     font-size: 18px;
@@ -107,4 +117,33 @@
   .problem-type-hard {
     background-color: #efb5b0; /* Red for Hard */
     color: white;
+  }
+
+  .upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .file-uploader {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing between the elements */
+  }
+  
+  .submit-button {
+    flex: 0 0 auto; /* Prevent button from stretching */
+    padding: 15px 25px;
+    background-color: #4e91ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #2662d9;
   }
