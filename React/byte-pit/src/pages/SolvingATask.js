@@ -26,13 +26,14 @@ const SolvingATask = () => {
     localStorage.removeItem(taskKey);
     setDurationMilliseconds(0);
 
+    /*
     if (durationMilliseconds === 0) {
       const [minutes, seconds] = task.duration.split(':');
       const totalMilliseconds = (parseInt(minutes, 10) * 60 + parseInt(seconds, 10)) * 1000;
 
       setDurationMilliseconds(totalMilliseconds);
       localStorage.setItem(taskKey, Date.now().toString());
-    }
+    }*/
 
   };
 
@@ -60,6 +61,7 @@ const SolvingATask = () => {
           }
         } else {
           localStorage.setItem(taskKey, Date.now().toString());
+          window.location.reload();
         }
       } catch (error) {
         console.error('Error fetching task:', error);
@@ -89,6 +91,7 @@ useEffect(() => {
           } else {
           }
       }, [jwtToken]);
+
   const handleTestSolution = async () => {
     const storedTime = parseInt(localStorage.getItem(taskKey));
     const [minutes, seconds] = task.duration.split(':');

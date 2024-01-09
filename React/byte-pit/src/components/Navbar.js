@@ -35,6 +35,7 @@ const Navbar = () => {
 
   const logout = () => {
     cookies.remove('jwt_authorization');
+    localStorage.clear();
     window.location.href = '/login'; // Redirect to the login page
   };
   return (
