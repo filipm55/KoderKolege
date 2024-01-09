@@ -10,6 +10,7 @@ import Practice from './pages/Practice'
 import AddTask from './pages/AddTask'
 import Users from "./pages/Users";
 import Calendar from "./pages/Calendar";
+import Virtual from "./pages/Virtual";
 import User from "./pages/User";
 import AllTasks from './pages/AllTasks';
 import SolvingATask from './pages/SolvingATask';
@@ -29,6 +30,7 @@ function App() {
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/registration' element={<Registration />} />
                 <Route exact path='/creation' element={<Creation />} />
+                <Route exact path='/virtual' element={<Virtual />} />
                 <Route exact path='/practice' element={<Practice />} />
                 <Route exact path='/tasks/addTask' element={<AddTask />} />
                 <Route exact path='/users' element={<Users />} />

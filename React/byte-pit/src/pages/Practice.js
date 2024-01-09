@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import useFetch from "../useFetch";
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import DesktopMacIcon from '@mui/icons-material/DesktopMac';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import CasinoIcon from '@mui/icons-material/Casino';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import Cookies from 'universal-cookie';
 
 const Practice = () => {
@@ -52,16 +55,22 @@ const Practice = () => {
             <div className="kategorije">
                  <Link to='/virtual' className="link">
                     <div className="kat">
-                        <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
+                        <DesktopMacIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Virtualno natjecanje</h3>
-                        <p>**opis**</p>
+                        <div className='opisKat' id ="poseban">
+                            <PlayArrowIcon className='ikona'/>
+                            <p className='opis' id ="prvi">Isprobaj kako je to sudjelovati u stvarnom natjecanju uz opciju virtualnog natjecanja</p>
+                        </div>
                     </div>
                 </Link>
                 <Link to='/tasks/allTasks' className="link">
                     <div className="kat">
                         <ExtensionIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Zadaci za vježbu</h3>
-                        <p>**opis**</p>
+                        <div className='opisKat' id ="poseban2">
+                            <PlayArrowIcon className='ikona'/>
+                            <p className='opis' id ="drugi">Popis svih zadataka za vježbu</p>
+                        </div>
                     </div>
                 </Link>
             </div>

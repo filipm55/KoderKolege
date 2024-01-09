@@ -6,6 +6,7 @@ import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import CasinoIcon from '@mui/icons-material/Casino';
 import Cookies from 'universal-cookie';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const Creation = () => {
 
@@ -37,16 +38,6 @@ const Creation = () => {
       }, [jwtToken]);
     
     return (
-        /*<div className="wrapper">
-            { error && <div>{ error }</div> }
-            { tasks && <div className="task-list">
-                {tasks.map(task => (
-                    <div className="task" key={task.id} >
-                        <Link to={'/zadaci/'+task.id}><h2>{ task.title }</h2></Link>
-                    </div>
-                ))}
-            </div> }
-        </div>*/
 
         <div className="body1">
             <div className="kategorije">
@@ -54,14 +45,20 @@ const Creation = () => {
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Kreiraj  natjecanje</h3>
-                        <p>**opis**</p>
+                        <div className='opisKat' id="poseban2">
+                            <PlayArrowIcon className='ikona'/>
+                            <p className='opis' id ="drugi">Stvori novo natjecanje </p>
+                        </div>
                     </div>
                 </Link>
                 <Link to='/tasks/addTask' className="link">
                     <div className="kat">
                         <AddToQueueIcon sx={{ fontSize: 60 }} color="primary"/>
                         <h3>Dodaj novi zadatak</h3>
-                        <p>**opis**</p>
+                        <div className='opisKat' id="poseban2">
+                            <PlayArrowIcon className='ikona'/>
+                            <p className='opis' id ="drugi" >Stvori novi privatan ili javan zadatak</p>
+                        </div>
                     </div>
                 </Link>
             </div>

@@ -38,7 +38,7 @@ div.kategorije {
     align-items: center;
 }
 
-div.kategorije div {
+div.kat {
     border-radius: 0.7rem;
     width: 27vw;
     height: 40vh;
@@ -47,6 +47,7 @@ div.kategorije div {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    align-content: center;
     padding-top: 10px;
     text-decoration: none;
 
@@ -59,7 +60,7 @@ div.kategorije div {
 div.kat {
     border-radius: 0.7rem;
     width: 27vw;
-    height: 40vh;
+    height: 43vh;
     display: flex;
     margin: 0 20px;
     flex-direction: column;
@@ -70,6 +71,48 @@ div.kat {
     transition: all 0.3s ease; /* Smooth transition */
     border: 1px solid transparent; /* Initially no border */
     transform: scale(1); /* Initial scale */
+  }
+
+  h3.nas {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  p.opis {
+    width: 20vw;
+  }
+
+  p#prvi {
+    margin-bottom: -2.2rem;
+  }
+
+  p#treci {
+    margin-bottom: -2.3rem;
+  }
+  p#drugi {
+    margin-bottom: -1rem;
+  }
+  p#cetvrti {
+    margin-bottom: -2.3rem;
+  }
+
+  div#poseban{
+    margin-left: 3.2rem;
+  }
+
+  div#poseban2 {
+    margin-left: 6rem;
+  }
+
+  div.opisKat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .ikona {
+
   }
   
   div.kat:hover {
@@ -88,6 +131,8 @@ div.kat h3 {
 div.kat p {
     margin-top: -10px;
 }
+
+
 
 @media screen and (max-width: 767px) {
     h1.naslov {
