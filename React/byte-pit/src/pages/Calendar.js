@@ -75,16 +75,16 @@ const Cal = () => {
     };
 
     return (
-        <div className="body">
-            <div style={{ display: 'flex' }}>
-                <div style={{ flex: 1 }}>
-                    <Calendar tileContent={tileContent} />
+        <div className="body" id="izKalendara">
+            <h1> Nadolazeća i aktualna natjecanja</h1>
+            <div id="prozor17">
+                <div >
+                    <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
-                <div style={{ flex: 1 }}><h2>  Nadolazeća i aktualna natjecanja</h2>
+                <div >
                     {competitions &&
                         competitions.map((comp) => (
                             <div key={comp.id}>
-                                {console.log(comp.id)}
                                 {isCompetitionUpcoming(comp) && (
                                 <p>ID: {comp.id} Start time: {formatDate(comp.dateTimeOfBeginning)} End time: {formatTime(comp.dateTimeOfEnding[3]) + ":" + formatTime(comp.dateTimeOfEnding[4])}
                                 
