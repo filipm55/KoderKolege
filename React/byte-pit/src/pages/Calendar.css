@@ -1,4 +1,4 @@
-div.body {
+div#izKalendara {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -18,7 +18,7 @@ div#prozor17 {
 
 .react-calendar {
     width: 59rem;
-    height: 24rem;
+    height: fit-content;
     max-width: 100%;
     background: white;
     border: 1px solid #a0a096;
@@ -31,14 +31,17 @@ span {
     font-size: 2rem;
 }
 
-button.react-calendar__navigation__arrow react-calendar__navigation__next-button {
-    font-size: 5rem;
-}
 
 .react-calendar__navigation button {
     min-width: 60px;
     background: none;
     font-size: 2rem;
+    border: 0px solid white;
+}
+
+.react-calendar__viewContainer button {
+    height: 5rem;
+    border: rgba(222, 219, 219, 0.735) 0.5px solid;
 }
 
 div#izKalendara {
@@ -47,6 +50,11 @@ div#izKalendara {
     justify-content: space-around;
     align-items: center;
     height: fit-content;
+}
+
+h1#naslov17 {
+    align-self: flex-start;
+    margin-left: 20rem;
 }
 
 @media screen and (max-width: 767px) {

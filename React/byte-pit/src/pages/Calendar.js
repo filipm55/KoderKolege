@@ -64,7 +64,7 @@ const Cal = () => {
                 return (
                     <div>
                         {competition.map((comp, index) => (
-                            <p key={index} style={{ color: 'red' }}>{comp.id}</p>
+                            <p key={index} style={{ color: 'red' }}>Natjecanje!</p>
                         ))}
                     </div>
                 );
@@ -76,7 +76,7 @@ const Cal = () => {
 
     return (
         <div className="body" id="izKalendara">
-            <h1> Nadolazeća i aktualna natjecanja</h1>
+            <h1 id="naslov17"> Nadolazeća i aktualna natjecanja</h1>
             <div id="prozor17">
                 <div >
                     <Calendar id="kalendar" tileContent={tileContent} />

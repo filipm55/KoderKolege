@@ -56,10 +56,10 @@ const AllTasks = () => {
         
           return (
             <div>
-              <div id="popis">
+              <div id="popis11">
                 <div id="naslovSort">
-                  <h1>Zadaci za vježbu</h1>
-                  <div>
+                  <h1 id="zdzvj">Zadaci za vježbu</h1>
+                  <div id="tezina11">
                         <p>Težina:  
                         <select onChange={(event) => setSort(event.target.value)}>
                             <option value = 'ALL'>ALL</option>
@@ -88,7 +88,7 @@ const AllTasks = () => {
                               <td>{task.problemType}</td>
                               <td>{task.points}</td>
                               <td>
-                              {(task.problemMaker == 1) && <span>Admin</span>}
+                              {(task.problemMaker == 1) && <span id ="korisnik">Admin</span>}
                               {findMaker(task.problemMaker) && 
                                 <span>
                                   <Link id ="korisnik" to={'/users/'+problemMakerr.id}>

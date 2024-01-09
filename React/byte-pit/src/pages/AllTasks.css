@@ -1,5 +1,5 @@
 /* Common styles for #popis */
-#popis {
+#popis11 {
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -10,8 +10,9 @@
 
 /* Styles for .zadatcitezine */
 .zadatcitezine {
+   display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: space-between;
    width: 90%; /* Adjusted width for mobile */
    margin: 0 auto; /* Centering the element */
 }
@@ -72,14 +73,25 @@ td.tName {
 
 div#naslovSort {
    display: flex;
-   flex-direction: column; /* Adjusted for mobile */
-   width: 90%; /* Adjusted width for mobile */
+   flex-direction: row; /* Adjusted for mobile */
+   width: 85%; /* Adjusted width for mobile */
    margin: 0 auto; /* Centering the element */
-   justify-content: center; /* Adjusted for mobile */
+   margin-bottom: -1rem;
+   justify-content: space-between; /* Adjusted for mobile */
    align-items: center; /* Adjusted for mobile */
 }
 
 #korisnik {
    text-decoration: none;
    color: black;
+   font-size: 3vh; 
+}
+
+#tezina11 {
+   margin-bottom: -1.3rem;
+   font-size: 1.1rem;
+}
+
+#zdzvj {
+   font-size: 2.6rem;
 }
