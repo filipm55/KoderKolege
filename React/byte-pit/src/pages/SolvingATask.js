@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import './SolvingATask.css';
+import Cookies from 'universal-cookie';
+
 
 const SolvingATask = () => {
   const { id } = useParams();
@@ -14,6 +16,10 @@ const SolvingATask = () => {
   const [solutionError, setSolutionError] = useState(''); // New state for solution error
   const [userInput, setUserInput] = useState('');
   let fileInputRef = null;
+  const [userData, setUserData] = useState(null);
+
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
 
   const handleCountdownComplete = () => {
     // Clear the stored value when countdown completes
@@ -65,6 +71,24 @@ const SolvingATask = () => {
     fetchTaskById();
   }, [id, taskKey]);
 
+useEffect(() => {
+          if (jwtToken) {
+              const fetchData = async () => {
+                  try {
+                      const url = `http://localhost:8080/users/${jwtToken}`;
+                      const response = await fetch(url);
+                      const data = await response.json();
+                      setUserData(data); // Set user data fetched from the backend
+                  } catch (error) {
+                      // Handle error if needed
+                      console.error(error);
+                  }
+              };
+
+              fetchData();
+          } else {
+          }
+      }, [jwtToken]);
   const handleTestSolution = async () => {
     const storedTime = parseInt(localStorage.getItem(taskKey));
     const [minutes, seconds] = task.duration.split(':');
@@ -145,6 +169,8 @@ const SolvingATask = () => {
       const formData = new FormData();
       formData.append('file', uploadedFile);
       formData.append('time', passedTimeInSeconds);
+      formData.append('user', userData.username);
+      formData.append('problem', task.id)
 
       const submitResponse = await fetch(`http://localhost:8080/submit/${id}`, {
         method: 'POST',
