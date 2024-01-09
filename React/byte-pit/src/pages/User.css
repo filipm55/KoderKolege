@@ -115,6 +115,7 @@ div#kalendar {
     margin-bottom: 10vh;
     margin-right: 5vw;
     margin-top: -90px;
+
 }
 
 div#gornjidio{
@@ -137,3 +138,7 @@ select {
     margin-left: 8px;
 }
 
+
+div#voditelj {
+    width: 100px;
+}

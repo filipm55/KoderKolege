@@ -134,7 +134,7 @@ const User = () => {
                         <div id="kalendar">
                             <p><CalendarMonthIcon className="pehar"/>
                                 OBJAVLJENA NATJECANJA</p>
-                            <Calendar id="voditelj"/>
+                            {<Calendar id="voditelj"/>}
                         </div>
                     }
                 </div>

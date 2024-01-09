@@ -1,16 +1,28 @@
 import './Calendar.css';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import EastIcon from '@mui/icons-material/East';
 import { Link } from 'react-router-dom';
 
 
 import useFetch from "../useFetch";
 
 const Cal = () => {
-    //convertanje u datum ne radi, treba drugacije slat podatke ili ih drugacije convertat
-    //bavit cu se time sutra
+    var mapa = new Map();
 
     const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
+
+    function getRandomHexColor() {
+        // Generate random RGB components
+        const red = Math.floor(Math.random() * 150) + 100;
+        const green = Math.floor(Math.random() * 150) + 100;
+        const blue = Math.floor(Math.random() * 150) + 100;
+      
+        // Convert RGB components to hexadecimal and construct the color string
+        const randomLightHexColor = `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+        return randomLightHexColor;
+      }
 
     const formatTime = (timeString) => {
         return timeString.toString().length === 1 ? `0${timeString}` : timeString;
@@ -41,6 +53,14 @@ const Cal = () => {
 
         return currentDateTime < compEndDate;
     };
+
+    if (competitions) {
+        competitions.map(comp => {
+            var col = getRandomHexColor();
+            mapa.set(comp.id, col);
+        })
+    }
+
     const tileContent = ({ date, view }) => {
         // Check if the date falls within the start and end dates of any competition
         if(competitions){
@@ -59,12 +79,15 @@ const Cal = () => {
                 }
                 return date >= compStartDate && date <= compEndDate;
             });
+            
             if (competition) {
                 // If there is a competition on this date, display its id
                 return (
                     <div>
                         {competition.map((comp, index) => (
-                            <p key={index} style={{ color: 'red' }}>Natjecanje!</p>
+                                <div style={{ color: "black", background: mapa.get(comp.id) }}>
+                                   Natjecanje! {comp.id}
+                                 </div>
                         ))}
                     </div>
                 );
@@ -76,24 +99,26 @@ const Cal = () => {
 
     return (
         <div className="body" id="izKalendara">
-            <h1 id="naslov17"> Nadolazeća i aktualna natjecanja</h1>
             <div id="prozor17">
                 <div >
                     <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
-                <div >
+                <div id="natjecanja">
+                <h1 id="naslov17"> Nadolazeća i aktualna natjecanja</h1>
                     {competitions &&
                         competitions.map((comp) => (
-                            <div key={comp.id}>
+                            <div>
                                 {isCompetitionUpcoming(comp) && (
-                                <p>ID: {comp.id} Start time: {formatDate(comp.dateTimeOfBeginning)} End time: {formatTime(comp.dateTimeOfEnding[3]) + ":" + formatTime(comp.dateTimeOfEnding[4])}
-                                
+                                <div className='natjecanje'>
+                                    <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
+                                    <p>Natjecanje {comp.id} </p>
+                                    <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
                                     {isCompetitionActive(comp) && (
-                                        <Link to={`/competitions/${comp.id}`}> Pridruži se 
+                                        <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 
                                         </Link>
                                         
                                     )}
-                                </p>)}
+                                </div>)}
                             </div>
                         ))}
                 </div>

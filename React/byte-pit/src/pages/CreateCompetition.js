@@ -7,6 +7,7 @@ import useFetch from "../useFetch";
 
 
 const CreateCompetition = () => {
+    const [name, setName] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [numOfProblems, setNumOfProblems] = useState('');
@@ -94,13 +95,13 @@ const CreateCompetition = () => {
         const problemsArray = Array.from(new Set(problems.filter(problem => selectedProblems.includes(problem.id)).map(problem => problem.id)));
 
         const formData = new FormData();
+        formData.append('name', name);
         formData.append('competitionMaker', userData.id);
         formData.append('dateTimeOfBeginning', startTime);
         formData.append('dateTimeOfEnding', endTime);
         formData.append('numberOfProblems', numOfProblems);
         formData.append('trophyPicture', picture);
         formData.append('problems', problemsArray);
-        console.log(formData);
 
         fetch('http://localhost:8080/competitions', {
             method: 'POST',
@@ -149,6 +150,10 @@ const CreateCompetition = () => {
                 <h2 id="novizd">Novo natjecanje</h2>
                 <form id="addTask" onSubmit={submitFja}>
                     <div id="lijeviDio">
+                    <div className="input">
+                            <label>Naziv natjecanja: </label>
+                            <input type ="text" value={name} required onChange={(e) => setName(e.target.value)}></input>
+                        </div>
                         <div className="input">
                             <label>Datum i vrijeme početka natjecanja: </label>
                             <input type ="datetime-local" value={startTime} required onChange={(e) => setStartTime(e.target.value)}></input>
@@ -171,7 +176,7 @@ const CreateCompetition = () => {
                             <label>Odaberite zadatke: </label>
                             <ul>
                                 {problems.map((problem) => (
-                                    <li key={problem.id}>
+                                    <li key={problem.id} style={{ listStyleType: 'none' }}>
                                         <label>
                                             <input
                                                 type="checkbox"
