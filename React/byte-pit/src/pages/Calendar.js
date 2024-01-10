@@ -74,9 +74,6 @@ const Cal = () => {
                 dataArray = [datumic[0], datumic[1], datumic[2], datumic[3], datumic[4]];
                 [year, month, day, hours, minutes] = dataArray
                 let compEndDate = new Date(year, month-1, day, 23, 59);   // AKO SE OVDJE UPIŠE hours i minutes NE RADI DOBRO PRIKAZ JER FUNKCIJA date >= compStartDate && date <= compEndDate VRAĆA FALSE AKO JE DATUM POČETKA I KRAJA NATJECANJA ISTI DAN!!!!!!!!!!!!!
-                if (comp.id==110){
-                    console.log(date >= compStartDate);
-                }
                 return date >= compStartDate && date <= compEndDate;
             });
             

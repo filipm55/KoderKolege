@@ -137,9 +137,9 @@ const Competition = () => {
     <div>
       <div className="task-buttons">
           {competition && competition.name ?
-                  <p>{competition.name}</p>
-               :
-                  <p>Natjecanje {competition.id}</p>
+              <p>{competition.name}</p>
+              :
+              <p>Natjecanje {competitionId}</p>
 
           }
         {competitionInfo && competitionInfo.map((task, index) => (
