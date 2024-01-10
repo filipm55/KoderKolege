@@ -86,11 +86,7 @@ const Cal = () => {
                     <div>
                         {competition.map((comp, index) => (
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                    {comp.name ? (
-                                        <p>{comp.name}</p>
-                                    ) : (
-                                        <p>Natjecanje {comp.id}</p>
-                                    )}
+                                    {comp.name ? comp.name : "Natjecanje "+comp.id}
                                  </div>
                         ))}
                     </div>
