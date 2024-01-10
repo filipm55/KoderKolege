@@ -29,7 +29,7 @@ const Competition = () => {
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState('');
-  const [solvedTasks, setSolvedTasks] = useEffect(null)
+  const [solvedTasks, setSolvedTasks] = useState(null)
 
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
@@ -51,7 +51,6 @@ const Competition = () => {
       })
       .then((data) => {
         console.log('Competition Info:', data);
-        console.log(data.dateTimeOfBeginning);
         setCompetitionInfo(data);
       })
       .catch((error) => {
