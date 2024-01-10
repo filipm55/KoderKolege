@@ -14,17 +14,14 @@ import java.io.IOException;
 public class CodeExecutionController {
 
     @Autowired
-    private CodeExecutionService codeExecutionService;
+    private CodeExecutionService ces;
 
     @Autowired
-    private UserCodeFileRepository codeRepo;
-
-     @Autowired
      private CodeSubService cs;
 
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
-        return codeExecutionService.execute(id, submission.getCode(), submission.getInput());
+        return ces.execute(id, submission.getCode(), submission.getInput());
     }
 
     @PostMapping("/submit/{id}")
@@ -39,12 +36,8 @@ public class CodeExecutionController {
             cs.setUserAndProblem(codeSub, username, problemId);
             codeSub.setTime(time);
             codeSub.setFileData(file.getBytes());
-            System.out.println(codeSub.getUser());
-            System.out.println(codeSub.getProblem());
 
-            codeRepo.save(codeSub);
-
-            return "Code submission saved successfully";
+            return ces.submit(file, problemId, codeSub);
         } catch (IOException e) {
             return "Error in processing file";
         }

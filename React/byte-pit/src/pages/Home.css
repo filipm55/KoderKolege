@@ -1,0 +1,56 @@
+.welcomeText {
+   font-size: 1.2rem;
+   margin-bottom: 20px;
+   padding: 20px;
+   border-radius: 8px;
+   background-color: #f0f0f0;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .aktivnaNatjecanja {
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   align-items: center; 
+   text-align: center; 
+ }
+ 
+ .natjecanje {
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   margin-bottom: 10px;
+   padding: 10px;
+   background-color: #fff;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .joinComp {
+   text-decoration: none;
+   color: #007bff;
+   font-weight: bold;
+ }
+ 
+ .ikona {
+   margin-right: 5px;
+   vertical-align: middle;
+ }
+ 
+ .boja {
+   display: inline-block;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   margin-right: 5px;
+ }
+ 
+ .nadkontenjer {
+   max-width: 800px;
+   margin: 0 auto;
+ }
+ 
+ h1 {
+   text-align: center;
+   margin-bottom: 20px;
+   color: #333;
+ }
+ 

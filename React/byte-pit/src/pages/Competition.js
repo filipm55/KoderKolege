@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Countdown from 'react-countdown';
 import './Competition.css'; 
 import './SolvingATask.css';
 import useFetch from "../useFetch";
+import Cookies from 'universal-cookie';
+
 
 const Competition = () => {
     const { competitionId, taskId } = useParams();
@@ -19,14 +20,22 @@ const Competition = () => {
     }
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [task, setTask] = useState(null);
-  const [countdownTime, setCountdownTime] = useState(0);
 
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
   const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
   const [solutionError, setSolutionError] = useState(''); // New state for solution error
   const [userInput, setUserInput] = useState('');
+  let fileInputRef = null;
+  const [userData, setUserData] = useState(null);
+  const [submissionStatus, setSubmissionStatus] = useState('');
+  const [solvedTasks, setSolvedTasks] = useState(null)
 
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
+
+  //const [submittedTasks, setSubmittedTasks] = useState([]);
+  //const [isSubmitting, setIsSubmitting] = useState()
 
 
   useEffect(() => {
@@ -49,32 +58,6 @@ const Competition = () => {
       });
   }, [competitionId]);
 
-  useEffect(() => {
-    if (competitionInfo && competitionInfo.length > 0) {
-      let totalDuration = 0;
-
-      competitionInfo.forEach((task) => {
-        const [minutes, seconds] = task.duration.split(':');
-        totalDuration += parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
-      });
-
-      setCountdownTime(totalDuration * 1000); // Set the countdown time
-    }
-  }, [competitionInfo]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdownTime((prevTime) => {
-        if (prevTime <= 0) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prevTime - 1000;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -83,17 +66,52 @@ const Competition = () => {
                 const response = await fetch(`http://localhost:8080/problems/${taskId}`);
                 const task = await response.json();
                 setTask(task);
+                //setIsSubmitting(false)
 
             } catch (error) {
                 console.error('Error fetching task:', error);
                 setTask(null);
             }
-
-
     };
 
     fetchTaskById();
   }, [taskId]);
+
+  useEffect(() => {
+
+    const fetchDataByTaskUser = async () => {
+
+      try {
+          const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.id}`);
+          const solvedTasks = await response.json();
+          setSolvedTasks(solvedTasks);
+
+      } catch (error) {
+          console.error('Error fetching task:', error);
+          setSolvedTasks(null);
+      }
+};
+
+    fetchDataByTaskUser();
+  }, [taskId, competitionId]);
+
+  useEffect(() => {
+    if (jwtToken) {
+        const fetchData = async () => {
+            try {
+                const url = `http://localhost:8080/users/${jwtToken}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                setUserData(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    } else {
+    }
+}, [jwtToken]);
 
   const handleTestSolution = async () => {
     try {
@@ -102,13 +120,13 @@ const Competition = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ code: solution, input: userInput,  }), // Send code and input
+            body: JSON.stringify({ code: solution, input: userInput }),
       });
-      console.log('Sending request:', response);  // Log the request being sent
+      console.log('Sending request:', response);
 
  if (response.ok) {
       const result = await response.json();
-      const correctOutput = task?.inputOutputExamples?.[userInput]; // Safely access correctOutput
+      const correctOutput = task?.inputOutputExamples?.[userInput];
 
           if (result.error) {
             setTestResult('Failed!');
@@ -131,8 +149,42 @@ const Competition = () => {
     } catch (error) {
       console.error('Error testing solution:', error);
       setTestResult('Failed to test solution');
-      setSolutionOutput(''); // Reset output on error
-      setSolutionError(error.message); // Set error from catch block
+      setSolutionOutput('');
+      setSolutionError(error.message);
+    }
+  };
+
+  const handleSubmitFile = async () => {
+    if (!fileInputRef || !fileInputRef.files || fileInputRef.files.length === 0 /*|| isSubmitting*/) {
+      console.error('Niste uploadali datoteku ili ste već predali svoje rješenje...');
+      return;
+    }
+
+    const uploadedFile = fileInputRef.files[0];
+
+    try {
+
+      const formData = new FormData();
+      formData.append('file', uploadedFile);
+      formData.append('time', 2)
+      formData.append('user', userData.username);
+      formData.append('problem', task.id)
+
+      const submitResponse = await fetch(`http://localhost:8080/submit/${taskId}`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (submitResponse.ok) {
+        setSubmissionStatus('File submitted successfully');
+        //setIsSubmitting(true); // Set submission in progress
+        //setSubmittedTasks([...submittedTasks, task.id]);
+      } else {
+        setSubmissionStatus('Failed to submit file');
+      }
+    } catch (error) {
+      console.error('Error submitting file:', error);
+      setSubmissionStatus(`Error submitting file: ${error.message}`);
     }
   };
 
@@ -145,13 +197,10 @@ const Competition = () => {
     //NAPRAVIO SAM DA SE POKAŽE COMPETITION NAME KAD RJEŠAVAŠ ZADATAK
   return (
     <div>
+      <h1 className="competition-title">
+      {competition && competition.name ? competition.name : `Natjecanje ${competitionId}`}
+      </h1>
       <div className="task-buttons">
-          {competition && competition.name ?
-              <p>{competition.name}</p>
-              :
-              <p>Natjecanje {competitionId}</p>
-
-          }
         {competitionInfo && competitionInfo.map((task, index) => (
           <Link
             key={task.id}
@@ -165,21 +214,8 @@ const Competition = () => {
 
       </div>
 
-
-
       <div className="task-container">
-      <div className={`timer ${countdownTime <= 60000 ? 'red' : ''}`}>
-        <Countdown
-          date={Date.now() + countdownTime}
-          onComplete={() => {
-            console.log("Time's up!");
-            document.querySelector('.finish-button').click();
-          }}
-          renderer={({ minutes, seconds }) => (
-            <span>{`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</span>
-          )}
-        />
-      </div>
+
       <h2 className="task-title">{task.title}</h2>
 
       <div className={`problem-type problem-type-${task.problemType.toLowerCase()}`}>
@@ -195,6 +231,7 @@ const Competition = () => {
         rows={10}
       ></textarea>
 
+        <div className='input-container'>
         <textarea
             className="user-input-textarea"
             value={userInput}
@@ -204,10 +241,24 @@ const Competition = () => {
         ></textarea>
 
       <button className="test-button" onClick={handleTestSolution}>Testiraj</button>
+      </div>
+
+      <div className="upload-container">
+        <input
+          type="file"
+          ref={(ref) => (fileInputRef = ref)}
+          className="file-uploader"
+        />
+        <button className="submit-button" onClick={handleSubmitFile} /*disabled={submittedTasks.includes(task.id)}*/>
+        {/*submittedTasks.includes(task.id) ? 'Submitting...' :*/ 'Predaj'}
+        </button>
+      </div>
+      {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
+
 
       {testResult && <div className="test-result">Test Result: {testResult}</div>}
 
-        <div className="input-output-examples">
+      <div className="input-output-examples">
         <h3>Input-Output Examples:</h3>
         <ul>
           {Object.entries(task.inputOutputExamples).map(([input, output], index) => (
