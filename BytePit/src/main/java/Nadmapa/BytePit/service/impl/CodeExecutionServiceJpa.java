@@ -1,13 +1,18 @@
 package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.ExecutionResult;
+import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.service.CodeExecutionService;
+import Nadmapa.BytePit.service.ProblemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -15,6 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class CodeExecutionServiceJpa implements CodeExecutionService {
 
+    private final ProblemService problemService;
+
+    @Autowired
+    public CodeExecutionServiceJpa(ProblemService problemService) {
+        this.problemService = problemService;
+    }
     @Override
     public ExecutionResult execute(Long id, String code, String userInput) {
         System.out.println("Executing code for taskId: " + id + " with code: " + code);
@@ -71,11 +82,19 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
     }
 
     @Override
-    public String submit(MultipartFile file) {
+    public String submit(MultipartFile file, Long problemId) {
         File tempFile = null;
         Path tempDir = null;
+        int correctOutputs = 0;
 
         try {
+            Optional<Problem> problemOptional = problemService.getProblemById(problemId);
+            if (!problemOptional.isPresent()) {
+                return "Error: Problem not found.";
+            }
+            Problem problem = problemOptional.get();
+            int totalExamples = problem.getInputOutputExamples().size();
+
             String code = new String(file.getBytes());
             String className = extractClassName(code);
 
@@ -92,13 +111,16 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
                 return compilationResult;
             }
 
-            String executionResult = runJavaClass(tempDir.toString(), className);
-            if (executionResult != null) {
-                System.out.println("Output: " + executionResult);
-                return executionResult;
+            for (Map.Entry<String, String> entry : problem.getInputOutputExamples().entrySet()) {
+                String executionResult = runJavaClassWithInput(tempDir.toString(), className, entry.getKey());
+                if (executionResult != null && executionResult.trim().equals(entry.getValue().trim())) {
+                    correctOutputs++;
+                }
             }
 
-            return "Execution completed without output.";
+            System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));
+            return String.format("Correct outputs: %d/%d", correctOutputs, totalExamples);
+
 
         } catch (Exception e) {
             return "Error executing code: " + e.getMessage();
@@ -120,9 +142,16 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
         return null;
     }
 
-    private String runJavaClass(String classPath, String className) throws IOException, InterruptedException {
+    private String runJavaClassWithInput(String classPath, String className, String input) throws IOException, InterruptedException {
         ProcessBuilder runProcessBuilder = new ProcessBuilder("java", "-cp", classPath, className);
         Process runProcess = runProcessBuilder.start();
+
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(runProcess.getOutputStream()))) {
+            writer.write(input);
+            writer.newLine();
+            writer.flush();
+        }
+
         runProcess.waitFor();
 
         if (runProcess.exitValue() != 0) {

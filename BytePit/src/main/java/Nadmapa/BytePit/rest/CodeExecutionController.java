@@ -45,7 +45,7 @@ public class CodeExecutionController {
             codeRepo.save(codeSub);
 
 
-            return ces.submit(file);
+            return ces.submit(file, problemId);
         } catch (IOException e) {
             return "Error in processing file";
         }
