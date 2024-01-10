@@ -70,13 +70,13 @@ const Competition = () => {
 
     fetchTaskById();
   }, [taskId]);
-/*
+
   useEffect(() => {
 
     const fetchDataByTaskUser = async () => {
 
       try {
-          const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.id}`);
+          const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.username}`);
           const solvedTasks = await response.json();
           setSolvedTasks(solvedTasks);
 
@@ -87,7 +87,7 @@ const Competition = () => {
 };
 
     fetchDataByTaskUser();
-  }, [taskId, competitionId]); */
+  }, [taskId, competitionId]);
 
   useEffect(() => {
     if (jwtToken) {
