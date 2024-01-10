@@ -19,6 +19,7 @@ const Competition = () => {
         });
     }
   const [competitionInfo, setCompetitionInfo] = useState(null);
+  const [competitionData, setCompetitionData] = useState(null)
   const [task, setTask] = useState(null);
 
   const [solution, setSolution] = useState('');
@@ -58,6 +59,27 @@ const Competition = () => {
       });
   }, [competitionId]);
 
+  
+  useEffect(() => {
+    fetch(`http://localhost:8080/competitions/competition/${competitionId}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+            setFetchError(true);
+          console.error('Error fetching competition info');
+          throw new Error('Error fetching competition info');
+        }
+      })
+      .then((data) => {
+        console.log('Competition:', data);
+        setCompetitionData(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [competitionId]);
+
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -76,7 +98,7 @@ const Competition = () => {
 
     fetchTaskById();
   }, [taskId]);
-
+/*
   useEffect(() => {
 
     const fetchDataByTaskUser = async () => {
@@ -93,7 +115,7 @@ const Competition = () => {
 };
 
     fetchDataByTaskUser();
-  }, [taskId, competitionId]);
+  }, [taskId, competitionId]); */
 
   useEffect(() => {
     if (jwtToken) {
@@ -165,10 +187,28 @@ const Competition = () => {
     try {
 
       const formData = new FormData();
+
+      const currentTime = new Date();
+      const [year, month, day, hour, minutes] = competitionData?.dateTimeOfBeginning;
+
+      const dateTimeOfBeginning = new Date(year, month - 1, day, hour, minutes); 
+    
+      const timeDifference = Math.floor((currentTime - dateTimeOfBeginning) / 1000); 
+      
       formData.append('file', uploadedFile);
-      formData.append('time', 2)
+      formData.append('time', timeDifference)
       formData.append('user', userData.username);
       formData.append('problem', task.id)
+    
+      //ovo je za provjeru sta se salje
+      /*
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+      console.log(JSON.stringify(formDataObject, null, 2));
+      */
+
 
       const submitResponse = await fetch(`http://localhost:8080/submit/${taskId}`, {
         method: 'POST',
