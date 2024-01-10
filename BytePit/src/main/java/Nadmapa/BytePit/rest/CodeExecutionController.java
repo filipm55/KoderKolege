@@ -14,17 +14,17 @@ import java.io.IOException;
 public class CodeExecutionController {
 
     @Autowired
-    private CodeExecutionService codeExecutionService;
+    private CodeExecutionService ces;
 
     @Autowired
     private UserCodeFileRepository codeRepo;
 
-     @Autowired
+    @Autowired
      private CodeSubService cs;
 
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
-        return codeExecutionService.execute(id, submission.getCode(), submission.getInput());
+        return ces.execute(id, submission.getCode(), submission.getInput());
     }
 
     @PostMapping("/submit/{id}")
