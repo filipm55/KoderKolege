@@ -34,7 +34,11 @@ public class CodeSub {
     @Getter @Setter
     private byte[] fileData;
 
+    @Column(name = "points")
+    @Getter @Setter
+    private Integer points;
 
     public CodeSub() {
+        this.points = null;
     }
 }

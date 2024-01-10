@@ -1,9 +1,13 @@
 package Nadmapa.BytePit.service.impl;
 
+import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.ExecutionResult;
 import Nadmapa.BytePit.domain.Problem;
+import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.CodeExecutionService;
 import Nadmapa.BytePit.service.ProblemService;
+import Nadmapa.BytePit.service.UserService;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +25,12 @@ import java.util.stream.Collectors;
 public class CodeExecutionServiceJpa implements CodeExecutionService {
 
     private final ProblemService problemService;
+
+    @Autowired
+    private UserCodeFileRepository userCodeFileRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     public CodeExecutionServiceJpa(ProblemService problemService) {
@@ -82,7 +92,7 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
     }
 
     @Override
-    public String submit(MultipartFile file, Long problemId) {
+    public String submit(MultipartFile file, Long problemId, CodeSub cs) {
         File tempFile = null;
         Path tempDir = null;
         int correctOutputs = 0;
@@ -118,9 +128,11 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
                 }
             }
 
+            int points = (problem.getPoints() * correctOutputs) / totalExamples;
+            cs.setPoints(points);
+            userCodeFileRepository.save(cs);
             System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));
             return String.format("Correct outputs: %d/%d", correctOutputs, totalExamples);
-
 
         } catch (Exception e) {
             return "Error executing code: " + e.getMessage();
