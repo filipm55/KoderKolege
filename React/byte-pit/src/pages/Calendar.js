@@ -86,7 +86,11 @@ const Cal = () => {
                     <div>
                         {competition.map((comp, index) => (
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                   Natjecanje! {comp.id}
+                                    {comp.name ? (
+                                        <p>{comp.name}</p>
+                                    ) : (
+                                        <p>Natjecanje {comp.id}</p>
+                                    )}
                                  </div>
                         ))}
                     </div>
@@ -111,7 +115,11 @@ const Cal = () => {
                                 {isCompetitionUpcoming(comp) && (
                                 <div className='natjecanje'>
                                     <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
-                                    <p>Natjecanje {comp.id} </p>
+                                    {comp.name ? (
+                                        <p>{comp.name}</p>
+                                    ) : (
+                                        <p>Natjecanje {comp.id}</p>
+                                    )}
                                     <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
                                     {isCompetitionActive(comp) && (
                                         <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 

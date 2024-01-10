@@ -44,6 +44,7 @@ public class CompetitionController {
 
     @PostMapping("")
     public ResponseEntity<String> createCompetition(
+            @RequestParam("name") String name,
             @RequestParam("competitionMaker") Long competitionMakerId,
             @RequestParam("dateTimeOfBeginning") LocalDateTime dateTimeOfBeginning,
             @RequestParam("dateTimeOfEnding") LocalDateTime dateTimeOfEnding,
@@ -68,7 +69,7 @@ public class CompetitionController {
             problem.ifPresent(setProblem::add);
         }
         Optional<User> competitionMaker = userService.getUserById(competitionMakerId);
-
+        competition.setName(name);
         competition.addProblems(setProblem);
         competitionMaker.ifPresent(competition::setCompetitionMaker);
         competition.setDateTimeOfEnding(dateTimeOfEnding);
@@ -82,6 +83,7 @@ public class CompetitionController {
     }
     @PutMapping("/{competitionId}")
     public ResponseEntity<String> updateCompetition(@PathVariable Long competitionId,
+                                                    @RequestParam("name") String name,
                                                     @RequestParam("competitionMaker") Long competitionMakerId,
                                                     @RequestParam("dateTimeOfBeginning") LocalDateTime dateTimeOfBeginning,
                                                     @RequestParam("dateTimeOfEnding") LocalDateTime dateTimeOfEnding,
@@ -116,6 +118,9 @@ public class CompetitionController {
             }
             if(!competition.getDateTimeOfEnding().equals(dateTimeOfEnding)){
                 competition.setDateTimeOfEnding(dateTimeOfEnding);
+            }
+            if(!competition.getName().equals(name)){
+                competition.setName(name);
             }
             if(competition.getNumberOfProblems()!=numberOfProblems){
                competition.setNumberOfProblems(numberOfProblems);

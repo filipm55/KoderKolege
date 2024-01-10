@@ -17,6 +17,9 @@ public class Competition {
     @Getter
     private Long id;
 
+    @Getter @Setter
+    private String name;
+
     @NotNull
     @ManyToOne
     @Getter @Setter

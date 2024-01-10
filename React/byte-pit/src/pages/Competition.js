@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Countdown from 'react-countdown';
 import './Competition.css'; 
 import './SolvingATask.css';
+import useFetch from "../useFetch";
 
 const Competition = () => {
   const [competitionInfo, setCompetitionInfo] = useState(null);
@@ -16,7 +17,15 @@ const Competition = () => {
   const [userInput, setUserInput] = useState('');
 
   const { competitionId, taskId } = useParams();
-
+  var competition;
+  const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
+    if (competitions) {
+        competitions.map(c => {
+            if(c.id == competitionId) {
+                competition = c;
+            }
+        });
+    }
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
@@ -86,7 +95,7 @@ const Competition = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ code: solution, input: userInput }), // Send code and input
+            body: JSON.stringify({ code: solution, input: userInput,  }), // Send code and input
       });
       console.log('Sending request:', response);  // Log the request being sent
 
@@ -123,10 +132,15 @@ const Competition = () => {
   if (!task) {
     return <div>Loading...</div>;
   }
-
+    //NAPRAVIO SAM DA SE POKAŽE COMPETITION NAME KAD RJEŠAVAŠ ZADATAK
   return (
     <div>
       <div className="task-buttons">
+          {competition.name ? (
+              <p>{competition.name}</p>
+          ) : (
+              <p>Natjecanje {competition.id}</p>
+          )}
         {competitionInfo && competitionInfo.map((task, index) => (
           <Link
             key={task.id}
