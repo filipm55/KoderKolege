@@ -141,9 +141,15 @@ public class CompetitionController {
 
     @GetMapping("/{competitionId}")
     public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
+
         try {
+
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
             System.out.println(competitionId + " " + competition);
+            LocalDateTime now = LocalDateTime.now();
+            if(competition.getDateTimeOfBeginning().isAfter(now) || competition.getDateTimeOfEnding().isBefore(now)){
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
             Set<Problem> problems = competition.getProblems();
             return new ResponseEntity<>(problems, HttpStatus.OK);
         } catch (EntityNotFoundException e) {

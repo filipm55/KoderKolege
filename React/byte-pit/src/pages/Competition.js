@@ -6,6 +6,17 @@ import './SolvingATask.css';
 import useFetch from "../useFetch";
 
 const Competition = () => {
+    const { competitionId, taskId } = useParams();
+    var competition;
+    const [fetchError, setFetchError] = useState(false);
+    const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
+    if (competitions) {
+        competitions.map(c => {
+            if(c.id == competitionId) {
+                competition = c;
+            }
+        });
+    }
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [task, setTask] = useState(null);
   const [countdownTime, setCountdownTime] = useState(0);
@@ -16,22 +27,15 @@ const Competition = () => {
   const [solutionError, setSolutionError] = useState(''); // New state for solution error
   const [userInput, setUserInput] = useState('');
 
-  const { competitionId, taskId } = useParams();
-  var competition;
-  const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
-    if (competitions) {
-        competitions.map(c => {
-            if(c.id == competitionId) {
-                competition = c;
-            }
-        });
-    }
+
+
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
+            setFetchError(true);
           console.error('Error fetching competition info');
           throw new Error('Error fetching competition info');
         }
@@ -74,15 +78,18 @@ const Competition = () => {
 
   useEffect(() => {
     const fetchTaskById = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/problems/${taskId}`);
-        const task = await response.json();
-        setTask(task);
 
-      } catch (error) {
-        console.error('Error fetching task:', error);
-        setTask(null);
-      }
+            try {
+                const response = await fetch(`http://localhost:8080/problems/${taskId}`);
+                const task = await response.json();
+                setTask(task);
+
+            } catch (error) {
+                console.error('Error fetching task:', error);
+                setTask(null);
+            }
+
+
     };
 
     fetchTaskById();
@@ -132,6 +139,9 @@ const Competition = () => {
   if (!task) {
     return <div>Loading...</div>;
   }
+  if (fetchError) { //AKO POKUSAS PRISTUPIT NATJECANJU KOJE SE TRENUTNO NE ODRZAVA
+        return <div>FORBIDDEN</div>;
+    }
     //NAPRAVIO SAM DA SE POKAŽE COMPETITION NAME KAD RJEŠAVAŠ ZADATAK
   return (
     <div>
