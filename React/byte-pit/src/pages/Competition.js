@@ -29,6 +29,7 @@ const Competition = () => {
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState('');
+  const [solvedTasks, setSolvedTasks] = useEffect(null)
 
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
@@ -50,13 +51,13 @@ const Competition = () => {
       })
       .then((data) => {
         console.log('Competition Info:', data);
+        console.log(data.dateTimeOfBeginning);
         setCompetitionInfo(data);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [competitionId]);
-
 
 
   useEffect(() => {
@@ -76,6 +77,24 @@ const Competition = () => {
 
     fetchTaskById();
   }, [taskId]);
+
+  useEffect(() => {
+
+    const fetchDataByTaskUser = async () => {
+
+      try {
+          const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.id}`);
+          const solvedTasks = await response.json();
+          setSolvedTasks(solvedTasks);
+
+      } catch (error) {
+          console.error('Error fetching task:', error);
+          setSolvedTasks(null);
+      }
+};
+
+    fetchDataByTaskUser();
+  }, [taskId, competitionId]);
 
   useEffect(() => {
     if (jwtToken) {
