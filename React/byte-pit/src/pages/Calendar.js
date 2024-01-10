@@ -8,6 +8,36 @@ import { Link } from 'react-router-dom';
 
 import useFetch from "../useFetch";
 
+
+export const formatTime = (timeString) => {
+    return timeString.toString().length === 1 ? `0${timeString}` : timeString;
+
+};
+export const formatDate = (dateString) => {
+    const [year, month, day, hours, minutes] = dateString;
+
+    const formattedDay = formatTime(day);
+    const formattedMonth = formatTime(month);
+    const formattedHours = formatTime(hours);
+    const formattedMinutes = formatTime(minutes);
+
+    return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}`;
+};
+
+export const isCompetitionActive = (comp) => {
+    const currentDateTime = new Date();
+    const compStartDate = new Date(formatDate(comp.dateTimeOfBeginning));
+    const compEndDate = new Date(formatDate(comp.dateTimeOfEnding));
+
+    return currentDateTime >= compStartDate && currentDateTime < compEndDate;
+};
+export const isCompetitionUpcoming = (comp) => {
+    const currentDateTime = new Date();
+    const compStartDate = new Date(formatDate(comp.dateTimeOfBeginning));
+    const compEndDate = new Date(formatDate(comp.dateTimeOfEnding));
+
+    return currentDateTime < compEndDate;
+};
 const Cal = () => {
     var mapa = new Map();
 
@@ -24,35 +54,7 @@ const Cal = () => {
         return randomLightHexColor;
       }
 
-    const formatTime = (timeString) => {
-        return timeString.toString().length === 1 ? `0${timeString}` : timeString;
 
-    };
-    const formatDate = (dateString) => {
-        const [year, month, day, hours, minutes] = dateString;
-
-        const formattedDay = formatTime(day);
-        const formattedMonth = formatTime(month);
-        const formattedHours = formatTime(hours);
-        const formattedMinutes = formatTime(minutes);
-
-        return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}`;
-    };
-
-    const isCompetitionActive = (comp) => {
-        const currentDateTime = new Date();
-        const compStartDate = new Date(formatDate(comp.dateTimeOfBeginning));
-        const compEndDate = new Date(formatDate(comp.dateTimeOfEnding));
-
-        return currentDateTime >= compStartDate && currentDateTime < compEndDate;
-    };
-    const isCompetitionUpcoming = (comp) => {
-        const currentDateTime = new Date();
-        const compStartDate = new Date(formatDate(comp.dateTimeOfBeginning));
-        const compEndDate = new Date(formatDate(comp.dateTimeOfEnding));
-
-        return currentDateTime < compEndDate;
-    };
 
     if (competitions) {
         competitions.map(comp => {
@@ -104,7 +106,7 @@ const Cal = () => {
                 <h1 id="naslov17"> Nadolazeća i aktualna natjecanja</h1>
                     {competitions &&
                         competitions.map((comp) => (
-                            <div>
+                            <div  key={comp.id}>
                                 {isCompetitionUpcoming(comp) && (
                                 <div className='natjecanje'>
                                     <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
