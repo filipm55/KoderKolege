@@ -159,5 +159,15 @@ public class CompetitionController {
         }
     }
 
+    @GetMapping("/competition/{competitiondId}")
+    public Competition getCompetitonById(@PathVariable Long competitiondId){
+        try{
+            Competition competition = competitionService.getCompetition(String.valueOf(competitiondId));
+            return competition;
+        }catch(EntityNotFoundException e){
+            return null;
+        }
+    }
+
 
 }
