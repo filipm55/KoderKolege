@@ -7,22 +7,23 @@ import Cookies from 'universal-cookie';
 
 const SolvingATask = () => {
   const { id } = useParams();
-  const taskKey = `startTime_${id}`; // Unique key for each task
+  const taskKey = `startTime_${id}`;
   const [task, setTask] = useState(null);
   const [durationMilliseconds, setDurationMilliseconds] = useState(0);
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
-  const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
-  const [solutionError, setSolutionError] = useState(''); // New state for solution error
+  const [solutionOutput, setSolutionOutput] = useState('');
+  const [solutionError, setSolutionError] = useState('');
   const [userInput, setUserInput] = useState('');
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
+  const [submissionStatus, setSubmissionStatus] = useState('');
+
 
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
 
   const handleCountdownComplete = () => {
-    // Clear the stored value when countdown completes
     localStorage.removeItem(taskKey);
     setDurationMilliseconds(0);
 
@@ -80,9 +81,8 @@ useEffect(() => {
                       const url = `http://localhost:8080/users/${jwtToken}`;
                       const response = await fetch(url);
                       const data = await response.json();
-                      setUserData(data); // Set user data fetched from the backend
+                      setUserData(data);
                   } catch (error) {
-                      // Handle error if needed
                       console.error(error);
                   }
               };
@@ -113,13 +113,13 @@ useEffect(() => {
         headers: {
           'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ code: solution, input: userInput }), // Send code and input
+            body: JSON.stringify({ code: solution, input: userInput }),
       });
-      console.log('Sending request:', response);  // Log the request being sent
+      console.log('Sending request:', response);
 
  if (response.ok) {
       const result = await response.json();
-      const correctOutput = task?.inputOutputExamples?.[userInput]; // Safely access correctOutput
+      const correctOutput = task?.inputOutputExamples?.[userInput];
 
           if (result.error) {
             setTestResult('Failed!');
@@ -142,8 +142,8 @@ useEffect(() => {
     } catch (error) {
       console.error('Error testing solution:', error);
       setTestResult('Failed to test solution');
-      setSolutionOutput(''); // Reset output on error
-      setSolutionError(error.message); // Set error from catch block
+      setSolutionOutput('');
+      setSolutionError(error.message);
     }
   };
 
@@ -181,15 +181,13 @@ useEffect(() => {
       });
 
       if (submitResponse.ok) {
-        // Handle success
-        console.log('File submitted successfully');
-        // Additional logic if needed after successful submission
+        setSubmissionStatus('File submitted successfully');
       } else {
-        // Handle failure
-        console.error('Failed to submit file');
+        setSubmissionStatus('Failed to submit file');
       }
     } catch (error) {
       console.error('Error submitting file:', error);
+      setSubmissionStatus(`Error submitting file: ${error.message}`);
     }
   };
 
@@ -245,6 +243,8 @@ useEffect(() => {
           Predaj
         </button>
       </div>
+      {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
+
 
       {testResult && <div className="test-result">Test Result: {testResult}</div>}
 
