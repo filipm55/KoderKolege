@@ -26,6 +26,18 @@ img.okrugla {
     height: 100%;
   }
 
+div#malo {
+    width: 100%;
+}
+
+p.slova3 {
+    font-size: 1.1rem;
+}
+
+div.ikonaOpis {
+    font-size: 1.4rem;
+}
+
 div.slikaIme {
     display: flex;
     flex-direction: row;
@@ -63,6 +75,7 @@ div.ikonaOpis{
 p {
     margin-left: 6px;
     color: #494545;
+    font-size: large;
 }
 
 div#gornjidio{
@@ -115,7 +128,8 @@ div#kalendar {
     margin-bottom: 10vh;
     margin-right: 5vw;
     margin-top: -90px;
-
+    width: 37rem;
+    height: 30rem;
 }
 
 div#gornjidio{

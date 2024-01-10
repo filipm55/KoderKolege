@@ -9,6 +9,8 @@ import FilterVintageIcon from '@mui/icons-material/FilterVintage';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Calendar from 'react-calendar'
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import EastIcon from '@mui/icons-material/East';
 
 
 const User = () => {
@@ -27,11 +29,93 @@ const User = () => {
             } 
         });
     }
+    
     const { data: tasks, error: tasksError } = useFetch(
       `http://localhost:8080/problems/byMakerId/${id}`
     );
     const handleSortingChange = (e) => {
         setSortingOption(e.target.value);
+    };
+
+    var mapa = new Map();
+
+    const {data:competitions, error2} = useFetch('http://localhost:8080/competitions');
+
+    function getRandomHexColor() {
+        // Generate random RGB components
+        const red = Math.floor(Math.random() * 150) + 100;
+        const green = Math.floor(Math.random() * 150) + 100;
+        const blue = Math.floor(Math.random() * 150) + 100;
+      
+        // Convert RGB components to hexadecimal and construct the color string
+        const randomLightHexColor = `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+        return randomLightHexColor;
+      }
+
+    const formatTime = (timeString) => {
+        return timeString.toString().length === 1 ? `0${timeString}` : timeString;
+
+    };
+    const formatDate = (dateString) => {
+        const [year, month, day, hours, minutes] = dateString;
+
+        const formattedDay = formatTime(day);
+        const formattedMonth = formatTime(month);
+        const formattedHours = formatTime(hours);
+        const formattedMinutes = formatTime(minutes);
+
+        return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}`;
+    };
+    const isCompetitionActive = (comp) => {
+        const currentDateTime = new Date();
+        const compStartDate = new Date(formatDate(comp.dateTimeOfBeginning));
+        const compEndDate = new Date(formatDate(comp.dateTimeOfEnding));
+
+        return currentDateTime >= compStartDate && currentDateTime < compEndDate;
+    };
+
+
+    if (competitions) {
+        competitions.map(comp => {
+            var col = getRandomHexColor();
+            mapa.set(comp.id, col);
+        })
+    }
+
+    const tileContent = ({ date, view }) => {
+        // Check if the date falls within the start and end dates of any competition
+        if(competitions){
+            const competition = competitions.filter(comp => {
+                let datumic = comp.dateTimeOfBeginning;
+                let dataArray = [datumic[0], datumic[1], datumic[2], datumic[3], datumic[4]]; // [godina, mjesec, dan, sat, minute]
+                let [year, month, day, hours, minutes] = dataArray
+
+                let compStartDate = new Date(year, month-1, day, 0, 0);
+                datumic = comp.dateTimeOfEnding;
+                dataArray = [datumic[0], datumic[1], datumic[2], datumic[3], datumic[4]];
+                [year, month, day, hours, minutes] = dataArray
+                let compEndDate = new Date(year, month-1, day, 23, 59);   // AKO SE OVDJE UPIŠE hours i minutes NE RADI DOBRO PRIKAZ JER FUNKCIJA date >= compStartDate && date <= compEndDate VRAĆA FALSE AKO JE DATUM POČETKA I KRAJA NATJECANJA ISTI DAN!!!!!!!!!!!!!
+                if (comp.id==110){
+                    console.log(date >= compStartDate);
+                }
+                return date >= compStartDate && date <= compEndDate;
+            });
+            
+            if (competition) {
+                // If there is a competition on this date, display its id
+                return (
+                    <div>
+                        {competition.map((comp, index) => (
+                                (comp.competitionMaker.id == id) && <div style={{ color: "black", background: mapa.get(comp.id) }}>
+                                   Natjecanje! {comp.id}
+                                 </div>  
+                        ))}
+                    </div>
+                );
+            }
+            return null;
+        }
+        else return null;
     };
 
     useEffect(() => {
@@ -134,7 +218,18 @@ const User = () => {
                         <div id="kalendar">
                             <p><CalendarMonthIcon className="pehar"/>
                                 OBJAVLJENA NATJECANJA</p>
-                            {<Calendar id="voditelj"/>}
+                            <Calendar id="voditelj" tileContent={tileContent}/>
+                            <div id="natjecanja">
+                                {competitions && competitions.map((comp) => (
+                                    <div>
+                                        {(comp.competitionMaker.id == id) && (<div className="natjecanje" id ="malo">
+                                            <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
+                                            <p className="slova3">Natjecanje {comp.id} </p>
+                                            <p className="slova3"><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
+                                        </div>)}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     }
                 </div>

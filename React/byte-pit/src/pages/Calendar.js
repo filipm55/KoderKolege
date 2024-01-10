@@ -104,7 +104,7 @@ const Cal = () => {
     return (
         <div className="body" id="izKalendara">
             <div id="prozor17">
-                <div >
+                <div id="kalendar17">
                     <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
                 <div id="natjecanja">
