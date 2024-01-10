@@ -8,16 +8,8 @@ import Cookies from 'universal-cookie';
 
 const Competition = () => {
     const { competitionId, taskId } = useParams();
-    var competition;
     const [fetchError, setFetchError] = useState(false);
-    const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
-    if (competitions) {
-        competitions.map(c => {
-            if(c.id == competitionId) {
-                competition = c;
-            }
-        });
-    }
+    const {data:competition, error} = useFetch(`http://localhost:8080/competitions/competition/${competitionId}`);
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [competitionData, setCompetitionData] = useState(null)
   const [task, setTask] = useState(null);
