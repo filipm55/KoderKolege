@@ -138,6 +138,24 @@ const Users = () => {
 
     }
 
+    var handleConfirmation = (confirmationHash) => {
+        const email = encodeURIComponent("bytepit.noreply@gmail.com");
+        const url = `http://localhost:8080/confirm-registration?hash=${confirmationHash}&email=${email}`;
+
+        fetch(url, {
+            method: 'GET'
+        }).then(response => {
+            console.log("USPJEH");
+            window.location.href = '/users'; // Redirect to the login page
+        }).catch(error => {
+            console.log("NEUSPJEH");
+        });
+
+
+
+
+    }
+
 
 
     var proba = (id) => { // SAMO DA ISPROBAM MOGU LI SE PROMIJENITI PODACI, RADI, VI TREBATE SAMO OSIGURAT OVAJ DIO SA formDATA  DA TO PROCITA SA FRONTENDA
@@ -169,20 +187,20 @@ const Users = () => {
             <div className="task-list">
             
                 {users.map(user => (
-                    
                     <div className="task" key={user.id} >
                         <div className="naslov">
                         <Link className = "imeiprezime" to={'/users/'+user.id}>
                             <h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
                             {userData && userData.userType==="ADMIN" && (
                             <div className="gumbici">
-                                {<button className="zadmina" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
-                                {<button  className="zadmina" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
-    
+                                {<button className="zadmina blueButton" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                                {<button  className="zadmina redButton" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
+                                {user.userType === "COMPETITION_LEADER" && !user.confirmedByAdmin &&(
+                                    <button className="zadmina greenButton" onClick={() => handleConfirmation(user.confirmationHash)}>Potvrdi</button>
+                                )}
                             </div>
                             )}
                         </div>
-                        <hr/>
                         <div className="info">
                             <div className="tekstDio">
                                 {!mapa.get(user.username)  && 

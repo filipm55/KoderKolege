@@ -37,7 +37,7 @@ public class User {
    private String confirmationHash;
 
    private boolean confirmed;
-
+   @Getter @Setter
    private boolean confirmedByAdmin;
 
 

@@ -46,7 +46,7 @@ public class UserController {
     public List<User> listConfirmedUsers() {
         List<User> allUsers = userService.listAll();
         return allUsers.stream()
-                .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType() == UserType.COMPETITION_LEADER))
+                .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed()  && user.getUserType() == UserType.COMPETITION_LEADER))
                 .collect(Collectors.toList());
     }
 
@@ -105,14 +105,14 @@ public class UserController {
 
 
             emailservice.sendSimpleEmail(user.getEmail(), message, "Potvrda registracije");
-            if (user.getUserType() == UserType.COMPETITION_LEADER) {
+           /* if (user.getUserType() == UserType.COMPETITION_LEADER) {
                 String adminmail = "bytepit.noreply@gmail.com";
                 String message2 = "Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
                         "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
                         "\n" +
                         "Moramo potvrditi u roku od 7 dana.";
                 emailservice.sendSimpleEmail(adminmail, message2, "Netko želi biti voditelj");
-            }
+            }*/
         }
         logger.info("Response from userService: {}", response);
         return response;

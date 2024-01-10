@@ -136,11 +136,12 @@ const Competition = () => {
   return (
     <div>
       <div className="task-buttons">
-          {competition.name ? (
-              <p>{competition.name}</p>
-          ) : (
-              <p>Natjecanje {competition.id}</p>
-          )}
+          {competition && competition.name ?
+                  <p>{competition.name}</p>
+               :
+                  <p>Natjecanje {competition.id}</p>
+
+          }
         {competitionInfo && competitionInfo.map((task, index) => (
           <Link
             key={task.id}

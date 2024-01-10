@@ -108,6 +108,33 @@ button.zadmina:hover {
     background-color:#645e5edd;
     color: white;
 }
+button.zadmina.greenButton {
+    background-color: green;
+    color: white;
+}
+button.zadmina.greenButton:hover {
+    background-color: darkgreen;
+    /* Dodajte ostale stilove za hover prema potrebi */
+}
+
+button.zadmina.redButton {
+    background-color: red;
+    color: white;
+}
+button.zadmina.redButton:hover {
+    background-color: darkred;
+    /* Dodajte ostale stilove za hover prema potrebi */
+}
+
+button.zadmina.blueButton {
+    background-color: deepskyblue;
+    color: white;
+}
+button.zadmina.blueButton:hover {
+    background-color: blue;
+    /* Dodajte ostale stilove za hover prema potrebi */
+}
+
 
 
 div.gumbici {
