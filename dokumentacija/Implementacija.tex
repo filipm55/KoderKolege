@@ -2,13 +2,6 @@
 		
 		
 		\section{Korištene tehnologije i alati}
-		
-			\textbf{\textit{dio 2. revizije}}
-			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
-			
-			
-			\eject 
 			
 			U izradi dokumentacije i aplikacije koristili smo sljedeće tehnologije i alate:
 			\begin{itemize}
@@ -68,13 +61,52 @@
 			\eject 
 		
 		\section{Upute za puštanje u pogon}
+ 
+			
+			Postavljanje aplikacije u pogon putem usluge Render zahtijeva pažljivo provedene korake uključujući kreiranje baze podataka, kreiranje backend-a  te kreiranje frontenda, čime se osigurava siguran i učinkovit deploy.
+			
+			Prije samog puštanja aplikacije u pogon potrebno je provesti tri ključna koraka:
+			\begin{packed_enum}
+				\item \textbf{Konfiguracija baze podataka}
+				\begin{itemize}
+					\item Ovaj proces uključuje definiranje environmental varijabli unutar konfiguracije razvojnog okruženja (IDE). U našem slučaju, konfiguracija se nalazi u datoteci src/main/resources/application.properties. U ovoj datoteci specificiramo parametre kao što su korisničko ime, lozinka, URL baze podataka te određujemo port poslužitelja. Primjer konfiguracije:
+				\end{itemize}
+				
+				\item \textbf{Priprema backend-a za deploy}
+				\begin{itemize}
+					\item Nakon postavljanja baze podataka, slijedi priprema backend-a za deploy. Ovaj korak uključuje dodavanje Dockerfile skripte za izgradnju i pokretanje aplikacije.  U našem slučaju, koristimo Maven, pa je Dockerfile konfiguriran na sljedeći način:
+					\item Ukoliko se mijenja lokacija Dockerfilea paziti na putanje unutar COPY naredbi u Dockerfile skripti. U nasem slucaju Docker file se nalazi u root direktoriju Docker/Maven/Dockerfile te su po toj putanji pisane naredbe COPY.
+				\end{itemize}
+				
+				\item \textbf{Priprema frontenda za deploy}
+				\begin{itemize}
+					\item Potrebno je dodati potrebne dependencije u package.json datoteku. U terminalu je potrebno izvršiti sljedeće naredbe:
+					\item Potrebno je kreirati Proxy.js, u src direktorij, koji služi kao proxy server za lokalni development (preusmjeruje api pozive na localhost:8080). Ovo je primjer koda:
+					\item Stvoriti app.js, u root direktorij, koja sadrži Express server za produkcijski proxy i posluživanje frontenda. Ovo je primjer koda:
+					\item Izmjeniti package.json skripte i dodati specifične konfiguracije:
+				\end{itemize}
+			\end{packed_enum}
+			
+			Sada, nakon završene pripreme, možemo započeti deploy.
+			
+				\begin{packed_enum}
+				\item \textbf{Kreiranje baze podataka}
+				\begin{itemize}
+					\item
+				\end{itemize}
+				
+				\item \textbf{Kreiranje backend-a}
+				\begin{itemize}
+					\item 
+				\end{itemize}
+				
+				\item \textbf{Kreiranje frontenda}
+				\begin{itemize}
+					\item 
+				\end{itemize}
+			\end{packed_enum}
 		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
+				
 			
 			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
 			
-			
-			\eject 

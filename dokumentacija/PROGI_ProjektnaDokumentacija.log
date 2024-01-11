@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  2 JAN 2024 19:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 12:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -959,7 +959,7 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 \@float@every@table=\toks31
 Package hyperref Info: Option `colorlinks' set `true' on input line 40.
 LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 8
-5.
+2.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
 File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
@@ -970,47 +970,47 @@ File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
 (./Dodatak.aux))
 \openout1 = `PROGI_ProjektnaDokumentacija.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 85.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 82.
 LaTeX Font Info:    Trying to load font information for OML+jkp on input line 8
-5.
+2.
  (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 82.
 LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 8
-5.
+2.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 82.
 LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 8
-5.
+2.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 82.
 LaTeX Font Info:    Trying to load font information for U+jkpexa on input line 
-85.
+82.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 85.
-LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1068,37 +1068,37 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 85.
+Package hyperref Info: Link coloring ON on input line 82.
 (./PROGI_ProjektnaDokumentacija.out) (./PROGI_ProjektnaDokumentacija.out)
 \@outlinefile=\write3
 \openout3 = `PROGI_ProjektnaDokumentacija.out'.
 
 LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
-97.
+94.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyb on input line 
-97.
+94.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for OT1+txr on input line 9
-7.
+4.
 
 (c:/texlive/2023/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for U+jkpmia on input line 
-97.
+94.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 
-97.
+94.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
@@ -1857,7 +1857,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.124 	\include{Specifikacija_programske_potpore}
+l.121 	\include{Specifikacija_programske_potpore}
                                                   <./slike/Virtualno natjecanje
 .png>]
 \openout2 = `Arhitektura.aux'.
@@ -2126,6 +2126,18 @@ Overfull \hbox (10.38434pt too wide) in paragraph at lines 1--1
  []
 
 
+Overfull \hbox (11.3715pt too wide) in paragraph at lines 10--11
+\OT1/jkp/m/n/12 tako[]der je vrlo flek-si-bi-lan.. Vi[]se o Re-actu mo[]zete sa
+z-nati na ht-tps://reactjs.org/. 
+ []
+
+
+Overfull \hbox (2.72437pt too wide) in paragraph at lines 14--15
+\OT1/jkp/m/n/12 ma-nje, di-je-lje-nje i su-rad-nju na iz-vor-nom kodu. Si-gu-ra
+n je i po-uz-dan, a tako[]der
+ []
+
+
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -2139,15 +2151,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 
 ]
-Overfull \hbox (11.3715pt too wide) in paragraph at lines 17--18
-\OT1/jkp/m/n/12 tako[]der je vrlo flek-si-bi-lan.. Vi[]se o Re-actu mo[]zete sa
-z-nati na ht-tps://reactjs.org/. 
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+
  []
 
+LaTeX Font Info:    Trying to load font information for OT1+jkptt on input line
+ 43.
+(c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
+File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
 
-Overfull \hbox (2.72437pt too wide) in paragraph at lines 21--22
-\OT1/jkp/m/n/12 ma-nje, di-je-lje-nje i su-rad-nju na iz-vor-nom kodu. Si-gu-ra
-n je i po-uz-dan, a tako[]der
  []
 
 
@@ -2159,19 +2173,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
-
- []
-
-LaTeX Font Info:    Trying to load font information for OT1+jkptt on input line
- 50.
-(c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ot1jkptt.fd
-File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 50--51
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2198,11 +2199,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[41]
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
-
- []
-
+[41])
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2211,7 +2208,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[42])
+[42]
 \openout2 = `Zakljucak.aux'.
 
  (./Zakljucak.tex
@@ -2354,8 +2351,8 @@ anged.
 (rerunfilecheck)             Checksum: A6168D0D4C56A59022786A53502B9F7B;4419.
  ) 
 Here is how much of TeX's memory you used:
- 17990 strings out of 474398
- 317123 string characters out of 5754205
+ 17996 strings out of 474398
+ 317171 string characters out of 5754205
  2063036 words of memory out of 5000000
  39467 multiletter control sequences out of 15000+600000
  627344 words of font info for 184 fonts, out of 8000000 for 9000
@@ -2371,10 +2368,10 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (50 pages, 6360473 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (50 pages, 6360791 bytes).
 PDF statistics:
- 736 PDF objects out of 1000 (max. 8388607)
- 638 compressed objects within 7 object streams
- 259 named destinations out of 1000 (max. 500000)
+ 739 PDF objects out of 1000 (max. 8388607)
+ 641 compressed objects within 7 object streams
+ 265 named destinations out of 1000 (max. 500000)
  279 words of extra memory for PDF output out of 10000 (max. 10000000)
 

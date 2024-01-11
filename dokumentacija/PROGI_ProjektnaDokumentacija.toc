@@ -21,11 +21,11 @@
 \contentsline {section}{\numberline {4.5}Dijagram komponenti}{36}{section.4.5}%
 \contentsline {chapter}{\numberline {5}Implementacija i korisničko sučelje}{37}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{37}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{39}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{39}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{39}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{41}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{42}{section.5.4}%
+\contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{38}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Ispitivanje komponenti}{38}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Ispitivanje sustava}{38}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Dijagram razmještaja}{40}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Upute za puštanje u pogon}{41}{section.5.4}%
 \contentsline {chapter}{\numberline {6}Zaključak i budući rad}{43}{chapter.6}%
 \contentsline {chapter}{Popis literature}{44}{chapter*.7}%
 \contentsline {chapter}{Indeks slika i dijagrama}{45}{chapter*.8}%
