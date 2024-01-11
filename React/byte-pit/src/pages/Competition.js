@@ -21,7 +21,7 @@ const Competition = () => {
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState('');
-  const [solvedTasks, setSolvedTasks] = useState(null)
+  const [solvedTasks, setSolvedTasks] = useState([])
 
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
@@ -79,10 +79,12 @@ const Competition = () => {
           const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.username}`);
           const solvedTasks = await response.json();
           setSolvedTasks(solvedTasks);
+          console.log(solvedTasks)
+          console.log(solvedTasks.includes(Number(taskId)))
 
       } catch (error) {
           console.error('Error fetching task:', error);
-          setSolvedTasks(null);
+          setSolvedTasks([]);
       }
 };
 
@@ -261,8 +263,12 @@ const Competition = () => {
           ref={(ref) => (fileInputRef = ref)}
           className="file-uploader"
         />
-        <button className="submit-button" onClick={handleSubmitFile} /*disabled={submittedTasks.includes(task.id)}*/>
-        {/*submittedTasks.includes(task.id) ? 'Submitting...' :*/ 'Predaj'}
+        <button
+          className={`submit-button ${solvedTasks.includes(Number(taskId)) ? 'disabled' : ''}`}
+          onClick={handleSubmitFile}  
+          disabled={solvedTasks.includes(Number(taskId))}
+        >
+        {'Predaj'}
         </button>
       </div>
       {submissionStatus && <div className="submission-status">{submissionStatus}</div>}

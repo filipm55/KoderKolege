@@ -147,3 +147,11 @@
   .submit-button:hover {
     background-color: #2662d9;
   }
+
+  .disabled {
+    background-color: #938b8b;
+  }
+
+  .disabled:hover {
+    background-color: #938b8b;
+  }
