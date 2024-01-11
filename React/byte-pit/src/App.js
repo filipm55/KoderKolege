@@ -17,6 +17,7 @@ import SolvingATask from './pages/SolvingATask';
 import CreateCompetition from "./pages/CreateCompetition";
 import JoinACompetition from "./pages/JoinACompetition";
 import Competition from "./pages/Competition"
+import Rank from "./pages/Rank";
 
 function App() {
 
@@ -31,7 +32,6 @@ function App() {
                 <Route exact path='/registration' element={<Registration />} />
                 <Route exact path='/creation' element={<Creation />} />
                 <Route exact path='/virtual' element={<Virtual />} />
-
                 <Route exact path='/practice' element={<Practice />} />
                 <Route exact path='/tasks/addTask' element={<AddTask />} />
                 <Route exact path='/users' element={<Users />} />
@@ -43,6 +43,7 @@ function App() {
                 <Route exact path='/createCompetition' element={<CreateCompetition />} />
                 <Route exact path='/competitions/:competitionId' element={<JoinACompetition />} />
                 <Route exact path='/competitions/:competitionId/:taskId' element={<Competition />} />
+                <Route exact path='/rank/:competitionId' element={<Rank />} />
           </Routes>
         </div>
         <Footer />

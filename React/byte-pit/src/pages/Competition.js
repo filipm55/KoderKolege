@@ -202,6 +202,14 @@ const Competition = () => {
     }
   };
 
+  const handleFinishCompetition = () => {
+    const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
+    
+    if (userConfirmed) {
+      window.location.href = `/rank/${competitionId}`;
+    }
+  };
+
   if (!task) {
     return <div>Loading...</div>;
   }
@@ -224,7 +232,7 @@ const Competition = () => {
             {index + 1}
           </Link>
         ))}
-              <button className="finish-button">Završi Natjecanje</button>
+              <button className="finish-button" onClick={handleFinishCompetition}>Završi Natjecanje</button>
 
       </div>
 
