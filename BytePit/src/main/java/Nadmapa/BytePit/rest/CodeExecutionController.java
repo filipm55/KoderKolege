@@ -36,11 +36,13 @@ public class CodeExecutionController {
                              @RequestParam("file") MultipartFile file,
                              @RequestParam("time") int time,
                              @RequestParam("user") String username,
-                             @RequestParam("problem") Long problemId) {
+                             @RequestParam("problem") Long problemId,
+                             @RequestParam("competition_id") Long competitionId) {
         try {
             System.out.println(username);
             CodeSub codeSub = new CodeSub();
             cs.setUserAndProblem(codeSub, username, problemId);
+            cs.setCompetition(codeSub, competitionId);
             codeSub.setTime(time);
             codeSub.setFileData(file.getBytes());
 

@@ -1,11 +1,13 @@
 package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.CodeSub;
+import Nadmapa.BytePit.domain.Competition;
 import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.domain.User;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.repository.UserRepository;
 import Nadmapa.BytePit.service.CodeSubService;
+import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ProblemService;
 import Nadmapa.BytePit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class CodeSubServiceJpa implements CodeSubService {
     private ProblemService problemService;
 
     @Autowired
+    private CompetitionService competitionService;
+
+
+    @Autowired
     private UserCodeFileRepository cr;
 
     @Override
@@ -37,5 +43,11 @@ public class CodeSubServiceJpa implements CodeSubService {
     @Override
     public Set<Long> getSolvedProblemIdsByUserAndCompetition(String username, Long competitionId) {
         return cr.findDistinctProblemIdsByUsernameAndCompetitionId(username, competitionId);
+    }
+
+    @Override
+    public void setCompetition(CodeSub codeSub, Long competitionId) {
+        Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
+        codeSub.setCompetition(competition);
     }
 }

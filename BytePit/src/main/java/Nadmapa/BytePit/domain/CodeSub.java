@@ -25,6 +25,11 @@ public class CodeSub {
     @Getter @Setter
     private Problem problem;
 
+    @ManyToOne
+    @JoinColumn(name = "competition_id", referencedColumnName = "id")
+    @Getter @Setter
+    private Competition competition;
+
     @Column(name = "time_taken")
     @Getter @Setter
     private int time;
