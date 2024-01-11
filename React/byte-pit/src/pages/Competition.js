@@ -173,7 +173,6 @@ const Competition = () => {
       formData.append('time', timeDifference)
       formData.append('user', userData.username);
       formData.append('problem', task.id)
-      formData.append('competition_id', competition_id)
     
       //ovo je za provjeru sta se salje
       
