@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 17:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2348,10 +2348,10 @@ Overfull \hbox (34.14305pt too wide) in paragraph at lines 241--244
 File: slike/EnvironmentVarijableFront.png Graphic file (type png)
 <use slike/EnvironmentVarijableFront.png>
 Package pdftex.def Info: slike/EnvironmentVarijableFront.png  used on input lin
-e 249.
+e 250.
 (pdftex.def)             Requested size: 461.47293pt x 50.43831pt.
 
-Overfull \hbox (25.86214pt too wide) in paragraph at lines 249--252
+Overfull \hbox (25.86214pt too wide) in paragraph at lines 250--253
  [][] 
  []
 
@@ -2368,13 +2368,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5.5})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.259 				\end{itemize}
+l.257 				\end{itemize}
                        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5.6}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.259 				\end{itemize}
+l.257 				\end{itemize}
                         <./slike/BuildComand.png> <./slike/EnvironmentVarijable
 Front.png>])
 
@@ -2545,7 +2545,7 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (55 pages, 6473041 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (55 pages, 6473218 bytes).
 PDF statistics:
  891 PDF objects out of 1000 (max. 8388607)
  773 compressed objects within 8 object streams
