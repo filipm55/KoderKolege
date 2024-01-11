@@ -44,6 +44,7 @@ const Competition = () => {
       .then((data) => {
         console.log('Competition Info:', data);
         setCompetitionInfo(data);
+
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -51,7 +52,23 @@ const Competition = () => {
   }, [competitionId]);
 
   
+  useEffect(() => {
+    if (jwtToken) {
+        const fetchData = async () => {
+            try {
+                const url = `http://localhost:8080/users/${jwtToken}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                setUserData(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
+        fetchData();
+    } else {
+    }
+}, [jwtToken]);
 
   useEffect(() => {
     const fetchTaskById = async () => {
@@ -72,15 +89,16 @@ const Competition = () => {
   }, [taskId]);
 
   useEffect(() => {
-
     const fetchDataByTaskUser = async () => {
 
       try {
+        if(userData) {
           const response = await fetch(`http://localhost:8080/problems/${competitionId}/${userData.username}`);
           const solvedTasks = await response.json();
           setSolvedTasks(solvedTasks);
           console.log(solvedTasks)
           console.log(solvedTasks.includes(Number(taskId)))
+        }
 
       } catch (error) {
           console.error('Error fetching task:', error);
@@ -89,25 +107,8 @@ const Competition = () => {
 };
 
     fetchDataByTaskUser();
-  }, [taskId, competitionId]);
+  }, [taskId, competitionId, userData]);
 
-  useEffect(() => {
-    if (jwtToken) {
-        const fetchData = async () => {
-            try {
-                const url = `http://localhost:8080/users/${jwtToken}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                setUserData(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchData();
-    } else {
-    }
-}, [jwtToken]);
 
   const handleTestSolution = async () => {
     try {
@@ -151,7 +152,7 @@ const Competition = () => {
   };
 
   const handleSubmitFile = async () => {
-    if (!fileInputRef || !fileInputRef.files || fileInputRef.files.length === 0 /*|| isSubmitting*/) {
+    if (!fileInputRef || !fileInputRef.files || fileInputRef.files.length === 0) {
       console.error('Niste uploadali datoteku ili ste već predali svoje rješenje...');
       return;
     }
@@ -192,15 +193,17 @@ const Competition = () => {
 
       if (submitResponse.ok) {
         setSubmissionStatus('File submitted successfully');
-        //setIsSubmitting(true); // Set submission in progress
-        //setSubmittedTasks([...submittedTasks, task.id]);
       } else {
         setSubmissionStatus('Failed to submit file');
       }
+
+      window.location.reload();
+
     } catch (error) {
       console.error('Error submitting file:', error);
       setSubmissionStatus(`Error submitting file: ${error.message}`);
     }
+
   };
 
   const handleFinishCompetition = () => {
