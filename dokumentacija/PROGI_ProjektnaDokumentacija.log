@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -957,9 +957,38 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
 \@float@every@table=\toks31
-Package hyperref Info: Option `colorlinks' set `true' on input line 40.
-LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 8
-2.
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count323
+\lst@gtempboxa=\box86
+\lst@token=\toks32
+\lst@length=\count324
+\lst@currlwidth=\dimen285
+\lst@column=\count325
+\lst@pos=\count326
+\lst@lostspace=\dimen286
+\lst@width=\dimen287
+\lst@newlines=\count327
+\lst@lineno=\count328
+\lst@maxwidth=\dimen288
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count329
+\lst@skipnumbers=\count330
+\lst@framebox=\box87
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 62.
+LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 1
+04.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
 File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
@@ -970,61 +999,61 @@ File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
 (./Dodatak.aux))
 \openout1 = `PROGI_ProjektnaDokumentacija.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 82.
-LaTeX Font Info:    Trying to load font information for OML+jkp on input line 8
-2.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 104.
+LaTeX Font Info:    Trying to load font information for OML+jkp on input line 1
+04.
  (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 82.
-LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 8
-2.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 104.
+LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 1
+04.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 82.
-LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 8
-2.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 104.
+LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 1
+04.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 104.
 LaTeX Font Info:    Trying to load font information for U+jkpexa on input line 
-82.
+104.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count323
-\scratchdimen=\dimen285
-\scratchbox=\box86
-\nofMPsegments=\count324
-\nofMParguments=\count325
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count326
-\MPscratchDim=\dimen286
-\MPnumerator=\count327
-\makeMPintoPDFobject=\count328
-\everyMPtoPDFconversion=\toks33
+\scratchcounter=\count331
+\scratchdimen=\dimen289
+\scratchbox=\box88
+\nofMPsegments=\count332
+\nofMParguments=\count333
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count334
+\MPscratchDim=\dimen290
+\MPnumerator=\count335
+\makeMPintoPDFobject=\count336
+\everyMPtoPDFconversion=\toks34
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1068,37 +1097,38 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 82.
+Package hyperref Info: Link coloring ON on input line 104.
 (./PROGI_ProjektnaDokumentacija.out) (./PROGI_ProjektnaDokumentacija.out)
 \@outlinefile=\write3
 \openout3 = `PROGI_ProjektnaDokumentacija.out'.
 
+\c@lstlisting=\count337
 LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
-94.
+116.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyb on input line 
-94.
+116.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Trying to load font information for OT1+txr on input line 9
-4.
+LaTeX Font Info:    Trying to load font information for OT1+txr on input line 1
+16.
 
 (c:/texlive/2023/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Trying to load font information for U+jkpmia on input line 
-94.
+116.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 
-94.
+116.
 
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
@@ -1119,7 +1149,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.32 ...: Prikaz aktivnosti grupe}{46}{chapter*.9}
+l.32 ...: Prikaz aktivnosti grupe}{51}{chapter*.9}
                                                   % [1
 
 ])
@@ -1857,7 +1887,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3.5})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.121 	\include{Specifikacija_programske_potpore}
+l.143 	\include{Specifikacija_programske_potpore}
                                                   <./slike/Virtualno natjecanje
 .png>]
 \openout2 = `Arhitektura.aux'.
@@ -2191,6 +2221,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [40]
+<slike/EnvironmentVarijable.png, id=567, 1026.08344pt x 423.08063pt>
+File: slike/EnvironmentVarijable.png Graphic file (type png)
+<use slike/EnvironmentVarijable.png>
+Package pdftex.def Info: slike/EnvironmentVarijable.png  used on input line 74.
+
+(pdftex.def)             Requested size: 513.04047pt x 211.5398pt.
+
+Overfull \hbox (77.42967pt too wide) in paragraph at lines 74--77
+ [][] 
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2199,7 +2240,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[41])
+[41
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.1}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.91 						COPY 
+                ../../.mvn .mvn <./slike/EnvironmentVarijable.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2209,6 +2256,136 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [42]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[43]
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family jkp in TS1 encoding.
+            Default family used instead on input line 185.
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family jkp in TS1 encoding.
+            Default family used instead on input line 194.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[44{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+<slike/EnvironmentVarijableBackend.png, id=674, 925.20656pt x 171.64125pt>
+File: slike/EnvironmentVarijableBackend.png Graphic file (type png)
+<use slike/EnvironmentVarijableBackend.png>
+Package pdftex.def Info: slike/EnvironmentVarijableBackend.png  used on input l
+ine 205.
+(pdftex.def)             Requested size: 462.60214pt x 85.8204pt.
+
+Overfull \hbox (26.99135pt too wide) in paragraph at lines 205--208
+ [][] 
+ []
+
+<slike/PostavkeBazePodataka.png, id=675, 767.11594pt x 475.7775pt>
+File: slike/PostavkeBazePodataka.png Graphic file (type png)
+<use slike/PostavkeBazePodataka.png>
+Package pdftex.def Info: slike/PostavkeBazePodataka.png  used on input line 213
+.
+(pdftex.def)             Requested size: 383.55702pt x 237.88815pt.
+<slike/DockerFile.png, id=677, 733.23938pt x 117.43875pt>
+File: slike/DockerFile.png Graphic file (type png)
+<use slike/DockerFile.png>
+Package pdftex.def Info: slike/DockerFile.png  used on input line 221.
+(pdftex.def)             Requested size: 366.61879pt x 58.71922pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[45
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.2}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.228 				\end{itemize}
+                       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.3}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.228 				\end{itemize}
+                       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.228 				\end{itemize}
+                        <./slike/EnvironmentVarijableBackend.png> <./slike/Post
+avkeBazePodataka.png> <./slike/DockerFile.png>]
+LaTeX Info: Symbol \textrightarrow not provided by
+            font family jkp in TS1 encoding.
+            Default family used instead on input line 232.
+<slike/BuildComand.png, id=690, 939.51pt x 323.70938pt>
+File: slike/BuildComand.png Graphic file (type png)
+<use slike/BuildComand.png>
+Package pdftex.def Info: slike/BuildComand.png  used on input line 241.
+(pdftex.def)             Requested size: 469.75385pt x 161.8543pt.
+
+Overfull \hbox (34.14305pt too wide) in paragraph at lines 241--244
+ [][] 
+ []
+
+<slike/EnvironmentVarijableFront.png, id=692, 922.94812pt x 100.87688pt>
+File: slike/EnvironmentVarijableFront.png Graphic file (type png)
+<use slike/EnvironmentVarijableFront.png>
+Package pdftex.def Info: slike/EnvironmentVarijableFront.png  used on input lin
+e 249.
+(pdftex.def)             Requested size: 461.47293pt x 50.43831pt.
+
+Overfull \hbox (25.86214pt too wide) in paragraph at lines 249--252
+ [][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[46
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.5}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.259 				\end{itemize}
+                       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5.6}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.259 				\end{itemize}
+                        <./slike/BuildComand.png> <./slike/EnvironmentVarijable
+Front.png>])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[47]
 \openout2 = `Zakljucak.aux'.
 
  (./Zakljucak.tex
@@ -2226,7 +2403,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[43
+[48
 
 
 
@@ -2255,7 +2432,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[44
+[49
 
 
 
@@ -2273,7 +2450,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[45
+[50
 
 
 
@@ -2289,7 +2466,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[46
+[51
 
 
 ]
@@ -2313,7 +2490,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[47]
+[52]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2322,7 +2499,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[48]
+[53]
 Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
@@ -2336,7 +2513,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[49] 
+[54] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PROGI_ProjektnaDokumentacija.aux (./Dnevnik_promjena_dokumentacije.aux)
 (./Opis_projektnog_zadatka.aux) (./Specifikacija_programske_potpore.aux)
@@ -2351,13 +2528,13 @@ anged.
 (rerunfilecheck)             Checksum: A6168D0D4C56A59022786A53502B9F7B;4419.
  ) 
 Here is how much of TeX's memory you used:
- 17996 strings out of 474398
- 317171 string characters out of 5754205
+ 19924 strings out of 474398
+ 344123 string characters out of 5754205
  2063036 words of memory out of 5000000
- 39467 multiletter control sequences out of 15000+600000
- 627344 words of font info for 184 fonts, out of 8000000 for 9000
+ 41295 multiletter control sequences out of 15000+600000
+ 629486 words of font info for 189 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,12n,115p,1223b,1205s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,13n,115p,1223b,2216s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
@@ -2367,11 +2544,11 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
-mn8a.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (50 pages, 6360791 bytes).
+mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on PROGI_ProjektnaDokumentacija.pdf (55 pages, 6473041 bytes).
 PDF statistics:
- 739 PDF objects out of 1000 (max. 8388607)
- 641 compressed objects within 7 object streams
- 265 named destinations out of 1000 (max. 500000)
- 279 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 891 PDF objects out of 1000 (max. 8388607)
+ 773 compressed objects within 8 object streams
+ 349 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -70,20 +70,109 @@
 				\item \textbf{Konfiguracija baze podataka}
 				\begin{itemize}
 					\item Ovaj proces uključuje definiranje environmental varijabli unutar konfiguracije razvojnog okruženja (IDE). U našem slučaju, konfiguracija se nalazi u datoteci src/main/resources/application.properties. U ovoj datoteci specificiramo parametre kao što su korisničko ime, lozinka, URL baze podataka te određujemo port poslužitelja. Primjer konfiguracije:
+					\begin{figure}[H]
+						\includegraphics[scale=0.5]{slike/EnvironmentVarijable}
+						%veličina slike u odnosu na originalnu datoteku i pozicija slike
+						\centering
+						\caption{Environment Varijable u IDE-u}
+						\label{fig:EnvVar}
+					\end{figure}
+					
+						
 				\end{itemize}
-				
 				\item \textbf{Priprema backend-a za deploy}
 				\begin{itemize}
 					\item Nakon postavljanja baze podataka, slijedi priprema backend-a za deploy. Ovaj korak uključuje dodavanje Dockerfile skripte za izgradnju i pokretanje aplikacije.  U našem slučaju, koristimo Maven, pa je Dockerfile konfiguriran na sljedeći način:
+					\begin{lstlisting}
+						# Container za izgradnju (build) aplikacije
+						FROM openjdk:17-alpine AS builder
+						
+						# Kopiranje izvornog koda u container
+						COPY ../../.mvn .mvn
+						COPY ../../mvnw .
+						COPY ../../pom.xml .
+						COPY ../../src src
+						RUN chmod +x mvnw
+						
+						# Pokretanje builda
+						RUN ./mvnw clean package
+						
+					
+						FROM openjdk:17-alpine
+						
+						COPY --from=builder target/*.jar /app.jar
+						
+						EXPOSE 8080
+						
+						ENTRYPOINT ["java","-jar","/app.jar"]
+						
+					\end{lstlisting}
 					\item Ukoliko se mijenja lokacija Dockerfilea paziti na putanje unutar COPY naredbi u Dockerfile skripti. U nasem slucaju Docker file se nalazi u root direktoriju Docker/Maven/Dockerfile te su po toj putanji pisane naredbe COPY.
 				\end{itemize}
 				
 				\item \textbf{Priprema frontenda za deploy}
 				\begin{itemize}
 					\item Potrebno je dodati potrebne dependencije u package.json datoteku. U terminalu je potrebno izvršiti sljedeće naredbe:
+					\begin{lstlisting}
+						npm install http-proxy-middleware
+						npm install dotenv
+						npm install express
+					\end{lstlisting}
 					\item Potrebno je kreirati Proxy.js, u src direktorij, koji služi kao proxy server za lokalni development (preusmjeruje api pozive na localhost:8080). Ovo je primjer koda:
+					\begin{lstlisting}
+						const { createProxyMiddleware } = require("http-proxy-middleware");
+						
+						module.exports = function (app) {
+							app.use(
+							"/api",
+							createProxyMiddleware({
+								target: "http://localhost:8080/",
+								changeOrigin: true,
+							})
+							);
+						};
+					\end{lstlisting}
 					\item Stvoriti app.js, u root direktorij, koja sadrži Express server za produkcijski proxy i posluživanje frontenda. Ovo je primjer koda:
+					\begin{lstlisting}
+						const express = require("express");
+						const { createProxyMiddleware } = require("http-proxy-middleware");
+						require("dotenv").config();
+						const path = require("path");
+						
+						const app = express();
+						
+						// Configuration
+						const { PORT, HOST, API_BASE_URL } = process.env;
+						
+						// Proxy
+						app.use(
+						"/api",
+						createProxyMiddleware({
+							target: API_BASE_URL,
+							changeOrigin: true,
+						})
+						);
+						
+						app.use(express.static(path.join(__dirname, 'build')));
+						
+						app.listen(PORT, HOST, () => {
+							console.log(`Starting Proxy at ${HOST}:${PORT}`);
+						});
+						
+						app.get("*", async (req, res) => {
+							res.sendFile(path.join(__dirname, 'build', 'index.html'))
+						});
+						
+					\end{lstlisting}
 					\item Izmjeniti package.json skripte i dodati specifične konfiguracije:
+					\begin{lstlisting}
+						"build": "yarn install && react-scripts build",
+						"start-prod": "node app.js",
+						"engines": {
+							"node": ">=18.18.0 <19.0.0"
+						}
+						
+					\end{lstlisting}
 				\end{itemize}
 			\end{packed_enum}
 			
@@ -91,22 +180,85 @@
 			
 				\begin{packed_enum}
 				\item \textbf{Kreiranje baze podataka}
+				U rander dashboardu:
 				\begin{itemize}
-					\item
+					\item New \textrightarrow PostgreSQL
+					\item Postaviti ime baze i opcionalno username za korisnika baze (password je automatski generiran)
+					\item Region Frankfurt
+					\item Create Database
 				\end{itemize}
 				
 				\item \textbf{Kreiranje backend-a}
+				U Render dashboardu:
 				\begin{itemize}
-					\item 
+					\item New \textrightarrow Web Service
+					\item Povezati GitHub račun, nakon čega su za odabir dostupni svi projekti na koje imate prava pristupa
+					\item Stisnuti connect pored odgovarajućeg projekta
+					\item Postaviti ime za servis (postat ce dio web adrese)
+					\item Postaviti root directory (u nasem slucaju: dev)
+					\item Environment Docker
+					\item Region Frankfurt
+					\item Na dnu proširiti \textit{advanced}
+					\item Dodati potrebne environment varijable (vidi sliku \ref{fig:EnvVar}), kopirati vrijednosti iz postavki baze na renderu (vidi sliku \ref{fig:postavkebaze}). Također dodati kopirane environment varijable u IDE okruzenje (vidi sliku \ref{fig:EnvVar})
+					
+					\begin{figure}[H]
+						\includegraphics[scale=0.5]{slike/EnvironmentVarijableBackend}
+						%veličina slike u odnosu na originalnu datoteku i pozicija slike
+						\centering
+						\caption{Environment Varijable za backend}
+						\label{fig:EnvVarbackend}
+					\end{figure}
+					
+					\begin{figure}[H]
+						\includegraphics[scale=0.5]{slike/PostavkeBazePodataka}
+						%veličina slike u odnosu na originalnu datoteku i pozicija slike
+						\centering
+						\caption{Postavke baze podataka na renderu}
+						\label{fig:postavkebaze}
+					\end{figure}
+					\item Postaviti putanju za Dockerfile ovisno koji se package manager koristi (u ovom slučaju ./docker/maven/Dockerfile, vidi sliku \ref{fig:dockerfile})
+					\begin{figure}[H]
+						\includegraphics[scale=0.5]{slike/DockerFile}
+						%veličina slike u odnosu na originalnu datoteku i pozicija slike
+						\centering
+						\caption{Putanja za Dockerfile}
+						\label{fig:dockerfile}
+					\end{figure}
+					\item Stisnuti Create Web Service
 				\end{itemize}
 				
 				\item \textbf{Kreiranje frontenda}
 				\begin{itemize}
-					\item 
+					\item New \textrightarrow Web Service
+					\item Povezati GitLab racun, nakon cega su za odabir dostupni svi projekti na koje imate prava pristupa
+					\item Stisnuti connect pored odgovarajućeg projekta
+					\item Postaviti ime za servis (postat ce dio web adrese)
+					\item Postaviti root directory (u nasem slucaju: dev)
+					\item Environment Node
+					\item Region Frankfurt
+					\item Build Command postaviti na yarn build, a Start Command yarn start-prod (vidi sliku \ref{fig:BuildComand})
+					\begin{figure}[H]
+						\includegraphics[scale=0.5]{slike/BuildComand}
+						%veličina slike u odnosu na originalnu datoteku i pozicija slike
+						\centering
+						\caption{Build Comand za Node enviroment}
+						\label{fig:BuildComand}
+					\item Na dnu proširiti \textit{advanced}
+					\item Dodati potrebne environment varijable - API BASE URL postaviti na adresu deployanog backenda aplikacije dostupnu na Render dashboardu (vidi sliku \ref{fig:BuildComand})
+						\begin{figure}[H]
+							\includegraphics[scale=0.5]{slike/EnvironmentVarijableFront}
+							%veličina slike u odnosu na originalnu datoteku i pozicija slike
+							\centering
+							\caption{Environment Varijable za frontend }
+							\label{fig:EnvVarfront}
+						\end{figure}
+					\item Stisnuti Create Web Service
+						
+					\end{figure}
+					\item
 				\end{itemize}
 			\end{packed_enum}
 		
-				
 			
 			
 			
