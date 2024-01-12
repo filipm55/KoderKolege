@@ -16,9 +16,107 @@ import EastIcon from '@mui/icons-material/East';
 const User = () => {
     const [sortingOption, setSortingOption] = useState('newest-first');
     const [sortingTasks, setSortingTasks] = useState([]);
+    const [isError, setIsError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+    const [showForm, setShowForm] = useState(false);
     var user;
     var isCompetitor = null;
     const { id } = useParams();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
+  const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    var uredi = new Map();
+    var [mapa, setMapa] = useState(uredi);
+    var postojeKorisnici = false;
+    const emptyBlob = new Blob([''], { type: 'text/plain' });
+    const [file, setFile] = useState(emptyBlob);
+
+  useEffect(() => {
+    if (jwtToken) {
+      setIsLoggedIn(true);
+
+      const fetchData = async () => {
+        try {
+          const url = `http://localhost:8080/users/${jwtToken}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          setUserData(data); // Set user data fetched from the backend
+          console.log(data.id);
+        } catch (error) {
+          // Handle error if needed
+          console.error(error);
+        }
+      };
+
+      fetchData();
+    } else {
+    }
+  }, [jwtToken]);
+  var urediKorisnika = (usernamee, id) => {
+    uredi.set(usernamee, false);
+    setMapa(uredi);
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('lastname', surname);
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('image', file);
+    formData.append('userType', user.userType);
+
+    if(password)
+        formData.append('password',password)
+
+    fetch(`http://localhost:8080/users/${id}`, {
+        method: 'PUT',
+        body: formData,
+    }).then(response => {
+        console.log("USPJEH");
+        //window.location.href = '/users'; // Redirect to the login page
+    }).catch(error => {
+        console.log("NEUSPJEH");
+    });
+    }
+    var obrisiKorisnika = (id) => {
+        fetch(`http://localhost:8080/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Ako je zahtjev uspješan (status kod 200-299), možete obraditi odgovor
+                    console.log("Uspješno izbirsan user s id-om: " + id);
+                }
+                else throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // Ovdje možete obraditi odgovor od servera (ako je potrebno)
+                console.log('Uspjeh:', data);
+                window.location.href = '/users'; // Redirect to the login page
+            })
+            .catch(error => {
+                // Uhvatite i obradite bilo kakve greške prilikom slanja zahtjeva
+                console.error('Greška prilikom slanja DELETE zahtjeva:', error);
+            });
+
+    };
+
+    var urediKorisnike = (username, name, surname, email, role) => {
+        setShowForm(true)
+        uredi.set(username, true);
+        setUsername(username);
+        setMapa(uredi);
+        setName(name);
+        setSurname(surname);
+        setEmail(email);
+        //console.log(uredi);
+        //setPromjena(true);
+    }
+
     const {data:users, error} = useFetch('http://localhost:8080/users');
     if (users) {
         users.map(u => {
@@ -35,6 +133,20 @@ const User = () => {
     );
     const handleSortingChange = (e) => {
         setSortingOption(e.target.value);
+    };
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+
+        // Checking if the file type is allowed or not
+        const allowedTypes = ["image/jpeg"]; // STAVIO SAM SAMO JPEG JER JE ZIVOT TAK JEDNOSTAVNIJI ZA RADIT SA SLIKOM, Mislav, MOZDA U ONE DODATNE FUNKCIONALNOST TREBA UPISAT
+        if (!allowedTypes.includes(selectedFile?.type)) {
+            setIsError(true);
+            setErrorMsg("Only JPEG");
+            return;
+        }
+
+        setIsError(false);
+        setFile(selectedFile);
     };
 
     var mapa = new Map();
@@ -159,7 +271,7 @@ const User = () => {
         <div id="usercontent">
             <div className="obojano"></div>
             <div id = "gornjidio">
-                <div className="slikaIme">
+                {!showForm && <div className="slikaIme">
                     <div className="slikaa"> 
                         <img className="okrugla" src={`data:image/jpeg;base64,${user.image?.data}`} alt="User Image"/>
                     </div>
@@ -167,7 +279,41 @@ const User = () => {
                         <h1 id = "imeprezime">{user.name} {user.lastname}</h1>
                         {/*<p>{user.email}</p>*/}
                     </div>
-                </div>
+                    {userData && userData.id==user.id && (
+                            <div className="gumbici">
+                                {<button className="zadmina blueButton" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                            </div>
+                            )}
+                </div>}
+                <div className="tekstDio">
+                                {showForm &&
+                                <form className="nestajuciForm">
+                                    <div>
+                                    <div className="kucica4">
+                                        <p>Ime: <input type = "text" defaultValue={user.name} onChange={(e) => setName(e.target.value)}></input></p>
+                                    </div>
+                                    <div className="kucica4">
+                                    <p>Prezime: <input type = "text" defaultValue={user.lastname} onChange={(e) => setSurname(e.target.value)}></input></p>
+                                    </div>
+                                    <div className="kucica4">
+                                    <p>Email: <input type = "text" defaultValue={user.email} length = "20" onChange={(e) => setEmail(e.target.value)}></input></p>
+                                    </div>
+                                    <div className="kucica4">
+                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
+                                    </div>
+                                    <div className="kucica4">
+                                    <p>Password: <input type = "text" onChange={(e) => setPassword(e.target.value)}></input> </p>
+                                    </div>
+                                        <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"
+                                                                                                         onChange={handleFileChange}/>
+                                        </div>
+                                        {isError && <p className='fileError'>{errorMsg}</p>}
+                                    </div>
+                                    <button id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+
+                                    
+                                </form>}
+                            </div>
                 {isCompetitor && <div id="statistika">
                     <div className="brojopis">
                         <h6>20</h6> {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}

@@ -192,7 +192,7 @@ const Users = () => {
                         <div className="naslov">
                         <Link className = "imeiprezime" to={'/users/'+user.id}>
                             <h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
-                            {userData && userData.userType==="ADMIN" && (
+                            {userData && (userData.userType==="ADMIN" || userData.id==user.id) && (
                             <div className="gumbici">
                                 {<button className="zadmina blueButton" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
                                 {<button  className="zadmina redButton" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
@@ -230,12 +230,12 @@ const Users = () => {
                                                                                                          onChange={handleFileChange}/>
                                         </div>
                                         {isError && <p className='fileError'>{errorMsg}</p>}
-                                    <div className='izbor'><label>Uloga:</label>
+                                    {userData.userType==="ADMIN" && <div className='izbor'><label>Uloga:</label>
                                         <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
                                                                 onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>
                                         <input type="radio" id="voditelj" name="uloga" checked={role === 'COMPETITION_LEADER'}
                                                                 onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
-                                    </div>
+                                    </div>}
                                     </div>
                                     <button id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
 

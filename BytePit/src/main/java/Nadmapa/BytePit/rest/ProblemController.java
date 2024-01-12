@@ -37,7 +37,7 @@ public class ProblemController {
             return problemService.listAll().stream().filter((problem -> !problem.isPrivate())).toList();
         }
 
-        @GetMapping("/all/{id")
+        @GetMapping("/all/{id}")
         public List<Problem> listAllProblemsById(@PathVariable Long id){
             return problemService.listAll().stream().filter((problem) -> problem.getProblemMaker().equals(userService.getUserById(id))).toList();
         }

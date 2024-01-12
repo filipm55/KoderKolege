@@ -155,6 +155,8 @@ public class UserController {
                                              @RequestParam("username") String username,
                                              @RequestParam("email") String email,
                                              @RequestParam("userType") String userType,
+                                             @RequestParam("password") String password,
+
                                              @RequestParam("image") MultipartFile file) throws IOException {
 
 
@@ -176,6 +178,9 @@ public class UserController {
             }
             if (!email.equals(user.getEmail())) {
                 user.setEmail(email);
+            }
+            if(!password.equals("") && !password.equals(user.getPassword())){
+                user.setPassword(password);
             }
             if (!userType.toString().equals(user.getUserType().toString())) {
                 switch (userType) {
