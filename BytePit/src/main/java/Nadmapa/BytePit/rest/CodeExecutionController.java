@@ -1,9 +1,11 @@
 package Nadmapa.BytePit.rest;
 
 import Nadmapa.BytePit.domain.*;
+import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.CodeExecutionService;
 import Nadmapa.BytePit.service.CodeSubService;
+import Nadmapa.BytePit.service.CompSubmitService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +65,22 @@ public class CodeExecutionController {
         }
         System.out.println(problemIds);
         return ResponseEntity.ok(problemIds);
+    }
+
+    @Autowired
+    private CompRankRepository compRankRepository;
+
+    @Autowired
+    private CompSubmitService css;
+
+    @PostMapping("/rank/{competitionId}/{username}")
+    public String saveCompInfo(@PathVariable Long competitionId, @PathVariable String username) {
+        css.calculateAndSaveCompRank(competitionId, username);
+        return "Saved";
+    }
+
+    @PostMapping("/rank/{competitionId}")
+    public List<Object[]> getRankingByCompetition(@PathVariable Long competitionId) {
+        return compRankRepository.getCompetitionRanking(competitionId);
     }
 }

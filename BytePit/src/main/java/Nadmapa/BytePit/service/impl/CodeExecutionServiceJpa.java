@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -128,7 +129,7 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
                 }
             }
 
-            int points = (problem.getPoints() * correctOutputs) / totalExamples;
+            BigDecimal points = BigDecimal.valueOf(((long) problem.getPoints() * correctOutputs) / totalExamples);
             cs.setPoints(points);
             userCodeFileRepository.save(cs);
             System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));
