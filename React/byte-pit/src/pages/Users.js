@@ -187,6 +187,7 @@ const Users = () => {
             <div className="task-list">
             
                 {users.map(user => (
+                    user.userType === "COMPETITION_LEADER"  && !user.confirmedByAdmin && userData && userData.userType!="ADMIN" ? (null ): ( //SAMO ADMIN MOZE VIDIT NE POTVRDENE KORISNIKE
                     <div className="task" key={user.id} >
                         <div className="naslov">
                         <Link className = "imeiprezime" to={'/users/'+user.id}>
@@ -246,7 +247,7 @@ const Users = () => {
                                 alt="User Image"
                             /></p>
                         </div>
-                    </div>
+                    </div> )
                 ))}
             </div> }
         </div>
