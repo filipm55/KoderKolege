@@ -42,6 +42,15 @@ public class UserController {
         this.registrationService = registrationService;
     }
 
+    @GetMapping("/byId/{id}")
+    public ResponseEntity<User> getUserByToken(@PathVariable Long id) {
+       Optional<User> user = userService.getUserById(id);
+       if(user.isPresent()){
+           return ResponseEntity.ok(user.get());
+       }
+       else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
     @GetMapping("")
     public List<User> listConfirmedUsers() {
         List<User> allUsers = userService.listAll();

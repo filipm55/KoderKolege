@@ -32,6 +32,11 @@ public class ProblemController {
             return problemService.listAll();
         }
 
+        @GetMapping("/public")
+        public List<Problem> listPublicProblems(){
+            return problemService.listAll().stream().filter((problem -> !problem.isPrivate())).toList();
+        }
+
         @PostMapping("")
         public Problem createProblem(@RequestBody Problem problem){
             System.out.println("Pokusavamo spremit zadatak " + problem.getTitle() + " problem maker je " + problem.getProblemMaker() +

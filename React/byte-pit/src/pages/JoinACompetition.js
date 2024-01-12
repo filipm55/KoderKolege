@@ -54,7 +54,6 @@ const JoinACompetition = () => {
             }
           })
         }catch(error){
-          console.log("OVJDE SAM");
         }
       }
       fetchData();
