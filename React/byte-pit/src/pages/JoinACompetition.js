@@ -77,7 +77,7 @@ const JoinACompetition = () => {
   const startCompetition = () => {
     // Redirect to the first problem of the competition
     if (competitionInfo && competitionInfo.length > 0 && !pristupio) {
-
+      fetch(`/competitions/${competitionId}/${firstProblemId}`)
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
       window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
     } else {

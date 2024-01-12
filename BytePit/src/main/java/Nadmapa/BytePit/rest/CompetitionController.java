@@ -44,7 +44,7 @@ public class CompetitionController {
 
     @GetMapping("/virtual")
     public List<Competition> listVirtualCompetitions() {
-        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()).toList();
+        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()!=null && e.getIsvirtual()).toList();
     };
 
 
@@ -169,6 +169,7 @@ public class CompetitionController {
             return false;
         }
     }
+    
 
     @GetMapping("/{competitionId}")
     public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
