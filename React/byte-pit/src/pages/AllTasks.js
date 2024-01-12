@@ -16,7 +16,7 @@ const AllTasks = () => {
           // Funkcija za dohvat podataka
           const fetchData = async () => {
             try {
-              const response = await fetch('http://localhost:8080/problems'); 
+              const response = await fetch('http://localhost:8080/problems/public'); 
               const jsonData = await response.json();
               setData(jsonData);
             } catch (error) {

@@ -124,6 +124,8 @@ const CreateCompetition = () => {
                 } else {
                     // Text response
                     setMessage(data);
+                    window.location.href = '/'; // Redirect to the login page
+
                 }
             })
             .catch((error) => {
