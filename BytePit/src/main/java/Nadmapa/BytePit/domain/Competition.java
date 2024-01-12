@@ -47,10 +47,16 @@ public class Competition {
 
     @Getter @Setter
     private Boolean isvirtual;
-
     @Getter @Setter
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "competition_user", // Naziv vanjske tablice
+            joinColumns = @JoinColumn(name = "competition_id"), // Stupac koji predstavlja Competition
+            inverseJoinColumns = @JoinColumn(name = "user_id") // Stupac koji predstavlja User
+    )
     private List<User> pristupiliNatjecanju;
+
+
 
 
     public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara, Boolean isvirtual) {

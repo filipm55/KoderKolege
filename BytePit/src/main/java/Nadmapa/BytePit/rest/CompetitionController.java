@@ -6,6 +6,7 @@ import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.ProblemService;
 import Nadmapa.BytePit.service.UserService;
+import Nadmapa.BytePit.service.impl.CompetitionDeleteService;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,17 @@ public class CompetitionController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CompetitionDeleteService competitionDeleteService;
+
     @GetMapping("")
     public List<Competition> listCompetition(){
-        return competitionService.listAll();
+
+        return competitionService.listAll().stream().filter(competition -> {
+            if(competition.getName()!=null)
+               return !competition.getName().contains("Virtualno");
+           return true;
+        }).toList();
     }
 
     @GetMapping("/virtual")
@@ -111,7 +120,9 @@ public class CompetitionController {
 
         logger.info("Received request to create a competition: {}", competition);
         //return competitionService.createCompetition(competition);
-        return  competitionService.createCompetition(competition);
+        ResponseEntity<String> returnValue = competitionService.createCompetition(competition);
+        if(competition.getName().equals("Virtualno")) competitionDeleteService.deleteVirtualAfter2H(competition); //izbrisi sva za vjezbu nakon 2 sata
+        return returnValue;
     }
     @PutMapping("/{competitionId}")
     public ResponseEntity<String> updateCompetition(@PathVariable Long competitionId,
@@ -178,7 +189,7 @@ public class CompetitionController {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
             List<User> users = competition.getPristupiliNatjecanju();
-            if(users.stream().anyMatch(user -> user.getId().equals(userId))){ System.out.println("NESTO"); return; };
+            if((competition.getIsvirtual()!=null && competition.getIsvirtual()) || users.stream().anyMatch(user -> user.getId().equals(userId))){ System.out.println("NESTO"); return; };
             Optional<User> user = userService.getUserById(userId);
             if(user.isPresent()){
                 users.add(user.get());

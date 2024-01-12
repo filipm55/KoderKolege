@@ -38,4 +38,9 @@ public class CompetitionServiceJpa implements CompetitionService {
     public void saveCompetition(Competition competition) {
         competitionRepo.save(competition);
     }
+
+    @Override
+    public void deleteCompetitionById(Long id) {
+        competitionRepo.deleteById(id.toString());
+    }
 }
