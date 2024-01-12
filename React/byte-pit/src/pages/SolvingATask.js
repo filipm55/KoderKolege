@@ -171,7 +171,6 @@ useEffect(() => {
 
       const formData = new FormData();
       formData.append('file', uploadedFile);
-      formData.append('time', passedTimeInSeconds);
       formData.append('user', userData.username);
       formData.append('problem', task.id)
 
@@ -244,9 +243,6 @@ useEffect(() => {
         </button>
       </div>
       {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
-
-
-      {testResult && <div className="test-result">Test Result: {testResult}</div>}
 
         <div className="input-output-examples">
         <h3>Input-Output Examples:</h3>

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "code_submissions")
 public class CodeSub {
@@ -39,9 +41,9 @@ public class CodeSub {
     @Getter @Setter
     private byte[] fileData;
 
-    @Column(name = "points")
     @Getter @Setter
-    private Integer points;
+    @Column(name = "points", precision = 10, scale = 2)
+    private BigDecimal points;
 
     public CodeSub() {
         this.points = null;

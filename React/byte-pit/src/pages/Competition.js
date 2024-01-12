@@ -6,6 +6,7 @@ import useFetch from "../useFetch";
 import Cookies from 'universal-cookie';
 
 
+
 const Competition = () => {
     const { competitionId, taskId } = useParams();
     const [fetchError, setFetchError] = useState(false);
@@ -52,7 +53,7 @@ const Competition = () => {
       });
   }, [competitionId]);
 
-  
+
   useEffect(() => {
     if (jwtToken) {
         setIsLoggedIn(true);
@@ -168,24 +169,24 @@ const Competition = () => {
       const currentTime = new Date();
       const [year, month, day, hour, minutes] = competition?.dateTimeOfBeginning;
 
-      const dateTimeOfBeginning = new Date(year, month - 1, day, hour, minutes); 
-    
-      const timeDifference = Math.floor((currentTime - dateTimeOfBeginning) / 1000); 
-      
+      const dateTimeOfBeginning = new Date(year, month - 1, day, hour, minutes);
+
+      const timeDifference = Math.floor((currentTime - dateTimeOfBeginning) / 1000);
+
       formData.append('file', uploadedFile);
       formData.append('time', timeDifference)
       formData.append('user', userData.username);
       formData.append('problem', task.id)
       formData.append('competition_id', competitionId)
-    
+
       //ovo je za provjeru sta se salje
-      
+
       const formDataObject = {};
       formData.forEach((value, key) => {
         formDataObject[key] = value;
       });
       console.log(JSON.stringify(formDataObject, null, 2));
-      
+
 
 
       const submitResponse = await fetch(`http://localhost:8080/submit/${taskId}`, {
@@ -208,13 +209,29 @@ const Competition = () => {
 
   };
 
-  const handleFinishCompetition = () => {
+const handleFinishCompetition = async () => {
     const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
-    
+
     if (userConfirmed) {
-      window.location.href = `/rank/${competitionId}`;
+        try {
+            // Trigger backend process to calculate final ranking
+            const response = await fetch(`http://localhost:8080/rank/${competitionId}/${userData.username}`, {
+                method: 'POST'
+            });
+
+            if (response.ok) {
+                console.log('Ranking calculated successfully');
+                // Redirect to ranking page
+                window.location.href = `/rank/${competitionId}`;
+            } else {
+                console.error('Failed to calculate ranking');
+            }
+        } catch (error) {
+            console.error('Error finishing competition:', error);
+        }
     }
-  };
+};
+
 
   if (!task) {
     return <div>Loading...</div>;
@@ -279,7 +296,7 @@ const Competition = () => {
         />
         <button
           className={`submit-button ${solvedTasks.includes(Number(taskId)) ? 'disabled' : ''}`}
-          onClick={handleSubmitFile}  
+          onClick={handleSubmitFile}
           disabled={solvedTasks.includes(Number(taskId))}
         >
         {'Predaj'}

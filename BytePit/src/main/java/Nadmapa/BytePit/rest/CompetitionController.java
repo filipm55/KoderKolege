@@ -44,8 +44,10 @@ public class CompetitionController {
 
     @GetMapping("/virtual")
     public List<Competition> listVirtualCompetitions() {
-        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()).toList();
+        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()!=null && e.getIsvirtual()).toList();
     };
+
+
 
     @PostMapping("")
     public ResponseEntity<String> createCompetition(
@@ -83,7 +85,15 @@ public class CompetitionController {
         competition.setDateTimeOfBeginning(dateTimeOfBeginning);
         competition.setNumberOfProblems(numberOfProblems);
         competition.setTrophyPicture(trophyPic);
+
         competition.setIsvirtual(isvirtual);
+
+        LocalDateTime now = LocalDateTime.now();
+        if(competition.getDateTimeOfBeginning().isBefore(now) || competition.getDateTimeOfEnding().isBefore(now)){
+            competition.setIsvirtual(true);
+        }
+
+
 
         logger.info("Received request to create a competition: {}", competition);
         //return competitionService.createCompetition(competition);
@@ -146,6 +156,20 @@ public class CompetitionController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Natjecanje s ID-om : " + competitionId +" nije pronađen u bazi");
     }
+    @GetMapping("/{competitionId}/competitors/{userId}")
+    public boolean hasEnteredCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
+        try {
+
+            Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
+            List<User> users = competition.getPristupiliNatjecanju();
+            return users.stream().anyMatch(user -> user.getId().equals(userId));
+        } catch (EntityNotFoundException e) {
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 
     @GetMapping("/{competitionId}")
     public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
