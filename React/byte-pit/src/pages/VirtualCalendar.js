@@ -55,18 +55,18 @@ const Cal = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
+    const {data:competitions, error} = useFetch('http://localhost:8080/competitions/virtual');
 
     function getRandomHexColor() {
         // Generate random RGB components
         const red = Math.floor(Math.random() * 150) + 100;
         const green = Math.floor(Math.random() * 150) + 100;
         const blue = Math.floor(Math.random() * 150) + 100;
-      
+
         // Convert RGB components to hexadecimal and construct the color string
         const randomLightHexColor = `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
         return randomLightHexColor;
-      }
+    }
 
 
 
@@ -92,20 +92,20 @@ const Cal = () => {
                 let compEndDate = new Date(year, month-1, day, 23, 59);   // AKO SE OVDJE UPIŠE hours i minutes NE RADI DOBRO PRIKAZ JER FUNKCIJA date >= compStartDate && date <= compEndDate VRAĆA FALSE AKO JE DATUM POČETKA I KRAJA NATJECANJA ISTI DAN!!!!!!!!!!!!!
                 return date >= compStartDate && date <= compEndDate;
             });
-            
+
             if (competition) {
                 // If there is a competition on this date, display its id
                 return (
 
                     <div>
                         {competition.map((comp, index) => (
-                             (
+                            (
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                {comp.name ? comp.name : "Natjecanje "+comp.id}
-                             </div>                           
-                              )
-                                
-                            
+                                    {comp.name ? comp.name : "Natjecanje "+comp.id}
+                                </div>
+                            )
+
+
                         ))}
                     </div>
                 );
@@ -123,34 +123,10 @@ const Cal = () => {
                     <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
                 <div id="natjecanja">
-                <h1 id="naslov17"> Nadolazeća i aktualna natjecanja</h1>
+                    <h1 id="naslov17"> Virtualna natjecanja</h1>
                     {competitions &&
                         competitions.map((comp) => (
                             <div  key={comp.id}>
-                                {isCompetitionUpcoming(comp) && (!comp.isvirtual || comp.isvirtual===null) && (
-                                <div className='natjecanje'>
-                                    <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
-                                    {comp.name ? (
-                                        <p>{comp.name}</p>
-                                    ) : (
-                                        <p>Natjecanje {comp.id}</p>
-                                    )}
-                                    <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
-                                    {isCompetitionActive(comp) && isLoggedIn && (
-                                        <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 
-                                        </Link>
-                                        
-                                    )}
-                                </div>)}
-                            </div>
-                        ))}
-                </div>
-                <div id="natjecanja">
-                    <h1 id="naslov17"> Virtualna natjecanja za vježbu</h1>
-                    {competitions &&
-                        competitions.map((comp) => (
-                            <div  key={comp.id}>
-                                {(comp.isvirtual) && (
                                     <div className='natjecanje'>
                                         <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
                                         {comp.name ? (
@@ -164,7 +140,7 @@ const Cal = () => {
                                             </Link>
 
                                         )}
-                                    </div>)}
+                                    </div>
                             </div>
                         ))}
                 </div>
