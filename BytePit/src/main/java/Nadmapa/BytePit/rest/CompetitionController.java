@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.management.OperatingSystemMXBean;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -46,6 +45,21 @@ public class CompetitionController {
     public List<Competition> listVirtualCompetitions() {
         return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()!=null && e.getIsvirtual()).toList();
     };
+
+    @GetMapping("/{competitionId}/competitors/{userId}")
+    public ResponseEntity<Boolean> hasEnteredCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
+        try {
+
+            Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
+            List<User> users = competition.getPristupiliNatjecanju();
+            if(users.stream().anyMatch(user -> user.getId().equals(userId))) return ResponseEntity.ok(true);
+            else return ResponseEntity.ok(false);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+    }
 
 
 
@@ -89,7 +103,7 @@ public class CompetitionController {
         competition.setIsvirtual(isvirtual);
 
         LocalDateTime now = LocalDateTime.now();
-        if(competition.getDateTimeOfBeginning().isBefore(now) || competition.getDateTimeOfEnding().isBefore(now)){
+        if(competition.getDateTimeOfBeginning().isBefore(now) && competition.getDateTimeOfEnding().isBefore(now)){
             competition.setIsvirtual(true);
         }
 
@@ -156,20 +170,27 @@ public class CompetitionController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Natjecanje s ID-om : " + competitionId +" nije pronađen u bazi");
     }
-    @GetMapping("/{competitionId}/competitors/{userId}")
-    public boolean hasEnteredCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
+
+    @PutMapping("/{competitionId}/competitors/{userId}")
+    public void enterCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
+        System.out.println("OVdje sam");
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
             List<User> users = competition.getPristupiliNatjecanju();
-            return users.stream().anyMatch(user -> user.getId().equals(userId));
-        } catch (EntityNotFoundException e) {
-            return false;
+            if(users.stream().anyMatch(user -> user.getId().equals(userId))){ System.out.println("NESTO"); return; };
+            Optional<User> user = userService.getUserById(userId);
+            if(user.isPresent()){
+                users.add(user.get());
+                competition.setPristupiliNatjecanju(users);
+                competitionService.saveCompetition(competition);
+            }
+
         } catch (Exception e) {
-            return false;
+            System.out.println("Error");
         }
     }
-    
+
 
     @GetMapping("/{competitionId}")
     public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
@@ -179,7 +200,7 @@ public class CompetitionController {
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
             System.out.println(competitionId + " " + competition);
             LocalDateTime now = LocalDateTime.now();
-            if(competition.getDateTimeOfBeginning().isAfter(now) || competition.getDateTimeOfEnding().isBefore(now)){
+            if(competition.getDateTimeOfBeginning().isAfter(now)){
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
             Set<Problem> problems = competition.getProblems();

@@ -61,14 +61,13 @@ const JoinACompetition = () => {
           const problemsArray = Array.from(new Set(randomtasks.map(problem => problem.id)));
           const trophyPictureFile = new Blob([], { type: 'image/png' });
 
-          formData.append('name', "Virtualno");
-          formData.append('competitionMaker', adminUser.id);
-          formData.append('dateTimeOfBeginning', "2024-01-05T00:00:00");
-          formData.append('dateTimeOfEnding', "3000-01-01T00:00:00");
-          formData.append('numberOfProblems', 5);
-          formData.append('trophyPicture', trophyPictureFile);
-          formData.append('problems', problemsArray);
-          formData.append('isvirtual', Boolean(true));
+          //formData.append('name', "Virtualno");
+         //formData.append('dateTimeOfBeginning', "2024-01-05T00:00:00");
+          //formData.append('dateTimeOfEnding', "3000-01-01T00:00:00");
+          //formData.append('numberOfProblems', 5);
+          //formData.append('trophyPicture', trophyPictureFile);
+          //formData.append('problems', problemsArray);
+          //formData.append('isvirtual', Boolean(true));
 
           console.log('FormData:');
           for (let pair of formData.entries()) {

@@ -36,21 +36,28 @@ const JoinACompetition = () => {
   }, [jwtToken]);
 
   useEffect(() => {
-    if(userData && userData.id){
+    if(userData && userData.id && competitionId){
       const fetchData = async () => {
         try{
-          fetch(`http://localhost:8080/${competitionId}/competitors/${userData.id}`)
-              .then((response => response.json())
-                  .then(data => {
-                    if(data === true){
-                      setPristupio(true);
-                    }
-                    else setPristupio(false);
-                  }))
+          fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Ovdje moramo parsirati JSON neovisno o tipu odgovora
+              }) .then(data => {
+            // Ovdje sada radimo s podacima, koji su izvučeni iz JSON formata
+            if (data === true) {
+              setPristupio(true);
+            } else {
+              setPristupio(false);
+            }
+          })
         }catch(error){
-
+          console.log("OVJDE SAM");
         }
       }
+      fetchData();
     }
 
   }, [userData, competitionId]);
@@ -74,10 +81,13 @@ const JoinACompetition = () => {
       });
   }, [competitionId]);
 
-  const startCompetition = () => {
+  const startCompetition = async () => {
+    console.log(pristupio);
     // Redirect to the first problem of the competition
-    if (competitionInfo && competitionInfo.length > 0 && !pristupio) {
-      fetch(`/competitions/${competitionId}/${firstProblemId}`)
+    if (competitionInfo && competitionInfo.length > 0 && !pristupio && userData) {
+      await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`, {
+        method: 'PUT'
+      })
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
       window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
     } else {
