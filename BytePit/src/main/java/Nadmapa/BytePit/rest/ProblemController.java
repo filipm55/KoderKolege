@@ -37,6 +37,16 @@ public class ProblemController {
             return problemService.listAll().stream().filter((problem -> !problem.isPrivate())).toList();
         }
 
+        @GetMapping("/all/{id")
+        public List<Problem> listAllProblemsById(@PathVariable Long id){
+            return problemService.listAll().stream().filter((problem) -> problem.getProblemMaker().equals(userService.getUserById(id))).toList();
+        }
+
+        @GetMapping("/public/{id}")
+        public List<Problem> listPublicProblemsById(@PathVariable Long id){
+            return problemService.listAll().stream().filter((problem -> !problem.isPrivate() && problem.getProblemMaker().equals(userService.getUserById(id)))).toList();
+    }
+
         @PostMapping("")
         public Problem createProblem(@RequestBody Problem problem){
             System.out.println("Pokusavamo spremit zadatak " + problem.getTitle() + " problem maker je " + problem.getProblemMaker() +

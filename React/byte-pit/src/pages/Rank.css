@@ -1,0 +1,44 @@
+.container {
+    margin:0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.rank-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rank-table th,
+.rank-table td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+.rank-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.highlighted-row {
+    background-color: #bde7c4; /* Yellow color for highlighted row */
+    color: #333; /* Text color for highlighted row */
+    font-weight: bold;
+}
+
+.rankTitle {
+    color: #333;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.compTitle {
+    color: #766060; /* Change the color to your preference */
+    font-weight: bold;
+}

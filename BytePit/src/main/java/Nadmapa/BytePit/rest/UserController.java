@@ -43,12 +43,12 @@ public class UserController {
     }
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<User> getUserByToken(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
        Optional<User> user = userService.getUserById(id);
        if(user.isPresent()){
-           return ResponseEntity.ok(user.get());
+           return user.get();
        }
-       else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+       else return null;
     }
 
     @GetMapping("")
