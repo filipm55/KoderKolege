@@ -12,6 +12,9 @@ import java.util.List;
 
 @Repository
 public interface CompRankRepository extends JpaRepository<CompRank, Long> {
-    @Query(value = "SELECT username, points, RANK() OVER (ORDER BY points DESC) as rank FROM comp_rank WHERE competition_id = :competitionId", nativeQuery = true)
+    @Query(value = "SELECT u.id as userId, cr.username, cr.points, RANK() OVER (ORDER BY cr.points DESC) as rank " +
+            "FROM comp_rank cr " +
+            "JOIN users u ON cr.username = u.username " +
+            "WHERE cr.competition_id = :competitionId", nativeQuery = true)
     List<Object[]> getCompetitionRanking(@Param("competitionId") Long competitionId);
 }
