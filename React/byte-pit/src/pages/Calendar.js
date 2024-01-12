@@ -82,11 +82,16 @@ const Cal = () => {
             if (competition) {
                 // If there is a competition on this date, display its id
                 return (
+
                     <div>
                         {competition.map((comp, index) => (
+                             (!comp.isvirtual || comp.isvirtual===null)&& (
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                    {comp.name ? comp.name : "Natjecanje "+comp.id}
-                                 </div>
+                                {comp.name ? comp.name : "Natjecanje "+comp.id}
+                             </div>                           
+                              )
+                                
+                            
                         ))}
                     </div>
                 );
@@ -107,7 +112,7 @@ const Cal = () => {
                     {competitions &&
                         competitions.map((comp) => (
                             <div  key={comp.id}>
-                                {isCompetitionUpcoming(comp) && (
+                                {isCompetitionUpcoming(comp) && (!comp.isvirtual || comp.isvirtual===null) && (
                                 <div className='natjecanje'>
                                     <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
                                     {comp.name ? (

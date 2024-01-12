@@ -51,6 +51,11 @@ public class UserServiceJpa implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    @Override
     public ResponseEntity<String> deleteUserById(Long id) {
         try{
             userRepo.deleteById(id);

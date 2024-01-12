@@ -49,7 +49,16 @@ public class UserController {
                 .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed()  && user.getUserType() == UserType.COMPETITION_LEADER))
                 .collect(Collectors.toList());
     }
+    @GetMapping("/getadmin")
+    public ResponseEntity<User> getAdminUser() {
+        User adminUser = userService.findByUsername("admin");
 
+        if (adminUser != null) {
+            return ResponseEntity.ok(adminUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("")
     public ResponseEntity<String> createUser(

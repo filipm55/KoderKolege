@@ -102,6 +102,8 @@ const CreateCompetition = () => {
         formData.append('numberOfProblems', numOfProblems);
         formData.append('trophyPicture', picture);
         formData.append('problems', problemsArray);
+        formData.append('isvirtual',Boolean(false));
+        console.log(formData);
 
         fetch('http://localhost:8080/competitions', {
             method: 'POST',

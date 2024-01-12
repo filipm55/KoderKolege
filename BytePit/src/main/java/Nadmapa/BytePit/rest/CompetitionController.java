@@ -49,8 +49,10 @@ public class CompetitionController {
             @RequestParam("dateTimeOfBeginning") LocalDateTime dateTimeOfBeginning,
             @RequestParam("dateTimeOfEnding") LocalDateTime dateTimeOfEnding,
             @RequestParam("numberOfProblems") int numberOfProblems,
-            @RequestParam("trophyPicture") MultipartFile trophyPicture,
-            @RequestParam("problems") Long[] problemsId
+            @RequestParam(value = "trophyPicture") MultipartFile trophyPicture,
+            @RequestParam("problems") Long[] problemsId,
+            @RequestParam("isvirtual") Boolean isvirtual
+
     ){
         Competition competition = new Competition();
         Image trophyPic = null;
@@ -76,6 +78,7 @@ public class CompetitionController {
         competition.setDateTimeOfBeginning(dateTimeOfBeginning);
         competition.setNumberOfProblems(numberOfProblems);
         competition.setTrophyPicture(trophyPic);
+        competition.setIsvirtual(isvirtual);
 
         logger.info("Received request to create a competition: {}", competition);
         //return competitionService.createCompetition(competition);

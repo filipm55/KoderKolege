@@ -43,7 +43,10 @@ public class Competition {
     @Getter @Setter
     private boolean slicica_pehara = false;
 
-    public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara) {
+    @Getter @Setter
+    private Boolean isvirtual;
+
+    public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara, Boolean isvirtual) {
         this.competitionMaker =competitionMaker;
         this.dateTimeOfBeginning = dateTimeOfBeginning;
         this.dateTimeOfEnding = dateTimeOfEnding;
@@ -51,6 +54,7 @@ public class Competition {
         this.trophyPicture = trophyPicture;
         this.numberOfProblems = problems.size();
         this.slicica_pehara=slicica_pehara;
+        this.isvirtual=isvirtual;
     }
 
     public Competition() {

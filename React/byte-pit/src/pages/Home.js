@@ -32,7 +32,7 @@ Registrirajte se i pridružite se zajednici programera. Uživajte u programiranj
       {competitions &&
                         competitions.map((comp) => (
                             <div  key={comp.id}>
-                                {isCompetitionActive(comp) && (
+                                {isCompetitionActive(comp) && (!comp.isvirtual || comp.isvirtual===null) &&(
                                 <div className='natjecanje'>
                                     <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
                                     {comp.name ? (
