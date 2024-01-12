@@ -96,7 +96,7 @@ const AllTasks = () => {
                                   </Link>
                                 </span>}
                               </td>
-                              <td><Link className='taskName' to={`/tasks/${task.id}`}>RIJEŠI!</Link></td>
+                              <td><Link id="zeleno" className='taskName' to={`/tasks/${task.id}`}>RIJEŠI!</Link></td>
                         </tr>
                       ))
                 ))}</tbody></table>

@@ -11,7 +11,7 @@ div#prozor17 {
     flex-direction: column;
     width: 60%;
     height:fit-content;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -104,6 +104,10 @@ span.boja {
     margin-right: 3rem;
 }
 
+.ikona17 {
+    margin-bottom: -0.3rem;
+}
+
 @media screen and (max-width: 767px) {
     .body{
         display: flex;
@@ -113,3 +117,4 @@ span.boja {
         height: 70vh;
     }
 }
+

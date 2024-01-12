@@ -135,7 +135,7 @@ const Cal = () => {
                                     ) : (
                                         <p>Natjecanje {comp.id}</p>
                                     )}
-                                    <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
+                                    <p><ScheduleIcon className='ikona17'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona17'/> {formatDate(comp.dateTimeOfEnding)}</p>
                                     {isCompetitionActive(comp) && isLoggedIn && (
                                         <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 
                                         </Link>

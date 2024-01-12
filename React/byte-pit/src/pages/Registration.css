@@ -70,10 +70,19 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition */
-    margin-left: 36%;
+    margin-left: 5.3rem;
   }
   
   .submitGumb:hover {
     background-color: #beabab; /* Button color on hover */
+  }
+
+  .slova20 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .form20 , .submitGumb{
+    font-size: 1.5rem;
   }
   

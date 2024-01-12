@@ -115,9 +115,9 @@ const Registration = () => {
         return (
             <div>
             {<div className="wrapper">
-                <h2>Registracija</h2>
+                <h2 className='slova20'>Registracija</h2>
 
-                <form onSubmit={submitFja}>
+                <form className='form20' onSubmit={submitFja}>
 
                     <div className='kucica'><label>Ime:</label>
                         <input className='top' type="text" value={name} required

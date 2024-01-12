@@ -52,8 +52,8 @@ const Login = () => {
 
     return (
         <div className="wrapper">
-            <h2>Prijava</h2>
-            <form onSubmit={submitFja}>
+            <h2 className='slova20'>Prijava</h2>
+            <form className='form20' onSubmit={submitFja}>
                 <div className='kucica'>
                     <label>Korisničko ime:</label>
                     <input type="text" value={username} required onChange={(e) => setUsername(e.target.value)}></input>

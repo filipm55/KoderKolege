@@ -7,7 +7,7 @@
   background-color: #ffffff;
   color: #000000;
   padding: 5px 30px;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
 }
 
 .omotac {
@@ -44,6 +44,7 @@
     text-decoration: none;
     margin: 10px;
     transition: color 0.3s ease; /* Adding smooth color transition */
+    font-size: 1.4rem;
 }
   
   .middle-link {
