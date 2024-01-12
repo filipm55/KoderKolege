@@ -42,6 +42,11 @@ public class CompetitionController {
         return competitionService.listAll();
     }
 
+    @GetMapping("/virtual")
+    public List<Competition> listVirtualCompetitions() {
+        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()).toList();
+    };
+
     @PostMapping("")
     public ResponseEntity<String> createCompetition(
             @RequestParam("name") String name,

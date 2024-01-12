@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,6 +46,11 @@ public class Competition {
 
     @Getter @Setter
     private Boolean isvirtual;
+
+    @Getter @Setter
+    @OneToMany
+    private ArrayList<User> pristupiliNatjecanju;
+
 
     public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara, Boolean isvirtual) {
         this.competitionMaker =competitionMaker;

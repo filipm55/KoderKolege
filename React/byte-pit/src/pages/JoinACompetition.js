@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './JoinACompetition.css'; 
+import './JoinACompetition.css';
+import Cookies from "universal-cookie";
 
 
 const JoinACompetition = () => {
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const { competitionId } = useParams();
+
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
