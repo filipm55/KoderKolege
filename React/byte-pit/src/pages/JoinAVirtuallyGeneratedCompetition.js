@@ -12,6 +12,7 @@ const JoinACompetition = () => {
   const [adminUser, setAdmin] = useState(null);
   const [competitionCreated, setCompetitionCreated] = useState(false);
   const [processStarted, setProcessStarted] = useState(false);
+  const [competitionId, setCompetitionId] = useState(null);
 
   const pickRandomTasks = (tasks, count) => {
     const shuffledTasks = tasks.sort(() => 0.5 - Math.random());
@@ -93,6 +94,13 @@ const JoinACompetition = () => {
               } else {
                 setMessage(data);
               }
+              const competitionIdMatch = data.match(/s id-om:\s*(\d+)/);
+              if (competitionIdMatch && competitionIdMatch[1]) {
+                setCompetitionId(competitionIdMatch[1]);
+                //console.log('Competition ID:', competitionId);
+              } else {
+                console.error('Unable to extract competition ID from the message');
+              }
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -105,6 +113,19 @@ const JoinACompetition = () => {
         });
     }
   }, [adminUser, processStarted]);
+
+  
+  const startCompetition = () => {
+    if (competitionInfo && competitionInfo.length > 0) {
+      const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
+      if(competitionId) {
+        window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
+      }
+    } else {
+      console.error('No problems found in the competition');
+    }
+  };
+
   
   return (
     <div className="competition-container">
@@ -113,7 +134,7 @@ const JoinACompetition = () => {
           <p className="competition-disclaimer">
             May the odds be ever in your favour.
           </p>
-          <button className="start-button" >
+          <button className="start-button" onClick={startCompetition}>
             Pokreni Natjecanje
           </button>
         </div>
