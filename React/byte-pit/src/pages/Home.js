@@ -8,6 +8,7 @@ import EastIcon from '@mui/icons-material/East';
 import { Link } from 'react-router-dom';
 import { isCompetitionActive } from './Calendar.js';
 import { formatDate } from './Calendar.js';
+import Cookies from "universal-cookie";
 
 
 
@@ -15,6 +16,15 @@ import { formatDate } from './Calendar.js';
 
 
 const Home = () => {
+    const cookies = new Cookies();
+    const jwtToken = cookies.get('jwt_authorization');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        if (jwtToken) {
+            setIsLoggedIn(true);
+        }
+    }, [jwtToken]);
+
   const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
   var mapa = new Map();
   return  (
@@ -41,8 +51,10 @@ Registrirajte se i pridružite se zajednici programera. Uživajte u programiranj
                                         <p>Natjecanje {comp.id}</p>
                                     )}
                                     <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
+                                    {isLoggedIn &&
                                         <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 
                                         </Link>
+                                    }
                                 </div>)}
                             </div>
                         ))}

@@ -4,9 +4,14 @@ import 'react-calendar/dist/Calendar.css';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EastIcon from '@mui/icons-material/East';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 
 import useFetch from "../useFetch";
+import {useEffect, useState} from "react";
+
+
+
 
 
 export const formatTime = (timeString) => {
@@ -39,6 +44,15 @@ export const isCompetitionUpcoming = (comp) => {
     return currentDateTime < compEndDate;
 };
 const Cal = () => {
+    const cookies = new Cookies();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const jwtToken = cookies.get('jwt_authorization');
+    useEffect(() => {
+        if (jwtToken) {
+            setIsLoggedIn(true);
+        }
+    }, [jwtToken]);
+
     var mapa = new Map();
 
     const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
@@ -101,6 +115,7 @@ const Cal = () => {
         else return null;
     };
 
+
     return (
         <div className="body" id="izKalendara">
             <div id="prozor17">
@@ -121,7 +136,7 @@ const Cal = () => {
                                         <p>Natjecanje {comp.id}</p>
                                     )}
                                     <p><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
-                                    {isCompetitionActive(comp) && (
+                                    {isCompetitionActive(comp) && isLoggedIn && (
                                         <Link className='joinComp' to={`/competitions/${comp.id}`}> Pridruži se! 
                                         </Link>
                                         

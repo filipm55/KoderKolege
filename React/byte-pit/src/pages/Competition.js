@@ -25,6 +25,7 @@ const Competition = () => {
 
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //const [submittedTasks, setSubmittedTasks] = useState([]);
   //const [isSubmitting, setIsSubmitting] = useState()
@@ -54,6 +55,7 @@ const Competition = () => {
   
   useEffect(() => {
     if (jwtToken) {
+        setIsLoggedIn(true);
         const fetchData = async () => {
             try {
                 const url = `http://localhost:8080/users/${jwtToken}`;
@@ -217,7 +219,7 @@ const Competition = () => {
   if (!task) {
     return <div>Loading...</div>;
   }
-  if (fetchError) { //AKO POKUSAS PRISTUPIT NATJECANJU KOJE SE TRENUTNO NE ODRZAVA
+  if (fetchError || !isLoggedIn) { //AKO POKUSAS PRISTUPIT NATJECANJU KOJE SE TRENUTNO NE ODRZAVA
         return <div>FORBIDDEN</div>;
     }
     //NAPRAVIO SAM DA SE POKAŽE COMPETITION NAME KAD RJEŠAVAŠ ZADATAK
