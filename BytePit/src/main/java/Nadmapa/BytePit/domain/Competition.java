@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "COMPETITION")
@@ -49,7 +50,7 @@ public class Competition {
 
     @Getter @Setter
     @OneToMany
-    private ArrayList<User> pristupiliNatjecanju;
+    private List<User> pristupiliNatjecanju;
 
 
     public Competition(User competitionMaker, LocalDateTime dateTimeOfBeginning, LocalDateTime dateTimeOfEnding, Set<Problem> problems, Image trophyPicture, boolean slicica_pehara, Boolean isvirtual) {
@@ -61,6 +62,7 @@ public class Competition {
         this.numberOfProblems = problems.size();
         this.slicica_pehara=slicica_pehara;
         this.isvirtual=isvirtual;
+        pristupiliNatjecanju = new ArrayList<>();
     }
 
     public Competition() {

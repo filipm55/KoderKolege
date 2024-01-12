@@ -12,6 +12,8 @@ const JoinACompetition = () => {
   const jwtToken = cookies.get('jwt_authorization');
   const [userData, setUserData] = useState(null);
 
+
+
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
