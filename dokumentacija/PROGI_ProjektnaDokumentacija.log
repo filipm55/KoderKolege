@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  11 JAN 2024 17:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  13 JAN 2024 17:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2085,7 +2085,32 @@ has been already used, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.229 			\eject
                 <./slike/dijagramrazreda1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
+Underfull \hbox (badness 10000) in paragraph at lines 233--236
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
+
+ []
+
+<slike/dijagram stanja.png, id=519, 1029.8475pt x 719.68875pt>
+File: slike/dijagram stanja.png Graphic file (type png)
+<use slike/dijagram stanja.png>
+Package pdftex.def Info: slike/dijagram stanja.png  used on input line 247.
+(pdftex.def)             Requested size: 411.9317pt x 287.87039pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 243--252
 
  []
 
@@ -2098,14 +2123,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [33]
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[34
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
+has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.260 			
+          <./slike/dijagram stanja.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 261--263
 
  []
 
-<slike/dijagram aktivnosti.png, id=524, 737.75626pt x 800.23969pt>
+<slike/dijagram aktivnosti.png, id=534, 737.75626pt x 800.23969pt>
 File: slike/dijagram aktivnosti.png Graphic file (type png)
 <use slike/dijagram aktivnosti.png>
-Package pdftex.def Info: slike/dijagram aktivnosti.png  used on input line 253.
+Package pdftex.def Info: slike/dijagram aktivnosti.png  used on input line 266.
 
 (pdftex.def)             Requested size: 368.87723pt x 400.11887pt.
 
@@ -2116,23 +2156,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[34]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [35
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) 
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.260 			\eject
+l.273 			\eject
                 <./slike/Dijagram aktivnosti.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 263--264
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
 
  []
 
@@ -2221,7 +2252,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [40]
-<slike/EnvironmentVarijable.png, id=567, 1026.08344pt x 423.08063pt>
+<slike/EnvironmentVarijable.png, id=571, 1026.08344pt x 423.08063pt>
 File: slike/EnvironmentVarijable.png Graphic file (type png)
 <use slike/EnvironmentVarijable.png>
 Package pdftex.def Info: slike/EnvironmentVarijable.png  used on input line 74.
@@ -2281,7 +2312,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [44{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<slike/EnvironmentVarijableBackend.png, id=674, 925.20656pt x 171.64125pt>
+<slike/EnvironmentVarijableBackend.png, id=678, 925.20656pt x 171.64125pt>
 File: slike/EnvironmentVarijableBackend.png Graphic file (type png)
 <use slike/EnvironmentVarijableBackend.png>
 Package pdftex.def Info: slike/EnvironmentVarijableBackend.png  used on input l
@@ -2292,13 +2323,13 @@ Overfull \hbox (26.99135pt too wide) in paragraph at lines 205--208
  [][] 
  []
 
-<slike/PostavkeBazePodataka.png, id=675, 767.11594pt x 475.7775pt>
+<slike/PostavkeBazePodataka.png, id=679, 767.11594pt x 475.7775pt>
 File: slike/PostavkeBazePodataka.png Graphic file (type png)
 <use slike/PostavkeBazePodataka.png>
 Package pdftex.def Info: slike/PostavkeBazePodataka.png  used on input line 213
 .
 (pdftex.def)             Requested size: 383.55702pt x 237.88815pt.
-<slike/DockerFile.png, id=677, 733.23938pt x 117.43875pt>
+<slike/DockerFile.png, id=681, 733.23938pt x 117.43875pt>
 File: slike/DockerFile.png Graphic file (type png)
 <use slike/DockerFile.png>
 Package pdftex.def Info: slike/DockerFile.png  used on input line 221.
@@ -2334,7 +2365,7 @@ avkeBazePodataka.png> <./slike/DockerFile.png>]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family jkp in TS1 encoding.
             Default family used instead on input line 232.
-<slike/BuildComand.png, id=690, 939.51pt x 323.70938pt>
+<slike/BuildComand.png, id=694, 939.51pt x 323.70938pt>
 File: slike/BuildComand.png Graphic file (type png)
 <use slike/BuildComand.png>
 Package pdftex.def Info: slike/BuildComand.png  used on input line 241.
@@ -2344,7 +2375,7 @@ Overfull \hbox (34.14305pt too wide) in paragraph at lines 241--244
  [][] 
  []
 
-<slike/EnvironmentVarijableFront.png, id=692, 922.94812pt x 100.87688pt>
+<slike/EnvironmentVarijableFront.png, id=696, 922.94812pt x 100.87688pt>
 File: slike/EnvironmentVarijableFront.png Graphic file (type png)
 <use slike/EnvironmentVarijableFront.png>
 Package pdftex.def Info: slike/EnvironmentVarijableFront.png  used on input lin
@@ -2528,10 +2559,10 @@ anged.
 (rerunfilecheck)             Checksum: A6168D0D4C56A59022786A53502B9F7B;4419.
  ) 
 Here is how much of TeX's memory you used:
- 19924 strings out of 474398
- 344123 string characters out of 5754205
+ 19937 strings out of 474398
+ 344492 string characters out of 5754205
  2063036 words of memory out of 5000000
- 41295 multiletter control sequences out of 15000+600000
+ 41307 multiletter control sequences out of 15000+600000
  629486 words of font info for 189 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  86i,13n,115p,1223b,2216s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2545,10 +2576,10 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (55 pages, 6473218 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (55 pages, 6576129 bytes).
 PDF statistics:
- 891 PDF objects out of 1000 (max. 8388607)
- 773 compressed objects within 8 object streams
- 349 named destinations out of 1000 (max. 500000)
- 309 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 896 PDF objects out of 1000 (max. 8388607)
+ 776 compressed objects within 8 object streams
+ 350 named destinations out of 1000 (max. 500000)
+ 314 words of extra memory for PDF output out of 10000 (max. 10000000)
 
