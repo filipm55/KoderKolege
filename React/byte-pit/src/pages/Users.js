@@ -223,12 +223,7 @@ const Users = () => {
                                     <div className="kucica4">
                                     <p>Prezime: <input type = "text" defaultValue={user.lastname} onChange={(e) => setSurname(e.target.value)}></input></p>
                                     </div>
-                                    <div className="kucica4">
-                                    <p>Email: <input type = "text" defaultValue={user.email} length = "20" onChange={(e) => setEmail(e.target.value)}></input></p>
-                                    </div>
-                                    <div className="kucica4">
-                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
-                                    </div>
+                                    
                                         <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"
                                                                                                          onChange={handleFileChange}/>
                                         </div>
