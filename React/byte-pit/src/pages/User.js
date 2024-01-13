@@ -13,6 +13,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import EastIcon from '@mui/icons-material/East';
 
 
+
 const User = () => {
     const [sortingOption, setSortingOption] = useState('newest-first');
     const [sortingTasks, setSortingTasks] = useState([]);
@@ -389,7 +390,20 @@ const User = () => {
                             <option value="by-type-asc">težini - uzlazno</option>
                         </select></p>
                     </div>
-                    {tasks && sortingTasks.length > 0 ? (
+                    {userData && (userData.id==id || userData.userType==="ADMIN") && tasks && sortingTasks.length > 0 ? (
+                <ul>
+                  {sortingTasks.map(task => (
+                    <li key={task.id}>
+                        <Link to={`/edittask/${task.id}`}>
+                            {task.title}
+                        </Link>
+                        <p>{task.points}, {task.problemType}</p></li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No tasks found.</p>
+              )}
+                    {(!userData || userData.id!=id) && tasks && sortingTasks.length > 0 ? (
                 <ul>
                   {sortingTasks.map(task => (
                     <li key={task.id}>
@@ -402,6 +416,7 @@ const User = () => {
               ) : (
                 <p>No tasks found.</p>
               )}
+              
                     
                 </div>}
         </div>}
