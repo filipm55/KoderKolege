@@ -123,13 +123,16 @@ const Users = () => {
         formData.append('email', email);
         formData.append('userType', role);
         formData.append('image', file);
+        formData.append('password','');
+        console.log(username+name+surname+email+role)
+        console.log(formData.get('name'))
 
         fetch(`http://localhost:8080/users/${id}`, {
             method: 'PUT',
             body: formData,
         }).then(response => {
             console.log("USPJEH");
-            window.location.href = '/users'; // Redirect to the login page
+           // window.location.href = '/users'; // Redirect to the login page
         }).catch(error => {
             console.log("NEUSPJEH");
         });
@@ -146,7 +149,7 @@ const Users = () => {
             method: 'GET'
         }).then(response => {
             console.log("USPJEH");
-            window.location.href = '/users'; // Redirect to the login page
+            //window.location.href = '/users'; // Redirect to the login page
         }).catch(error => {
             console.log("NEUSPJEH");
         });
@@ -237,7 +240,7 @@ const Users = () => {
                                                                 onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
                                     </div>}
                                     </div>
-                                    <button id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+                                    <button type="button" id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
 
                                     
                                 </form>}

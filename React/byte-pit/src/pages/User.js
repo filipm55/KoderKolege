@@ -69,15 +69,14 @@ const User = () => {
     formData.append('image', file);
     formData.append('userType', user.userType);
 
-    if(password)
-        formData.append('password',password)
+    formData.append('password',password)
 
     fetch(`http://localhost:8080/users/${id}`, {
         method: 'PUT',
         body: formData,
     }).then(response => {
         console.log("USPJEH");
-        //window.location.href = '/users'; // Redirect to the login page
+        window.location.href = '/users'; // Redirect to the login page
     }).catch(error => {
         console.log("NEUSPJEH");
     });
