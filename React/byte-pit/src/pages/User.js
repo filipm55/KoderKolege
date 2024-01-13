@@ -365,16 +365,26 @@ const User = () => {
                             <p><CalendarMonthIcon className="pehar"/>
                                 OBJAVLJENA NATJECANJA</p>
                             <Calendar id="voditelj" tileContent={tileContent}/>
-                            <div id="natjecanja">
-                                {competitions && competitions.map((comp) => (
-                                    <div>
-                                        {(comp.competitionMaker.id == id) && (<div className="natjecanje" id ="malo">
-                                            <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
-                                            <p className="slova3">Natjecanje {comp.id} </p>
-                                            <p className="slova3"><ScheduleIcon className='ikona'/> {formatDate(comp.dateTimeOfBeginning) } <EastIcon className='ikona'/> {formatDate(comp.dateTimeOfEnding)}</p>
-                                        </div>)}
+                            <div id="natjecanja">                                      
+                                            {competitions && competitions.map((comp) => (
+                                                ((comp.competitionMaker.id == id)&&
+                                                <div key={comp.id} className="natjecanje" id="malo">
+                                                <span className="boja" style={{ backgroundColor: mapa.get(comp.id) }}></span>
+                                                <p className="slova3">Natjecanje {comp.id} </p>
+                                                <p className="slova3">
+                                                    <ScheduleIcon className="ikona" /> {formatDate(comp.dateTimeOfBeginning)}{' '}
+                                                    <EastIcon className="ikona" /> {formatDate(comp.dateTimeOfEnding)}
+                                                </p>
+                                                {!isCompetitionActive(comp) && !comp.isvirtual && (
+                                                    <Link className="joinComp" to={'/editcompetition/'+comp.id}>
+                                                        <div>Uredi natjecanje</div>
+                                                    </Link>
+                                                )}
+                                                {/*(userData && (userData.id == id || userData.userType === 'ADMIN')) &&*/ }
+                                        
                                     </div>
-                                ))}
+                                )))}
+                                
                             </div>
                         </div>
                     }

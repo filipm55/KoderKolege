@@ -20,6 +20,7 @@ import Competition from "./pages/Competition"
 import Rank from "./pages/Rank";
 import VirtualCalendar from "./pages/VirtualCalendar";
 import EditTask from "./pages/EditTask";
+import EditCompetition from "./pages/EditCompetition";
 import JoinAVirtuallyGeneratedCompetition from "./pages/JoinAVirtuallyGeneratedCompetition";
 
 function App() {
@@ -49,8 +50,9 @@ function App() {
                 <Route exact path='/virtual/randomTasks' element={<JoinAVirtuallyGeneratedCompetition />} />
                 <Route exact path='/competitions/:competitionId/:taskId' element={<Competition />} />
                 <Route exact path='/virtual/competitionChoice' element={<VirtualCalendar />} />
-                
                 <Route exact path='/edittask/:id' element={<EditTask />} />
+                <Route exact path='/editcompetition/:id' element={<EditCompetition />} />
+
 
           </Routes>
         </div>
