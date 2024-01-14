@@ -106,6 +106,7 @@ public class UserServiceJpa implements UserService {
             if(user.getConfirmed() && user.getUserType()== UserType.COMPETITOR ) return 1;
             else if (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType()== UserType.COMPETITION_LEADER )return 1;
             else if(user.getUserType()==UserType.ADMIN) return 1;
+            else if(user.getUserType()==  UserType.COMPETITION_LEADER  && user.getConfirmed() && !user.getConfirmedByAdmin()) return 2;
             else return 0;
         }
         return -1;

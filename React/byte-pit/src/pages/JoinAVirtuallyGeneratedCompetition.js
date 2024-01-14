@@ -147,7 +147,7 @@ const JoinACompetition = () => {
         <div className="competition-details">
           <p className="competition-disclaimer">
             May the odds be ever in your favour.
-            Riješavanje traje 2 sata.
+            Rješavanje traje 2 sata.
           </p>
           <button className="start-button" onClick={startCompetition}>
             Pokreni Natjecanje
