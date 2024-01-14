@@ -130,6 +130,8 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
             }
 
             BigDecimal points = BigDecimal.valueOf(((long) problem.getPoints() * correctOutputs) / totalExamples);
+            double percentage=points.doubleValue()/problem.getPoints();
+            cs.setPercentage_of_total(percentage);
             cs.setPoints(points);
             userCodeFileRepository.save(cs);
             System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));

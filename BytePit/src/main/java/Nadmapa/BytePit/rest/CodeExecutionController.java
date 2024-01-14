@@ -39,18 +39,8 @@ public class CodeExecutionController {
 
     @GetMapping("/usersolutions/{id}/{taskId}")
     public List<CodeSub> correctSolutions(@PathVariable Long id, @PathVariable Long taskId) {
-        Optional<Problem> problemOptional=prs.getProblemById(taskId);
-        double fullpoints = 0;
-        if (problemOptional.isPresent()) {
-            Problem problem = problemOptional.get();
-             fullpoints = problem.getPoints();
-
-        } else {
-            System.out.println("No Problem found for taskId: " + taskId);
-            return null;
-        }
-        System.out.println(cr.find100percentsubs(id,taskId,fullpoints));
-        return cr.find100percentsubs(id,taskId,fullpoints);
+        System.out.println(cr.find100percentsubs(id,taskId));
+        return cr.find100percentsubs(id,taskId);
     }
 
     @PostMapping("/submit/{id}")

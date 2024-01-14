@@ -15,8 +15,8 @@ public interface UserCodeFileRepository extends JpaRepository<CodeSub, Long> {
     @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :competitionId AND username = :username", nativeQuery = true)
     List<CodeSub> findByCompetitionIdAndUsername(Long competitionId, String username);
 
-    @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :compId AND problem_id = :taskId AND points= :fullpoints", nativeQuery = true)
-    List<CodeSub> find100percentsubs (Long compId,Long taskId,double fullpoints);
+    @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :compId AND problem_id = :taskId AND percentage_of_total= 1", nativeQuery = true)
+    List<CodeSub> find100percentsubs (Long compId,Long taskId);
 
 
 }

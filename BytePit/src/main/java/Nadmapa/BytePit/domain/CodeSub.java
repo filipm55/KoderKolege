@@ -45,6 +45,10 @@ public class CodeSub {
     @Column(name = "points", precision = 10, scale = 2)
     private BigDecimal points;
 
+    @Getter @Setter
+    @Column(name = "percentage_of_total")
+    private double percentage_of_total;
+
     public CodeSub() {
         this.points = null;
     }
