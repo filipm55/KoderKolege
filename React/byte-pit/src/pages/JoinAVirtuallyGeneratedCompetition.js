@@ -61,9 +61,19 @@ const JoinACompetition = () => {
           const problemsArray = Array.from(new Set(randomtasks.map(problem => problem.id)));
           const trophyPictureFile = new Blob([], { type: 'image/png' });
 
+
+          const currentDateTime1 = new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
+          const currentDateTime = new Date(currentDateTime1);
+          currentDateTime.setHours(currentDateTime.getHours()+1);
+          const dateTimeOfEnding = new Date(currentDateTime);
+          dateTimeOfEnding.setHours(dateTimeOfEnding.getHours() + 2);
+
+          const formattedDateTimeOfBeginning = new Date(currentDateTime).toISOString();
+          const formattedDateTimeOfEnding = dateTimeOfEnding.toISOString();
+
           formData.append('name', "Virtualno");
-         formData.append('dateTimeOfBeginning', "2024-01-05T00:00:00");
-          formData.append('dateTimeOfEnding', "3000-01-01T00:00:00");
+          formData.append('dateTimeOfBeginning', formattedDateTimeOfBeginning);
+          formData.append('dateTimeOfEnding', formattedDateTimeOfEnding);
           formData.append('numberOfProblems', 5);
           formData.append('trophyPicture', trophyPictureFile);
           formData.append('problems', problemsArray);

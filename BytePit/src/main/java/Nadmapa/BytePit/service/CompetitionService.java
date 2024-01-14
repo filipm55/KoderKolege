@@ -17,4 +17,6 @@ public interface CompetitionService {
     void saveCompetition(Competition competition);
 
     void deleteCompetitionById(Long id);
+
+    void krajNatjecanja(Long competitionId);
 }

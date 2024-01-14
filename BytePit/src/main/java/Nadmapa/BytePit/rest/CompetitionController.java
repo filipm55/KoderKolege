@@ -7,13 +7,16 @@ import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.ProblemService;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.CompetitionDeleteService;
+import Nadmapa.BytePit.service.impl.CompetitionSchedulerService;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +28,7 @@ import java.util.*;
 @RequestMapping("/competitions")
 public class CompetitionController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private CompetitionService competitionService;
 
@@ -39,6 +43,15 @@ public class CompetitionController {
 
     @Autowired
     private CompetitionDeleteService competitionDeleteService;
+    private final CompetitionSchedulerService schedulerService;
+
+    @Autowired
+    public CompetitionController(CompetitionSchedulerService schedulerService) {
+        this.schedulerService = schedulerService;
+    }
+
+
+
 
     @GetMapping("")
     public List<Competition> listCompetition(){
@@ -50,10 +63,7 @@ public class CompetitionController {
         }).toList();
     }
 
-    @GetMapping("/virtual")
-    public List<Competition> listVirtualCompetitions() {
-        return competitionService.listAll().stream().filter( (e) -> e.getIsvirtual()!=null && e.getIsvirtual()).toList();
-    };
+
 
     @GetMapping("/{competitionId}/competitors/{userId}")
     public ResponseEntity<Boolean> hasEnteredCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
@@ -76,8 +86,10 @@ public class CompetitionController {
     public ResponseEntity<String> createCompetition(
             @RequestParam("name") String name,
             @RequestParam("competitionMaker") Long competitionMakerId,
-            @RequestParam("dateTimeOfBeginning") LocalDateTime dateTimeOfBeginning,
-            @RequestParam("dateTimeOfEnding") LocalDateTime dateTimeOfEnding,
+            @RequestParam("dateTimeOfBeginning")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime dateTimeOfBeginning,
+            @RequestParam("dateTimeOfEnding")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime dateTimeOfEnding,
             @RequestParam("numberOfProblems") int numberOfProblems,
             @RequestParam(value = "trophyPicture") MultipartFile trophyPicture,
             @RequestParam("problems") Long[] problemsId,
@@ -121,7 +133,9 @@ public class CompetitionController {
         logger.info("Received request to create a competition: {}", competition);
         //return competitionService.createCompetition(competition);
         ResponseEntity<String> returnValue = competitionService.createCompetition(competition);
-        if(competition.getName().equals("Virtualno")) competitionDeleteService.deleteVirtualAfter2H(competition); //izbrisi sva za vjezbu nakon 2 sata
+        //if(competition.getName().equals("Virtualno")) competitionDeleteService.deleteVirtualAfter2H(competition); //izbrisi sva za vjezbu nakon 2 sata
+        schedulerService.scheduleCompetitionEnding(competition.getId(), competition.getDateTimeOfEnding());
+
         return returnValue;
     }
     @PutMapping("/{competitionId}")
@@ -184,7 +198,6 @@ public class CompetitionController {
 
     @PutMapping("/{competitionId}/competitors/{userId}")
     public void enterCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
-        System.out.println("OVdje sam");
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
@@ -232,6 +245,8 @@ public class CompetitionController {
             return null;
         }
     }
+
+
 
 
 }
