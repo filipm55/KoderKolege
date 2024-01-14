@@ -67,6 +67,9 @@ const Navbar = () => {
             VJEŽBA
           </Link>
           <p>|</p>
+          <Link to='competitions/results' className="nav-link middle-link">
+            REZULTATI
+          </Link>
         </div>
       </div>
 
