@@ -54,6 +54,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+    font-size: 1.2rem;
     transition: border-color 0.3s ease; /* Smooth transition */
   }
   

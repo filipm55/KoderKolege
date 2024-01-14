@@ -211,7 +211,8 @@ const Users = () => {
                                     <div className="nekidio">
                                        {/* <p className="podatak"> <EmailIcon className="ikona"/> {user.email}</p>*/}
                                         <p className="podatak"><PersonIcon className="ikona"/> {user.username}</p>
-                                        <p className="podatak"><FilterVintageIcon className="ikona"></FilterVintageIcon> {user.userType}</p>
+                                        <p className="podatak"><FilterVintageIcon className="ikona"></FilterVintageIcon> 
+                                        {user.userType === 'COMPETITOR' ? ("NATJECATELJ") : ("VODITELJ NATJECANJA")}</p>
                                     </div>
                                  }
                                 {mapa.get(user.username) &&

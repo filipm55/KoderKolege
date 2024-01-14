@@ -17,14 +17,17 @@ form#addTask {
     border: 0px;
     margin-top: -10px;
     margin-left: 2px;
+    font-size: 1.5rem;
 }
+
+
 
 div.input {
     margin-top: 10px;
 }
 
 button#addTask {
-    font-size: 1rem;
+    font-size: 1.5rem;
     justify-self: center;
     background-color: whitesmoke;
     border: 1px solid black;
@@ -66,10 +69,12 @@ h2#novizd {
     font-size: 6vh;
 }
 
-input, textarea, select {
+input, textarea, select, button {
     border-radius: 3px;
     border: 1px solid #ccc;
+    font-size: 1.5rem;
 }
+
 
 @media screen and (max-width: 767px) {
     div#pic {

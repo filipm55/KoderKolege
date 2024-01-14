@@ -75,7 +75,7 @@ div.ikonaOpis{
 p {
     margin-left: 6px;
     color: #494545;
-    font-size: large;
+    font-size: 1.5rem;
 }
 
 div#gornjidio{
@@ -155,4 +155,17 @@ select {
 
 div#voditelj {
     width: 100px;
+}
+
+div.korisnik {
+    margin-top: -1rem;
+}
+
+.linkzazad {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+}
+
+li {
+    font-size: 1.5rem;
 }

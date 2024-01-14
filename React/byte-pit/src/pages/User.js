@@ -66,6 +66,7 @@ const User = () => {
     formData.append('name', name);
     formData.append('lastname', surname);
     formData.append('username', username);
+    console.log(username);
     formData.append('email', email);
     formData.append('image', file);
     formData.append('userType', user.userType);
@@ -404,21 +405,23 @@ const User = () => {
                 <ul>
                   {sortingTasks.map(task => (
                     <li key={task.id}>
-                        <Link to={`/edittask/${task.id}`}>
                             {task.title}
+                        <Link className="linkzazad" to={`/edittask/${task.id}`}>
+                            UREDI ZADATAK!
                         </Link>
                         <p>{task.points}, {task.problemType}</p></li>
                   ))}
                 </ul>
               ) : (
-                <p>No tasks found.</p>
+                <p></p>
               )}
                     {(!userData || userData.id!=id) && (tasks && sortingTasks.length > 0 ? (
                 <ul>
                   {sortingTasks.map(task => (
                     <li key={task.id}>
+                        {task.title}
                         <Link to={`/tasks/${task.id}`}>
-                            {task.title}
+                            RIJEŠI!
                         </Link>
                         <p>{task.points}, {task.problemType}</p></li>
                   ))}
