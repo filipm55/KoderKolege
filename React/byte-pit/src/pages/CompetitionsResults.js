@@ -76,9 +76,11 @@ const CompetitionsResult = () => {
                 <table className='popisZad'>
                     <thead>
                     <tr id="vrh">
-                        <td className='tName'>Ime natjecanja</td>
-                        <td> Početak</td>
+                        <td>Ime natjecanja</td>
+                        <td>Početak</td>
                         <td>Kraj</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </thead>
                     <tbody>

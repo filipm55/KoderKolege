@@ -23,9 +23,9 @@
    list-style-type: none;
 }
 
-td {
+td , #k{
    text-align: center;
-   font-size: 1.2rem;
+   font-size: 1.5rem;
 }
 
 
@@ -84,7 +84,7 @@ div#naslovSort {
 #korisnik {
    text-decoration: none;
    color: black;
-   font-size: 3vh; 
+   font-size: 1.5rem; 
 }
 
 #tezina11 {

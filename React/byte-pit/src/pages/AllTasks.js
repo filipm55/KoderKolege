@@ -88,7 +88,7 @@ const AllTasks = () => {
                               <td>{task.problemType}</td>
                               <td>{task.points}</td>
                               <td>
-                              {(task.problemMaker == 1) && <span id ="korisnik">Admin</span>}
+                              {(task.problemMaker == 1) && <span id ="k">Admin</span>}
                               {findMaker(task.problemMaker) && 
                                 <span>
                                   <Link id ="korisnik" to={'/users/'+problemMakerr.id}>
