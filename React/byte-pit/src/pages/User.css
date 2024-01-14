@@ -112,10 +112,15 @@ h6{
 
 div#korisniknagrade {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     height: 40%;
+}
+
+div#sredisnjiProzor {
+    display: flex;
+    justify-content: space-between;
 }
 
 div#nagrade {
@@ -132,7 +137,7 @@ div#kalendar {
     margin-right: 5vw;
     margin-top: -90px;
     width: 37rem;
-    height: 30rem;
+    height: fit-content;
 }
 
 div#gornjidio{
@@ -141,9 +146,8 @@ div#gornjidio{
 
 div#zadaci {
     padding-left: 10vw;
-    padding-top: 10vw;
+    padding-top: 6vw;
     position: relative;
-    top: -250px;
 }
 
 b {
