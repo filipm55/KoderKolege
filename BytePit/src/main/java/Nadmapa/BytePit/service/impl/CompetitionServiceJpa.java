@@ -3,20 +3,26 @@ package Nadmapa.BytePit.service.impl;
 import Nadmapa.BytePit.domain.Competition;
 import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.repository.CompetitionRepository;
+import Nadmapa.BytePit.repository.ProblemRepository;
 import Nadmapa.BytePit.service.CompetitionService;
+import Nadmapa.BytePit.service.ProblemService;
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class CompetitionServiceJpa implements CompetitionService {
     @Autowired
     private CompetitionRepository competitionRepo;
+    @Autowired
+    ProblemRepository problemRepository;
     @Override
     public List<Competition> listAll() {
         return competitionRepo.findAll();
@@ -43,4 +49,27 @@ public class CompetitionServiceJpa implements CompetitionService {
     public void deleteCompetitionById(Long id) {
         competitionRepo.deleteById(id.toString());
     }
+
+    @Override
+    public void krajNatjecanja(Long competitionId) {
+        System.out.println("Kraj natjecanja: " + competitionId);
+        Optional<Competition> competitionOptional = competitionRepo.findById(String.valueOf(competitionId));
+        if(competitionOptional.isPresent()){
+
+            Competition competition = competitionOptional.get();
+            if(competition.getName().equals("Virtualno")) {
+                competitionRepo.deleteById(String.valueOf(competitionId));
+                return;
+            }
+            competition.setIsvirtual(true);
+
+            Set<Problem> problems = competition.getProblems();
+            for (Problem problem: problems) {
+                problem.setIsPrivate(false);
+                problemRepository.save(problem);
+            }
+            competitionRepo.save(competition);
+        }
+    }
+
 }

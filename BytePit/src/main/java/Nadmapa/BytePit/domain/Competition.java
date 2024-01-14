@@ -36,7 +36,7 @@ public class Competition {
     @Getter @Setter
     private int numberOfProblems;
     @Getter
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Problem> problems = new HashSet<>();
     @Getter @Setter
     @OneToOne(cascade = CascadeType.ALL)
