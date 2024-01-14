@@ -23,8 +23,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByConfirmationHash(String ConfirmationHash);
 
-    @Query(value = "SELECT * FROM code_submissions WHERE username= :username", nativeQuery = true)
-    List<CodeSub> rjesavani (String username);
+
 
 
 }

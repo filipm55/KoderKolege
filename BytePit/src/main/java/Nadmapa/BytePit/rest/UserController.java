@@ -224,7 +224,7 @@ public class UserController {
             double zbroj = 0;
             int ukBrojStoPostotnih = ukbroj;
             for (CodeSub codeSub : svisubmitovi) {
-                zbroj += codeSub.getPoints().doubleValue();
+                zbroj += codeSub.getPercentage_of_total();
                 if(codeSub.getPercentage_of_total() <1){
                     ukBrojStoPostotnih--;
                 }

@@ -4,6 +4,7 @@ import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.User;
 import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.domain.UserType;
+import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.repository.UserRepository;
 
 import Nadmapa.BytePit.service.UserService;
@@ -26,6 +27,9 @@ public class UserServiceJpa implements UserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private UserCodeFileRepository codesubrepo;
 
     @Override
     public List<User> listAll(){
@@ -53,7 +57,7 @@ public class UserServiceJpa implements UserService {
     }
     @Override
     public List<CodeSub> rjesavani(String username) {
-        return userRepo.rjesavani(username);
+        return codesubrepo.rjesavani(username);
     }
 
     @Override
