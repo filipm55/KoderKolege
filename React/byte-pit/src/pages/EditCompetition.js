@@ -20,6 +20,7 @@ const CreateCompetition = () => {
     const [expandedTask, setExpandedTask] = useState([]);
     const [isError, setIsError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+
     const emptyBlob = new Blob([''], { type: 'text/plain' });
     const [picture, setPicture] = useState(emptyBlob);
 
@@ -127,11 +128,15 @@ const CreateCompetition = () => {
         const formData = new FormData();
         console.log(name, startTime);
         formData.append('name', name);
-        formData.append('competitionMaker', competition.competitionMaker);
+        formData.append('competitionMaker', competition.competitionMaker.id);
         formData.append('dateTimeOfBeginning', startTime);
         formData.append('dateTimeOfEnding', endTime);
         formData.append('numberOfProblems', numOfProblems);
-        formData.append('trophyPicture', picture);
+        if (picture.size > 0) {
+            formData.append('trophyPicture', picture);
+        }
+        else formData.append('trophyPicture', emptyBlob);
+
         formData.append('problems', problemsArray);
         //formData.append('isvirtual',Boolean(false));
         console.log(formData.get('dateTimeOfBeginning'));
@@ -237,7 +242,7 @@ const CreateCompetition = () => {
                         }
 
                     </div>
-                    <button className='submitGumb' id="addTask">Stvori natjecanje</button>
+                    <button className='submitGumb' id="addTask">Spremi promjene</button>
 
                 </form>
             </div>

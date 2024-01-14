@@ -112,7 +112,9 @@ public class ProblemController {
                 // Handle errors, including network errors or server errors
                 console.error('Error:', error.message);
             }); */
+
             Optional<Problem> problem2 = problemService.getProblemById(id);
+
             if(problem2.isPresent()){
 
                 Problem problemStari = problem2.get();
@@ -147,8 +149,9 @@ public class ProblemController {
                 if(problemStari.getPoints()!=problemNovi.getPoints()){
                     problemStari.setPoints(problemNovi.getPoints());
                 }
-                if(problemStari.getTitle().equals(problemNovi.getTitle())){
+                if(!problemStari.getTitle().equals(problemNovi.getTitle())){
                     problemStari.setTitle(problemNovi.getTitle());
+                    System.out.println("OVDJE SAM");
                 }
 
                 try{

@@ -127,7 +127,7 @@ public class CompetitionController {
     @PutMapping("/{competitionId}")
     public ResponseEntity<String> updateCompetition(@PathVariable Long competitionId,
                                                     @RequestParam("name") String name,
-                                                    @RequestParam("competitionMaker") Long competitionMakerId,
+                                                    @RequestParam("competitionMaker") String competitionMakerId,
                                                     @RequestParam("dateTimeOfBeginning") LocalDateTime dateTimeOfBeginning,
                                                     @RequestParam("dateTimeOfEnding") LocalDateTime dateTimeOfEnding,
                                                     @RequestParam("numberOfProblems") int numberOfProblems,
@@ -137,8 +137,8 @@ public class CompetitionController {
         Optional<Competition> optionalCompetition = Optional.ofNullable(competitionService.getCompetition(String.valueOf(competitionId)));
         if(optionalCompetition.isPresent()){
             Competition competition = optionalCompetition.get();
-            
-            if(!Objects.equals(competitionMakerId, competition.getCompetitionMaker().getId())){
+            System.out.println(competitionMakerId.toString() + " " + competition.getCompetitionMaker().getId());
+            if(!competitionMakerId.equals(Long.toString(competition.getCompetitionMaker().getId()))){
                 Optional<User> cmptMkr = userService.getUserById(competitionId);
                 if(cmptMkr.isPresent()){
                     User compMkr = cmptMkr.get();

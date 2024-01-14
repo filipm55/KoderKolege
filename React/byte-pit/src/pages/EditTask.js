@@ -103,8 +103,8 @@ const AddTask = () => {
         };
 
         console.log(JSON.stringify(requestData));
-        fetch('http://localhost:8080/problems', {
-            method: 'POST',
+        fetch(`http://localhost:8080/problems/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -114,7 +114,7 @@ const AddTask = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             // If the response is OK, return the JSON data
-            return response.json();
+            return response.text();
         })
             .then(data => {
                 // Handle the JSON data

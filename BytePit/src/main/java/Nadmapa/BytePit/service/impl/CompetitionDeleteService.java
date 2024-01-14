@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class CompetitionDeleteService {
-    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(50);
 
     @Autowired
     private CompetitionService competitionService;
