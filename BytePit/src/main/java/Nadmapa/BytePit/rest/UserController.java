@@ -216,15 +216,17 @@ public class UserController {
     }
     @GetMapping ("/allactivity/{id}")
     public Map<String, Object> getStats(@PathVariable Long id) {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" );
         Map<String, Object> map = new HashMap<>();
         userService.getUserById(id).ifPresent(user -> {
 
             int ukbroj = userService.rjesavani(user.getUsername()).size();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + ukbroj);
             List<CodeSub> svisubmitovi = userService.rjesavani(user.getUsername());
             double zbroj = 0;
             int ukBrojStoPostotnih = ukbroj;
             for (CodeSub codeSub : svisubmitovi) {
-                zbroj += codeSub.getPoints().doubleValue();
+                zbroj += codeSub.getPercentage_of_total();
                 if(codeSub.getPercentage_of_total() <1){
                     ukBrojStoPostotnih--;
                 }
