@@ -132,6 +132,12 @@ const User = () => {
     const { data: tasks, error: tasksError } = useFetch(
       `http://localhost:8080/problems/byMakerId/${id}`
     );
+
+        
+    const { data: stats, error: statsError } = useFetch(
+        `http://localhost:8080/users/allactivity/${id}`
+      );
+
     const handleSortingChange = (e) => {
         setSortingOption(e.target.value);
     };
@@ -315,17 +321,18 @@ const User = () => {
                                     
                                 </form>}
                             </div>
+                            {console.log(stats)}
                 {isCompetitor && <div id="statistika">
                     <div className="brojopis">
-                        <h6>20</h6> {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}
+                        {stats && <h6>{stats.ukbroj}</h6>} {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}
                         <p>Započeti zadaci</p>
                     </div>
                     <div className="brojopis">
-                        <h6>20</h6> {/*UMETNI BROJ SVIH RJEŠENIH ZADATAKA */}
+                    {stats && <h6>{stats.ukBrojStoPostotnih}</h6>} {/*UMETNI BROJ SVIH RJEŠENIH ZADATAKA */}
                         <p>Uspješno rješeni zadaci</p>
                     </div>
                     <div className="brojopis">
-                        <h6>100%</h6> {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
+                    {stats && <h6>{stats.postotak}%</h6>} {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
                         <p>Uspješnost</p>
                     </div>
                 </div>}
