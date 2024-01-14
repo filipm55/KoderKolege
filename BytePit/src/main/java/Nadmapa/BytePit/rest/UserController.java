@@ -222,13 +222,17 @@ public class UserController {
             int ukbroj = userService.rjesavani(user.getUsername()).size();
             List<CodeSub> svisubmitovi = userService.rjesavani(user.getUsername());
             double zbroj = 0;
+            int ukBrojStoPostotnih = ukbroj;
             for (CodeSub codeSub : svisubmitovi) {
                 zbroj += codeSub.getPoints().doubleValue();
+                if(codeSub.getPercentage_of_total() <1){
+                    ukBrojStoPostotnih--;
+                }
             }
             double prosjek = zbroj / ukbroj * 100;
             map.put("ukbroj", ukbroj);
             map.put("prosjek", prosjek);
-
+            map.put("stoPostotni",ukBrojStoPostotnih);
         });
         return map;
     }
