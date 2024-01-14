@@ -48,4 +48,12 @@ public class CodeSub {
     public CodeSub() {
         this.points = null;
     }
+
+    public BigDecimal getPoints() {
+        return points;
+    }
+
+    public void setPoints(BigDecimal points) {
+        this.points = points;
+    }
 }
