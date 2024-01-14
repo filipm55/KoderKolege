@@ -99,7 +99,7 @@ const VirtualCalendar = () => {
 
                     <div>
                         {competition.map((comp, index) => (
-                            (
+                            (comp.isvirtual && 
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
                                     {comp.name ? comp.name : "Natjecanje "+comp.id}
                                 </div>
