@@ -420,7 +420,7 @@ const User = () => {
                   {sortingTasks.map(task => (
                     <li key={task.id}>
                         {task.title}
-                        <Link to={`/tasks/${task.id}`}>
+                        <Link className="linkzazad"  to={`/tasks/${task.id}`}>
                             RIJEŠI!
                         </Link>
                         <p>{task.points}, {task.problemType}</p></li>

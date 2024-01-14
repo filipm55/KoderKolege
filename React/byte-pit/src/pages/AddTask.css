@@ -24,6 +24,7 @@ form#addTask {
 
 div.input {
     margin-top: 10px;
+    margin-bottom: 1rem;
 }
 
 button#addTask {
@@ -50,6 +51,18 @@ div#pic {
     align-self: center;
     border-radius: 10px;
     margin-top: 70px;
+}
+
+div#pic2 {
+    margin-left: 50px;
+    height: 46em;
+    width: 70vw;
+    background-image: url("../../public/pictures/pic5.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 7rem;
 }
 
 
