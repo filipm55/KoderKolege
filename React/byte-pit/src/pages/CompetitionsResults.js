@@ -85,7 +85,7 @@ const CompetitionsResult = () => {
                     </thead>
                     <tbody>
                     {competitions.map((comp) => (
-                        <tr key={comp.id}>
+                        comp.isvirtual && <tr key={comp.id}>
                             <td>{comp.name}</td>
                             <td>{formatDate(comp.dateTimeOfBeginning)}</td>
                             <td>{formatDate(comp.dateTimeOfEnding)}</td>
