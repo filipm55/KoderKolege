@@ -15,8 +15,12 @@ const JoinACompetition = () => {
   const [competitionId, setCompetitionId] = useState(null);
 
   const pickRandomTasks = (tasks, count) => {
-    const shuffledTasks = tasks.sort(() => 0.5 - Math.random());
-    return shuffledTasks.slice(0, count);
+  const publicTasks = tasks.filter(task => !task.isPrivate);
+
+  const shuffledTasks = publicTasks.sort(() => 0.5 - Math.random());
+
+  return shuffledTasks.slice(0, count);
+    
   };
 
   const fetchAdminUser = useCallback(async () => {

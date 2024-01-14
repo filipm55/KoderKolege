@@ -6,6 +6,7 @@ import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.CodeExecutionService;
 import Nadmapa.BytePit.service.CodeSubService;
 import Nadmapa.BytePit.service.CompSubmitService;
+import Nadmapa.BytePit.service.ProblemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,11 +28,29 @@ public class CodeExecutionController {
     private UserCodeFileRepository cr;
 
     @Autowired
+    private ProblemService prs;
+    @Autowired
      private CodeSubService cs;
 
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
         return ces.execute(id, submission.getCode(), submission.getInput());
+    }
+
+    @GetMapping("/usersolutions/{id}/{taskId}")
+    public List<CodeSub> correctSolutions(@PathVariable Long id, @PathVariable Long taskId) {
+        Optional<Problem> problemOptional=prs.getProblemById(taskId);
+        double fullpoints = 0;
+        if (problemOptional.isPresent()) {
+            Problem problem = problemOptional.get();
+             fullpoints = problem.getPoints();
+
+        } else {
+            System.out.println("No Problem found for taskId: " + taskId);
+            return null;
+        }
+        System.out.println(cr.find100percentsubs(id,taskId,fullpoints));
+        return cr.find100percentsubs(id,taskId,fullpoints);
     }
 
     @PostMapping("/submit/{id}")
