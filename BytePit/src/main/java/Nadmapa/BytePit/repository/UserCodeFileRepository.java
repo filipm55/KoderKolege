@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.repository;
 
 import Nadmapa.BytePit.domain.CodeSub;
+import Nadmapa.BytePit.domain.Problem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,6 +18,7 @@ public interface UserCodeFileRepository extends JpaRepository<CodeSub, Long> {
 
     @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :compId AND problem_id = :taskId AND percentage_of_total= 1", nativeQuery = true)
     List<CodeSub> find100percentsubs (Long compId,Long taskId);
+
 
 
 }

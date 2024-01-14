@@ -81,11 +81,13 @@ const Navbar = () => {
           )}
           {isLoggedIn && userData && (
             <div className="user-info">
-            <Link to={`/users/${userData.id}`}>
+            {userData.id!=1 &&<Link to={`/users/${userData.id}`}>
               <img src={logoUser} className="logoUser" alt="User Logo" />
-              </Link>
+              </Link>}
             <Link to={`/users/${userData.id}`} style={{ textDecoration: 'none' }}>
-            <div className="nav-link middle-link">{userData && `${userData.name} ${userData.lastname}`}</div></Link>
+            <div className="nav-link middle-link">{userData && userData.id!=1 &&`${userData.name} ${userData.lastname}`}</div></Link>
+            {userData && userData.id == 1 &&
+            <div><img src={logoUser} className="logoUser" alt="User Logo" />admin</div>}
           </div>
           )}
           { !userData && (

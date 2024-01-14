@@ -1,6 +1,8 @@
 package Nadmapa.BytePit.service.impl;
 
+import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.domain.UserType;
 import Nadmapa.BytePit.repository.UserRepository;
 
@@ -48,6 +50,10 @@ public class UserServiceJpa implements UserService {
     @Override
     public Optional<User> getUserById(Long id) {
         return userRepo.findById(id);
+    }
+    @Override
+    public List<CodeSub> rjesavani(String username) {
+        return userRepo.rjesavani(username);
     }
 
     @Override
