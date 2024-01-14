@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 //import Cookies from "universal-cookie"
 //import { useHistory } from 'react-router-dom'; // Import useHistory
 
-const AddTask = () => {
+const EditTask = () => {
     const [taskName, setTaskName] = useState('');
     const [taskPoints, setTaskPoints] = useState('');
     const [taskTime, setTaskTime] = useState('');
@@ -229,4 +229,4 @@ const AddTask = () => {
     )
 };
 
-export default AddTask;
+export default EditTask;

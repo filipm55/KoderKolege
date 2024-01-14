@@ -219,7 +219,7 @@ const User = () => {
                     <div>
                         {competition.map((comp, index) => (
                                 (comp.competitionMaker.id == id) && <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                   Natjecanje! {comp.id}
+                                   {comp.name}
                                  </div>  
                         ))}
                     </div>
@@ -368,9 +368,9 @@ const User = () => {
                             <div id="natjecanja">                                      
                                             {competitions && competitions.map((comp) => (
                                                 ((comp.competitionMaker.id == id)&&
-                                                <div key={comp.id} className="natjecanje" id="malo">
+                                                <div key={comp.name} className="natjecanje" id="malo">
                                                 <span className="boja" style={{ backgroundColor: mapa.get(comp.id) }}></span>
-                                                <p className="slova3">Natjecanje {comp.id} </p>
+                                                <p className="slova3">{comp.name} </p>
                                                 <p className="slova3">
                                                     <ScheduleIcon className="ikona" /> {formatDate(comp.dateTimeOfBeginning)}{' '}
                                                     <EastIcon className="ikona" /> {formatDate(comp.dateTimeOfEnding)}
@@ -413,7 +413,7 @@ const User = () => {
               ) : (
                 <p>No tasks found.</p>
               )}
-                    {(!userData || userData.id!=id) && tasks && sortingTasks.length > 0 ? (
+                    {(!userData || userData.id!=id) && (tasks && sortingTasks.length > 0 ? (
                 <ul>
                   {sortingTasks.map(task => (
                     <li key={task.id}>
@@ -424,8 +424,8 @@ const User = () => {
                   ))}
                 </ul>
               ) : (
-                <p>No tasks found.</p>
-              )}
+                <p>Nema zadataka.</p>
+              ))}
               
                     
                 </div>}

@@ -7,7 +7,7 @@ import useFetch from "../useFetch";
 import {useParams} from "react-router-dom";
 
 
-const CreateCompetition = () => {
+const EditCompetition = () => {
     const [name, setName] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
@@ -253,4 +253,4 @@ const CreateCompetition = () => {
     )
 };
 
-export default CreateCompetition;
+export default EditCompetition;

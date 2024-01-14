@@ -43,7 +43,7 @@ export const isCompetitionUpcoming = (comp) => {
 
     return currentDateTime < compEndDate;
 };
-const Cal = () => {
+const VirtualCalendar = () => {
     const cookies = new Cookies();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const jwtToken = cookies.get('jwt_authorization');
@@ -94,7 +94,7 @@ const Cal = () => {
             });
 
             if (competition) {
-                // If there is a competition on this date, display its id
+                // If there is a competition on this date, display its name
                 return (
 
                     <div>
@@ -148,4 +148,4 @@ const Cal = () => {
         </div>
     );
 };
-export default Cal;
+export default VirtualCalendar;
