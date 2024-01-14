@@ -12,7 +12,7 @@ import Cookies from "universal-cookie";
 import ComputerIcon from '@mui/icons-material/Computer';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PeopleIcon from '@mui/icons-material/People';
-
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 
 const Home = () => {
     const cookies = new Cookies();
@@ -45,10 +45,15 @@ const Home = () => {
                     Sudjeluj u natjecanjima!
                     <p className='p27'>Pregledaj koja natjecanja su aktivna klikom na ovu kategoriju!</p>
                 </div></a>
-                <Link id="link27" to='/registration'><div className='kat27'>
+                {/* <Link id="link27" to='/registration'><div className='kat27'>
                     <PeopleIcon id="ikon27" className='ikona27'/>
                     Uključi se u zajednicu
                     <p className='p27'>Registriraj se i postani dio BytePit tima!</p>
+                </div></Link>*/}
+                <Link id="link27" to='/competitions/results'><div className='kat27'>
+                    <MilitaryTechIcon id="ikon27" className='ikona27'/>
+                    Rezultati nedavnih natjecanja
+                    <p className='p27'>Pogledaj poredak i rješenja drugih korisnika!</p>
                 </div></Link>
             </div>
         </div>

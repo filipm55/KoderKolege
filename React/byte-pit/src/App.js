@@ -47,7 +47,7 @@ function App() {
                 <Route exact path='/tasks/allTasks' element={<AllTasks />} />
                 <Route exact path='/tasks/:id' element={<SolvingATask />} />
                 <Route exact path='/createCompetition' element={<CreateCompetition />} />
-              <Route exact path='/competitions/results/:competitionId' element={<CompetitionTaskSolutions />} />
+              <Route exact path='/competitions/results/:id' element={<CompetitionTaskSolutions />} />
               <Route exact path='/competitions/:competitionId' element={<JoinACompetition />} />
                 <Route exact path='/competitions/rank/:competitionId' element={<Rank />} />
                 <Route exact path='/virtual/randomTasks' element={<JoinAVirtuallyGeneratedCompetition />} />
