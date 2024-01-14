@@ -68,7 +68,7 @@ const JoinACompetition = () => {
           formData.append('trophyPicture', trophyPictureFile);
           formData.append('problems', problemsArray);
           formData.append('isvirtual', Boolean(true));
-          formData.append('competitionMaker', 1);
+          formData.append('competitionMaker', adminUser.id);
 
           console.log('FormData:');
           for (let pair of formData.entries()) {
