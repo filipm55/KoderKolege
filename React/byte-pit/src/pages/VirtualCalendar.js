@@ -55,7 +55,7 @@ const VirtualCalendar = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error} = useFetch('http://localhost:8080/competitions/virtual');
+    const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
 
     function getRandomHexColor() {
         // Generate random RGB components
@@ -123,10 +123,12 @@ const VirtualCalendar = () => {
                     <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
                 <div id="natjecanja">
-                    <h1 id="naslov17"> Virtualna natjecanja</h1>
+                    {console.log(competitions)}
+                    <h1 id="naslov17"> Virtualna natjecanja za vježbu</h1>
                     {competitions &&
                         competitions.map((comp) => (
                             <div  key={comp.id}>
+                                {(comp.isvirtual) && (
                                     <div className='natjecanje'>
                                         <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
                                         {comp.name ? (
@@ -140,7 +142,7 @@ const VirtualCalendar = () => {
                                             </Link>
 
                                         )}
-                                    </div>
+                                    </div>)}
                             </div>
                         ))}
                 </div>
