@@ -6,14 +6,16 @@ import useFetch from "../useFetch";
 
 const CompetitionsResult = () => {
     const [data, setData] = useState([]);
-    const [sort, setSort] = useState('ALL');
+    const [sort, setSort] = useState('beginningdatetime');
     const [competitions, setCompetitions] = useState([]);
-    var problemMakerr = null;
+    const[fcompetitions, setFcompetitions]=useState([]);
 
-    const {data:fcompetitions, error} = useFetch('http://localhost:8080/competitions');
+    const {data:allcompetitions, error} = useFetch('http://localhost:8080/competitions');
+    const currentDate = new Date();
+
     useEffect(() => {
-        if(fcompetitions){
-            fcompetitions.map((comp)=>{
+        if(allcompetitions){
+            allcompetitions.map((comp)=>{
                 const dateArray = comp.dateTimeOfBeginning;
                 //const formattedStartDate = new Date(Date.UTC(...dateArray)).toISOString().slice(0, -1);
                 //comp.dateTimeOfBeginning=formattedStartDate
@@ -30,8 +32,13 @@ const CompetitionsResult = () => {
                 const formattedEndDate = new Date(year, month - 1, day, hours, minutes)
                 comp.dateTimeOfEnding=formattedEndDate;
             })
+            //filtriraj samo prosla natjecanja
+            setFcompetitions(allcompetitions.filter((competition) => {
+                return competition.dateTimeOfEnding < currentDate;
+            }));
+            console.log(fcompetitions);
         }
-    }, [fcompetitions]);
+    }, [allcompetitions]);
     useEffect(() => {
         if (fcompetitions) {
             //pretvorba datuma u normalan oblik
@@ -55,7 +62,7 @@ const CompetitionsResult = () => {
     }
     const sortCompetitions = (property) => {
         const sortedCompetitions = [...fcompetitions].sort((a, b) =>
-            property === 'name' ? a.name.localeCompare(b.name) : new Date(a.dateTimeOfBeginning) - new Date(b.dateTimeOfBeginning)
+            property === 'name' ? a.name.localeCompare(b.name) : new Date(b.dateTimeOfBeginning) - new Date(a.dateTimeOfBeginning)
         );
         setCompetitions(sortedCompetitions);
     };
@@ -67,9 +74,9 @@ const CompetitionsResult = () => {
                 <div id="naslovSort">
                     <h1 id="zdzvj">Rezultati prošlih natjecanja</h1>
                     <div>
-                        {/* Add sorting buttons */}
-                        <button onClick={() => setSort('name')}>Sort by Name</button>
-                        <button onClick={() => setSort('beginningdatetime')}>Sort by Date</button>
+                        <p>Sortiraj</p>
+                        <button onClick={() => setSort('name')}>abecedno</button>
+                        <button onClick={() => setSort('beginningdatetime')}>najnovije</button>
                         {/* Add more buttons for different difficulty levels as needed */}
                     </div>
                 </div>
@@ -85,7 +92,7 @@ const CompetitionsResult = () => {
                     </thead>
                     <tbody>
                     {competitions.map((comp) => (
-                        <tr key={comp.id}>
+                        comp.isvirtual && <tr key={comp.id}>
                             <td>{comp.name}</td>
                             <td>{formatDate(comp.dateTimeOfBeginning)}</td>
                             <td>{formatDate(comp.dateTimeOfEnding)}</td>
