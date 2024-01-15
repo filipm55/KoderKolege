@@ -33,4 +33,11 @@ public class CompRank {
     private Integer time;
 
     public CompRank () {}
+
+    public CompRank(User user, Competition competition, BigDecimal points, int time) {
+        this.user = user;
+        this.competition = competition;
+        this.points = points;
+        this.time = time;
+    }
 }

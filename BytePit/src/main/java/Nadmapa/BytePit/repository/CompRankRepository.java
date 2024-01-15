@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CompRankRepository extends JpaRepository<CompRank, Long> {
@@ -17,4 +18,6 @@ public interface CompRankRepository extends JpaRepository<CompRank, Long> {
             "JOIN users u ON cr.username = u.username " +
             "WHERE cr.competition_id = :competitionId", nativeQuery = true)
     List<Object[]> getCompetitionRanking(@Param("competitionId") Long competitionId);
+
+    Optional<CompRank> findByUserAndCompetition(User user, Competition competition);
 }
