@@ -1,0 +1,14 @@
+.finish-competition-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+  }
+  
+  .finish-competition-container p {
+    line-height: 1.5;
+    color: #333;
+  }
+  

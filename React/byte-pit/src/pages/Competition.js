@@ -213,22 +213,7 @@ const handleFinishCompetition = async () => {
     const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
 
     if (userConfirmed) {
-        try {
-            // Trigger backend process to calculate final ranking
-            const response = await fetch(`http://localhost:8080/rank/${competitionId}/${userData.username}`, {
-                method: 'POST'
-            });
-
-            if (response.ok) {
-                console.log('Ranking calculated successfully');
-                // Redirect to ranking page
-                window.location.href = `/rank/${competitionId}`;
-            } else {
-                console.error('Failed to calculate ranking');
-            }
-        } catch (error) {
-            console.error('Error finishing competition:', error);
-        }
+      window.location.href = `/finishcompetition`;
     }
 };
 
