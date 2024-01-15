@@ -331,7 +331,7 @@ const User = () => {
                         <p>Uspješno rješeni zadaci</p>
                     </div>
                     <div className="brojopis">
-                    {stats && <h6>{stats.prosjek*100}%</h6>} {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
+                    {stats && <h6>{Math.round(stats.prosjek)}%</h6>} {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
                         {!stats && <h6>0%</h6>}
                         <p>Uspješnost</p>
                     </div>
