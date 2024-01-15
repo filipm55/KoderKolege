@@ -73,10 +73,12 @@ const CompetitionsResult = () => {
             <div id="popis11">
                 <div id="naslovSort">
                     <h1 id="zdzvj">Rezultati prošlih natjecanja</h1>
-                    <div>
+                    <div id="sortovi91">
                         <p>Sortiraj</p>
-                        <button onClick={() => setSort('name')}>abecedno</button>
-                        <button onClick={() => setSort('beginningdatetime')}>najnovije</button>
+                        <select id ="sel91" onChange={(event) => setSort(event.target.value)}>
+                            <option value = 'name'>abecedno</option>
+                            <option value ='beginningdatetime'>najnovije</option>
+                        </select>
                         {/* Add more buttons for different difficulty levels as needed */}
                     </div>
                 </div>

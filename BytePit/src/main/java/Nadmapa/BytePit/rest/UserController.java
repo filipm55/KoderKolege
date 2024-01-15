@@ -230,6 +230,7 @@ public class UserController {
                 }
             }
             double prosjek = zbroj / ukbroj * 100;
+            if (ukbroj == 0) prosjek = 0;
             map.put("ukbroj", ukbroj);
             map.put("prosjek", prosjek);
             map.put("stoPostotni",ukBrojStoPostotnih);

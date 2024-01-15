@@ -26,7 +26,7 @@ const Virtual = () => {
                 <Link to='/virtual/randomTasks' className="link">
                     <div className="kat">
                         <CasinoIcon sx={{ fontSize: 60 }} color="primary"/>
-                        <h3 className='nas'>Nasumicno generirano natjecanje</h3>
+                        <h3 className='nas'>Nasumično generirano natjecanje</h3>
                         <div className='opisKat'>
                             <PlayArrowIcon className='ikona'/>
                             <p className='opis' id ="cetvrti">Doživi iskustvo natjecanja sa nasumično odabranim zadacima za vježbu</p>
