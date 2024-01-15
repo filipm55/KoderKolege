@@ -2,6 +2,7 @@ import CompetitionsResult from "./CompetitionsResults";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useFetch from "../useFetch";
+import './CompetitionTaskSolutions.css';
 import Cookies from "universal-cookie";
 import base64 from 'base-64';
 
@@ -230,13 +231,15 @@ import base64 from 'base-64';
     }
 
     return (
-        <div>
-        <button onClick={() => (setByTask(true))}> Po zadacima </button>
-        <button onClick={() => (setByTask(false))}> Po korisnicima </button>
-            {byTask && (<table>
+        <div id="body34">
+        <button className="gumb34" onClick={() => {(setByTask(true))}}> Po zadacima </button>
+        <button className="gumb34" onClick={() => (setByTask(false))}> Po korisnicima </button>
+        <hr/>
+            {byTask && (<table id="t34">
                 <thead>
                 <tr>
-                    <th>Problem</th>
+                    <th>Zadatak</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
