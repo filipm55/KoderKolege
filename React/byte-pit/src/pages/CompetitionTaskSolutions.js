@@ -92,17 +92,15 @@ import base64 from 'base-64';
                         return response.json();
                     })
                     .then(data => {
-                        data.map((d)=>{
-                            newUsersByProblem[problem.id] = d.user;
+                        console.log(data);
+                        newUsersByProblem[problem.id] = data;
                             //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
 
-
-                        })
                         if (!userData) {
                             //nije ulogiran
                             problems.map((problem) => [problem.id, false])
                         } else {
-                            const isUserInProblem = data.some((user) => user.user.id == userData.id);
+                            const isUserInProblem = Boolean(data.id === userData.id);
                             setIsUserInProblem((prev) => ({
                                 ...prev,
                                 [problem.id]: isUserInProblem,
@@ -154,12 +152,13 @@ import base64 from 'base-64';
                                     user: user,
                                     problems: [problem],
                                 };
-                                console.log(uniqueUsers);
+                                //console.log(uniqueUsers);
                             } else {
                                 // If the user id is already in the object, add the current problem to the problems array
                                 uniqueUsers[user.id].problems.push(problem);
                             }
                             setMapa(uniqueUsers);
+                            //console.log(mapa);
                         });
                         //console.log(data);
                     })
@@ -169,7 +168,7 @@ import base64 from 'base-64';
                     });
            })
             setUsers(newUsersByProblem);
-            console.log(uniqueUsers);
+            //console.log(uniqueUsers);
             //console.log(uniqueUsers.keys());
         }
 
@@ -210,7 +209,7 @@ import base64 from 'base-64';
                 return response.json();
             })
             .then(data => {
-                const base64Content = data[0].fileData;
+                const base64Content = data[0];
 
                 const binaryString = atob(base64Content);
                 const blob = new Blob([new Uint8Array([...binaryString].map(char => char.charCodeAt(0)))], { type: 'application/octet-stream' });
@@ -285,7 +284,7 @@ import base64 from 'base-64';
                 {(mapa != undefined) && Object.entries(mapa).map((value) =>(
                     <tr key={value[1].user.id}>
                         <td onClick={() => toggleUser(value[1].user.id)} style={{ cursor: "pointer" }}>
-                            {value[1].user.username} 
+                            {value[1].user.username}
                         </td>
                         <td>
                             {expandedUsers.includes(value[1].user.id) && (
