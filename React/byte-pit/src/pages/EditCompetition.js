@@ -188,12 +188,12 @@ const EditCompetition = () => {
     return (
         <div className="wrapper" id ="addTask">
             <div>
-                <h2 id="novizd">Novo natjecanje</h2>
+                <h2 id="novizd">Uredi natjecanje</h2>
                 <form id="addTask" onSubmit={submitFja}>
                     <div id="lijeviDio">
                     <div className="input">
                             <label>Naziv natjecanja: </label>
-                            <input type ="text" value={name} required onChange={(e) => setName(e.target.value)}></input>
+                            <input type ="text" value={name} size ="40" required onChange={(e) => setName(e.target.value)}></input>
                         </div>
                         <div className="input">
                             <label>Datum i vrijeme početka natjecanja: </label>
@@ -246,7 +246,7 @@ const EditCompetition = () => {
 
                 </form>
             </div>
-            <div id="pic">
+            <div id="pic2">
 
             </div>
         </div>

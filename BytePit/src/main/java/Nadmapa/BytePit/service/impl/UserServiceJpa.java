@@ -96,11 +96,11 @@ public class UserServiceJpa implements UserService {
         logger.debug("Checking email and username existence...");
         if (userRepo.existsByEmail(user.getEmail())) {
             logger.warn("User with email already exists: {}", user.getEmail());
-            throw new RequestDeniedException("vec postoji natjecatelj s tim mailom");
+            throw new RequestDeniedException("Već postoji natjecatelj s tim mailom!");
         }
         if (userRepo.existsByUsername(user.getUsername())) {
             logger.warn("User with username already exists: {}", user.getUsername());
-            throw new RequestDeniedException("vec postoji natjecatelj s tim usernameom");
+            throw new RequestDeniedException("Već postoji natjecatelj s tim usernameom!");
         }
 
         logger.debug("Saving user...");
