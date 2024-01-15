@@ -109,13 +109,26 @@ useEffect(() => {
         } else {
           localStorage.setItem(taskKey, Date.now().toString());
         }
+
+
     try {
+        const regex = /(public\s+)?class\s+(\w+)/;
+        const match = solution.match(regex);
+        var newSolution;
+        if (match && match[2]) {
+            // match[1] contains the first word after 'public class'
+            const oldClassName = match[2];
+            // Replace the old class name with a new class name
+            const newClassName = "TempClass" + id;
+            newSolution = solution.replace(oldClassName, newClassName);
+        }
+
       const response = await fetch(`http://localhost:8080/solution/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ code: solution, input: userInput }),
+            body: JSON.stringify({ code: newSolution, input: userInput }),
       });
       console.log('Sending request:', response);
 
