@@ -140,6 +140,7 @@ import base64 from 'base-64';
                     .then(data => {
                         //console.log(data);
                         newUsersByProblem[problem.id] = data;
+                        console.log(data);
 
                     })
                     .catch(error => {
@@ -234,7 +235,10 @@ import base64 from 'base-64';
                                         /*.filter((user) => user.problemId === problem.id)*/
                                         .map((user) => (
                                             <tr key={user.user.id}>
-                                                <td>{user.user.name} {user.user.surname}</td>
+                                                <td>{user.user.name} {user.user.lastname}</td>
+                                                <td>Postotak točnih primjera: {user.percentage_of_total * 100} %</td>
+                                                <td>Broj bodova: {user.points}</td>
+                                                <td>Vrijeme izvršavanja: {user.time}</td>
                                                 {/*nesto cime provjerimo je li user tocno rijesio zadatak i smije li dohvatiti rjesenje
                                                 correct.includes(problem.id) &&*/
                                                     isUserInProblem[problem.id] &&
