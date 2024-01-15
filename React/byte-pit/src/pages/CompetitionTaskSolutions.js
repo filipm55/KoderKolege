@@ -3,8 +3,9 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import useFetch from "../useFetch";
 import Cookies from "universal-cookie";
+import base64 from 'base-64';
 
-const CompetitionTaskSolutions = () => {
+ const CompetitionTaskSolutions = () => {
    const { id } = useParams();
    //svi zadaci s natjecanja
     const [problems, setProblems] = useState([]);
@@ -149,11 +150,13 @@ const CompetitionTaskSolutions = () => {
 
             })
             setUsers(newUsersByProblem);
-            //console.log(users);
+            console.log(users);
 
         }
 
     },[problems]);
+
+
 
     const [expandedProblems, setExpandedProblems] = useState([]);
 
@@ -166,6 +169,47 @@ const CompetitionTaskSolutions = () => {
             }
         });
     };
+
+    const [expandedUsers, setExpandedUsers] = useState([]);
+
+    const toggleUser = (userId) => {
+        setExpandedUsers((prevExpanded) => {
+            if (prevExpanded.includes(userId)) {
+                return prevExpanded.filter((id) => id !== userId);
+            } else {
+                return [...prevExpanded, userId];
+            }
+        });
+    };
+
+    const download_solution=(problemid, userid)=>{
+        fetch(`http://localhost:8080/allusersubs/${id}/${problemid}/${userid}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const base64Content = data[0].fileData;
+
+                const binaryString = atob(base64Content);
+                const blob = new Blob([new Uint8Array([...binaryString].map(char => char.charCodeAt(0)))], { type: 'application/octet-stream' });
+                const blobUrl = URL.createObjectURL(blob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobUrl;
+                downloadLink.download = 'solution.java'; // Specify the desired file name and extension
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                document.body.removeChild(downloadLink);
+            })
+            .catch(error => {
+                console.error('Error fetching file:', error);
+                // Handle error here
+            });
+
+    }
 
     return (
         <div>
@@ -194,7 +238,7 @@ const CompetitionTaskSolutions = () => {
                                                 {/*nesto cime provjerimo je li user tocno rijesio zadatak i smije li dohvatiti rjesenje
                                                 correct.includes(problem.id) &&*/
                                                     isUserInProblem[problem.id] &&
-                                                    <td><button onClick={() => console.log(`Button clicked for ${user.name}`)}>
+                                                    <td><button onClick={() => download_solution(problem.id, user.user.id)}>
                                                     Dohvati rješenje
                                                 </button></td>}
                                             </tr>
@@ -207,28 +251,27 @@ const CompetitionTaskSolutions = () => {
                 </tbody>
             </table>)}
 
-            {!byTask && (<table>
+            {/*!byTask && (<table>
                 <thead>
                 <tr>
                     <th>Korisnik</th>
                 </tr>
                 </thead>
                 <tbody>
-                {problems.map((problem) => (
-                    <tr key={problem.id}>
-                        <td onClick={() => toggleProblem(problem.id)} style={{ cursor: "pointer" }}>
-                            {problem.title}
+                {users.map((u) => (
+                    <tr key={u.user.id}>
+                        <td onClick={() => toggleUser(u.user.id)} style={{ cursor: "pointer" }}>
+                            {u.user.username}
                         </td>
                         <td>
-                            {expandedProblems.includes(problem.id) && (
+                            {expandedProblems.includes(u.user.id) && (
                                 <table>
-                                    {users && users[problem.id] && users[problem.id]
-                                        /*.filter((user) => user.problemId === problem.id)*/
+                                    {u
+                                        .filter((user) => user.problemId === problem.id)
                                         .map((user) => (
                                             <tr key={user.id}>
                                                 <td>{user.name} {user.surname}</td>
-                                                {/*nesto cime provjerimo je li user tocno rijesio zadatak i smije li dohvatiti rjesenje
-                                                correct.includes(problem.id) &&*/
+                                                {
                                                     <td>{<button>
                                                         Dohvati rješenje
                                                     </button>}
@@ -241,7 +284,7 @@ const CompetitionTaskSolutions = () => {
                     </tr>
                 ))}
                 </tbody>
-            </table>)}
+            </table>)*/}
         </div>
     );
 }
