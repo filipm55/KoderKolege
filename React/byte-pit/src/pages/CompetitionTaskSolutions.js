@@ -6,16 +6,26 @@ import Cookies from "universal-cookie";
 
 const CompetitionTaskSolutions = () => {
    const { id } = useParams();
+   //svi zadaci s natjecanja
     const [problems, setProblems] = useState([]);
+    //lista usera koji su rjesili zadatak s idem
+    const [users100, setUsers100]=useState([]);
+
+    //svi koji su predali rjesenje zadatka, po idu zadatka
     const [users, setUsers]=useState([]);
+
+    //varijabla koja odreduje koji je prikaz, po zadacima ili po korisnicima
     const[byTask, setByTask]=useState(true);
+
+    //lista s kljucevima id zadatka, true ili false smije li user skinut rjesenje
     const [isUserInProblem, setIsUserInProblem] = useState({});
+    //podatci o ulogiranom korisniku
     const [userData, setUserData] = useState(null);
-    const[showTasks,setShowTasks] = useState(0);
-    const[showUsers, setShowUsers] = useState(0);
     const cookies = new Cookies();
     const jwtToken = cookies.get('jwt_authorization');
     const correct_ids=[1,2,3];
+
+    //svi podaci o natjecanju, potencijalno useless
     const {data:competition} = useFetch(`http://localhost:8080/competitions/competition/${id}`);
 
     useEffect(() => {
@@ -39,7 +49,7 @@ const CompetitionTaskSolutions = () => {
     }, [jwtToken]);
 
     useEffect(() => {
-        // Fetch data inside useEffect
+        // svi zadaci s natjecanja
         fetch(`http://localhost:8080/competitions/${id}`)
             .then(response => {
                 if (!response.ok) {
@@ -57,16 +67,20 @@ const CompetitionTaskSolutions = () => {
                 // Handle error here
             });
 
-        if(problems){
-            //za svaki problem nadi sve natjecatelje
-            const newUsersByProblem={};
-            problems.map((problem)=>{
+    }, []); //zasad [] da mi se sve ne krsi, tu treb ic showTasks, svaki put kad se promijeni tasks tj stisne taj gumb, prikazuje se ovo umjesto onih drugih podataka?
+    //mozda ipak bolje da se sve samo jednom fetcha?
+
+    useEffect(() => {
+        if(problems) {
+            //za svaki problem nadi natjecatelje sa 100
+            const newUsersByProblem = {};
+            problems.map((problem) => {
                 //dohvacamo sve koji su tocno rijesili, to nam sluzi za gumb download
                 //treba jos dohvatiti SVE koji su predali rješenje po zadatku i nparaviti do kraja ovaj prikaz
                 // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
                 // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
                 //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
-                fetch(`http://localhost:8080//usersolutions/${id}/${problem.id}`)
+                fetch(`http://localhost:8080/usersolutions/${id}/${problem.id}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -74,18 +88,23 @@ const CompetitionTaskSolutions = () => {
                         return response.json();
                     })
                     .then(data => {
-                        newUsersByProblem[problem.id] = data;
-                        //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
-                        if(!userData){
+                        data.map((d)=>{
+                            newUsersByProblem[problem.id] = d.user;
+                            //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
+
+
+                        })
+                        if (!userData) {
                             //nije ulogiran
                             problems.map((problem) => [problem.id, false])
-                        }else{
-                            const isUserInProblem = data.some((user) => user.id == userData.id);
+                        } else {
+                            const isUserInProblem = data.some((user) => user.user.id == userData.id);
                             setIsUserInProblem((prev) => ({
                                 ...prev,
                                 [problem.id]: isUserInProblem,
                             }));
                         }
+
 
 
                     })
@@ -94,13 +113,47 @@ const CompetitionTaskSolutions = () => {
                         // Handle error here
                     });
             })
-            setUsers(newUsersByProblem);
+            setUsers100(newUsersByProblem);
+            console.log(users100);
+        }
+    }, [problems]);
 
+    useEffect(()=> {
+
+        if (problems) {
+            //za svaki problem nadi sve natjecatelje (zapravo vraca nes spigano, natjecatelj je kljuc u onom sto vraca)
+            const newUsersByProblem = {};
+            problems.map((problem) => {
+                //dohvacamo sve koji su predali rješenje po zadatku i nparaviti do kraja ovaj prikaz
+                // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
+                // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
+                //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
+                //console.log(id, problem.id);
+                fetch(`http://localhost:8080/allsolutions/${id}/${problem.id}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        //console.log(data);
+                        newUsersByProblem[problem.id] = data;
+
+                    })
+                    .catch(error => {
+                        console.error('Error fetching problems:', error);
+                        // Handle error here
+                    });
+
+
+            })
+            setUsers(newUsersByProblem);
+            //console.log(users);
 
         }
 
-    }, []); //zasad [] da mi se sve ne krsi, tu treb ic showTasks, svaki put kad se promijeni tasks tj stisne taj gumb, prikazuje se ovo umjesto onih drugih podataka?
-    //mozda ipak bolje da se sve samo jednom fetcha?
+    },[problems]);
 
     const [expandedProblems, setExpandedProblems] = useState([]);
 
@@ -116,8 +169,8 @@ const CompetitionTaskSolutions = () => {
 
     return (
         <div>
-        <button onClick={() => {setByTask(true); setShowTasks(showTasks+1);}}> Po zadacima </button>
-        <button onClick={() => {setByTask(false); setShowUsers(showUsers+1)}}> Po korisnicima </button>
+        <button onClick={() => (setByTask(true))}> Po zadacima </button>
+        <button onClick={() => (setByTask(false))}> Po korisnicima </button>
             {byTask && (<table>
                 <thead>
                 <tr>
@@ -136,8 +189,8 @@ const CompetitionTaskSolutions = () => {
                                     {users && users[problem.id] && users[problem.id]
                                         /*.filter((user) => user.problemId === problem.id)*/
                                         .map((user) => (
-                                            <tr key={user.id}>
-                                                <td>{user.name} {user.surname}</td>
+                                            <tr key={user.user.id}>
+                                                <td>{user.user.name} {user.user.surname}</td>
                                                 {/*nesto cime provjerimo je li user tocno rijesio zadatak i smije li dohvatiti rjesenje
                                                 correct.includes(problem.id) &&*/
                                                     isUserInProblem[problem.id] &&
