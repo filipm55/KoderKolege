@@ -207,14 +207,27 @@ const Competition = () => {
       setSubmissionStatus(`Error submitting file: ${error.message}`);
     }
 
-  };
+      
+        try {
+          // Trigger backend process to calculate final ranking
+          const response = await fetch(`http://localhost:8080/rank/${competitionId}/${userData.username}`, {
+              method: 'POST'
+          });
+  
+          if (response.ok) {
+              console.log('Ranking calculated successfully');
+          } else {
+              console.error('Failed to calculate ranking');
+          }
+        } catch (error) {
+            console.error('Error finishing competition:', error);
+        }
+
+    };
 
 const handleFinishCompetition = async () => {
     const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
-
-    if (userConfirmed) {
-      window.location.href = `/finishcompetition`;
-    }
+    if (userConfirmed) window.location.href = `/finishcompetition`;
 };
 
 

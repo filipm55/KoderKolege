@@ -173,8 +173,10 @@ useEffect(() => {
 
       const formData = new FormData();
       formData.append('file', uploadedFile);
+      formData.append('time', 1)
       formData.append('user', userData.username);
       formData.append('problem', task.id)
+      formData.append('competition_id', "0")
 
       const submitResponse = await fetch(`http://localhost:8080/submit/${id}`, {
         method: 'POST',
