@@ -3,16 +3,14 @@ package Nadmapa.BytePit.rest;
 import Nadmapa.BytePit.domain.*;
 import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
-import Nadmapa.BytePit.service.CodeExecutionService;
-import Nadmapa.BytePit.service.CodeSubService;
-import Nadmapa.BytePit.service.CompSubmitService;
-import Nadmapa.BytePit.service.ProblemService;
+import Nadmapa.BytePit.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -32,15 +30,35 @@ public class CodeExecutionController {
     @Autowired
      private CodeSubService cs;
 
+    @Autowired
+    private UserService us;
+
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
         return ces.execute(id, submission.getCode(), submission.getInput());
     }
 
-    @GetMapping("/usersolutions/{id}/{taskId}")
+    @GetMapping("/usersolutions/{id}/{taskId}")                                         // VRACA CodeSubs KOJI SU 100% ZA ODREDENI COMPETITION I ODREDENI TASK
     public List<CodeSub> correctSolutions(@PathVariable Long id, @PathVariable Long taskId) {
-        System.out.println(cr.find100percentsubs(id,taskId));
         return cr.find100percentsubs(id,taskId);
+    }
+    @GetMapping("/allsolutions/{id}/{taskId}")                                         // VRACA SVE CodeSubs  ZA ODREDENI COMPETITION I ODREDENI TASK
+    public List<CodeSub> allSolutions(@PathVariable Long id, @PathVariable Long taskId) {
+        return cr.findAllSubs(id,taskId);
+    }
+
+    @GetMapping("/allusersubs/{id}/{taskId}/{userId}")                              // VRACA CodeSubs  ZA ODREDENI COMPETITION I ODREDENOG USERA I VRAĆA IH SORTIRANIH SILAZNO PO BODOVIMA TAKO DA PRVI JE NJEGOV NAJBOLJI REZULTAT
+    public List<CodeSub> allUserSolutions(@PathVariable Long id, @PathVariable Long userId) {
+        Optional<User> user =us.getUserById(userId);
+        if (user.isPresent()) {
+            List<CodeSub> userSubs = cr.findAllUserSubs(id, user.get().getUsername());
+            // Sortiranje liste silazno po atributu points
+            userSubs.sort(Comparator.comparing(CodeSub::getPoints, Comparator.reverseOrder()));
+            return userSubs;
+
+        } else {
+            return null;
+        }
     }
 
     @PostMapping("/submit/{id}")

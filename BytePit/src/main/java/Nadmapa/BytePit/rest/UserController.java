@@ -214,7 +214,7 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Korisnik s ID-om : " + id +" nije pronađen u bazi");
     }
-    @GetMapping ("/allactivity/{id}")
+    @GetMapping ("/allactivity/{id}")     // statistika za odredenog usera
     public Map<String, Object> getStats(@PathVariable Long id) {
         Map<String, Object> map = new HashMap<>();
         userService.getUserById(id).ifPresent(user -> {
