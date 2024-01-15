@@ -41,8 +41,6 @@ public class CompetitionController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private CompetitionDeleteService competitionDeleteService;
     private final CompetitionSchedulerService schedulerService;
 
     @Autowired
