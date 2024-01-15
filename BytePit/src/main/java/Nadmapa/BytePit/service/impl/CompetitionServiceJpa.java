@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -51,24 +52,29 @@ public class CompetitionServiceJpa implements CompetitionService {
     }
 
     @Override
-    public void krajNatjecanja(Long competitionId) {
-        System.out.println("Kraj natjecanja: " + competitionId);
+    public void krajNatjecanja(Long competitionId, LocalDateTime dateTimeOfEnding) {
+
         Optional<Competition> competitionOptional = competitionRepo.findById(String.valueOf(competitionId));
         if(competitionOptional.isPresent()){
 
             Competition competition = competitionOptional.get();
-            if(competition.getName().equals("Virtualno")) {
-                competitionRepo.deleteById(String.valueOf(competitionId));
-                return;
-            }
-            competition.setIsvirtual(true);
+            if(competition.getDateTimeOfEnding().isEqual(dateTimeOfEnding)){
+                System.out.println("Kraj natjecanja: " + competitionId);
+                if(competition.getName().equals("Virtualno")) {
+                    competitionRepo.deleteById(String.valueOf(competitionId));
+                    return;
+                }
+                competition.setIsvirtual(true);
 
-            Set<Problem> problems = competition.getProblems();
-            for (Problem problem: problems) {
-                problem.setIsPrivate(false);
-                problemRepository.save(problem);
+                Set<Problem> problems = competition.getProblems();
+                for (Problem problem: problems) {
+                    problem.setIsPrivate(false);
+                    problemRepository.save(problem);
+                }
+                competitionRepo.save(competition);
             }
-            competitionRepo.save(competition);
+            else System.out.println("Probao sam zavrsiti natjecanje " + competitionId + ", ali mu je promijenjeno vrijeme kraja: " + dateTimeOfEnding + " -> " + competition.getDateTimeOfEnding());
+
         }
     }
 

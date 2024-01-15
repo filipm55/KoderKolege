@@ -24,7 +24,7 @@ public class CompetitionSchedulerService {
 
 
     public void scheduleCompetitionEnding(Long competitionId, LocalDateTime dateTimeOfEnding){
-        taskScheduler.schedule(() -> competitionService.krajNatjecanja(competitionId), new CronTrigger(convertToCronExpression(dateTimeOfEnding)));
+        taskScheduler.schedule(() -> competitionService.krajNatjecanja(competitionId, dateTimeOfEnding), new CronTrigger(convertToCronExpression(dateTimeOfEnding)));
     }
 
     private String convertToCronExpression(LocalDateTime dateTimeOfEnding) {

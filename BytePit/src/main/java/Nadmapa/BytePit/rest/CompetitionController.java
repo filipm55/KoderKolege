@@ -173,6 +173,8 @@ public class CompetitionController {
             }
             if(!competition.getDateTimeOfEnding().equals(dateTimeOfEnding)){
                 competition.setDateTimeOfEnding(dateTimeOfEnding);
+                schedulerService.scheduleCompetitionEnding(competition.getId(), competition.getDateTimeOfEnding());
+                System.out.println("Mijenjam vrijeme kraja natjecanja" + competition.getId() + " u " + competition.getDateTimeOfEnding());
             }
             if(!competition.getName().equals(name)){
                 competition.setName(name);

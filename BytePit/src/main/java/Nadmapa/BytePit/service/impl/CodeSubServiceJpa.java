@@ -42,7 +42,7 @@ public class CodeSubServiceJpa implements CodeSubService {
 
     @Override
     public Set<Long> getSolvedProblemIdsByUserAndCompetition(String username, Long competitionId) {
-        return cr.findDistinctProblemIdsByUsernameAndCompetitionId(username, competitionId);
+        return cr.findDistinctProblemIdsByUsernameAndCompetitionId(username, competitionId); //???????????????????????
     }
 
     @Override

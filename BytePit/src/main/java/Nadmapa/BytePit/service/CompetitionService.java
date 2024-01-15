@@ -4,6 +4,7 @@ import Nadmapa.BytePit.domain.Competition;
 import Nadmapa.BytePit.domain.Problem;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -18,5 +19,5 @@ public interface CompetitionService {
 
     void deleteCompetitionById(Long id);
 
-    void krajNatjecanja(Long competitionId);
+    void krajNatjecanja(Long competitionId, LocalDateTime timeOfEnding);
 }
