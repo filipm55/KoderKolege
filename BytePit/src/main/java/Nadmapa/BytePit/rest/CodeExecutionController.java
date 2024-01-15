@@ -72,7 +72,8 @@ public class CodeExecutionController {
             System.out.println(username);
             CodeSub codeSub = new CodeSub();
             cs.setUserAndProblem(codeSub, username, problemId);
-            cs.setCompetition(codeSub, competitionId);
+            if(competitionId!=0)
+                cs.setCompetition(codeSub, competitionId);
             codeSub.setTime(time);
             codeSub.setFileData(file.getBytes());
 
