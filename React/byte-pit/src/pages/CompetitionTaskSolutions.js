@@ -9,8 +9,10 @@ import base64 from 'base-64';
    const { id } = useParams();
    //svi zadaci s natjecanja
     const [problems, setProblems] = useState([]);
-    //lista usera koji su rjesili zadatak s idem
+    //lista usera koji su skroz tocno rjesili zadatak s idem
     const [users100, setUsers100]=useState([]);
+
+     const [uniqueUsersArray, setUniqueUsersArray] = useState([]);
 
     //svi koji su predali rjesenje zadatka, po idu zadatka
     const [users, setUsers]=useState([]);
@@ -25,9 +27,9 @@ import base64 from 'base-64';
     const cookies = new Cookies();
     const jwtToken = cookies.get('jwt_authorization');
     const correct_ids=[1,2,3];
+    const uniqueUsers = {};
+    const [mapa,setMapa] = useState(uniqueUsers);
 
-    //svi podaci o natjecanju, potencijalno useless
-    const {data:competition} = useFetch(`http://localhost:8080/competitions/competition/${id}`);
 
     useEffect(() => {
         if (jwtToken) {
@@ -115,7 +117,7 @@ import base64 from 'base-64';
                     });
             })
             setUsers100(newUsersByProblem);
-            console.log(users100);
+            //console.log(users100);
         }
     }, [problems]);
 
@@ -140,19 +142,34 @@ import base64 from 'base-64';
                     .then(data => {
                         //console.log(data);
                         newUsersByProblem[problem.id] = data;
-                        console.log(data);
 
+                        data.forEach((entry) => {
+                            // Access the user object from the entry
+                            const user = entry.user;
+                            // Check if the user id is not already in the object
+                            if (!uniqueUsers[user.id]) {
+                                // If not, add the user to the object with an array containing the current problem
+                                uniqueUsers[user.id]= {
+                                    user: user,
+                                    problems: [problem],
+                                };
+                                console.log(uniqueUsers);
+                            } else {
+                                // If the user id is already in the object, add the current problem to the problems array
+                                uniqueUsers[user.id].problems.push(problem);
+                            }
+                            setMapa(uniqueUsers);
+                        });
+                        //console.log(data);
                     })
                     .catch(error => {
                         console.error('Error fetching problems:', error);
                         // Handle error here
                     });
-
-
-            })
+           })
             setUsers(newUsersByProblem);
-            console.log(users);
-
+            console.log(uniqueUsers);
+            //console.log(uniqueUsers.keys());
         }
 
     },[problems]);
@@ -255,31 +272,25 @@ import base64 from 'base-64';
                 </tbody>
             </table>)}
 
-            {/*!byTask && (<table>
+            {!byTask && (<table>
                 <thead>
                 <tr>
                     <th>Korisnik</th>
                 </tr>
                 </thead>
                 <tbody>
-                {users.map((u) => (
-                    <tr key={u.user.id}>
-                        <td onClick={() => toggleUser(u.user.id)} style={{ cursor: "pointer" }}>
-                            {u.user.username}
+                {(mapa != undefined) && Object.entries(mapa).map((value) =>(
+                    <tr key={value[1].user.id}>
+                        <td onClick={() => toggleUser(value[1].user.id)} style={{ cursor: "pointer" }}>
+                            {value[1].user.username} 
                         </td>
                         <td>
-                            {expandedProblems.includes(u.user.id) && (
+                            {expandedUsers.includes(value[1].user.id) && (
                                 <table>
-                                    {u
-                                        .filter((user) => user.problemId === problem.id)
-                                        .map((user) => (
-                                            <tr key={user.id}>
-                                                <td>{user.name} {user.surname}</td>
-                                                {
-                                                    <td>{<button>
-                                                        Dohvati rješenje
-                                                    </button>}
-                                                    </td>}
+                                    {value[1].problems.map((problem) => (
+                                            <tr key={problem.id}>
+                                                <td>{problem.title}</td>
+                                               
                                             </tr>
                                         ))}
                                 </table>
@@ -287,8 +298,9 @@ import base64 from 'base-64';
                         </td>
                     </tr>
                 ))}
+                {console.log(mapa)}
                 </tbody>
-            </table>)*/}
+            </table>)}
         </div>
     );
 }
