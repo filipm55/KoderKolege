@@ -306,9 +306,6 @@ const User = () => {
                                     <p>Email: <input type = "text" defaultValue={user.email} length = "20" onChange={(e) => setEmail(e.target.value)}></input></p>
                                     </div>
                                     <div className="kucica4">
-                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
-                                    </div>
-                                    <div className="kucica4">
                                     <p>Password: <input type = "text" onChange={(e) => setPassword(e.target.value)}></input> </p>
                                     </div>
                                         <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"
@@ -325,14 +322,17 @@ const User = () => {
                 {isCompetitor && <div id="statistika">
                     <div className="brojopis">
                         {stats && <h6>{stats.ukbroj}</h6>} {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}
+                        {!stats && <h6>0</h6>}
                         <p>Započeti zadaci</p>
                     </div>
                     <div className="brojopis">
                     {stats && <h6>{stats.ukBrojStoPostotnih}</h6>} {/*UMETNI BROJ SVIH RJEŠENIH ZADATAKA */}
+                        {!stats && <h6>0</h6>}
                         <p>Uspješno rješeni zadaci</p>
                     </div>
                     <div className="brojopis">
                     {stats && <h6>{stats.postotak}%</h6>} {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
+                        {!stats && <h6>0%</h6>}
                         <p>Uspješnost</p>
                     </div>
                 </div>}
@@ -347,28 +347,7 @@ const User = () => {
                         <FilterVintageIcon/> <p> {user.userType}</p>
                     </div>
                 </div>
-                {isCompetitor && <div id="nagrade"> {/*DIO ZA PEHARE I NAGRADE - napraviti for po osvojenim natjecanjima */}
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "gold" }} ></EmojiEventsIcon>
-                            Regionalno natjecanje 2020</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
-                            IPX competiton 2016</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "silver" }} ></EmojiEventsIcon>
-                            Božični turnir 2019</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
-                            Državno natjecanje 2014</p>
-                        </div>
-                    </div>}
+
                     {!isCompetitor && <div id="zadaci">
                     <div>
                         <b>Popis objavljenih zadataka</b>
@@ -412,6 +391,28 @@ const User = () => {
                     
                 </div>}
                 </div>
+                {isCompetitor && <div id="nagrade"> {/*DIO ZA PEHARE I NAGRADE - napraviti for po osvojenim natjecanjima */}
+                        <div className="osvojeno">
+                            <p>
+                            <EmojiEventsIcon className="pehar" sx={{ color: "gold" }} ></EmojiEventsIcon>
+                            Regionalno natjecanje 2020</p>
+                        </div>
+                        <div className="osvojeno">
+                            <p>
+                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
+                            IPX competiton 2016</p>
+                        </div>
+                        <div className="osvojeno">
+                            <p>
+                            <EmojiEventsIcon className="pehar" sx={{ color: "silver" }} ></EmojiEventsIcon>
+                            Božični turnir 2019</p>
+                        </div>
+                        <div className="osvojeno">
+                            <p>
+                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
+                            Državno natjecanje 2014</p>
+                        </div>
+                    </div>}
 
                 {!isCompetitor && 
                         <div id="kalendar">

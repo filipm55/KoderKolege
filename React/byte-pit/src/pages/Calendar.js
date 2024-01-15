@@ -94,13 +94,13 @@ const Cal = () => {
             });
             
             if (competition) {
+                var i = 0;
                 // If there is a competition on this date, display its id
                 return (
-
-                    <div>
+                    <div unique='true' key ={i ++}>
                         {competition.map((comp, index) => (
                              (
-                                <div style={{ color: "black", background: mapa.get(comp.id) }}>
+                                <div key={comp.id} style={{ color: "black", background: mapa.get(comp.id) }}>
                                 {comp.name ? comp.name : "Natjecanje "+comp.id}
                              </div>                           
                               )

@@ -98,7 +98,10 @@ if (!isLoggedIn){
   return <p>FORBIDDEN</p>
 }
 if(pristupio){
-  return <p>VEC STE PRISTUPILI NATJECANJU!</p>
+  return <div className="competition-container">
+          <div className="competition-details">
+            <p className="competition-disclaimer" id="pristup">VEĆ STE PRISTUPILI NATJECANJU!</p>
+            </div></div>
 }
   return (
     <div className="competition-container">
