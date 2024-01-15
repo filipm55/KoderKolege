@@ -95,12 +95,11 @@ import base64 from 'base-64';
                         console.log(data);
                         newUsersByProblem[problem.id] = data;
                             //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
-
                         if (!userData) {
                             //nije ulogiran
                             problems.map((problem) => [problem.id, false])
                         } else {
-                            const isUserInProblem = Boolean(data.id === userData.id);
+                            const isUserInProblem = data.some((user)=>user.id == userData.id);
                             setIsUserInProblem((prev) => ({
                                 ...prev,
                                 [problem.id]: isUserInProblem,
