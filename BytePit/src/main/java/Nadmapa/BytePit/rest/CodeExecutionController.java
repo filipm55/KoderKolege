@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.rest;
 
 import Nadmapa.BytePit.domain.*;
+import Nadmapa.BytePit.dto.CodeSubDTO;
 import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.*;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,22 +37,43 @@ public class CodeExecutionController {
     }
 
     @GetMapping("/usersolutions/{id}/{taskId}")                                         // VRACA CodeSubs KOJI SU 100% ZA ODREDENI COMPETITION I ODREDENI TASK
-    public List<CodeSub> correctSolutions(@PathVariable Long id, @PathVariable Long taskId) {
-        return cr.find100percentsubs(id,taskId);
+    public List<User> correctSolutions(@PathVariable Long id, @PathVariable Long taskId) {
+        List<CodeSub> codesubs=cr.find100percentsubs(id,taskId);
+        List<User> users=new ArrayList<>();
+        for (CodeSub codesub:codesubs) {
+            users.add(codesub.getUser());
+        }
+        return users;
     }
     @GetMapping("/allsolutions/{id}/{taskId}")                                         // VRACA SVE CodeSubs  ZA ODREDENI COMPETITION I ODREDENI TASK
-    public List<CodeSub> allSolutions(@PathVariable Long id, @PathVariable Long taskId) {
-        return cr.findAllSubs(id,taskId);
+    public List<CodeSubDTO> allSolutions(@PathVariable Long id, @PathVariable Long taskId) {
+        List<CodeSub> codeSubs = cr.findAllSubs(id, taskId);
+
+        // Mapiranje CodeSub na CodeSubDTO
+        List<CodeSubDTO> codeSubDTOs = codeSubs.stream()
+                .map(codeSub -> new CodeSubDTO(
+                        codeSub.getUser(),
+                        codeSub.getPoints(),
+                        codeSub.getTime(),
+                        codeSub.getPercentage_of_total()
+                ))
+                .collect(Collectors.toList());
+
+        return codeSubDTOs;
     }
 
     @GetMapping("/allusersubs/{id}/{taskId}/{userId}")                              // VRACA CodeSubs  ZA ODREDENI COMPETITION I ODREDENOG USERA I VRAĆA IH SORTIRANIH SILAZNO PO BODOVIMA TAKO DA PRVI JE NJEGOV NAJBOLJI REZULTAT
-    public List<CodeSub> allUserSolutions(@PathVariable Long id, @PathVariable Long userId) {
+    public List<byte[]> allUserSolutions(@PathVariable Long id, @PathVariable Long userId) {
         Optional<User> user =us.getUserById(userId);
         if (user.isPresent()) {
             List<CodeSub> userSubs = cr.findAllUserSubs(id, user.get().getUsername());
             // Sortiranje liste silazno po atributu points
             userSubs.sort(Comparator.comparing(CodeSub::getPoints, Comparator.reverseOrder()));
-            return userSubs;
+            List<byte[]> fileovi=new ArrayList<>();
+            for (CodeSub codesub:userSubs) {
+                fileovi.add(codesub.getFileData());
+            }
+            return fileovi;
 
         } else {
             return null;
