@@ -156,7 +156,7 @@ const CreateCompetition = () => {
                     <div id="lijeviDio">
                     <div className="input">
                             <label>Naziv natjecanja: </label>
-                            <input type ="text" value={name} required onChange={(e) => setName(e.target.value)}></input>
+                            <input type ="text" value={name} required size ="40" onChange={(e) => setName(e.target.value)}></input>
                         </div>
                         <div className="input">
                             <label>Datum i vrijeme početka natjecanja: </label>
@@ -209,7 +209,7 @@ const CreateCompetition = () => {
 
                 </form>
             </div>
-            <div id="pic">
+            <div id="pic2">
 
             </div>
         </div>

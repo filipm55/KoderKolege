@@ -1,5 +1,6 @@
 package Nadmapa.BytePit.rest;
 
+import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.Image;
 import Nadmapa.BytePit.domain.User;
 import Nadmapa.BytePit.domain.UserType;
@@ -17,9 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -214,5 +213,27 @@ public class UserController {
 
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Korisnik s ID-om : " + id +" nije pronađen u bazi");
+    }
+    @GetMapping ("/allactivity/{id}")     // statistika za odredenog usera
+    public Map<String, Object> getStats(@PathVariable Long id) {
+        Map<String, Object> map = new HashMap<>();
+        userService.getUserById(id).ifPresent(user -> {
+
+            int ukbroj = userService.rjesavani(user.getUsername()).size();
+            List<CodeSub> svisubmitovi = userService.rjesavani(user.getUsername());
+            double zbroj = 0;
+            int ukBrojStoPostotnih = ukbroj;
+            for (CodeSub codeSub : svisubmitovi) {
+                zbroj += codeSub.getPercentage_of_total();
+                if(codeSub.getPercentage_of_total() <1){
+                    ukBrojStoPostotnih--;
+                }
+            }
+            double prosjek = zbroj / ukbroj * 100;
+            map.put("ukbroj", ukbroj);
+            map.put("prosjek", prosjek);
+            map.put("stoPostotni",ukBrojStoPostotnih);
+        });
+        return map;
     }
 }

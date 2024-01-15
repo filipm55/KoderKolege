@@ -29,6 +29,7 @@ public class LoginController {
                          return ResponseEntity.ok(token);
                 case 0: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email not confirmed!");
                 case -1:  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                case 2: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Molimo pricekajte da Vas admin odobri");
                 default: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
             }
         } catch (Exception e) {

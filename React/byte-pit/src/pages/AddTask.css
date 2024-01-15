@@ -17,14 +17,18 @@ form#addTask {
     border: 0px;
     margin-top: -10px;
     margin-left: 2px;
+    font-size: 1.5rem;
 }
+
+
 
 div.input {
     margin-top: 10px;
+    margin-bottom: 1rem;
 }
 
 button#addTask {
-    font-size: 1rem;
+    font-size: 1.5rem;
     justify-self: center;
     background-color: whitesmoke;
     border: 1px solid black;
@@ -49,6 +53,18 @@ div#pic {
     margin-top: 70px;
 }
 
+div#pic2 {
+    margin-left: 50px;
+    height: 46em;
+    width: 70vw;
+    background-image: url("../../public/pictures/pic5.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 7rem;
+}
+
 
 label {
     color: rgb(43, 40, 40);
@@ -66,10 +82,12 @@ h2#novizd {
     font-size: 6vh;
 }
 
-input, textarea, select {
+input, textarea, select, button {
     border-radius: 3px;
     border: 1px solid #ccc;
+    font-size: 1.5rem;
 }
+
 
 @media screen and (max-width: 767px) {
     div#pic {

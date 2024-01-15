@@ -24,6 +24,7 @@ div#kalendar17 {
 
 .react-calendar {
     margin-top: 2rem;
+    margin-bottom: 0.6rem;
     width: 100%;
     align-self: center;
     height: fit-content;

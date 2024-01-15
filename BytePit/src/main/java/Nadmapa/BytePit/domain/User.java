@@ -115,4 +115,12 @@ public class User {
               ", userType='" + userType.toString() + '\'' +
               '}';
    }
+
+   public String getUsername() {
+      return username;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
+   }
 }

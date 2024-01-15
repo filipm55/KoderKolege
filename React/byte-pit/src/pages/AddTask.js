@@ -137,7 +137,7 @@ const AddTask = () => {
                         </div>
                         <div className="input">
                             <label>Vidljivost: </label>
-                            <div>
+                            <div >
                                 <label>
                                     <input
                                         type="radio"
@@ -163,7 +163,7 @@ const AddTask = () => {
                         <div className="input">
                             <label>Tekst zadatka: </label>
                             <div className="input">
-                                <textarea value={taskText} cols="100" rows="10" required onChange={(e) => setTaskText(e.target.value)}></textarea>
+                                <textarea value={taskText} cols="80" rows="10" required onChange={(e) => setTaskText(e.target.value)}></textarea>
                             </div>
                         </div>
                         <div className="input">
@@ -172,7 +172,7 @@ const AddTask = () => {
                                 <div key={index} className="input">
                                     <textarea
                                         value={example.input}
-                                        cols="100"
+                                        cols="80"
                                         rows="3"
                                         required
                                         onChange={(e) => {
@@ -183,7 +183,7 @@ const AddTask = () => {
                                     ></textarea>
                                     <textarea
                                         value={example.output}
-                                        cols="100"
+                                        cols="80"
                                         rows="3"
                                         required
                                         onChange={(e) => {

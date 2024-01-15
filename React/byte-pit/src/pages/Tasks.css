@@ -70,13 +70,13 @@ div.info {
 
 div.tekstDio {
     align-self: flex-start;
-    font-size: 3vh;
+    font-size: 1.3rem;
     margin-left: 5px;
     margin-top: -10px;
 }
 
 .ikona {
-    margin-bottom: -5px;
+    margin-bottom: 0.1rem;
 }
 
 h3.podaciokorisniku {
@@ -129,6 +129,7 @@ button.zadmina.redButton:hover {
 button.zadmina.blueButton {
     background-color: deepskyblue;
     color: white;
+    border-radius: 10px;
 }
 button.zadmina.blueButton:hover {
     background-color: blue;
@@ -198,6 +199,10 @@ button#spremime{
 button#spremime:hover {
     background-color:#645e5edd;
     color: white;
+}
+
+p.podatak {
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 767px) {

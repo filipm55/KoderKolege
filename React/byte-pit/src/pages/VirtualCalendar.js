@@ -43,7 +43,7 @@ export const isCompetitionUpcoming = (comp) => {
 
     return currentDateTime < compEndDate;
 };
-const Cal = () => {
+const VirtualCalendar = () => {
     const cookies = new Cookies();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const jwtToken = cookies.get('jwt_authorization');
@@ -55,7 +55,7 @@ const Cal = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error} = useFetch('http://localhost:8080/competitions/virtual');
+    const {data:competitions, error} = useFetch('http://localhost:8080/competitions');
 
     function getRandomHexColor() {
         // Generate random RGB components
@@ -94,12 +94,12 @@ const Cal = () => {
             });
 
             if (competition) {
-                // If there is a competition on this date, display its id
+                // If there is a competition on this date, display its name
                 return (
 
                     <div>
                         {competition.map((comp, index) => (
-                            (
+                            (comp.isvirtual && 
                                 <div style={{ color: "black", background: mapa.get(comp.id) }}>
                                     {comp.name ? comp.name : "Natjecanje "+comp.id}
                                 </div>
@@ -123,10 +123,12 @@ const Cal = () => {
                     <Calendar id="kalendar" tileContent={tileContent} />
                 </div>
                 <div id="natjecanja">
-                    <h1 id="naslov17"> Virtualna natjecanja</h1>
+                    {console.log(competitions)}
+                    <h1 id="naslov17"> Virtualna natjecanja za vježbu</h1>
                     {competitions &&
                         competitions.map((comp) => (
                             <div  key={comp.id}>
+                                {(comp.isvirtual) && (
                                     <div className='natjecanje'>
                                         <span className='boja' style={{backgroundColor: mapa.get(comp.id)}}></span>
                                         {comp.name ? (
@@ -140,7 +142,7 @@ const Cal = () => {
                                             </Link>
 
                                         )}
-                                    </div>
+                                    </div>)}
                             </div>
                         ))}
                 </div>
@@ -148,4 +150,4 @@ const Cal = () => {
         </div>
     );
 };
-export default Cal;
+export default VirtualCalendar;

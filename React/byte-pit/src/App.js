@@ -22,6 +22,8 @@ import VirtualCalendar from "./pages/VirtualCalendar";
 import EditTask from "./pages/EditTask";
 import EditCompetition from "./pages/EditCompetition";
 import JoinAVirtuallyGeneratedCompetition from "./pages/JoinAVirtuallyGeneratedCompetition";
+import CompetitionResults from "./pages/CompetitionsResults";
+import CompetitionTaskSolutions from "./pages/CompetitionTaskSolutions";
 
 function App() {
 
@@ -45,13 +47,16 @@ function App() {
                 <Route exact path='/tasks/allTasks' element={<AllTasks />} />
                 <Route exact path='/tasks/:id' element={<SolvingATask />} />
                 <Route exact path='/createCompetition' element={<CreateCompetition />} />
-                <Route exact path='/competitions/:competitionId' element={<JoinACompetition />} />
-                <Route exact path='/rank/:competitionId' element={<Rank />} />
+              <Route exact path='/competitions/results/:id' element={<CompetitionTaskSolutions />} />
+              <Route exact path='/competitions/:competitionId' element={<JoinACompetition />} />
+                <Route exact path='/competitions/rank/:competitionId' element={<Rank />} />
                 <Route exact path='/virtual/randomTasks' element={<JoinAVirtuallyGeneratedCompetition />} />
                 <Route exact path='/competitions/:competitionId/:taskId' element={<Competition />} />
                 <Route exact path='/virtual/competitionChoice' element={<VirtualCalendar />} />
                 <Route exact path='/edittask/:id' element={<EditTask />} />
                 <Route exact path='/editcompetition/:id' element={<EditCompetition />} />
+              <Route exact path='/competitions/results' element={<CompetitionResults />} />
+
 
 
           </Routes>

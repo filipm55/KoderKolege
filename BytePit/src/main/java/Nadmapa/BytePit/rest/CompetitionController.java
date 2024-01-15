@@ -220,7 +220,7 @@ public class CompetitionController {
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
-            System.out.println(competitionId + " " + competition);
+            //System.out.println(competitionId + " " + competition);
             LocalDateTime now = LocalDateTime.now();
             if(competition.getDateTimeOfBeginning().isAfter(now)){
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);

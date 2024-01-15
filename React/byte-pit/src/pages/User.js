@@ -66,6 +66,7 @@ const User = () => {
     formData.append('name', name);
     formData.append('lastname', surname);
     formData.append('username', username);
+    console.log(username);
     formData.append('email', email);
     formData.append('image', file);
     formData.append('userType', user.userType);
@@ -131,6 +132,12 @@ const User = () => {
     const { data: tasks, error: tasksError } = useFetch(
       `http://localhost:8080/problems/byMakerId/${id}`
     );
+
+        
+    const { data: stats, error: statsError } = useFetch(
+        `http://localhost:8080/users/allactivity/${id}`
+      );
+
     const handleSortingChange = (e) => {
         setSortingOption(e.target.value);
     };
@@ -219,7 +226,7 @@ const User = () => {
                     <div>
                         {competition.map((comp, index) => (
                                 (comp.competitionMaker.id == id) && <div style={{ color: "black", background: mapa.get(comp.id) }}>
-                                   Natjecanje! {comp.id}
+                                   {comp.name}
                                  </div>  
                         ))}
                     </div>
@@ -314,21 +321,23 @@ const User = () => {
                                     
                                 </form>}
                             </div>
+                            {console.log(stats)}
                 {isCompetitor && <div id="statistika">
                     <div className="brojopis">
-                        <h6>20</h6> {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}
+                        {stats && <h6>{stats.ukbroj}</h6>} {/*UMETNI BROJ SVIH ZAPOČETIH ZADATAKA */}
                         <p>Započeti zadaci</p>
                     </div>
                     <div className="brojopis">
-                        <h6>20</h6> {/*UMETNI BROJ SVIH RJEŠENIH ZADATAKA */}
+                    {stats && <h6>{stats.ukBrojStoPostotnih}</h6>} {/*UMETNI BROJ SVIH RJEŠENIH ZADATAKA */}
                         <p>Uspješno rješeni zadaci</p>
                     </div>
                     <div className="brojopis">
-                        <h6>100%</h6> {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
+                    {stats && <h6>{stats.postotak}%</h6>} {/*UMETNI OMJER DRUGOG I PRVOG BROJA U OBLIKU % */}
                         <p>Uspješnost</p>
                     </div>
                 </div>}
             </div>
+            <div id="sredisnjiProzor">
             <div id="korisniknagrade">
                 <div className="korisnik">
                     <div className="ikonaOpis">
@@ -360,7 +369,51 @@ const User = () => {
                             Državno natjecanje 2014</p>
                         </div>
                     </div>}
-                    {!isCompetitor && 
+                    {!isCompetitor && <div id="zadaci">
+                    <div>
+                        <b>Popis objavljenih zadataka</b>
+                        <p>Sortiraj prema:
+                        <select onChange={handleSortingChange}>
+                            <option value="newest-first">najnovije prvo</option>
+                            <option value="oldest-first">najstarije prvo</option>
+                            <option value="by-type-desc">težini - silazno</option>
+                            <option value="by-type-asc">težini - uzlazno</option>
+                        </select></p>
+                    </div>
+                    {userData && (userData.id==id || userData.userType==="ADMIN") && tasks && sortingTasks.length > 0 ? (
+                <ul>
+                  {sortingTasks.map(task => (
+                    <li key={task.id}>
+                            {task.title}
+                        <Link className="linkzazad" to={`/edittask/${task.id}`}>
+                            UREDI ZADATAK!
+                        </Link>
+                        <p>{task.points}, {task.problemType}</p></li>
+                  ))}
+                </ul>
+              ) : (
+                <p></p>
+              )}
+                    {(!userData || userData.id!=id) && (tasks && sortingTasks.length > 0 ? (
+                <ul>
+                  {sortingTasks.map(task => (
+                    <li key={task.id}>
+                        {task.title}
+                        <Link className="linkzazad"  to={`/tasks/${task.id}`}>
+                            RIJEŠI!
+                        </Link>
+                        <p>{task.points}, {task.problemType}</p></li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Nema zadataka.</p>
+              ))}
+              
+                    
+                </div>}
+                </div>
+
+                {!isCompetitor && 
                         <div id="kalendar">
                             <p><CalendarMonthIcon className="pehar"/>
                                 OBJAVLJENA NATJECANJA</p>
@@ -368,9 +421,9 @@ const User = () => {
                             <div id="natjecanja">                                      
                                             {competitions && competitions.map((comp) => (
                                                 ((comp.competitionMaker.id == id)&&
-                                                <div key={comp.id} className="natjecanje" id="malo">
+                                                <div key={comp.name} className="natjecanje" id="malo">
                                                 <span className="boja" style={{ backgroundColor: mapa.get(comp.id) }}></span>
-                                                <p className="slova3">Natjecanje {comp.id} </p>
+                                                <p className="slova3">{comp.name} </p>
                                                 <p className="slova3">
                                                     <ScheduleIcon className="ikona" /> {formatDate(comp.dateTimeOfBeginning)}{' '}
                                                     <EastIcon className="ikona" /> {formatDate(comp.dateTimeOfEnding)}
@@ -387,49 +440,9 @@ const User = () => {
                                 
                             </div>
                         </div>
-                    }
-                </div>
-                {!isCompetitor && <div id="zadaci">
-                    <div>
-                        <b>Popis objavljenih zadataka</b>
-                        <p>Sortiraj prema:
-                        <select onChange={handleSortingChange}>
-                            <option value="newest-first">najnovije prvo</option>
-                            <option value="oldest-first">najstarije prvo</option>
-                            <option value="by-type-desc">težini - silazno</option>
-                            <option value="by-type-asc">težini - uzlazno</option>
-                        </select></p>
-                    </div>
-                    {userData && (userData.id==id || userData.userType==="ADMIN") && tasks && sortingTasks.length > 0 ? (
-                <ul>
-                  {sortingTasks.map(task => (
-                    <li key={task.id}>
-                        <Link to={`/edittask/${task.id}`}>
-                            {task.title}
-                        </Link>
-                        <p>{task.points}, {task.problemType}</p></li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No tasks found.</p>
-              )}
-                    {(!userData || userData.id!=id) && tasks && sortingTasks.length > 0 ? (
-                <ul>
-                  {sortingTasks.map(task => (
-                    <li key={task.id}>
-                        <Link to={`/tasks/${task.id}`}>
-                            {task.title}
-                        </Link>
-                        <p>{task.points}, {task.problemType}</p></li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No tasks found.</p>
-              )}
-              
-                    
-                </div>}
+                    }</div>
         </div>}
+
         </div>
     );
 }
