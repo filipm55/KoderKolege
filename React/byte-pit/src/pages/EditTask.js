@@ -132,7 +132,7 @@ const EditTask = () => {
     return (
         <div className="wrapper" id ="addTask">
             <div>
-                <h2 id="novizd">Novi zadatak</h2>
+                <h2 id="novizd">Uredi zadatak</h2>
                 <form id="addTask" onSubmit={submitFja}>
                     <div id="lijeviDio">
                         <div className="input">

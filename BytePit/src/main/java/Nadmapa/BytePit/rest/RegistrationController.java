@@ -40,7 +40,6 @@ public class RegistrationController {
             System.out.println("User: " + user);
 
             if(user.getUserType()== UserType.COMPETITION_LEADER && user.getConfirmedByAdmin()){
-                System.out.println("trebo bi se vracat sad mail??");
                 emailservice.sendSimpleEmail(user.getEmail(),"Admin vam je potvrdio registraciju","Sada ste voditelj");
             }
             // Prikazivanje stranice s porukom potvrde
