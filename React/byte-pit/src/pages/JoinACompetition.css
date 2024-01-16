@@ -5,6 +5,7 @@
 /* Style for the competition container */
 .competition-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 10vh;
@@ -19,6 +20,10 @@
     max-width: 400px; /* Maximum width */
     margin: 50px auto 0; /* Updated margin to reduce top space */
     background-color: #f9f9f9; /* Background color */
+  }
+  #napomene{
+    max-width: 80vw;
+    width:80vw;
   }
   
   /* Style for the competition disclaimer paragraph */

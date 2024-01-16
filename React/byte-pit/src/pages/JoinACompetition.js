@@ -113,8 +113,18 @@ if(pristupio){
           <button className="start-button" onClick={startCompetition}>
             Pokreni Natjecanje
           </button>
-        </div>
+        </div>       
       )}
+      {competitionInfo && (
+        <div className="competition-details" id="napomene">
+          <h1>Napomene</h1>
+          <li>Jednom kada za neki zadatak predate file, više nećete moći uploadati novi pokušaj rješavanja.</li>
+          <li>Zato je preporučeno koristiti opciju testiranja koda pomoću playgrounda za testiranje. Provjerite da vam testni primjeri vraćaju očekivani output.</li>
+          <li>Na broj bodova koji se u natjecanjima ostvaruju utječe vrijeme rješavanja.</li>
+          <li>Svaki zadatak za koji napravite upload utjecat će na vašu natjecateljsku statistiku</li>
+          <h3>May the odds be ever in your favour</h3>
+        </div>
+)}
     </div>
   );
 };
