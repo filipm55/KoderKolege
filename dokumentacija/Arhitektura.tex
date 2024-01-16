@@ -232,7 +232,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 		
 		\noindent{	
 		UML-dijagram stanja je ponašajni UML-dijagram kojim se prikazuje
-		diskretno ponašanje objekta ili sustava putem prelazaka izmedu konačnog broja stanja, a često se za cjelokupni model stanja i prijelaza između stanja koristi izraz stroj stanja. Ova vrsta dijagrama se koristi za modeliranje ponašanja entiteta tijekom vremena, naglašavajući odgovor na dogadaje i okidače. Na dijagramu stanja \ref{fig:dijagramstanja} prikazane su sve funkcionalnosti koje natjecatelj može.\\
+		diskretno ponašanje objekta ili sustava putem prelazaka izmedu konačnog broja stanja, a često se za cjelokupni model stanja i prijelaza između stanja koristi izraz stroj stanja. Ova vrsta dijagrama se koristi za modeliranje ponašanja entiteta tijekom vremena, naglašavajući odgovor na dogadaje i okidače. Na dijagramu stanja, slika \ref{fig:dijagramstanja} prikazane su sve funkcionalnosti koje natjecatelj može.\\
 		
 		Proces kreće prijavom korisnika kao natjecatelj. Na početnoj stranici natjecatelj može pristupiti aktivnom natjecanju, otići na kalendar natjecanja, korisnike, rezultate ili na vježbe. U bilo kojem slučaju korisnik može doći u stanje "Početna stranica", "Vježba", "Korisnici", "Kalendar natjecanja", "Rezultati" također iz svih stanja se može odjaviti.\\
 		
@@ -254,7 +254,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 		\section{Dijagram aktivnosti}
 		
 		\noindent{
-			Dijagram aktivnosti je vrsta UML-dijagrama koja se u programskom inženjerstvu koristi za modeliranje i grafički prikaz dinamičkog ponašanja sustava. Na njemu se prikazuje izvođenje aktivnosti kroz niz akcija koje čine upravljačke tokove i tokove objekata, s naglaskom na slijed i uvjete toka. Na dijagramu aktivnosti \ref{fig:dijagramaktivnosti} prikazan je proces kako voditelj stvara zadatak za vježbu ili natjecanje.
+			Dijagram aktivnosti je vrsta UML-dijagrama koja se u programskom inženjerstvu koristi za modeliranje i grafički prikaz dinamičkog ponašanja sustava. Na njemu se prikazuje izvođenje aktivnosti kroz niz akcija koje čine upravljačke tokove i tokove objekata, s naglaskom na slijed i uvjete toka. Na dijagramu aktivnosti, slika \ref{fig:dijagramaktivnosti} prikazan je proces kako voditelj stvara zadatak za vježbu ili natjecanje.
 			
 			Proces započinje prijavom korisnika u sustav kao voditelj. Na početnoj stranici, klikom na "Kreiraj sadržaj", web aplikacija prikazuje 2 moguća odabira: kreiranje zadatka ili kreiranje natjecanja. Voditelj odabire što želi kreirati, te nakon odabira web aplikacija prikazuje formu za unos potrebnih podataka. Forma za stvaranje zadataka razlikuje se od forme za kreiranje natjecanja, ali bez obzira na odabrano, web aplikacija izvršava isti postupak.
 			
@@ -273,6 +273,16 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+		\noindent{
+			UML-dijagrami komponenti su vrsta strukturnih UML-dijagrama koji prikazuju organizaciju i odnose komponenti koje čine programsku potporu. Pružaju vizualni prikaz arhitekture sustava, naglašavajuci modularnu strukturu i interakcije između komponenti. Dijagram komponenti na slici \ref{fig:dijagramkomp} opisuje organizaciju i međuovisnost
+			komponenti, interne strukture i odnose prema okolini. 
+			
+			U web aplikaciji BytePit postoje dvije velike komponente: Frontend - React i Backend - Spring Boot. Te dvije komponente kumuniciraju preko sučelja REST\_API koje je zaduženo za komunikaciju frontend dijela aplikacije s backend dijelom aplikacije. U React komponenti sučelje REST\_API spaja se na komponentu React view koja komunicira s ostalim Frontend komponentama. Sve frontend komponente ovise o komponenti ReactJS koja je zadužena za dohvaćanje React biblioteka. S druge strane, u komponenti Spring Boot REST\_API je spojeno na komponentu Rest Controller koji je glavna komponenta za backend dio aplikacije. Sučelje JPA s vezom "ball and soccet" povezuje komponente Repository i JPA repository, JPA repository omogučuje komunikaciju s bazom podataka. Web aplikacija se spaja na vanjeske komponente: web preglednik preko sučelja HTTP\_Request koji podržava HTTP protokol i sve njegove operacije (Get, Post, Put, Delete), također na bazu podataka preko sučelja postgreSQL.
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			\begin{figure}[H]
+				\includegraphics[scale=0.4]{slike/Dijagram komponenti}
+				%veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\centering
+				\caption{Dijagram komponenti}
+				\label{fig:dijagramkomp}
+			\end{figure}
