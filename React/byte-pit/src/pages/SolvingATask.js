@@ -18,6 +18,9 @@ const SolvingATask = () => {
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState('');
+  const [buttonClicked, setButtonClicked] = useState(false); 
+  const [pointsFinal, setPoints] = useState(null);
+  const [outputResults, setOutputResults] = useState(null)
 
 
   const cookies = new Cookies();
@@ -27,18 +30,7 @@ const SolvingATask = () => {
     localStorage.removeItem(taskKey);
     setDurationMilliseconds(0);
 
-    /*
-    if (durationMilliseconds === 0) {
-      const [minutes, seconds] = task.duration.split(':');
-      const totalMilliseconds = (parseInt(minutes, 10) * 60 + parseInt(seconds, 10)) * 1000;
-
-      setDurationMilliseconds(totalMilliseconds);
-      localStorage.setItem(taskKey, Date.now().toString());
-    }*/
-
   };
-
-
 
 
   useEffect(() => {
@@ -163,6 +155,7 @@ useEffect(() => {
   };
 
   const handleSubmitFile = async () => {
+    setButtonClicked(true);
     if (!fileInputRef || !fileInputRef.files || fileInputRef.files.length === 0) {
       console.error('No file uploaded');
       return;
@@ -200,7 +193,9 @@ useEffect(() => {
         const responseData = await submitResponse.json();        
       
         console.log("response:", responseData);                                       // znaci ovo je objekt s atributima points i outputresults koji je mapa
-        console.log("points",responseData.points)
+        console.log("points",responseData.points);
+        setPoints(responseData.points);
+        setOutputResults(responseData.outputResults);
         setSubmissionStatus('File submitted successfully');
       } else {
         setSubmissionStatus('Failed to submit file');
@@ -259,11 +254,32 @@ useEffect(() => {
           ref={(ref) => (fileInputRef = ref)}
           className="file-uploader"
         />
-        <button className="submit-button" onClick={handleSubmitFile}>
+        <button
+          className={`submit-button ${buttonClicked ? 'disabled' : ''}`}
+          onClick={handleSubmitFile}
+          disabled={buttonClicked}
+        >
           Predaj
         </button>
       </div>
       {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
+      {pointsFinal !== null && <div className='bodovi'>Bodovi: {pointsFinal}</div>}
+
+      {outputResults && (
+        <div className="output-results">
+          <h3>Output Results:</h3>
+          <ul>
+            {Object.entries(outputResults).map(([expected, actual], index) => (
+              <li
+                key={index}
+                style={{ color: expected === actual ? 'green' : 'red' }}
+              >
+                <strong>Correct output:</strong> {expected} --- <strong>My output:</strong> {actual}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
         <div className="input-output-examples">
         <h3>Input-Output Examples:</h3>
