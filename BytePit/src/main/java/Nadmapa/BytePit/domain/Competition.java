@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "COMPETITION")
 public class Competition {
@@ -48,13 +45,15 @@ public class Competition {
     @Getter @Setter
     private Boolean isvirtual;
     @Getter @Setter
-    @ManyToMany
-    @JoinTable(
+    @ElementCollection
+    @CollectionTable(
             name = "competition_user", // Naziv vanjske tablice
-            joinColumns = @JoinColumn(name = "competition_id"), // Stupac koji predstavlja Competition
-            inverseJoinColumns = @JoinColumn(name = "user_id") // Stupac koji predstavlja User
+            joinColumns = @JoinColumn(name = "competition_id") // Stupac koji predstavlja Competition
     )
-    private List<User> pristupiliNatjecanju;
+    @MapKeyJoinColumn(name = "user_id") // Dodano mapiranje ključa
+    @Column(name = "access_time")
+    @Temporal(TemporalType.TIMESTAMP) // Dodano mapiranje vremena
+    private Map<User, LocalDateTime> pristupiliNatjecanju;
 
 
 
@@ -68,7 +67,7 @@ public class Competition {
         this.numberOfProblems = problems.size();
         this.slicica_pehara=slicica_pehara;
         this.isvirtual=isvirtual;
-        pristupiliNatjecanju = new ArrayList<>();
+        pristupiliNatjecanju = new HashMap<>();
     }
 
     public Competition() {

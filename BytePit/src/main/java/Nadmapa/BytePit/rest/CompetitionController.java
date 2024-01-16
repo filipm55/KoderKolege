@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -68,8 +70,8 @@ public class CompetitionController {
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
-            List<User> users = competition.getPristupiliNatjecanju();
-            if(users.stream().anyMatch(user -> user.getId().equals(userId))) return ResponseEntity.ok(true);
+            Map<User, LocalDateTime> mapa = competition.getPristupiliNatjecanju();
+            if(mapa.containsKey(userService.getUserById(userId).get())) return ResponseEntity.ok(true);
             else return ResponseEntity.ok(false);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
@@ -201,18 +203,51 @@ public class CompetitionController {
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
-            List<User> users = competition.getPristupiliNatjecanju();
-            if((competition.getIsvirtual()!=null && competition.getIsvirtual()) || users.stream().anyMatch(user -> user.getId().equals(userId))){ System.out.println("NESTO"); return; };
+            Map<User, LocalDateTime> mapa  = competition.getPristupiliNatjecanju();
+
             Optional<User> user = userService.getUserById(userId);
             if(user.isPresent()){
-                users.add(user.get());
-                competition.setPristupiliNatjecanju(users);
+                if((competition.getIsvirtual()!=null && competition.getIsvirtual()) || mapa.containsKey(user.get())){ System.out.println("NESTO"); return; };
+                User usercic = user.get();
+                Set<Problem> problems = competition.getProblems();
+                Duration ukupno = Duration.ofSeconds(0);
+                for (Problem problem: problems) {
+                    String problemDurationString = problem.getDuration();
+
+                    String[] problemDurations = problemDurationString.split(":");
+                    long minutes = Long.parseLong(problemDurations[0]);
+                    long seconds = Long.parseLong(problemDurations[1]);
+                    Duration problemDuration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+                    ukupno = ukupno.plus(problemDuration);
+                }
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime endingForUser = now.plus(ukupno);
+                mapa.put(usercic, endingForUser);
+                competition.setPristupiliNatjecanju(mapa);
                 competitionService.saveCompetition(competition);
             }
 
         } catch (Exception e) {
             System.out.println("Error");
         }
+    }
+
+
+
+    @GetMapping("/{competitionId}/competitors/{userId}/time")
+    public LocalDateTime getDateOfEndingForUser(@PathVariable Long competitionId, @PathVariable Long userId){
+        try {
+
+            Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
+            Map<User, LocalDateTime> mapa = competition.getPristupiliNatjecanju();
+            Optional<User> user = userService.getUserById(userId);
+            if(user.isPresent()){
+                return mapa.get(user.get());
+            }
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        return null;
     }
 
 
