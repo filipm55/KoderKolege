@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './Competition.css'; 
 import './SolvingATask.css';
+import Timer from './Timer';
 import useFetch from "../useFetch";
 import Cookies from 'universal-cookie';
 
@@ -266,9 +267,12 @@ const handleFinishCompetition = async () => {
       </div>
 
       <div className="task-container">
-
+      {competition && (
+        <div className="timer">
+          <Timer endTime={competition.dateTimeOfEnding} />
+        </div>
+      )}
       <h2 className="task-title">{task.title}</h2>
-
       <div className={`problem-type problem-type-${task.problemType.toLowerCase()}`}>
         {task.problemType}
       </div>
