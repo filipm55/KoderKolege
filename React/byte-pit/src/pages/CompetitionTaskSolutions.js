@@ -30,7 +30,8 @@ import base64 from 'base-64';
     const correct_ids=[1,2,3];
     const uniqueUsers = {};
     const [mapa,setMapa] = useState(uniqueUsers);
-
+    const [color, setColor] = useState("#f5f4f4");
+    const [color2, setColor2] = useState("#b2a7a7");
 
     useEffect(() => {
         if (jwtToken) {
@@ -230,41 +231,47 @@ import base64 from 'base-64';
 
     return (
         <div id="body34">
-        <button className="gumb34" onClick={() => {(setByTask(true))}}> Po zadacima </button>
-        <button className="gumb34" onClick={() => (setByTask(false))}> Po korisnicima </button>
+        <button className="gumb34" style={{backgroundColor:color, borderBottomColor:color, marginLeft:"2rem"}} onClick={() => {
+            setByTask(true);
+            setColor("#f5f4f4");
+            setColor2("#b2a7a7");
+        }}> Po zadacima </button>
+        <button className="gumb34" style={{backgroundColor:color2, borderBottomColor:color2}} onClick={() => {
+            setByTask(false);
+            setColor2("#f5f4f4");
+            setColor("#b2a7a7");
+        }}> Po korisnicima </button>
         <hr/>
             {byTask && (<table id="t34">
                 <thead>
-                <tr>
-                    <th>Zadatak</th>
-                    <th></th>
-                </tr>
+                    <tr className="redak34">
+                        <th>Zadatak</th>
+                        <th style={{fontSize:"2.5rem"}}>Predana rješenja</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {problems.map((problem) => (
-                    <tr key={problem.id}>
+                    <tr key={problem.id} className="redak34">
                         <td onClick={() => toggleProblem(problem.id)} style={{ cursor: "pointer" }}>
                             {problem.title}
                         </td>
                         <td>
                             {expandedProblems.includes(problem.id) && (
-                                <table>
+                                <table id="detalji34">
+                                    <tbody>
                                     {users && users[problem.id] && users[problem.id]
-                                        /*.filter((user) => user.problemId === problem.id)*/
                                         .map((user) => (
-                                            <tr key={user.user.id}>
+                                            <tr key={user.user.id} >
                                                 <td>{user.user.name} {user.user.lastname}</td>
                                                 <td>Postotak točnih primjera: {user.percentage_of_total * 100} %</td>
                                                 <td>Broj bodova: {user.points}</td>
                                                 <td>Vrijeme izvršavanja: {user.time}</td>
-                                                {/*nesto cime provjerimo je li user tocno rijesio zadatak i smije li dohvatiti rjesenje
-                                                correct.includes(problem.id) &&*/
-                                                    isUserInProblem[problem.id] &&
-                                                    <td><button onClick={() => download_solution(problem.id, user.user.id)}>
+                                                {isUserInProblem[problem.id] &&
+                                                    <td><button id="gumb34" onClick={() => download_solution(problem.id, user.user.id)}>
                                                     Dohvati rješenje
                                                 </button></td>}
                                             </tr>
-                                        ))}
+                                        ))} </tbody>
                                 </table>
                             )}
                         </td>
@@ -272,26 +279,25 @@ import base64 from 'base-64';
                 ))}
                 </tbody>
             </table>)}
-
-            {!byTask && (<table>
+            {!byTask && (<table id="t34">
                 <thead>
-                <tr>
+                <tr className="redak34">
                     <th>Korisnik</th>
+                    <th style={{fontSize:"2.5rem"}}>Predani zadaci</th>
                 </tr>
                 </thead>
                 <tbody>
                 {(mapa != undefined) && Object.entries(mapa).map((value) =>(
-                    <tr key={value[1].user.id}>
+                    <tr key={value[1].user.id} className="redak34">
                         <td onClick={() => toggleUser(value[1].user.id)} style={{ cursor: "pointer" }}>
-                            {value[1].user.username}
+                            {value[1].user.name+" "+ value[1].user.lastname}
                         </td>
                         <td>
                             {expandedUsers.includes(value[1].user.id) && (
-                                <table>
+                                <table id="detalji34">
                                     {value[1].problems.map((problem) => (
                                             <tr key={problem.id}>
                                                 <td>{problem.title}</td>
-                                               
                                             </tr>
                                         ))}
                                 </table>
@@ -299,7 +305,6 @@ import base64 from 'base-64';
                         </td>
                     </tr>
                 ))}
-                {console.log(mapa)}
                 </tbody>
             </table>)}
         </div>

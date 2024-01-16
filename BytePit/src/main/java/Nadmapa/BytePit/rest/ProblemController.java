@@ -28,6 +28,7 @@ public class ProblemController {
 
         @DeleteMapping("/{id}")
         public ResponseEntity<String> deleteProblem(@PathVariable Long id){
+            System.out.println("usao sam");
             Optional<Problem> problem = problemService.getProblemById(id);
             if(problem.isPresent()){
                 problemService.deleteProblem(problem.get());

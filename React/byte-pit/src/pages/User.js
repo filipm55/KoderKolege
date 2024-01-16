@@ -373,7 +373,7 @@ const User = () => {
               ) : (
                 <p></p>
               )}
-                    {(!userData || userData.id!=id) && (tasks && sortingTasks.length > 0 ? (
+                    {(!userData || (userData.id!=id && userData.userType != 'ADMIN')) && (tasks && sortingTasks.length > 0 ? (
                 <ul>
                   {sortingTasks.map(task => (
                     <li key={task.id}>

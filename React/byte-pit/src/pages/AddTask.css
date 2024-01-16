@@ -53,6 +53,17 @@ div#pic {
     margin-top: 70px;
 }
 
+div#uredenje {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+div#uredenje #addTask {
+    margin-bottom: -1rem;
+}
+
 div#pic2 {
     margin-left: 50px;
     height: 46em;
