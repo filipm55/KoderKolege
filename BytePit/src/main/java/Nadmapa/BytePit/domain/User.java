@@ -48,7 +48,7 @@ public class User {
    private Image image; // MAX SIZE 1048576 bytes !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (probo sam promijenit u fileuploadConfig al to ne radi ;_;)
 
    @Getter @Setter
-   @ElementCollection
+   @ElementCollection(fetch = FetchType.EAGER)
    @CollectionTable(
            name = "user_competition_placement",
            joinColumns = @JoinColumn(name = "user_id")

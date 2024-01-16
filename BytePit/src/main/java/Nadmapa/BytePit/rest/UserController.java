@@ -43,6 +43,7 @@ public class UserController {
     }
     @GetMapping("/getAllResults/{id}")
     public List<Object[]> getAllResultsFromUser(@PathVariable Long id){
+        
         Optional<User> userOptional = userService.getUserById(id);
         List<Object[]> returnValue = new LinkedList<>();
         if(userOptional.isPresent()){
