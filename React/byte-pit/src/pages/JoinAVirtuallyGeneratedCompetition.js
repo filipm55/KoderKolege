@@ -9,10 +9,31 @@ const JoinACompetition = () => {
   const [fetchError, setFetchError] = useState(false);
   const [randomlyPickedTasks, setRandomlyPickedTasks] = useState([]);
   const [message, setMessage] = useState('');
-  const [adminUser, setAdmin] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [competitionCreated, setCompetitionCreated] = useState(false);
   const [processStarted, setProcessStarted] = useState(false);
   const [competitionId, setCompetitionId] = useState(null);
+  
+  const cookies = new Cookies();
+  const jwtToken = cookies.get('jwt_authorization');
+
+  useEffect(() => {
+    if (jwtToken) {
+      const fetchData = async () => {
+        try {
+          const url = `http://localhost:8080/users/${jwtToken}`;
+          const response = await fetch(url);
+          const data = await response.json();
+          setUserData(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchData();
+    } else {
+    }
+  }, [jwtToken]);
 
   const pickRandomTasks = (tasks, count) => {
   const publicTasks = tasks.filter(task => !task.isPrivate);
@@ -23,26 +44,8 @@ const JoinACompetition = () => {
     
   };
 
-
-  const fetchAdminUser = useCallback(async () => {
-    try {
-      const response = await fetch('http://localhost:8080/users/getadmin');
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const adminUserData = await response.json();
-      setAdmin(adminUserData);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchAdminUser();
-  }, [fetchAdminUser]);
-
-  useEffect(() => {
-    if (!processStarted && adminUser) {
+    if (!processStarted && userData) {
       setProcessStarted(true); // Ensure that the process runs only once
 
       fetch('http://localhost:8080/problems')
@@ -83,7 +86,7 @@ const JoinACompetition = () => {
           formData.append('trophyPicture', trophyPictureFile);
           formData.append('problems', problemsArray);
           formData.append('isvirtual', Boolean(true));
-          formData.append('competitionMaker', adminUser.id);
+          formData.append('competitionMaker', userData.id);
 
           console.log('FormData:');
           for (let pair of formData.entries()) {
@@ -127,19 +130,18 @@ const JoinACompetition = () => {
           console.error('Error:', error);
         });
     }
-  }, [adminUser, processStarted]);
+  }, [userData, processStarted]);
 
   
   const startCompetition = async () => {
     if (competitionInfo && competitionInfo.length > 0) {
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
       if (competitionId) {
-        await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${adminUser.id}`, {
+        await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`, {
           method: 'PUT'
         }).then(response => {
 
         })
-        console.log("OVJDE SAM");
         window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
       }
     } else {
@@ -150,7 +152,7 @@ const JoinACompetition = () => {
   
   return (
     <div className="competition-container">
-      {competitionInfo && adminUser && (
+      {competitionInfo && userData && (
         <div className="competition-details">
           <p className="competition-disclaimer">
             May the odds be ever in your favour.
