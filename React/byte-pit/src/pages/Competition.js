@@ -126,8 +126,8 @@ const fetchTime = async () => {
       handleTimeExpired();
   }
 };
-fetchTime();
 
+    fetchTime();
     fetchDataByTaskUser();
   }, [competitionId, userData]);
 
