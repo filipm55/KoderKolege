@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Timer = ({ endTime, onTimerExpired }) => {
   const calculateRemainingTime = () => {
     const currentTime = new Date();
-    const [year, month, day, hour, minute] = endTime;
+    const [year, month, day, hour, minute, second, milisecond] = endTime;
     const endTimeDate = new Date(year, month - 1, day, hour, minute);
 
     if (isNaN(endTimeDate)) {
