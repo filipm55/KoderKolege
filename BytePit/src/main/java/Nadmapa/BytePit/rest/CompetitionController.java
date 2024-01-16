@@ -71,7 +71,9 @@ public class CompetitionController {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
             Map<User, LocalDateTime> mapa = competition.getPristupiliNatjecanju();
-            if(mapa.containsKey(userService.getUserById(userId).get())) return ResponseEntity.ok(true);
+            if (mapa.containsKey(userService.getUserById(userId).get()) && competition.getDateTimeOfEnding().isAfter(LocalDateTime.now())) {
+                return ResponseEntity.ok(true);
+            }
             else return ResponseEntity.ok(false);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
@@ -200,6 +202,7 @@ public class CompetitionController {
 
     @PutMapping("/{competitionId}/competitors/{userId}")
     public void enterCompetition(@PathVariable Long competitionId, @PathVariable Long userId){
+        System.out.println("ENTERO SAM");
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
@@ -207,7 +210,7 @@ public class CompetitionController {
 
             Optional<User> user = userService.getUserById(userId);
             if(user.isPresent()){
-                if((competition.getIsvirtual()!=null && competition.getIsvirtual()) || mapa.containsKey(user.get())){ System.out.println("NESTO"); return; };
+                //if((competition.getIsvirtual()!=null && (competition.getIsvirtual() && !competition.getName().equals("Virtualno")) || mapa.containsKey(user.get()))){ System.out.println("NESTO"); return; };
                 User usercic = user.get();
                 Set<Problem> problems = competition.getProblems();
                 Duration ukupno = Duration.ofSeconds(0);
@@ -242,7 +245,9 @@ public class CompetitionController {
             Map<User, LocalDateTime> mapa = competition.getPristupiliNatjecanju();
             Optional<User> user = userService.getUserById(userId);
             if(user.isPresent()){
-                return mapa.get(user.get());
+                LocalDateTime timeOfEnding = mapa.get(user.get());
+                if(!competition.getIsvirtual() && timeOfEnding.isAfter(competition.getDateTimeOfEnding())) return null;
+                return timeOfEnding;
             }
         } catch (Exception e) {
             System.out.println("Error");

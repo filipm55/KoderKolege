@@ -133,6 +133,11 @@ const JoinACompetition = () => {
     if (competitionInfo && competitionInfo.length > 0) {
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
       if(competitionId) {
+        fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${adminUser.id}`, {
+          method: 'PUT'
+        }).then(response => {
+
+        })
         window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
       }
     } else {
@@ -147,7 +152,6 @@ const JoinACompetition = () => {
         <div className="competition-details">
           <p className="competition-disclaimer">
             May the odds be ever in your favour.
-            Rješavanje traje 2 sata.
           </p>
           <button className="start-button" onClick={startCompetition}>
             Pokreni Natjecanje
