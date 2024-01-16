@@ -29,11 +29,13 @@ const User = () => {
   const jwtToken = cookies.get('jwt_authorization');
   const [username, setUsername] = useState('');
     const [name, setName] = useState('');
+    const [color, setColor] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     var uredi = new Map();
     var [mapa, setMapa] = useState(uredi);
+    var [pehars, setPehars] = useState([]);
     var postojeKorisnici = false;
     const emptyBlob = new Blob([''], { type: 'text/plain' });
     const [file, setFile] = useState(emptyBlob);
@@ -132,6 +134,31 @@ const User = () => {
     const { data: tasks, error: tasksError } = useFetch(
       `http://localhost:8080/problems/byMakerId/${id}`
     );
+
+    useEffect(() => {
+          fetch(`http://localhost:8080/users/getAllResults/${id}`, {
+            method: 'GET',
+        }).then(response => {
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json(); // Parse as JSON
+              } else {
+                return response.text(); // Parse as text
+              }
+        })
+            .then(data => {
+                console.log('Success:', data);
+                setPehars(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }, []);
+
+      //sva natjecanja s 1/2/3 mjestom
+
+
 
         
     const { data: stats, error: statsError } = useFetch(
@@ -236,6 +263,12 @@ const User = () => {
         }
         else return null;
     };
+
+    const boja = (rank) => {
+        if(rank == 1) return "gold";
+        if(rank == 2) return "silver";
+        if(rank == 3) return "brown";
+    }
 
     useEffect(() => {
         // deault je 'newest-first', za <0 a ide prije b
@@ -392,27 +425,18 @@ const User = () => {
                 </div>}
                 </div>
                 {isCompetitor && <div id="nagrade"> {/*DIO ZA PEHARE I NAGRADE - napraviti for po osvojenim natjecanjima */}
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "gold" }} ></EmojiEventsIcon>
-                            Regionalno natjecanje 2020</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
-                            IPX competiton 2016</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "silver" }} ></EmojiEventsIcon>
-                            Božični turnir 2019</p>
-                        </div>
-                        <div className="osvojeno">
-                            <p>
-                            <EmojiEventsIcon className="pehar" sx={{ color: "brown" }} ></EmojiEventsIcon>
-                            Državno natjecanje 2014</p>
-                        </div>
-                    </div>}
+                {console.log(pehars)}
+                {pehars!=null && pehars.map((entry, index) => (
+
+                    <div className="osvojeno">
+                    {entry[1] && <div id="s666" style={{backgroundColor:boja(entry[2])}}><img className="pic33" src={`data:image/jpeg;base64,${entry[1]}`} alt="Image"/></div>}
+                    {!entry[1] && <div> <EmojiEventsIcon className="pehar" sx={{ color: boja(entry[2]) }} ></EmojiEventsIcon></div>}
+                    <p id="p128">{"  " + entry[0] + " - " + entry[2] + ". mjesto"} </p>
+                    </div>
+
+                ))}
+
+                 </div>}
 
                 {!isCompetitor && 
                         <div id="kalendar">
