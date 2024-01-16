@@ -254,7 +254,7 @@ const handleFinishCompetition = async () => {
 };
 
 const handleTimeExpired = async () => {
-  window.location.href = `/finishcompetition`;
+  //window.location.href = `/finishcompetition`;
 };
 
 

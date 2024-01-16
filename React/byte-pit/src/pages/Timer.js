@@ -3,12 +3,19 @@ import React, { useState, useEffect } from 'react';
 const Timer = ({ endTime, onTimerExpired }) => {
   const calculateRemainingTime = () => {
     const currentTime = new Date();
-    const [year, month, day, hour, minute, second, milisecond] = endTime;
-    const endTimeDate = new Date(year, month - 1, day, hour, minute, second);
+    const [year, month, day, hour, minute, second, millisecond] = endTime;
+
+    let endTimeDate;
+    
+    if (endTime.length >= 6) {
+        endTimeDate = new Date(year, month - 1, day, hour, minute, second, millisecond);
+    } else {
+        endTimeDate = new Date(year, month - 1, day, hour, minute, 0, 0);
+    }
 
     if (isNaN(endTimeDate)) {
       console.error(`Invalid date format for endTime: ${endTime}`);
-      return 0; // Return 0 seconds if the date is invalid
+      return 0; 
     }
 
     const remainingSeconds = Math.max(0, Math.floor((endTimeDate - currentTime) / 1000));
