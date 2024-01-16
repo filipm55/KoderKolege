@@ -8,7 +8,8 @@ const Timer = ({ endTime, onTimerExpired }) => {
     let endTimeDate;
     
     if (endTime.length >= 6) {
-        endTimeDate = new Date(year, month - 1, day, hour, minute, second, millisecond);
+        endTimeDate = new Date(year, month - 1, day, hour, minute, second, 0);
+        console.log(endTime);
     } else {
         endTimeDate = new Date(year, month - 1, day, hour, minute, 0, 0);
     }
@@ -30,7 +31,6 @@ const Timer = ({ endTime, onTimerExpired }) => {
       setSeconds(newSeconds);
 
       if (newSeconds === 0) {
-        // Call the callback function when the timer expires
         onTimerExpired();
         clearInterval(intervalId);
       }
