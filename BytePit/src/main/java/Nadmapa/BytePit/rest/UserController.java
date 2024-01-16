@@ -1,9 +1,8 @@
 package Nadmapa.BytePit.rest;
 
-import Nadmapa.BytePit.domain.CodeSub;
-import Nadmapa.BytePit.domain.Image;
-import Nadmapa.BytePit.domain.User;
-import Nadmapa.BytePit.domain.UserType;
+import Nadmapa.BytePit.domain.*;
+import Nadmapa.BytePit.repository.UserRepository;
+import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
@@ -32,6 +31,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private CompetitionService competitionService;
 
     @Autowired
     private EmailSenderService emailservice;
@@ -40,7 +41,30 @@ public class UserController {
     public UserController(UserRegistrationService registrationService) {
         this.registrationService = registrationService;
     }
+    @GetMapping("/getAllResults/{id}")
+    public List<Object[]> getAllResultsFromUser(@PathVariable Long id){
+        Optional<User> userOptional = userService.getUserById(id);
+        List<Object[]> returnValue = new LinkedList<>();
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            Map<Competition, Integer> mapa = user.getCompetitionPlacements();
+            Map<Competition, Integer> filtriranaMapa = mapa.entrySet()
+                    .stream()
+                    .filter(entry -> entry.getValue() > 3)
+                    .collect(Collectors.toMap(entry -> entry.getKey(), (value) -> value.getValue()));
+            filtriranaMapa.entrySet().stream().forEach((entry) -> {
+                Object[]  podaci = new Object[3];
+                podaci[0] = entry.getKey().getName();
+                podaci[1] = entry.getKey().getTrophyPicture().getData();
+                podaci[2] = entry.getValue();
+                returnValue.add(podaci);
+            });
 
+            return returnValue;
+
+        }
+        return null;
+    }
     @GetMapping("/byId/{id}")
     public User getUserById(@PathVariable Long id) {
        Optional<User> user = userService.getUserById(id);

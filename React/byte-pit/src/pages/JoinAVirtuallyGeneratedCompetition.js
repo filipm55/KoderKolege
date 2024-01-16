@@ -129,15 +129,16 @@ const JoinACompetition = () => {
   }, [adminUser, processStarted]);
 
   
-  const startCompetition = () => {
+  const startCompetition = async () => {
     if (competitionInfo && competitionInfo.length > 0) {
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
-      if(competitionId) {
-        fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${adminUser.id}`, {
+      if (competitionId) {
+        await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${adminUser.id}`, {
           method: 'PUT'
         }).then(response => {
 
         })
+        console.log("OVJDE SAM");
         window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
       }
     } else {

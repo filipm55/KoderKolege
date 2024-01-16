@@ -2,8 +2,11 @@ package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.Competition;
 import Nadmapa.BytePit.domain.Problem;
+import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.CompetitionRepository;
 import Nadmapa.BytePit.repository.ProblemRepository;
+import Nadmapa.BytePit.repository.UserRepository;
 import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ProblemService;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +18,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,6 +28,10 @@ public class CompetitionServiceJpa implements CompetitionService {
     private CompetitionRepository competitionRepo;
     @Autowired
     ProblemRepository problemRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    private CompRankRepository compRankRepository;
     @Override
     public List<Competition> listAll() {
         return competitionRepo.findAll();
@@ -72,6 +80,32 @@ public class CompetitionServiceJpa implements CompetitionService {
                     problemRepository.save(problem);
                 }
                 competitionRepo.save(competition);
+
+                List<Object[]> objects = compRankRepository.getCompetitionRanking(competitionId);
+                Integer rank = Integer.valueOf(1);
+                for (Object[] objectArray: objects) {
+                    try{
+                        Long userId = (Long) objectArray[0];
+                        //Integer rank = (Integer) objectArray[3];
+
+
+                        Optional<User> userOptional = userRepository.findById(userId);
+                        if(userOptional.isPresent()){
+                            User user = userOptional.get();
+                            Map<Competition, Integer> mapa = user.getCompetitionPlacements();
+                            mapa.put(competition, rank);
+                            user.setCompetitionPlacements(mapa);
+                            userRepository.save(user);
+                        }
+                        else{
+                            System.out.println("GRESKA KOD DAVANJA NAGRADA");
+                        }
+                    }catch (Exception ignorable){
+                        System.out.println("GRESKA NEKA PRI DAVANJU NAGRADA");
+                    }
+                    rank++;
+                }
+
             }
             else System.out.println("Probao sam zavrsiti natjecanje " + competitionId + ", ali mu je promijenjeno vrijeme kraja: " + dateTimeOfEnding + " -> " + competition.getDateTimeOfEnding());
 

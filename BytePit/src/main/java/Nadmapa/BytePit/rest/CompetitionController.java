@@ -255,6 +255,12 @@ public class CompetitionController {
         return null;
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompetition(@PathVariable Long id){
+            competitionService.deleteCompetitionById(id);
+            return ResponseEntity.ok("Natjecanje je uspješno izbrisano");
+    }
+
 
     @GetMapping("/{competitionId}")
     public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {

@@ -42,5 +42,10 @@ public class ProblemServiceJpa implements ProblemService {
         problemRepo.save(problem);
     }
 
+    @Override
+    public void deleteProblem(Problem problem) {
+        problemRepo.delete(problem);
+    }
+
 
 }

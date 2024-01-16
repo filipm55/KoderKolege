@@ -34,6 +34,8 @@ const CompetitionsResult = () => {
             })
             //filtriraj samo prosla natjecanja
             setFcompetitions(allcompetitions.filter((competition) => {
+                console.log(competition.dateTimeOfEnding);
+                //
                 return competition.dateTimeOfEnding < currentDate;
             }));
             console.log(fcompetitions);

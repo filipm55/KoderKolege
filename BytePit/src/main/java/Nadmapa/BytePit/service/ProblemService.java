@@ -17,4 +17,6 @@ public interface ProblemService {
     List<Problem> getProblemsByProblemMakerId(String problem_maker_id);
 
     void saveProblem(Problem problem);
+
+    void deleteProblem(Problem problem);
 }

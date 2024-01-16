@@ -26,7 +26,15 @@ public class ProblemController {
         @Autowired
         private UserService userService;
 
-
+        @DeleteMapping("/{id}")
+        public ResponseEntity<String> deleteProblem(@PathVariable Long id){
+            Optional<Problem> problem = problemService.getProblemById(id);
+            if(problem.isPresent()){
+                problemService.deleteProblem(problem.get());
+                return ResponseEntity.ok("Uspješno izbrisan problem");
+            }
+            else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Problem nije pronađen");
+        }
         @GetMapping("")
         public List<Problem> listProblem(){
             return problemService.listAll();
