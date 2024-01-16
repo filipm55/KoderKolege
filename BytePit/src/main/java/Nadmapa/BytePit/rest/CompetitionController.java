@@ -239,18 +239,14 @@ public class CompetitionController {
 
     @GetMapping("/{competitionId}/competitors/{userId}/time")
     public LocalDateTime getDateOfEndingForUser(@PathVariable Long competitionId, @PathVariable Long userId){
-        System.out.println("JA SAM USER: " + userId);
         try {
 
             Competition competition = competitionService.getCompetition(String.valueOf(competitionId));
-            System.out.println("U COMPETITIONU: " + competition.getName());
             Map<User, LocalDateTime> mapa = competition.getPristupiliNatjecanju();
-            System.out.println("DOHVATIO SAM MAPU? " + mapa!=null);
             Optional<User> user = userService.getUserById(userId);
 
             if(user.isPresent()){
                 LocalDateTime timeOfEnding = mapa.get(user.get());
-                System.out.println("IS VIRUTAL RAZLICITNO OD NULL?" + competition.getIsvirtual()!= null + " !competition.getIsvirtual()" + !competition.getIsvirtual() + "  timeOfEnding.isAfter(competition.getDateTimeOfEnding())" +  timeOfEnding.isAfter(competition.getDateTimeOfEnding()));
                 if(competition.getIsvirtual()!= null && !competition.getIsvirtual() && timeOfEnding.isAfter(competition.getDateTimeOfEnding())) return null;
                 return timeOfEnding;
             }
