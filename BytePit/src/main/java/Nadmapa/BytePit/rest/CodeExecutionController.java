@@ -81,7 +81,7 @@ public class CodeExecutionController {
     }
 
     @PostMapping("/submit/{id}")
-    public String submitCode(@PathVariable Long id,
+    public SubmissionResult submitCode(@PathVariable Long id,
                              @RequestParam("file") MultipartFile file,
                              @RequestParam("time") int time,
                              @RequestParam("user") String username,
@@ -98,7 +98,7 @@ public class CodeExecutionController {
 
             return ces.submit(file, problemId, codeSub);
         } catch (IOException e) {
-            return "Error in processing file";
+            throw new RuntimeException("Error in processing file" );
         }
     }
 

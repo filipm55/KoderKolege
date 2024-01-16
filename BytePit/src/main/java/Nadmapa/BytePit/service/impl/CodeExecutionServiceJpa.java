@@ -3,6 +3,7 @@ package Nadmapa.BytePit.service.impl;
 import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.ExecutionResult;
 import Nadmapa.BytePit.domain.Problem;
+import Nadmapa.BytePit.domain.SubmissionResult;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.CodeExecutionService;
 import Nadmapa.BytePit.service.ProblemService;
@@ -16,6 +17,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -92,17 +94,20 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
         }
     }
 
+
     @Override
-    public String submit(MultipartFile file, Long problemId, CodeSub cs) {
+    public SubmissionResult submit(MultipartFile file, Long problemId, CodeSub cs) {
         File tempFile = null;
         Path tempDir = null;
         int correctOutputs = 0;
+        Map<String, String> outputResults = new HashMap<>();
 
         try {
             Optional<Problem> problemOptional = problemService.getProblemById(problemId);
-            if (!problemOptional.isPresent()) {
-                return "Error: Problem not found.";
+            if (problemOptional.isEmpty()) {
+                throw new IllegalArgumentException("Problem not found.");
             }
+
             Problem problem = problemOptional.get();
             int totalExamples = problem.getInputOutputExamples().size();
 
@@ -110,7 +115,7 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
             String className = extractClassName(code);
 
             if (className == null) {
-                return "Error: No valid class found in the submitted code.";
+                throw new IllegalArgumentException("No valid class found in the submitted code.");
             }
 
             tempDir = Files.createTempDirectory("tempCodeDir");
@@ -119,30 +124,89 @@ public class CodeExecutionServiceJpa implements CodeExecutionService {
 
             String compilationResult = compileJavaFile(tempFile);
             if (compilationResult != null) {
-                return compilationResult;
+                throw new RuntimeException("Compilation error: " + compilationResult);
             }
 
             for (Map.Entry<String, String> entry : problem.getInputOutputExamples().entrySet()) {
-                String executionResult = runJavaClassWithInput(tempDir.toString(), className, entry.getKey());
-                if (executionResult != null && executionResult.trim().equals(entry.getValue().trim())) {
+                String input = entry.getKey();
+                String expectedOutput = entry.getValue();
+                String executionResult = runJavaClassWithInput(tempDir.toString(), className, input);
+                outputResults.put(expectedOutput, executionResult);
+
+                if (executionResult != null && executionResult.trim().equals(expectedOutput.trim())) {
                     correctOutputs++;
                 }
             }
 
             BigDecimal points = BigDecimal.valueOf(((long) problem.getPoints() * correctOutputs) / totalExamples);
-            double percentage=points.doubleValue()/problem.getPoints();
+            double percentage = points.doubleValue() / problem.getPoints();
             cs.setPercentage_of_total(percentage);
             cs.setPoints(points);
             userCodeFileRepository.save(cs);
-            System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));
-            return String.format("Correct outputs: %d/%d", correctOutputs, totalExamples);
 
+            return new SubmissionResult(points, outputResults);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error processing file.", e);
         } catch (Exception e) {
-            return "Error executing code: " + e.getMessage();
+            // Catch any other exceptions and handle them appropriately
+            throw new RuntimeException("Error executing code.", e);
         } finally {
             cleanupFiles(tempFile, tempDir);
         }
     }
+//    @Override
+//    public String submit(MultipartFile file, Long problemId, CodeSub cs) {
+//        File tempFile = null;
+//        Path tempDir = null;
+//        int correctOutputs = 0;
+//        Map<String,String> mapa=new HashMap<>();
+//
+//        try {
+//            Optional<Problem> problemOptional = problemService.getProblemById(problemId);
+//            if (!problemOptional.isPresent()) {
+//                return "Error: Problem not found.";
+//            }
+//            Problem problem = problemOptional.get();
+//            int totalExamples = problem.getInputOutputExamples().size();
+//
+//            String code = new String(file.getBytes());
+//            String className = extractClassName(code);
+//
+//            if (className == null) {
+//                return "Error: No valid class found in the submitted code.";
+//            }
+//
+//            tempDir = Files.createTempDirectory("tempCodeDir");
+//            tempFile = new File(tempDir.toFile(), className + ".java");
+//            Files.write(tempFile.toPath(), code.getBytes());
+//
+//            String compilationResult = compileJavaFile(tempFile);
+//            if (compilationResult != null) {
+//                return compilationResult;
+//            }
+//
+//            for (Map.Entry<String, String> entry : problem.getInputOutputExamples().entrySet()) {
+//                String executionResult = runJavaClassWithInput(tempDir.toString(), className, entry.getKey());
+//                if (executionResult != null && executionResult.trim().equals(entry.getValue().trim())) {
+//                    correctOutputs++;
+//                }
+//            }
+//
+//            BigDecimal points = BigDecimal.valueOf(((long) problem.getPoints() * correctOutputs) / totalExamples);
+//            double percentage=points.doubleValue()/problem.getPoints();
+//            cs.setPercentage_of_total(percentage);
+//            cs.setPoints(points);
+//            userCodeFileRepository.save(cs);
+//            System.out.println(String.format("Correct outputs: %d/%d", correctOutputs, totalExamples));
+//            return String.format("Correct outputs: %d/%d, points %.2f", correctOutputs, totalExamples,points);
+//
+//        } catch (Exception e) {
+//            return "Error executing code: " + e.getMessage();
+//        } finally {
+//            cleanupFiles(tempFile, tempDir);
+//        }
+//    }
 
 
     private String compileJavaFile(File javaFile) throws IOException, InterruptedException {

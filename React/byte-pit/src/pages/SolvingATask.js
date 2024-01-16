@@ -197,6 +197,10 @@ useEffect(() => {
       });
 
       if (submitResponse.ok) {
+        const responseData = await submitResponse.json();        
+      
+        console.log("response:", responseData);                                       // znaci ovo je objekt s atributima points i outputresults koji je mapa
+        console.log("points",responseData.points)
         setSubmissionStatus('File submitted successfully');
       } else {
         setSubmissionStatus('Failed to submit file');
