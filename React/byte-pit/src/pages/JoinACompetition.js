@@ -81,9 +81,10 @@ const JoinACompetition = () => {
   }, [competitionId]);
 
   const startCompetition = async () => {
-    console.log(pristupio);
-    // Redirect to the first problem of the competition
     if (competitionInfo && competitionInfo.length > 0 && !pristupio && userData) {
+      const currentDate = new Date();
+      cookies.set('startTime', currentDate.toISOString(), { path: '/' });
+      
       await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`, {
         method: 'PUT'
       })
@@ -91,7 +92,6 @@ const JoinACompetition = () => {
       window.location.href = `/competitions/${competitionId}/${firstProblemId}`;
     } else {
       console.error('No problems found in the competition');
-      // You can handle this case, maybe show an error message
     }
   };
 if (!isLoggedIn){

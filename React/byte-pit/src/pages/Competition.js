@@ -17,8 +17,8 @@ const Competition = () => {
 
   const [solution, setSolution] = useState('');
   const [testResult, setTestResult] = useState('');
-  const [solutionOutput, setSolutionOutput] = useState(''); // New state for solution output
-  const [solutionError, setSolutionError] = useState(''); // New state for solution error
+  const [solutionOutput, setSolutionOutput] = useState(''); 
+  const [solutionError, setSolutionError] = useState(''); 
   const [userInput, setUserInput] = useState('');
   let fileInputRef = null;
   const [userData, setUserData] = useState(null);
@@ -29,9 +29,6 @@ const Competition = () => {
   const jwtToken = cookies.get('jwt_authorization');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [time, setTime] = useState(null)
-
-  //const [submittedTasks, setSubmittedTasks] = useState([]);
-  //const [isSubmitting, setIsSubmitting] = useState()
 
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
@@ -85,7 +82,6 @@ const Competition = () => {
                 const response = await fetch(`http://localhost:8080/problems/${taskId}`);
                 const task = await response.json();
                 setTask(task);
-                //setIsSubmitting(false)
 
             } catch (error) {
                 console.error('Error fetching task:', error);
@@ -133,7 +129,7 @@ const fetchTime = async () => {
 fetchTime();
 
     fetchDataByTaskUser();
-  }, [taskId, competitionId, userData]);
+  }, [competitionId, userData]);
 
 
   const handleTestSolution = async () => {
@@ -197,20 +193,17 @@ fetchTime();
 
       const formData = new FormData();
 
-      const currentTime = new Date();
-      const [year, month, day, hour, minutes] = competition?.dateTimeOfBeginning;
+      const storedDateTime = cookies.get('startTime');
+      const startDateTime = new Date(storedDateTime);
 
-      const dateTimeOfBeginning = new Date(year, month - 1, day, hour, minutes);
-
-      const timeDifference = Math.floor((currentTime - dateTimeOfBeginning) / 1000);
+      let timeDifference = Date.now() - startDateTime;
+      console.log(timeDifference)
 
       formData.append('file', uploadedFile);
       formData.append('time', timeDifference)
       formData.append('user', userData.username);
       formData.append('problem', task.id)
       formData.append('competition_id', competitionId)
-
-      //ovo je za provjeru sta se salje
 
       const formDataObject = {};
       formData.forEach((value, key) => {
@@ -240,7 +233,6 @@ fetchTime();
 
       
         try {
-          // Trigger backend process to calculate final ranking
           const response = await fetch(`http://localhost:8080/rank/${competitionId}/${userData.username}`, {
               method: 'POST'
           });
@@ -269,11 +261,11 @@ const handleTimeExpired = async () => {
   if (!task) {
     return <div>Loading...</div>;
   }
-  if (fetchError || !isLoggedIn) { //AKO POKUSAS PRISTUPIT NATJECANJU KOJE SE TRENUTNO NE ODRZAVA
+  if (fetchError || !isLoggedIn) { 
         return <div>FORBIDDEN</div>;
     }
-    //NAPRAVIO SAM DA SE POKAŽE COMPETITION NAME KAD RJEŠAVAŠ ZADATAK
-  return (
+
+    return (
     <div>
       <h1 className="competition-title">
       {competition && competition.name ? competition.name : `Natjecanje ${competitionId}`}
