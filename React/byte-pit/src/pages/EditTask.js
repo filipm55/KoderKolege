@@ -29,6 +29,8 @@ const EditTask = () => {
     const cookies = new Cookies();
     const jwtToken = cookies.get('jwt_authorization');
 
+
+
     const addExample = () => {
         setExamplePairs([...examplePairs, { input: '', output: '' }]);
     };

@@ -43,7 +43,7 @@ public class UserController {
     }
     @GetMapping("/getAllResults/{id}")
     public List<Object[]> getAllResultsFromUser(@PathVariable Long id){
-        
+
         Optional<User> userOptional = userService.getUserById(id);
         List<Object[]> returnValue = new LinkedList<>();
         if(userOptional.isPresent()){
@@ -51,16 +51,17 @@ public class UserController {
             Map<Competition, Integer> mapa = user.getCompetitionPlacements();
             Map<Competition, Integer> filtriranaMapa = mapa.entrySet()
                     .stream()
-                    .filter(entry -> entry.getValue() > 3)
+                    .filter(entry -> entry.getValue() <= 3)
                     .collect(Collectors.toMap(entry -> entry.getKey(), (value) -> value.getValue()));
             filtriranaMapa.entrySet().stream().forEach((entry) -> {
                 Object[]  podaci = new Object[3];
                 podaci[0] = entry.getKey().getName();
                 podaci[1] = entry.getKey().getTrophyPicture().getData();
                 podaci[2] = entry.getValue();
+                System.out.println(podaci.toString());
                 returnValue.add(podaci);
             });
-
+            System.out.println(returnValue.toString());
             return returnValue;
 
         }

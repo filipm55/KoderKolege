@@ -23,6 +23,7 @@ const JoinACompetition = () => {
     
   };
 
+
   const fetchAdminUser = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:8080/users/getadmin');
