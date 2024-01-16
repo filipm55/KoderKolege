@@ -9,7 +9,6 @@ const Timer = ({ endTime, onTimerExpired }) => {
     
     if (endTime.length >= 6) {
         endTimeDate = new Date(year, month - 1, day, hour, minute, second, 0);
-        console.log(endTime);
     } else {
         endTimeDate = new Date(year, month - 1, day, hour, minute, 0, 0);
     }
