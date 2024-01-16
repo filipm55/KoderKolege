@@ -4,7 +4,7 @@ const Timer = ({ endTime, onTimerExpired }) => {
   const calculateRemainingTime = () => {
     const currentTime = new Date();
     const [year, month, day, hour, minute, second, milisecond] = endTime;
-    const endTimeDate = new Date(year, month - 1, day, hour, minute);
+    const endTimeDate = new Date(year, month - 1, day, hour, minute, second);
 
     if (isNaN(endTimeDate)) {
       console.error(`Invalid date format for endTime: ${endTime}`);
