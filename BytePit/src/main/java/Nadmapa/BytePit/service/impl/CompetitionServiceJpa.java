@@ -90,12 +90,15 @@ public class CompetitionServiceJpa implements CompetitionService {
 
 
                         User user = userRepository.findByUsername(username);
-                        System.out.println("USER KOJEG MIJENJAM JE :" +user.getUsername());
                         Map<Competition, Integer> mapa = user.getCompetitionPlacements();
+                        System.out.println(mapa.toString());
                         mapa.put(competition, rank);
+                        System.out.println(mapa.toString());
                         user.setCompetitionPlacements(mapa);
                         userRepository.save(user);
+                        System.out.println("User:" +user.getUsername() + " je osvojio:" + rank + " . mjesto na natjecanju:" + competition.getName());
                     }catch (Exception ignorable){
+                        System.out.println(ignorable.getMessage());
                         System.out.println("GRESKA NEKA PRI DAVANJU NAGRADA");
                     }
                     rank++;
