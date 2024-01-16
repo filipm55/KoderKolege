@@ -10,9 +10,9 @@ import Nadmapa.BytePit.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.Objects;
+import java.time.Duration;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CompSubmitServiceJpa implements CompSubmitService {
@@ -49,33 +49,45 @@ public class CompSubmitServiceJpa implements CompSubmitService {
 
     private void updateCompRank(CompRank compRank, Long competitionId, String username) {
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
-        BigDecimal totalPoints = submissions.stream()
-                .map(CodeSub::getPoints)
-                .filter(Objects::nonNull)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        int totalTime = submissions.stream().mapToInt(CodeSub::getTime).sum();
+        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = submissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
+                .collect(Collectors.toSet());
         Competition c = cr.getCompetition(String.valueOf(competitionId));
-
+        int totalTime = (int) Duration.between(c.getDateTimeOfBeginning(), c.getDateTimeOfEnding()).getSeconds();
+        BigDecimal totalPoints = pointsTimeSet.stream()
+                .map(pair -> {
+                    BigDecimal points = pair.getKey();
+                    int time = pair.getValue();
+                    return points.add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("update");
+        System.out.println(totalPoints);
         compRank.setCompetition(c);
         compRank.setUser(ur.findByUsername(username));
         compRank.setPoints(totalPoints);
-        compRank.setTime(totalTime);
         // No need to explicitly save as JpaRepository automatically updates existing entities
     }
 
     private CompRank createCompRank(User user, Long competitionId, String username) {
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
-        BigDecimal totalPoints = submissions.stream()
-                .map(CodeSub::getPoints)
-                .filter(Objects::nonNull)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        int totalTime = submissions.stream().mapToInt(CodeSub::getTime).sum();
+        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = submissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
+                .collect(Collectors.toSet());
         Competition c = cr.getCompetition(String.valueOf(competitionId));
-
-        CompRank compRank = new CompRank(user, c, totalPoints, totalTime);
-
+        int totalTime = (int) Duration.between(c.getDateTimeOfBeginning(), c.getDateTimeOfEnding()).getSeconds();
+        BigDecimal totalPoints = pointsTimeSet.stream()
+                .map(pair -> {
+                    BigDecimal points = pair.getKey();
+                    int time = pair.getValue();
+                    return points.add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        CompRank compRank = new CompRank(user, c, totalPoints);
+        System.out.println("create");
+        System.out.println(totalPoints);
         return compRankRepository.save(compRank);
     }
 }
