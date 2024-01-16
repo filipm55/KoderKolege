@@ -231,7 +231,7 @@ public class CompetitionController {
             }
 
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error2");
         }
     }
 
@@ -246,11 +246,11 @@ public class CompetitionController {
             Optional<User> user = userService.getUserById(userId);
             if(user.isPresent()){
                 LocalDateTime timeOfEnding = mapa.get(user.get());
-                if(!competition.getIsvirtual() && timeOfEnding.isAfter(competition.getDateTimeOfEnding())) return null;
+                if(competition.getIsvirtual()!= null && !competition.getIsvirtual() && timeOfEnding.isAfter(competition.getDateTimeOfEnding())) return null;
                 return timeOfEnding;
             }
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println(e.getMessage());
         }
         return null;
     }

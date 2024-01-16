@@ -85,21 +85,16 @@ public class CompetitionServiceJpa implements CompetitionService {
                 Integer rank = Integer.valueOf(1);
                 for (Object[] objectArray: objects) {
                     try{
-                        Long userId = (Long) objectArray[0];
+                        String username = (String) objectArray[1];
                         //Integer rank = (Integer) objectArray[3];
 
 
-                        Optional<User> userOptional = userRepository.findById(userId);
-                        if(userOptional.isPresent()){
-                            User user = userOptional.get();
-                            Map<Competition, Integer> mapa = user.getCompetitionPlacements();
-                            mapa.put(competition, rank);
-                            user.setCompetitionPlacements(mapa);
-                            userRepository.save(user);
-                        }
-                        else{
-                            System.out.println("GRESKA KOD DAVANJA NAGRADA");
-                        }
+                        User user = userRepository.findByUsername(username);
+                        System.out.println("USER KOJEG MIJENJAM JE :" +user.getUsername());
+                        Map<Competition, Integer> mapa = user.getCompetitionPlacements();
+                        mapa.put(competition, rank);
+                        user.setCompetitionPlacements(mapa);
+                        userRepository.save(user);
                     }catch (Exception ignorable){
                         System.out.println("GRESKA NEKA PRI DAVANJU NAGRADA");
                     }
