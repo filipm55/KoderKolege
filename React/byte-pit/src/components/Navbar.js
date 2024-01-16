@@ -8,10 +8,11 @@ import Cookies from 'universal-cookie';
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [jwtToken, setJwtToken] = useState(null);
   const cookies = new Cookies();
-  const jwtToken = cookies.get('jwt_authorization');
 
   useEffect(() => {
+    setJwtToken(cookies.get('jwt_authorization'));
     if (jwtToken) {
       setIsLoggedIn(true);
 
@@ -20,10 +21,9 @@ const Navbar = () => {
           const url = `http://localhost:8080/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
-          setUserData(data); // Set user data fetched from the backend
+          setUserData(data); 
           console.log(data.id);
         } catch (error) {
-          // Handle error if needed
           console.error(error);
         }
       };
@@ -35,8 +35,9 @@ const Navbar = () => {
 
   const logout = () => {
     cookies.remove('jwt_authorization');
+    setJwtToken(null);
     localStorage.clear();
-    window.location.href = '/login'; // Redirect to the login page
+    window.location.href = '/login';
   };
   return (
     <div className="navbar">
