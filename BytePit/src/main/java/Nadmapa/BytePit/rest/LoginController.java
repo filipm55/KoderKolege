@@ -27,14 +27,14 @@ public class LoginController {
             switch (isValidUser){
                 case 1: String token = TokenService.createToken(loginDTO.getUsername());
                          return ResponseEntity.ok(token);
-                case 0: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email not confirmed!");
-                case -1:  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-                case 2: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Molimo pricekajte da Vas admin odobri");
-                default: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
+                case 0: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mail nije potvrden!");
+                case -1:  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Neispravno korisnicko ime ili lozinka.");
+                case 2: return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Molimo pricekajte da Vas admin odobri.");
+                default: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greska prilikom prijave.");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greska prilikom prijave.");
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during login");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greska prilikom prijave.");
     }
 }

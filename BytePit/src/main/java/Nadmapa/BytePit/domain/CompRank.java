@@ -28,16 +28,11 @@ public class CompRank {
     @Column(name = "points", precision = 10, scale = 2)
     private BigDecimal points;
 
-    @Getter @Setter
-    @Column(name = "time")
-    private Integer time;
-
     public CompRank () {}
 
-    public CompRank(User user, Competition competition, BigDecimal points, int time) {
+    public CompRank(User user, Competition competition, BigDecimal points) {
         this.user = user;
         this.competition = competition;
         this.points = points;
-        this.time = time;
     }
 }

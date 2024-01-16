@@ -9,9 +9,9 @@ import Cookies from 'universal-cookie';
 
 
 const Competition = () => {
-    const { competitionId, taskId } = useParams();
-    const [fetchError, setFetchError] = useState(false);
-    const {data:competition, error} = useFetch(`http://localhost:8080/competitions/competition/${competitionId}`);
+  const { competitionId, taskId } = useParams();
+  const [fetchError, setFetchError] = useState(false);
+  const {data:competition, error} = useFetch(`http://localhost:8080/competitions/competition/${competitionId}`);
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [task, setTask] = useState(null);
 
@@ -28,6 +28,7 @@ const Competition = () => {
   const cookies = new Cookies();
   const jwtToken = cookies.get('jwt_authorization');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [time, setTime] = useState(null)
 
   //const [submittedTasks, setSubmittedTasks] = useState([]);
   //const [isSubmitting, setIsSubmitting] = useState()
@@ -36,12 +37,14 @@ const Competition = () => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
         if (response.ok) {
+
           return response.json();
         } else {
             setFetchError(true);
           console.error('Error fetching competition info');
           throw new Error('Error fetching competition info');
         }
+
       })
       .then((data) => {
         console.log('Competition Info:', data);
@@ -51,7 +54,9 @@ const Competition = () => {
       .catch((error) => {
         console.error('Error:', error);
       });
+
   }, [competitionId]);
+
 
 
   useEffect(() => {
@@ -92,6 +97,7 @@ const Competition = () => {
   }, [taskId]);
 
 
+
   useEffect(() => {
     const fetchDataByTaskUser = async () => {
 
@@ -109,6 +115,22 @@ const Competition = () => {
           setSolvedTasks([]);
       }
 };
+
+const fetchTime = async () => {
+  try {
+    if(userData) {
+      const response = await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}/time`);
+      const timeResponse = await response.json();
+      setTime(timeResponse);
+      console.log(timeResponse);
+    }
+
+  } catch (error) {
+      console.error('Error fetching time:', error);
+      handleTimeExpired();
+  }
+};
+fetchTime();
 
     fetchDataByTaskUser();
   }, [taskId, competitionId, userData]);
@@ -271,9 +293,9 @@ const handleTimeExpired = async () => {
       </div>
 
       <div className="task-container">
-      {competition && (
+      {competition && time && (
         <div className="timer">
-          <Timer endTime={competition.dateTimeOfEnding} onTimerExpired={handleTimeExpired} />
+          <Timer endTime={time} onTimerExpired={handleTimeExpired} />
         </div>
       )}
       <h2 className="task-title">{task.title}</h2>
