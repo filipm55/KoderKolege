@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Timer = ({ endTime }) => {
+const Timer = ({ endTime, onTimerExpired }) => {
   const calculateRemainingTime = () => {
     const currentTime = new Date();
     const [year, month, day, hour, minute] = endTime;
@@ -19,11 +19,18 @@ const Timer = ({ endTime }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSeconds((prevSeconds) => Math.max(0, prevSeconds - 1));
+      const newSeconds = Math.max(0, seconds - 1);
+      setSeconds(newSeconds);
+
+      if (newSeconds === 0) {
+        // Call the callback function when the timer expires
+        onTimerExpired();
+        clearInterval(intervalId);
+      }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [seconds, onTimerExpired]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);

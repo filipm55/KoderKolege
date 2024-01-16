@@ -32,7 +32,6 @@ const Competition = () => {
   //const [submittedTasks, setSubmittedTasks] = useState([]);
   //const [isSubmitting, setIsSubmitting] = useState()
 
-
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
@@ -91,6 +90,7 @@ const Competition = () => {
 
     fetchTaskById();
   }, [taskId]);
+
 
   useEffect(() => {
     const fetchDataByTaskUser = async () => {
@@ -239,6 +239,10 @@ const handleFinishCompetition = async () => {
     if (userConfirmed) window.location.href = `/finishcompetition`;
 };
 
+const handleTimeExpired = async () => {
+  window.location.href = `/finishcompetition`;
+};
+
 
   if (!task) {
     return <div>Loading...</div>;
@@ -269,7 +273,7 @@ const handleFinishCompetition = async () => {
       <div className="task-container">
       {competition && (
         <div className="timer">
-          <Timer endTime={competition.dateTimeOfEnding} />
+          <Timer endTime={competition.dateTimeOfEnding} onTimerExpired={handleTimeExpired} />
         </div>
       )}
       <h2 className="task-title">{task.title}</h2>
