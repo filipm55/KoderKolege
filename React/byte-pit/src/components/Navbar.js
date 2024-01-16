@@ -51,22 +51,32 @@ const Navbar = () => {
           <Link to='/calendar' className="nav-link middle-link">
             KALENDAR NATJECANJA
           </Link>
+
+          {userData && (
           <p>|</p>
+          )}
+          {userData && (
           <Link to='/users' className="nav-link middle-link">
             KORISNICI
           </Link>
+          )}
           
           {userData && (userData.userType==="ADMIN" || userData.userType==="COMPETITION_LEADER")  && 
           <p>
             |
             <Link to='/creation' className="nav-link middle-link">
               KREIRAJ SADRŽAJ
-            </Link></p>}
+            </Link>
+            </p>}
           <p>|</p>
-          <Link to='/practice' className="nav-link middle-link">
-            VJEŽBA
-          </Link>
+          {userData && (
+            <Link to='/practice' className="nav-link middle-link">
+              VJEŽBA
+            </Link>
+          )}
+          {userData && (
           <p>|</p>
+          )}
           <Link to='competitions/results' className="nav-link middle-link">
             REZULTATI
           </Link>
