@@ -250,7 +250,7 @@ public class CompetitionController {
                 LocalDateTime realTimeOfEnding = competition.getDateTimeOfEnding();
 
                 //if(competition.getIsvirtual()!= null && !competition.getIsvirtual())  return null;
-                if(timeOfEnding.isAfter(realTimeOfEnding)) return realTimeOfEnding;
+                if(timeOfEnding.isAfter(realTimeOfEnding) && !competition.getIsvirtual()) return realTimeOfEnding;
                 return timeOfEnding;
             }
         } catch (Exception e) {
