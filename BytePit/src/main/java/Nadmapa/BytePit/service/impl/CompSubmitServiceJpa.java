@@ -55,7 +55,18 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         if (c == null) {
             return Collections.emptyList();
         }
-        int totalTime = (int) Duration.between(c.getDateTimeOfBeginning(), c.getDateTimeOfEnding()).getSeconds();
+        Set<Problem> problems = c.getProblems();
+        Duration ukupno = Duration.ofSeconds(0);
+        for (Problem problem: problems) {
+            String problemDurationString = problem.getDuration();
+
+            String[] problemDurations = problemDurationString.split(":");
+            long minutes = Long.parseLong(problemDurations[0]);
+            long seconds = Long.parseLong(problemDurations[1]);
+            Duration problemDuration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+            ukupno = ukupno.plus(problemDuration);
+        }
+        long totalTime = ukupno.toMillis();
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
         BigDecimal totalPoints = submissions.stream()
                 .filter(submission -> submission.getPoints() != null)
@@ -90,12 +101,23 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                 .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
                 .collect(Collectors.toSet());
         Competition c = cr.getCompetition(String.valueOf(competitionId));
-        int totalTime = (int) Duration.between(c.getDateTimeOfBeginning(), c.getDateTimeOfEnding()).getSeconds();
+        Set<Problem> problems = c.getProblems();
+        Duration ukupno = Duration.ofSeconds(0);
+        for (Problem problem: problems) {
+            String problemDurationString = problem.getDuration();
+
+            String[] problemDurations = problemDurationString.split(":");
+            long minutes = Long.parseLong(problemDurations[0]);
+            long seconds = Long.parseLong(problemDurations[1]);
+            Duration problemDuration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+            ukupno = ukupno.plus(problemDuration);
+        }
+        long totalTime = ukupno.toMillis();
         BigDecimal totalPoints = pointsTimeSet.stream()
                 .map(pair -> {
                     BigDecimal points = pair.getKey();
                     int time = pair.getValue();
-                    return points.add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                    return points.add(points.multiply(BigDecimal.valueOf(0.2 * (totalTime - time) / (double) totalTime)));
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("update");
