@@ -20,8 +20,8 @@ const FinishVirtualCompetition = () => {
                     const url = `http://localhost:8080/users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
-                    setUserData(data.username);
-                    console.log(data);
+                    setUserData(data);
+
                 } catch (error) {
                     console.error(error);
                 }
@@ -32,19 +32,28 @@ const FinishVirtualCompetition = () => {
     }, [jwtToken]);
 
     useEffect(() => {
-        const fetchRanking = async () => {///virtual/rank/{competitionId}/{username}
+        const fetchRanking = async () => {
             if(userData) {
                 const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData.username}`, {
                     method: 'POST',
                 });
-                const data = await response.json();
-                console.log(data);
-                setRanking(data);
+                
+                    if (response.ok) {
+                        try {
+                            const data = await response.json();
+                            console.log(data);
+                            setRanking(data);
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                        }
+                    } else {
+                        console.error('Server response not okay:', response.status);
+                    }
             }
 
         };
         fetchRanking();
-    }, [competitionId]);
+    }, [competitionId, userData]);
 
     return (
         <div>
@@ -59,7 +68,6 @@ const FinishVirtualCompetition = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {console.log(ranking)}
                     {ranking && ranking.map((row, index) => (
                         [
                             <tr key={index}>
