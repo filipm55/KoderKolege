@@ -56,7 +56,10 @@ public class UserController {
             filtriranaMapa.entrySet().stream().forEach((entry) -> {
                 Object[]  podaci = new Object[3];
                 podaci[0] = entry.getKey().getName();
-                podaci[1] = entry.getKey().getTrophyPicture().getData();
+
+                if(entry.getKey().getTrophyPicture()!=null) podaci[1] = entry.getKey().getTrophyPicture().getData();
+                else podaci[1] = null;
+
                 podaci[2] = entry.getValue();
                 System.out.println(podaci.toString());
                 returnValue.add(podaci);

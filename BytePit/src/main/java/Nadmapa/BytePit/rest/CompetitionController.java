@@ -249,8 +249,7 @@ public class CompetitionController {
                 LocalDateTime timeOfEnding = mapa.get(user.get());
                 LocalDateTime realTimeOfEnding = competition.getDateTimeOfEnding();
 
-                //if(competition.getIsvirtual()!= null && !competition.getIsvirtual())  return null;
-                if(timeOfEnding.isAfter(realTimeOfEnding) && !competition.getIsvirtual()) return realTimeOfEnding;
+                if(timeOfEnding.isAfter(realTimeOfEnding) && competition.getIsvirtual()!=null && !competition.getIsvirtual()) return realTimeOfEnding;
                 return timeOfEnding;
             }
         } catch (Exception e) {
