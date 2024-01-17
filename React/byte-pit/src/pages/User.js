@@ -408,13 +408,15 @@ const User = () => {
               )}
                     {(!userData || (userData.id!=id && userData.userType != 'ADMIN')) && (tasks && sortingTasks.length > 0 ? (
                 <ul>
-                  {sortingTasks.map(task => (
-                    <li key={task.id}>
+                    {sortingTasks.map(task => (
+                    <div>
+                        {!task.private && <li key={task.id}>
                         {task.title}
                         <Link className="linkzazad"  to={`/tasks/${task.id}`}>
                             RIJEŠI!
                         </Link>
-                        <p>{task.points}, {task.problemType}</p></li>
+                        <p>{task.points}, {task.problemType}</p></li>}
+                    </div>
                   ))}
                 </ul>
               ) : (

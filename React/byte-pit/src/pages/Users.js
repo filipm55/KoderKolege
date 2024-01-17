@@ -154,6 +154,7 @@ const Users = () => {
             console.log("NEUSPJEH");
         });
 
+        window.location.reload();
 
 
 
