@@ -70,7 +70,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
         BigDecimal totalPoints = submissions.stream()
                 .filter(submission -> submission.getPoints() != null)
-                .map(submission -> submission.getPoints().add(submission.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - submission.getTime()) / (double) totalTime))))
+                .map(submission -> submission.getPoints().multiply(BigDecimal.valueOf(0.9)).add(submission.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - submission.getTime()) / (double) totalTime))))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         List<Object[]> previousCompetitionRanks = compRankRepository.getCompetitionRanking(competitionId);
@@ -117,7 +117,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                 .map(pair -> {
                     BigDecimal points = pair.getKey();
                     int time = pair.getValue();
-                    return points.add(points.multiply(BigDecimal.valueOf(0.2 * (totalTime - time) / (double) totalTime)));
+                    return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("update");
@@ -153,7 +153,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                 .map(pair -> {
                     BigDecimal points = pair.getKey();
                     int time = pair.getValue();
-                    return points.add(points.multiply(BigDecimal.valueOf(0.2 * (totalTime - time) / (double) totalTime)));
+                    return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         CompRank compRank = new CompRank(user, c, totalPoints);

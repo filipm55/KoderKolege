@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -147,16 +150,30 @@ public class CodeExecutionController {
     @GetMapping("/allsolutions/{id}/{taskId}")                                         // VRACA SVE CodeSubs  ZA ODREDENI COMPETITION I ODREDENI TASK
     public List<CodeSubDTO> allSolutions(@PathVariable Long id, @PathVariable Long taskId) {
         List<CodeSub> codeSubs = cr.findAllSubs(id, taskId);
+       Competition competition = comps.getCompetition(id.toString());
+       Set<Problem> problems = competition.getProblems();
+       Duration ukupno = Duration.ofSeconds(0);
+        for (Problem problem: problems) {
+            String problemDurationString = problem.getDuration();
+
+            String[] problemDurations = problemDurationString.split(":");
+            long minutes = Long.parseLong(problemDurations[0]);
+            long seconds = Long.parseLong(problemDurations[1]);
+            Duration problemDuration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+            ukupno = ukupno.plus(problemDuration);
+        }
+        long totalTime = ukupno.toMillis();
 
         // Mapiranje CodeSub na CodeSubDTO
         List<CodeSubDTO> codeSubDTOs = codeSubs.stream()
                 .map(codeSub -> new CodeSubDTO(
                         codeSub.getUser(),
-                        codeSub.getPoints(),
+                        codeSub.getPoints().multiply(BigDecimal.valueOf(0.9)).add(codeSub.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - codeSub.getTime())/(double) totalTime))).setScale(2, RoundingMode.HALF_UP),
                         codeSub.getTime(),
                         codeSub.getPercentage_of_total()
                 ))
                 .collect(Collectors.toList());
+
 
         return codeSubDTOs;
     }
