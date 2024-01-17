@@ -32,7 +32,7 @@ const Rank = () => {
 
     useEffect(() => {
         const fetchRanking = async () => {
-            const response = await fetch(`http://localhost:8080/rank/${competitionId}`, {
+            const response = await fetch(`http://localhost:8080/competitions/rank/${competitionId}`, {
                 method: 'POST',
             });
             const data = await response.json();

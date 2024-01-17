@@ -252,14 +252,34 @@ const fetchTime = async () => {
 
 const handleFinishCompetition = async () => {
     const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
-    //if (userConfirmed) window.location.href = `/finishcompetition`;
-    if (userConfirmed && competition.isvirtual===false) window.location.href = `/finishcompetition`;
-    else window.location.href = `/finishvirtualcompetition/${competitionId}`
+
+    if (userConfirmed) {
+        if (competition.isvirtual === false) {
+            window.location.href = `/finishcompetition`;
+        } else {
+            try {
+                const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData.username}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    const virtualCompRanks = await response.json();
+                    console.log(virtualCompRanks);
+                    window.location.href = '/virtual/rank/${competitionId}/${userData.username}';
+                } else {
+                    console.error('Failed to retrieve virtual competition ranks');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    }
 };
+
 
 const handleTimeExpired = async () => {
     if (competition.isvirtual===false) window.location.href = `/finishcompetition`;
-    else window.location.href = `/finishvirtualcompetition/${competitionId}`
+    else window.location.href = `/virtual/rank/${competitionId}/${userData.username}`
 };
 
 

@@ -1,6 +1,7 @@
 package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.*;
+import Nadmapa.BytePit.dto.VirtualCompRankDTO;
 import Nadmapa.BytePit.repository.CompetitionRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.repository.CompRankRepository;
@@ -32,6 +33,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
     @Override
     public CompRank calculateAndSaveCompRank(Long competitionId, String username) {
         User user = ur.findByUsername(username);
+        System.out.println("calculateAndSaveCompRank");
         Competition competition = cr.getCompetition(String.valueOf(competitionId));
 
         Optional<CompRank> existingCompRank = compRankRepository.findByUserAndCompetition(user, competition);
@@ -45,6 +47,40 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             // If the record doesn't exist, create a new one
             return createCompRank(user, competitionId, username);
         }
+    }
+
+    @Override
+    public List<VirtualCompRankDTO> calculateRank(Long competitionId, String username) {
+        Competition c = cr.getCompetition(String.valueOf(competitionId));
+        if (c == null) {
+            return Collections.emptyList();
+        }
+        int totalTime = (int) Duration.between(c.getDateTimeOfBeginning(), c.getDateTimeOfEnding()).getSeconds();
+        List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
+        BigDecimal totalPoints = submissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> submission.getPoints().add(submission.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - submission.getTime()) / (double) totalTime))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        List<Object[]> previousCompetitionRanks = compRankRepository.getCompetitionRanking(competitionId);
+        List<VirtualCompRankDTO> virtualCompetitionRanks = new ArrayList<>();
+        for (Object[] rankRecord : previousCompetitionRanks) {
+            VirtualCompRankDTO dto = new VirtualCompRankDTO();
+            dto.setUserId((Long) rankRecord[0]);
+            dto.setUsername((String) rankRecord[1]);
+            dto.setPoints(totalPoints);
+            dto.setRank(((Long) rankRecord[3]).intValue()); // Safely converts Long to Integer
+            virtualCompetitionRanks.add(dto);
+        }
+        return virtualCompetitionRanks;
+    }
+
+
+
+
+    @Override
+    public void virtualRandRank(Long competitionId, String username) {
+
     }
 
     private void updateCompRank(CompRank compRank, Long competitionId, String username) {

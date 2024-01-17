@@ -2,6 +2,7 @@ package Nadmapa.BytePit.rest;
 
 import Nadmapa.BytePit.domain.*;
 import Nadmapa.BytePit.dto.CodeSubDTO;
+import Nadmapa.BytePit.dto.VirtualCompRankDTO;
 import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.*;
@@ -18,6 +19,13 @@ import java.util.stream.Collectors;
 public class CodeExecutionController {
 
     @Autowired
+    private CompRankRepository compRankRepository;
+
+    @Autowired
+    private CompSubmitService css;
+
+
+    @Autowired
     private CodeExecutionService ces;
 
     @Autowired
@@ -29,11 +37,102 @@ public class CodeExecutionController {
      private CodeSubService cs;
 
     @Autowired
+    private CodeSubService codeSubService;
+
+    @Autowired
     private UserService us;
+
+    @Autowired
+    private CompetitionService comps;
 
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
         return ces.execute(id, submission.getCode(), submission.getInput());
+    }
+
+    @PostMapping("/submit/{id}")
+    public SubmissionResult submitCode(@PathVariable Long id,
+                             @RequestParam("file") MultipartFile file,
+                             @RequestParam("time") int time,
+                             @RequestParam("user") String username,
+                             @RequestParam("problem") Long problemId,
+                             @RequestParam("competition_id") Long competitionId) {
+        try {
+            System.out.println(username);
+            CodeSub codeSub = new CodeSub();
+            cs.setUserAndProblem(codeSub, username, problemId);
+            if(competitionId!=0)
+                cs.setCompetition(codeSub, competitionId);
+            codeSub.setTime(time);
+            codeSub.setFileData(file.getBytes());
+
+            return ces.submit(file, problemId, codeSub);
+        } catch (IOException e) {
+            throw new RuntimeException("Error in processing file" );
+        }
+    }
+
+    @GetMapping("/problems/{competitionId}/{username}")
+    public ResponseEntity<Set<Long>> getSolvedProblemIdsByUserAndCompetition(@PathVariable Long competitionId, @PathVariable String username) {
+        Set<Long> problemIds = codeSubService.getSolvedProblemIdsByUserAndCompetition(username, competitionId);
+        if (problemIds.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        System.out.println(problemIds);
+        Competition co = comps.getCompetition(String.valueOf(competitionId));
+        if (!co.getIsvirtual())
+            return ResponseEntity.ok(problemIds);
+        else return null;
+    }
+
+    @PostMapping("/rank/{competitionId}/{username}")
+    public String saveCompInfo(@PathVariable Long competitionId, @PathVariable String username) {
+        Competition c = comps.getCompetition(String.valueOf(competitionId));
+        if(!c.getIsvirtual())
+            css.calculateAndSaveCompRank(competitionId, username);
+        else if(c.getName().equals("Virtualno"))
+            css.virtualRandRank(competitionId, username);
+        else css.calculateRank(competitionId, username);
+        return "Saved";
+    }
+
+    @PostMapping("/virtual/rank/{competitionId}/{username}")
+    public ResponseEntity<?> getVirtualCompRank(@PathVariable Long competitionId, @PathVariable String username) {
+        System.out.println("Received request for competitionId: " + competitionId + ", username: " + username);
+
+        Competition c = comps.getCompetition(String.valueOf(competitionId));
+        if (c == null) {
+            System.out.println("Competition not found for ID: " + competitionId);
+            return ResponseEntity.badRequest().body("Competition not found");
+        }
+
+        System.out.println("Competition name: " + c.getName());
+
+        List<VirtualCompRankDTO> virtualCompRanks = null;
+
+        if(c.getName().equals("Virtualno")) {
+            System.out.println("Processing virtual competition");
+            // If you have additional logic for virtual competition, include it here
+        } else {
+            System.out.println("Calculating rank for regular competition");
+            virtualCompRanks = css.calculateRank(competitionId, username);
+            System.out.println("Calculated ranks: " + virtualCompRanks);
+        }
+
+        if (virtualCompRanks != null && !virtualCompRanks.isEmpty()) {
+            System.out.println("Returning non-empty rank list");
+            return ResponseEntity.ok(virtualCompRanks);
+        } else {
+            System.out.println("Returning no content");
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+
+
+    @PostMapping("/competitions/rank/{competitionId}")
+    public List<Object[]> getRankingByCompetition(@PathVariable Long competitionId) {
+        return compRankRepository.getCompetitionRanking(competitionId);
     }
 
     @GetMapping("/usersolutions/{id}/{taskId}")                                         // VRACA CodeSubs KOJI SU 100% ZA ODREDENI COMPETITION I ODREDENI TASK
@@ -78,57 +177,5 @@ public class CodeExecutionController {
         } else {
             return null;
         }
-    }
-
-    @PostMapping("/submit/{id}")
-    public SubmissionResult submitCode(@PathVariable Long id,
-                             @RequestParam("file") MultipartFile file,
-                             @RequestParam("time") int time,
-                             @RequestParam("user") String username,
-                             @RequestParam("problem") Long problemId,
-                             @RequestParam("competition_id") Long competitionId) {
-        try {
-            System.out.println(username);
-            CodeSub codeSub = new CodeSub();
-            cs.setUserAndProblem(codeSub, username, problemId);
-            if(competitionId!=0)
-                cs.setCompetition(codeSub, competitionId);
-            codeSub.setTime(time);
-            codeSub.setFileData(file.getBytes());
-
-            return ces.submit(file, problemId, codeSub);
-        } catch (IOException e) {
-            throw new RuntimeException("Error in processing file" );
-        }
-    }
-
-    @Autowired
-    private CodeSubService codeSubService;
-
-    @GetMapping("/problems/{competitionId}/{username}")
-    public ResponseEntity<Set<Long>> getSolvedProblemIdsByUserAndCompetition(@PathVariable Long competitionId, @PathVariable String username) {
-        Set<Long> problemIds = codeSubService.getSolvedProblemIdsByUserAndCompetition(username, competitionId);
-        if (problemIds.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        System.out.println(problemIds);
-        return ResponseEntity.ok(problemIds);
-    }
-
-    @Autowired
-    private CompRankRepository compRankRepository;
-
-    @Autowired
-    private CompSubmitService css;
-
-    @PostMapping("/rank/{competitionId}/{username}")
-    public String saveCompInfo(@PathVariable Long competitionId, @PathVariable String username) {
-        css.calculateAndSaveCompRank(competitionId, username);
-        return "Saved";
-    }
-
-    @PostMapping("/rank/{competitionId}")
-    public List<Object[]> getRankingByCompetition(@PathVariable Long competitionId) {
-        return compRankRepository.getCompetitionRanking(competitionId);
     }
 }

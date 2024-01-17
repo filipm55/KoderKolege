@@ -20,4 +20,11 @@ public interface CompRankRepository extends JpaRepository<CompRank, Long> {
     List<Object[]> getCompetitionRanking(@Param("competitionId") Long competitionId);
 
     Optional<CompRank> findByUserAndCompetition(User user, Competition competition);
+
+    @Query(value = "SELECT cr.* " +
+            "FROM comp_rank cr " +
+            "WHERE cr.competition_id = :competitionId",
+            nativeQuery = true)
+    Optional<CompRank> findByCompetition(Long competitionId);
+
 }
