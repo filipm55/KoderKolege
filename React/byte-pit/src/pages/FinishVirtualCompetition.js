@@ -20,7 +20,8 @@ const FinishVirtualCompetition = () => {
                     const url = `http://localhost:8080/users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
-                    setUserData(data);
+                    setUserData(data.username);
+                    console.log(data);
                 } catch (error) {
                     console.error(error);
                 }
@@ -31,13 +32,13 @@ const FinishVirtualCompetition = () => {
     }, [jwtToken]);
 
     useEffect(() => {
-        const fetchRanking = async () => {
-            const response = await fetch(`http://localhost:8080/rank/${competitionId}`, {
+        const fetchRanking = async () => {///virtual/rank/{competitionId}/{username}
+            const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData}`, {
                 method: 'POST',
             });
             const data = await response.json();
             setRanking(data);
-            console.log(data);
+            console.log(ranking);
         };
         fetchRanking();
     }, [competitionId]);
@@ -59,7 +60,7 @@ const FinishVirtualCompetition = () => {
                         [
                             <tr
                                 key={index}
-                                className={userData && userData.username && row[1] === userData.username ? 'highlighted-row' : ''}
+                                className={userData && userData && row[1] === userData ? 'highlighted-row' : ''}
                             >
                                 <td>{row[3]}</td> {/* Rank */}
                                 <td><Link to={'/users/' + row[0]}>{row[1]}</Link></td>
