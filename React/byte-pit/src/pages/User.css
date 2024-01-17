@@ -127,6 +127,21 @@ div#nagrade {
     margin-right: 10rem;
 }
 
+p#p128 {
+    text-align: center;
+}
+
+div#s666 {
+    width: fit-content;
+    height: 2rem;
+}
+
+.pic33 {
+   width: 2rem;
+   height: 2rem; 
+   opacity: 0.6;
+}
+
 .pehar {
     margin-bottom: -5px;
     margin-right: 3px;
@@ -175,4 +190,12 @@ div.korisnik {
 
 li {
     font-size: 1.5rem;
+}
+
+div.osvojeno {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
 }
