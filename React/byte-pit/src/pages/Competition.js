@@ -349,7 +349,7 @@ const handleTimeExpired = async () => {
         <button
           className={`submit-button ${(solvedTasks.includes(Number(taskId)) && competition && !competition.isvirtual) ? 'disabled' : ''}`}
           onClick={handleSubmitFile}
-          disabled={solvedTasks.includes(Number(taskId)) && competition && !competition.isvirtual}
+          disabled={solvedTasks.includes(Number(taskId)) }
         >
         {'Predaj'}
         </button>
@@ -358,8 +358,8 @@ const handleTimeExpired = async () => {
 
 
       {testResult && <div className="test-result">Test Result: {testResult}</div>}
-
       <div className="input-output-examples">
+          {solvedTasks.includes(Number(taskId)) && <p>Uspješno ste predali rješenje.</p>}
         <h3>Input-Output Examples:</h3>
         <ul>
           {Object.entries(task.inputOutputExamples).map(([input, output], index) => (

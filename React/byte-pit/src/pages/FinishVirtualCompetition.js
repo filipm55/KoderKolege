@@ -38,7 +38,7 @@ const FinishVirtualCompetition = () => {
             });
             const data = await response.json();
             setRanking(data);
-            console.log(ranking);
+
         };
         fetchRanking();
     }, [competitionId]);
@@ -56,15 +56,13 @@ const FinishVirtualCompetition = () => {
                     </tr>
                     </thead>
                     <tbody>
+                    {console.log(ranking)}
                     {ranking && ranking.map((row, index) => (
                         [
-                            <tr
-                                key={index}
-                                className={userData && userData && row[1] === userData ? 'highlighted-row' : ''}
-                            >
-                                <td>{row[3]}</td> {/* Rank */}
-                                <td><Link to={'/users/' + row[0]}>{row[1]}</Link></td>
-                                <td>{row[2]}</td> {/* Points */}
+                            <tr key={index}>
+                                <td>{row.rank}</td> {/* Rank */}
+                                <td><Link to={'/users/' + row.id}>{row.username}</Link></td>
+                                <td>{row.points}</td> {/* Points */}
                             </tr>
                         ]
                     ))}
