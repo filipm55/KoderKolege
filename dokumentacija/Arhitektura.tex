@@ -67,7 +67,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					 confirmed & BOOLEAN & potvrđena registracija preko korisničkog emaila \\ \hline
 					 confirmed-by-admin & BOOLEAN & potvrđena registracija preko administratorskog emaila \\ \hline
 					   
-\end{longtblr}
+				\end{longtblr}
 
 
 				{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja, identifikator pehara. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja,. }
@@ -163,6 +163,72 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					data & BYTEA &  binarni kod slike \\ \hline 
 
 				\end{longtblr}
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Competition user}}	 \\ \hline[3pt]
+					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline	
+					\SetCell{LightBlue}user\_id & INT &  \\ \hline
+					acces\_time & TIMESTAMP & \\ \hline			
+				\end{longtblr}
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{User competition placement}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} user\_id & INT	& \\ \hline
+					placement & INT & \\ \hline
+					\SetCell{LightGreen}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline					
+				\end{longtblr}
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Competititon rank}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} id & INT &  	\\ \hline
+					points & NUMERIC & \\ \hline 	
+					time & INT & \\ \hline
+					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline
+					\SetCell{LightBlue}username & VARCHAR & izabrano korisničko ime\\ \hline
+					
+				\end{longtblr}
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Code submissions}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} id & INT &  	\\ \hline
+					file\_data &  &   \\ \hline 
+					time\_taken & INT & \\ \hline
+					\SetCell{LightBlue}problem\_id & INT & \\ \hline
+					\SetCell{LightBlue}username & VARCHAR & izabrano korisničko ime\\ \hline
+					points & NUMERIC & \\ \hline
+					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline
+					percentage\_of\_
+					total & & \\ \hline
+				\end{longtblr}
+				
 				
 				
 			

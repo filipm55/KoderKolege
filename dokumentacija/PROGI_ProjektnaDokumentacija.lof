@@ -13,18 +13,18 @@
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Sekvencijski dijagram pregleda i uređivanja korisnika}}{24}{figure.3.4}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Sekvencijski dijagram virtualnog natjecanja}}{25}{figure.3.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Er dijagram baze podataka}}{30}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Dijagram razreda: razredi koji predstavljaju strukturu baze}}{31}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Dijagram razreda: ostali razredi Controller i Service te konfiguracija}}{32}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram stanja}}{34}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram aktivnosti}}{35}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram komponenti}}{36}{figure.4.6}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Er dijagram baze podataka}}{32}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Dijagram razreda: razredi koji predstavljaju strukturu baze}}{33}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Dijagram razreda: ostali razredi Controller i Service te konfiguracija}}{34}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram stanja}}{36}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram aktivnosti}}{37}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram komponenti}}{38}{figure.4.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Dijagram razmjestaja}}{40}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Environment Varijable u IDE-u}}{41}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Environment Varijable za backend}}{45}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Postavke baze podataka na renderu}}{45}{figure.5.4}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Putanja za Dockerfile}}{45}{figure.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Build Comand za Node enviroment}}{46}{figure.5.6}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Environment Varijable za frontend }}{46}{figure.5.7}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Dijagram razmjestaja}}{42}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Environment Varijable u IDE-u}}{43}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Environment Varijable za backend}}{47}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Postavke baze podataka na renderu}}{47}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Putanja za Dockerfile}}{47}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Build Comand za Node enviroment}}{48}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Environment Varijable za frontend }}{48}{figure.5.7}%
 \addvspace {10\p@ }
