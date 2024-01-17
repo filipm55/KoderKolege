@@ -25,7 +25,7 @@ import JoinAVirtuallyGeneratedCompetition from "./pages/JoinAVirtuallyGeneratedC
 import CompetitionResults from "./pages/CompetitionsResults";
 import CompetitionTaskSolutions from "./pages/CompetitionTaskSolutions";
 import FinishCompetition from './pages/FinishCompetition';
-
+import FinishVirtualCompetition from './pages/FinishVirtualCompetition';
 function App() {
 
   return (
@@ -58,6 +58,8 @@ function App() {
                 <Route exact path='/editcompetition/:id' element={<EditCompetition />} />
               <Route exact path='/competitions/results' element={<CompetitionResults />} />
               <Route exact path='/finishcompetition' element={<FinishCompetition />} />
+              <Route exact path='/finishvirtualcompetition/:competitionId' element={<FinishVirtualCompetition />} />
+
           </Routes>
         </div>
         <Footer />
