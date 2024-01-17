@@ -267,7 +267,7 @@ public class CompetitionController {
 
 
     @GetMapping("/{competitionId}")
-    public ResponseEntity<Set<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
+    public ResponseEntity<List<Problem>> getCompetitionProblems(@PathVariable Long competitionId) {
 
         try {
 
@@ -278,7 +278,16 @@ public class CompetitionController {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
             Set<Problem> problems = competition.getProblems();
-            return new ResponseEntity<>(problems, HttpStatus.OK);
+            Comparator<Problem> comparator = Comparator
+                    .comparing(Problem::getProblemType)
+                    .thenComparingLong(Problem::getId);
+            List<Problem> problemList = new ArrayList<>(problems);
+            Collections.sort(problemList, comparator);
+            for (Problem problem: problemList
+                 ) {
+                System.out.println(problem.toString());
+            }
+            return new ResponseEntity<>(problemList, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
