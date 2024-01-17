@@ -265,7 +265,7 @@ const handleFinishCompetition = async () => {
                 if (response.ok) {
                     const virtualCompRanks = await response.json();
                     console.log(virtualCompRanks);
-                    window.location.href = '/virtual/rank/${competitionId}/${userData.username}';
+                    window.location.href = `/finishvirtualcompetition/${competitionId}`;
                 } else {
                     console.error('Failed to retrieve virtual competition ranks');
                 }
