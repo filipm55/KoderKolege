@@ -30,6 +30,8 @@ const Competition = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [time, setTime] = useState(null)
 
+    console.log(competition);
+
   useEffect(() => {
     fetch(`http://localhost:8080/competitions/${competitionId}`)
       .then((response) => {
@@ -44,7 +46,7 @@ const Competition = () => {
 
       })
       .then((data) => {
-        console.log('Competition Info:', data);
+        //console.log('Competition Info:', data);
         setCompetitionInfo(data);
 
       })
@@ -250,11 +252,14 @@ const fetchTime = async () => {
 
 const handleFinishCompetition = async () => {
     const userConfirmed = window.confirm("Jeste li sigurni da želite završiti s natjecanjem?");
-    if (userConfirmed) window.location.href = `/finishcompetition`;
+    //if (userConfirmed) window.location.href = `/finishcompetition`;
+    if (userConfirmed && competition.isvirtual===false) window.location.href = `/finishcompetition`;
+    else window.location.href = `/finishvirtualcompetition/${competitionId}`
 };
 
 const handleTimeExpired = async () => {
-  window.location.href = `/finishcompetition`;
+    if (competition.isvirtual===false) window.location.href = `/finishcompetition`;
+    else window.location.href = `/finishvirtualcompetition/${competitionId}`
 };
 
 
@@ -325,7 +330,7 @@ const handleTimeExpired = async () => {
         <button
           className={`submit-button ${solvedTasks.includes(Number(taskId)) ? 'disabled' : ''}`}
           onClick={handleSubmitFile}
-          disabled={solvedTasks.includes(Number(taskId))}
+          disabled={solvedTasks.includes(Number(taskId)) && !competition.isvirtual}
         >
         {'Predaj'}
         </button>
