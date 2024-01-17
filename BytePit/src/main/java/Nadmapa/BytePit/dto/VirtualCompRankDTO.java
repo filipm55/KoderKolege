@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 public class VirtualCompRankDTO {
     @Getter@Setter
-    private Long userId;
+    private Long compId;
     @Getter@Setter
     private String username;
 
@@ -19,8 +19,8 @@ public class VirtualCompRankDTO {
 
     public VirtualCompRankDTO() {}
 
-    public VirtualCompRankDTO(Long userId, String username, BigDecimal points, Integer rank) {
-        this.userId = userId;
+    public VirtualCompRankDTO(Long compId, String username, BigDecimal points, Integer rank) {
+        this.compId = compId;
         this.username = username;
         this.points = points;
         this.rank = rank;
@@ -29,7 +29,7 @@ public class VirtualCompRankDTO {
     @Override
     public String toString() {
         return "VirtualCompRankDTO{" +
-                "userId=" + userId +
+                "compId=" + compId +
                 ", username='" + username + '\'' +
                 ", points=" + points +
                 ", rank=" + rank +

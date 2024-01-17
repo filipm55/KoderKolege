@@ -83,9 +83,7 @@ public class CodeExecutionController {
         }
         System.out.println(problemIds);
         Competition co = comps.getCompetition(String.valueOf(competitionId));
-        if (!co.getIsvirtual())
-            return ResponseEntity.ok(problemIds);
-        else return null;
+        return ResponseEntity.ok(problemIds);
     }
 
     @PostMapping("/rank/{competitionId}/{username}")
