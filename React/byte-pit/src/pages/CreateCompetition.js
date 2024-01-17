@@ -171,7 +171,7 @@ const CreateCompetition = () => {
                             <label>Broj zadataka: </label>
                             <input type ="number" value={numOfProblems} required onChange={(e) => setNumOfProblems(e.target.value)}></input>
                         </div>
-                        <div className='kucica'><label>Sličica pehara </label><input type="file" name="pehar" onChange={(e)=>handleFileChange(e)}/>
+                        <div className='kucica'><label>Sličica pehara </label><input type="file" name="pehar" required onChange={(e)=>handleFileChange(e)}/>
                         </div>
                         {isError && <p style={{color:"red"}}>{errorMsg}</p>}
 
