@@ -330,7 +330,7 @@ const handleTimeExpired = async () => {
         <button
           className={`submit-button ${solvedTasks.includes(Number(taskId)) ? 'disabled' : ''}`}
           onClick={handleSubmitFile}
-          //disabled={solvedTasks.includes(Number(taskId)) && !competition.isvirtual}
+          disabled={solvedTasks.includes(Number(taskId)) && competition && !competition.isvirtual}
         >
         {'Predaj'}
         </button>
