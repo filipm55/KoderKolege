@@ -6,7 +6,7 @@ import useFetch from "../useFetch";
 
 const CompetitionsResult = () => {
     const [data, setData] = useState([]);
-    const [sort, setSort] = useState('beginningdatetime');
+    const [sort, setSort] = useState('name');
     const [competitions, setCompetitions] = useState([]);
     const[fcompetitions, setFcompetitions]=useState([]);
 
