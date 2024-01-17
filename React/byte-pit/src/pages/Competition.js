@@ -257,7 +257,8 @@ const handleFinishCompetition = async () => {
         if (competition.isvirtual === false) {
             window.location.href = `/finishcompetition`;
         } else {
-            try {
+            window.location.href = `/finishvirtualcompetition/${competitionId}`;
+           /* try {
                 const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData.username}`, {
                     method: 'POST'
                 });
@@ -265,13 +266,13 @@ const handleFinishCompetition = async () => {
                 if (response.ok) {
                     const virtualCompRanks = await response.json();
                     console.log(virtualCompRanks);
-                    window.location.href = `/finishvirtualcompetition/${competitionId}`;
+                    //window.location.href = `/finishvirtualcompetition/${competitionId}`;
                 } else {
                     console.error('Failed to retrieve virtual competition ranks');
                 }
             } catch (error) {
                 console.error('Error:', error);
-            }
+            }*/
         }
     }
 };

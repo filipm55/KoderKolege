@@ -33,11 +33,14 @@ const FinishVirtualCompetition = () => {
 
     useEffect(() => {
         const fetchRanking = async () => {///virtual/rank/{competitionId}/{username}
-            const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData}`, {
-                method: 'POST',
-            });
-            const data = await response.json();
-            setRanking(data);
+            if(userData) {
+                const response = await fetch(`http://localhost:8080/virtual/rank/${competitionId}/${userData.username}`, {
+                    method: 'POST',
+                });
+                const data = await response.json();
+                console.log(data);
+                setRanking(data);
+            }
 
         };
         fetchRanking();
