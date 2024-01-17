@@ -117,21 +117,22 @@ public class CodeExecutionController {
             System.out.println("Processing virtual competition");
             // If you have additional logic for virtual competition, include it here
         } else {
-            System.out.println("Calculating rank for regular competition");
+            System.out.println("Calculating rank for virtual competition");
             virtualCompRanks = css.calculateRank(competitionId, username);
             System.out.println("Calculated ranks: " + virtualCompRanks);
         }
 
         if (virtualCompRanks != null && !virtualCompRanks.isEmpty()) {
             System.out.println("Returning non-empty rank list");
+            for (VirtualCompRankDTO rank : virtualCompRanks) {
+                System.out.println(rank);
+            }
             return ResponseEntity.ok(virtualCompRanks);
         } else {
             System.out.println("Returning no content");
             return ResponseEntity.noContent().build();
         }
     }
-
-
 
     @PostMapping("/competitions/rank/{competitionId}")
     public List<Object[]> getRankingByCompetition(@PathVariable Long competitionId) {

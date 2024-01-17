@@ -25,4 +25,14 @@ public class VirtualCompRankDTO {
         this.points = points;
         this.rank = rank;
     }
+
+    @Override
+    public String toString() {
+        return "VirtualCompRankDTO{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", points=" + points +
+                ", rank=" + rank +
+                '}';
+    }
 }
