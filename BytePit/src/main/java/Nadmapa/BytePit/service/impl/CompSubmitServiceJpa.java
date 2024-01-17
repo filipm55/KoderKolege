@@ -7,6 +7,7 @@ import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserRepository;
 import Nadmapa.BytePit.service.CompSubmitService;
 import Nadmapa.BytePit.service.CompetitionService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
@@ -48,7 +49,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         }
     }
 
-    @Override
+    @Override @Transactional
     public List<VirtualCompRankDTO> calculateRank(Long competitionId, String username) {
         Competition c = cr.getCompetition(String.valueOf(competitionId));
         if (c == null) {
@@ -107,13 +108,14 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             VirtualCompRankDTO dto = virtualCompetitionRanks.get(i);
             dto.setRank(dto.getRank() + 1);
         }
+        codeSubRepository.deleteByIsVirtual();
         return virtualCompetitionRanks;
     }
 
 
 
 
-    @Override
+    @Override @Transactional
     public List<VirtualCompRankDTO> virtualRandRank(Long competitionId, String username) {
         Competition c = cr.getCompetition(String.valueOf(competitionId));
         if (c == null) {
@@ -151,6 +153,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         List<VirtualCompRankDTO> virtualCompetitionRanks = new ArrayList<>();
         virtualCompetitionRanks.add(userRankDto);
         System.out.println(userRankDto.toString());
+        codeSubRepository.deleteByIsVirtual();
         return virtualCompetitionRanks;
     }
 

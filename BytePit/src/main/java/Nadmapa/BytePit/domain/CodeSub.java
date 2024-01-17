@@ -49,6 +49,10 @@ public class CodeSub {
     @Column(name = "percentage_of_total")
     private double percentage_of_total;
 
+    @Getter @Setter
+    @Column(name = "is_virtual")
+    private Boolean isvirtual;
+
     public CodeSub() {
         this.points = null;
     }

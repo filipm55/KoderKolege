@@ -3,6 +3,7 @@ package Nadmapa.BytePit.repository;
 import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.Problem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -28,4 +29,8 @@ public interface UserCodeFileRepository extends JpaRepository<CodeSub, Long> {
 
     @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :competitionId AND username = :username", nativeQuery = true)
     List<CodeSub> findByCompetitionIdAndUsername(Long competitionId, String username);
+
+    @Modifying
+    @Query(value = "DELETE FROM code_submissions WHERE is_virtual = true", nativeQuery = true)
+    void deleteByIsVirtual();
 }

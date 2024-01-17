@@ -4,6 +4,7 @@ import Nadmapa.BytePit.domain.*;
 import Nadmapa.BytePit.dto.CodeSubDTO;
 import Nadmapa.BytePit.dto.VirtualCompRankDTO;
 import Nadmapa.BytePit.repository.CompRankRepository;
+import Nadmapa.BytePit.repository.ProblemRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.service.*;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,9 @@ public class CodeExecutionController {
     @Autowired
     private CompetitionService comps;
 
+    @Autowired
+    private ProblemRepository pr;
+
     @PostMapping("/solution/{id}")
     public ExecutionResult executeCode(@PathVariable Long id, @RequestBody CodeSubmission submission) {
         return ces.execute(id, submission.getCode(), submission.getInput());
@@ -68,7 +72,9 @@ public class CodeExecutionController {
                 cs.setCompetition(codeSub, competitionId);
             codeSub.setTime(time);
             codeSub.setFileData(file.getBytes());
-
+            Competition c = comps.getCompetition(String.valueOf(competitionId));
+            if(c.getIsvirtual())
+                codeSub.setIsvirtual(true);
             return ces.submit(file, problemId, codeSub);
         } catch (IOException e) {
             throw new RuntimeException("Error in processing file" );
