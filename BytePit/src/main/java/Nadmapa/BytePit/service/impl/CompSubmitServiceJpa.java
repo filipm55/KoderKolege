@@ -2,7 +2,6 @@ package Nadmapa.BytePit.service.impl;
 
 import Nadmapa.BytePit.domain.*;
 import Nadmapa.BytePit.dto.VirtualCompRankDTO;
-import Nadmapa.BytePit.repository.CompetitionRepository;
 import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.repository.CompRankRepository;
 import Nadmapa.BytePit.repository.UserRepository;
@@ -115,8 +114,44 @@ public class CompSubmitServiceJpa implements CompSubmitService {
 
 
     @Override
-    public void virtualRandRank(Long competitionId, String username) {
+    public List<VirtualCompRankDTO> virtualRandRank(Long competitionId, String username) {
+        Competition c = cr.getCompetition(String.valueOf(competitionId));
+        if (c == null) {
+            return Collections.emptyList();
+        }
+        List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
+        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = submissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
+                .collect(Collectors.toSet());
+        Set<Problem> problems = c.getProblems();
+        Duration ukupno = Duration.ofSeconds(0);
+        for (Problem problem: problems) {
+            String problemDurationString = problem.getDuration();
 
+            String[] problemDurations = problemDurationString.split(":");
+            long minutes = Long.parseLong(problemDurations[0]);
+            long seconds = Long.parseLong(problemDurations[1]);
+            Duration problemDuration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+            ukupno = ukupno.plus(problemDuration);
+        }
+        long totalTime = ukupno.toMillis();
+        BigDecimal totalPoints = pointsTimeSet.stream()
+                .map(pair -> {
+                    BigDecimal points = pair.getKey();
+                    int time = pair.getValue();
+                    return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
+        userRankDto.setCompId(competitionId);
+        userRankDto.setUsername(username);
+        userRankDto.setPoints(totalPoints);
+        List<VirtualCompRankDTO> virtualCompetitionRanks = new ArrayList<>();
+        virtualCompetitionRanks.add(userRankDto);
+        System.out.println(userRankDto.toString());
+        return virtualCompetitionRanks;
     }
 
     private void updateCompRank(CompRank compRank, Long competitionId, String username) {

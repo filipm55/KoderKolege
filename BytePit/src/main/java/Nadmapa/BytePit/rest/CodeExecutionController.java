@@ -89,35 +89,26 @@ public class CodeExecutionController {
     @PostMapping("/rank/{competitionId}/{username}")
     public String saveCompInfo(@PathVariable Long competitionId, @PathVariable String username) {
         Competition c = comps.getCompetition(String.valueOf(competitionId));
+        System.out.println(c.getName().equals("Virtualno"));
         if(!c.getIsvirtual())
             css.calculateAndSaveCompRank(competitionId, username);
-        else if(c.getName().equals("Virtualno"))
-            css.virtualRandRank(competitionId, username);
-        else css.calculateRank(competitionId, username);
         return "Saved";
     }
 
     @PostMapping("/virtual/rank/{competitionId}/{username}")
     public ResponseEntity<?> getVirtualCompRank(@PathVariable Long competitionId, @PathVariable String username) {
-        System.out.println("Received request for competitionId: " + competitionId + ", username: " + username);
-
         Competition c = comps.getCompetition(String.valueOf(competitionId));
         if (c == null) {
             System.out.println("Competition not found for ID: " + competitionId);
             return ResponseEntity.badRequest().body("Competition not found");
         }
 
-        System.out.println("Competition name: " + c.getName());
-
         List<VirtualCompRankDTO> virtualCompRanks = null;
 
         if(c.getName().equals("Virtualno")) {
-            System.out.println("Processing virtual competition");
-            // If you have additional logic for virtual competition, include it here
+            virtualCompRanks = css.virtualRandRank(competitionId,username);
         } else {
-            System.out.println("Calculating rank for virtual competition");
             virtualCompRanks = css.calculateRank(competitionId, username);
-            System.out.println("Calculated ranks: " + virtualCompRanks);
         }
 
         if (virtualCompRanks != null && !virtualCompRanks.isEmpty()) {

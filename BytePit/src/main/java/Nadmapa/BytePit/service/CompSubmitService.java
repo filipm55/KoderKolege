@@ -10,5 +10,5 @@ public interface CompSubmitService {
 
     List<VirtualCompRankDTO> calculateRank(Long competitionId, String username);
 
-    void virtualRandRank(Long competitionId, String username);
+    List<VirtualCompRankDTO> virtualRandRank(Long competitionId, String username);
 }
