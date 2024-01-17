@@ -306,7 +306,6 @@ const handleTimeExpired = async () => {
           </Link>
         ))}
               <button className="finish-button" onClick={handleFinishCompetition}>Završi Natjecanje</button>
-
       </div>
 
       <div className="task-container">
@@ -348,7 +347,7 @@ const handleTimeExpired = async () => {
           className="file-uploader"
         />
         <button
-          className={`submit-button ${solvedTasks.includes(Number(taskId)) ? 'disabled' : ''}`}
+          className={`submit-button ${(solvedTasks.includes(Number(taskId)) && competition && !competition.isvirtual) ? 'disabled' : ''}`}
           onClick={handleSubmitFile}
           disabled={solvedTasks.includes(Number(taskId)) && competition && !competition.isvirtual}
         >
