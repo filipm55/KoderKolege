@@ -95,7 +95,6 @@ public class CodeExecutionController {
     @PostMapping("/rank/{competitionId}/{username}")
     public String saveCompInfo(@PathVariable Long competitionId, @PathVariable String username) {
         Competition c = comps.getCompetition(String.valueOf(competitionId));
-        System.out.println(c.getName().equals("Virtualno"));
         if(!c.getIsvirtual())
             css.calculateAndSaveCompRank(competitionId, username);
         return "Saved";
@@ -108,7 +107,6 @@ public class CodeExecutionController {
             System.out.println("Competition not found for ID: " + competitionId);
             return ResponseEntity.badRequest().body("Competition not found");
         }
-
         List<VirtualCompRankDTO> virtualCompRanks = null;
 
         if(c.getName().equals("Virtualno")) {
@@ -117,7 +115,7 @@ public class CodeExecutionController {
             virtualCompRanks = css.calculateRank(competitionId, username);
         }
 
-        if (virtualCompRanks != null && !virtualCompRanks.isEmpty()) {
+        if (!virtualCompRanks.isEmpty()) {
             System.out.println("Returning non-empty rank list");
             for (VirtualCompRankDTO rank : virtualCompRanks) {
                 System.out.println(rank);

@@ -159,7 +159,6 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         List<VirtualCompRankDTO> virtualCompetitionRanks = new ArrayList<>();
         virtualCompetitionRanks.add(userRankDto);
         System.out.println(userRankDto.toString());
-        codeSubRepository.deleteByIsVirtual();
         return virtualCompetitionRanks;
     }
 
