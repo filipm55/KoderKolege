@@ -197,7 +197,7 @@ useEffect(() => {
         setOutputResults(responseData.outputResults);
         setSubmissionStatus('File submitted successfully');
       } else {
-        setSubmissionStatus('Failed to submit file');
+        setSubmissionStatus('Your file has a syntax error.Reload the page!');
       }
     } catch (error) {
       console.error('Error submitting file:', error);

@@ -222,11 +222,12 @@ const fetchTime = async () => {
 
       if (submitResponse.ok) {
         setSubmissionStatus('File submitted successfully');
+        window.location.reload();
       } else {
-        setSubmissionStatus('Failed to submit file');
+        setSubmissionStatus('Your file has a syntax error');
       }
 
-      window.location.reload();
+      
 
     } catch (error) {
       console.error('Error submitting file:', error);
