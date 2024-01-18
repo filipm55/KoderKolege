@@ -20,7 +20,7 @@ const JoinACompetition = () => {
       setIsLoggedIn(true);
       const fetchData = async () => {
         try {
-          const url = `http://localhost:8080/users/${jwtToken}`;
+          const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data); // Set user data fetched from the backend
@@ -39,7 +39,7 @@ const JoinACompetition = () => {
     if(userData && userData.id && competitionId){
       const fetchData = async () => {
         try{
-          fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`)
+          fetch(`https://bytepitb.onrender.com/competitions/${competitionId}/competitors/${userData.id}`)
               .then(response => {
                 if (!response.ok) {
                   throw new Error(`HTTP error! Status: ${response.status}`);
@@ -62,7 +62,7 @@ const JoinACompetition = () => {
   }, [userData, competitionId]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/competitions/${competitionId}`)
+    fetch(`https://bytepitb.onrender.com/competitions/${competitionId}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -85,7 +85,7 @@ const JoinACompetition = () => {
       const currentDate = new Date();
       cookies.set('startTime', currentDate.toISOString(), { path: '/' });
       
-      await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`, {
+      await fetch(`https://bytepitb.onrender.com/competitions/${competitionId}/competitors/${userData.id}`, {
         method: 'PUT'
       })
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used

@@ -21,7 +21,7 @@ const JoinACompetition = () => {
     if (jwtToken) {
       const fetchData = async () => {
         try {
-          const url = `http://localhost:8080/users/${jwtToken}`;
+          const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data);
@@ -48,7 +48,7 @@ const JoinACompetition = () => {
     if (!processStarted && userData) {
       setProcessStarted(true); // Ensure that the process runs only once
 
-      fetch('http://localhost:8080/problems')
+      fetch('https://bytepitb.onrender.com/problems')
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -93,7 +93,7 @@ const JoinACompetition = () => {
             console.log(pair[0] + ': ' + pair[1]);
           }
 
-          fetch('http://localhost:8080/competitions', {
+          fetch('https://bytepitb.onrender.com/competitions', {
             method: 'POST',
             body: formData,
           })
@@ -137,7 +137,7 @@ const JoinACompetition = () => {
     if (competitionInfo && competitionInfo.length > 0) {
       const firstProblemId = competitionInfo[0].id; // Assuming the first problem's ID is used
       if (competitionId) {
-        await fetch(`http://localhost:8080/competitions/${competitionId}/competitors/${userData.id}`, {
+        await fetch(`https://bytepitb.onrender.com/competitions/${competitionId}/competitors/${userData.id}`, {
           method: 'PUT'
         }).then(response => {
 

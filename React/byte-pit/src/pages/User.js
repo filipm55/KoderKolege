@@ -46,7 +46,7 @@ const User = () => {
 
       const fetchData = async () => {
         try {
-          const url = `http://localhost:8080/users/${jwtToken}`;
+          const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data); // Set user data fetched from the backend
@@ -75,7 +75,7 @@ const User = () => {
 
     formData.append('password',password)
 
-    fetch(`http://localhost:8080/users/${id}`, {
+    fetch(`https://bytepitb.onrender.com/users/${id}`, {
         method: 'PUT',
         body: formData,
     }).then(response => {
@@ -86,7 +86,7 @@ const User = () => {
     });
     }
     var obrisiKorisnika = (id) => {
-        fetch(`http://localhost:8080/users/${id}`, {
+        fetch(`https://bytepitb.onrender.com/users/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -120,7 +120,7 @@ const User = () => {
         //setPromjena(true);
     }
 
-    const {data:users, error} = useFetch('http://localhost:8080/users');
+    const {data:users, error} = useFetch('https://bytepitb.onrender.com/users');
     if (users) {
         users.map(u => {
             if(u.id == id) {
@@ -132,11 +132,11 @@ const User = () => {
     }
     
     const { data: tasks, error: tasksError } = useFetch(
-      `http://localhost:8080/problems/byMakerId/${id}`
+      `https://bytepitb.onrender.com/problems/byMakerId/${id}`
     );
 
     useEffect(() => {
-          fetch(`http://localhost:8080/users/getAllResults/${id}`, {
+          fetch(`https://bytepitb.onrender.com/users/getAllResults/${id}`, {
             method: 'GET',
         }).then(response => {
             const contentType = response.headers.get('content-type');
@@ -162,7 +162,7 @@ const User = () => {
 
         
     const { data: stats, error: statsError } = useFetch(
-        `http://localhost:8080/users/allactivity/${id}`
+        `https://bytepitb.onrender.com/users/allactivity/${id}`
       );
 
     const handleSortingChange = (e) => {
@@ -185,7 +185,7 @@ const User = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error2} = useFetch('http://localhost:8080/competitions');
+    const {data:competitions, error2} = useFetch('https://bytepitb.onrender.com/competitions');
 
     function getRandomHexColor() {
         // Generate random RGB components

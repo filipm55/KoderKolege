@@ -9,14 +9,14 @@ const AllTasks = () => {
         const [sort, setSort] = useState('ALL');
         var problemMakerr = null;
 
-        const {data:users, error} = useFetch('http://localhost:8080/users');
+        const {data:users, error} = useFetch('https://bytepitb.onrender.com/users');
 
       
         useEffect(() => {
           // Funkcija za dohvat podataka
           const fetchData = async () => {
             try {
-              const response = await fetch('http://localhost:8080/problems/public'); 
+              const response = await fetch('https://bytepitb.onrender.com/problems/public'); 
               const jsonData = await response.json();
               setData(jsonData);
             } catch (error) {

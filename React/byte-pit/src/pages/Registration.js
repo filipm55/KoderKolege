@@ -44,8 +44,8 @@ const Registration = () => {
                 image: file
             };
 
-            // sendData('http://localhost:8080/users', user);
-            fetch('http://localhost:8080/users', {
+            // sendData('https://bytepitb.onrender.com/users', user);
+            fetch('https://bytepitb.onrender.com/users', {
                 method: 'POST',
                 body: formData,
             }).then(response => {

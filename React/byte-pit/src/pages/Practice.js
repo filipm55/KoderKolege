@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 
 const Practice = () => {
 
-     const {data:tasks, error} =useFetch('http://localhost:8080/problems');
+     const {data:tasks, error} =useFetch('https://bytepitb.onrender.com/problems');
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //backend mora provjeravati i povezivati autora i zadatak?? moramo imat sa zadatka link na korisnika koji ga je objavio i obratno,
     // pri zahtjevu za dohvatom podataka o zadatku moraju tu biti i podaci o autoru (bar id i ime i prezime)
@@ -24,7 +24,7 @@ const Practice = () => {
         if (jwtToken) {    
           const fetchData = async () => {
             try {
-              const url = `http://localhost:8080/users/${jwtToken}`;
+              const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
               const response = await fetch(url);
               const data = await response.json();
               setUserData(data); // Set user data fetched from the backend

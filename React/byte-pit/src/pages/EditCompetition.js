@@ -33,7 +33,7 @@ const EditCompetition = () => {
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `http://localhost:8080/users/${jwtToken}`;
+                    const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data); // Set user data fetched from the backend
@@ -50,8 +50,8 @@ const EditCompetition = () => {
 
 
     //svi zadaci koji mogu biti izabrani su u data
-    const {data:problems, error} = useFetch('http://localhost:8080/problems');
-    const {data:competition} = useFetch(`http://localhost:8080/competitions/competition/${id}`);
+    const {data:problems, error} = useFetch('https://bytepitb.onrender.com/problems');
+    const {data:competition} = useFetch(`https://bytepitb.onrender.com/competitions/competition/${id}`);
 
     useEffect(() => {
         if (competition) {
@@ -141,7 +141,7 @@ const EditCompetition = () => {
         //formData.append('isvirtual',Boolean(false));
         console.log(formData.get('dateTimeOfBeginning'));
 
-        fetch(`http://localhost:8080/competitions/${id}`, {
+        fetch(`https://bytepitb.onrender.com/competitions/${id}`, {
             method: 'PUT',
             body: formData
         

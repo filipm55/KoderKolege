@@ -10,7 +10,7 @@ const CompetitionsResult = () => {
     const [competitions, setCompetitions] = useState([]);
     const[fcompetitions, setFcompetitions]=useState([]);
 
-    const {data:allcompetitions, error} = useFetch('http://localhost:8080/competitions');
+    const {data:allcompetitions, error} = useFetch('https://bytepitb.onrender.com/competitions');
     const currentDate = new Date();
 
     useEffect(() => {
