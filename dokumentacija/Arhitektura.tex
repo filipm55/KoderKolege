@@ -43,7 +43,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 			\subsection{Opis tablica}
 			
 
-				{\textbf{Korisnik} - entitet sadržava sve važne informacije o korisniku: Korisničko ime, lozinku, ime, prezime, identifikator slike, email, tip korisnika (natjecatelj/voditelj), individualni sažetak, potvrda registracije, potvrda administratora. }
+				{\textbf{Korisnik} - entitet sadržava sve važne informacije o korisniku: Korisničko ime, lozinku, ime, prezime, identifikator slike, email, tip korisnika (natjecatelj/voditelj), individualni sažetak, potvrda registracije, potvrda administratora. U vezi je One-To-One sa entitetom slika }
 				
 				
 				\begin{longtblr}[
@@ -65,12 +65,12 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					 user-type & VARCHAR & natjecatelj ili voditelj natjecanja \\ \hline
 					 password & VARCHAR	&  	šifra korisnika	\\ \hline 					 
 					 confirmed & BOOLEAN & potvrđena registracija preko korisničkog emaila \\ \hline
-					 confirmed-by-admin & BOOLEAN & potvrđena registracija preko administratorskog emaila \\ \hline
+					 confirmed-by-admin & BOOLEAN & potvrđena registracija od strane administratora \\ \hline
 					   
 				\end{longtblr}
 
 
-				{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja, identifikator pehara. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja,. }
+				{\textbf{Natjecanje} - entitet sadržava sve važne informacije o natjecanju: Id natjecanja, vrijeme početka, vrijeme završetka, broj zadataka, id voditelja natjecanja, identifikator pehara, ime natjecanja i je li virtualno. U odnosu je Many-To-One s entitetom korisnik preko atributa voditelja natjecanja,  u vezi je One-To-One sa entitetom slika. }
 				
 				
 				\begin{longtblr}[
@@ -88,9 +88,11 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					 date-time-of-ending	& TIMESTAMP &   vrijeme završetka natjecanja	\\ \hline  
 					 competition-maker-id & INT	&  	id voditelja natjecanja	\\ \hline 
 	 				number-of-problems & INT	&  	broj zadataka u natjecanju	\\ \hline 
+	 				name & VARCHAR & ime natjecanja \\ \hline
+	 				isVirtual & BOOLEAN & virtualno natjecanja \\ \hline
 				\end{longtblr}
 
-				{\textbf{Zadatak} - entitet sadržava sve važne informacije o zadatku. Sadrži atribute id, trajanje natjecanja, booleanski atribut is-private, broj bodova koje je moguće ostvariti, tip problema, tekst zadatka, naslov i id korisnika koji je napravio zadatak. S entitetom Korisnik je u odnosu Many-To-One preko atributa problem-maker-id.}
+				{\textbf{Zadatak} - entitet sadržava sve važne informacije o zadatku. Sadrži atribute id, trajanje zadatka, booleanski atribut is-private, broj bodova koje je moguće ostvariti, tip problema (težinu zadatka), tekst zadatka, naslov i id korisnika koji je napravio zadatak. S entitetom Korisnik je u odnosu Many-To-One preko atributa problem-maker-id.}
 				
 		\begin{longtblr}[
 					label=none,
@@ -112,7 +114,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 
 				\end{longtblr}
 
-				{\textbf{Zadaci na natjecanju} - entitet sadržava sve važne informacije o odnosu zadatka i natjecanja na kojem se nalazi. Atributi: id natjecanja i id zadatka.}
+				{\textbf{Zadaci na natjecanju} - entitet sadržava informacije o tome koje natjecanje ima koje zadatke. Atributi: id natjecanja i id zadatka. On predstavlja vezu Many-To-Many natjecanja i zadatka}
 
 				
 				\begin{longtblr}[
@@ -131,7 +133,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 
 				
 
-				{\textbf{Primjeri za evaluaciju} - entitet sadržava id zadatka te vrijednost i ključ, odnosno na ovaj način se mapiraju rješenja zadataka. }
+				{\textbf{Primjeri za evaluaciju} - entitet sadržava id zadatka te vrijednost i ključ, odnosno na ovaj način se mapiraju rješenja zadataka i služi za evaluaciju rješenja korisnika.}
 
 				
 				\begin{longtblr}[
@@ -148,7 +150,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					 ključ & VARCHAR	&  ulaz programa \\ \hline 
 				\end{longtblr}
 				
-				{\textbf{Slike} - entitet sadržava id slike te bajt zapis slike. Na ovaj način spremamo slike korisnika i pehara }
+				{\textbf{Slike} - entitet sadržava id slike te bajt zapis slike. Na ovaj način spremamo slike korisnika i pehara. }
 				
 				\begin{longtblr}[
 					label=none,
@@ -163,6 +165,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 					data & BYTEA &  binarni kod slike \\ \hline 
 
 				\end{longtblr}
+				{\textbf{Tablica sudionika natjecanja} - entitet sadržava id korisnika i id natjecatelja te informaciju do kada korisnik može rješavati natjecanje. Ova tablica predstavlja Many-To-Many vezu natjecanja i korisnika. }
 				
 				\begin{longtblr}[
 					label=none,
@@ -172,12 +175,15 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Competition user}}	 \\ \hline[3pt]
+					\hline \SetCell[c=3]{c}{\textbf{Tablica sudionika natjecanja}}	 \\ \hline[3pt]
 					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline	
-					\SetCell{LightBlue}user\_id & INT &  \\ \hline
-					acces\_time & TIMESTAMP & \\ \hline			
+					\SetCell{LightBlue}user\_id & INT & identifikator korisnika \\ \hline
+					access\_time & TIMESTAMP & rok završetka rješavanja natjecanja za korisnika\\ \hline			
+				
 				\end{longtblr}
 				
+				{\textbf{Rang lista} - entitet sadržava id korisnika i id natjecatelja te korisnikov rang. Ova tablica predstavlja Many-To-Many vezu natjecanja i korisnika. }
+				
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -186,28 +192,13 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{User competition placement}}	 \\ \hline[3pt]
-					\SetCell{LightGreen} user\_id & INT	& \\ \hline
-					placement & INT & \\ \hline
+					\hline \SetCell[c=3]{c}{\textbf{Rang lista}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} user\_id & INT	& identifikator korisnika \\ \hline
+					placement & INT & rang korisnika \\ \hline
 					\SetCell{LightGreen}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline					
 				\end{longtblr}
 				
-				\begin{longtblr}[
-					label=none,
-					entry=none
-					]{
-						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
-						rowhead = 1,
-					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Competititon rank}}	 \\ \hline[3pt]
-					\SetCell{LightGreen} id & INT &  	\\ \hline
-					points & NUMERIC & \\ \hline 	
-					time & INT & \\ \hline
-					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline
-					\SetCell{LightBlue}username & VARCHAR & izabrano korisničko ime\\ \hline
-					
-				\end{longtblr}
+				{\textbf{Rezultati natjecanja} - entitet sadržava jedinstven identifikator, id natjecatelja, korisničko ime natjecatelja, i osvojene bodove te korisnikov rang. Ova tablica predstavlja Many-To-Many vezu natjecanja i korisnika. }
 				
 				\begin{longtblr}[
 					label=none,
@@ -217,16 +208,34 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \SetCell[c=3]{c}{\textbf{Code submissions}}	 \\ \hline[3pt]
-					\SetCell{LightGreen} id & INT &  	\\ \hline
-					file\_data &  &   \\ \hline 
-					time\_taken & INT & \\ \hline
-					\SetCell{LightBlue}problem\_id & INT & \\ \hline
+					\hline \SetCell[c=3]{c}{\textbf{Rezultati natjecanja}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} id & INT &  jedinstven identifikator	\\ \hline
+					points & NUMERIC & osvojeni bodovi\\ \hline 	
+					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja \\ \hline
+					\SetCell{LightBlue}username & VARCHAR & korisničko ime\\ \hline
+					
+				\end{longtblr}
+				{\textbf{Učitana programska rješenja} - entitet sadržava jedinstven identifikator, bitove pohranjenog rješenja, vrijeme od početka rješavanja do predaje, korisničko ime, identifikator zadatka, ostvarene bodove, identifikator natjecanja, postotak točnosti i radi li se o virtualnom učitanju. Ova tablica predstavlja Many-To-Many-Many vezu natjecanja, korisnika i zadatka. }
+				
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \SetCell[c=3]{c}{\textbf{Učitana programska rješenja}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} id & INT &  jedinstven identifikator	\\ \hline
+					file\_data & BYTEA & binarni kod rješenja  \\ \hline 
+					time\_taken & INT & vrijeme od početka rješavanja do predaje \\ \hline
+					\SetCell{LightBlue}problem\_id & INT & identifikator zadatka \\ \hline
 					\SetCell{LightBlue}username & VARCHAR & izabrano korisničko ime\\ \hline
-					points & NUMERIC & \\ \hline
+					points & NUMERIC & ostvareni bodovi\\ \hline
 					\SetCell{LightBlue}competition\_id & INT & identifikator natjecanja (natjecanje.id) \\ \hline
 					percentage\_of\_
-					total & & \\ \hline
+					total & DOUBLE & postotak točnosti \\ \hline
+					is\_virtual & BOOLEAN & virtualno učitanje \\ \hline
 				\end{longtblr}
 				
 				
