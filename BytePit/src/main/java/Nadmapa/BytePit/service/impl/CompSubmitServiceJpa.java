@@ -86,7 +86,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             VirtualCompRankDTO dto = new VirtualCompRankDTO();
             dto.setCompId((Long) rankRecord[0]);
             dto.setUsername((String) rankRecord[1]);
-            dto.setPoints(totalPoints);
+            dto.setPoints((BigDecimal) rankRecord[2]);
             dto.setRank(((Long) rankRecord[3]).intValue()); // Safely converts Long to Integer
             virtualCompetitionRanks.add(dto);
         }
