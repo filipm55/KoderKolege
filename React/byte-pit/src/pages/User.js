@@ -377,7 +377,8 @@ const User = () => {
                         <AccountCircleIcon/> <p> {user.username}</p>
                     </div>
                     <div className="ikonaOpis">
-                        <FilterVintageIcon/> <p> {user.userType}</p>
+                    <FilterVintageIcon className="ikona"></FilterVintageIcon> 
+                                        <p>{user.userType === 'COMPETITOR' ? ("NATJECATELJ") : ("VODITELJ NATJECANJA")}</p>
                     </div>
                 </div>
 

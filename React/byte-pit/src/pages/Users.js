@@ -199,7 +199,7 @@ const Users = () => {
                             {userData && (userData.userType==="ADMIN" || userData.id==user.id) && (
                             <div className="gumbici">
                                 {<button className="zadmina blueButton" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
-                                {<button  className="zadmina redButton" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
+                                {/*<button  className="zadmina redButton" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>*/}
                                 {user.userType === "COMPETITION_LEADER" && !user.confirmedByAdmin &&(
                                     <button className="zadmina greenButton" onClick={() => handleConfirmation(user.confirmationHash)}>Potvrdi</button>
                                 )}
