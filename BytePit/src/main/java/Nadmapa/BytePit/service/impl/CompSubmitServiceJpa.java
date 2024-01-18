@@ -11,9 +11,11 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Service
 public class CompSubmitServiceJpa implements CompSubmitService {
@@ -80,6 +82,10 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        totalPoints = new BigDecimal(df.format(totalPoints));
+
         List<Object[]> previousCompetitionRanks = compRankRepository.getCompetitionRanking(competitionId);
         List<VirtualCompRankDTO> virtualCompetitionRanks = new ArrayList<>();
         for (Object[] rankRecord : previousCompetitionRanks) {
@@ -112,9 +118,6 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         return virtualCompetitionRanks;
     }
 
-
-
-
     @Override @Transactional
     public List<VirtualCompRankDTO> virtualRandRank(Long competitionId, String username) {
         Competition c = cr.getCompetition(String.valueOf(competitionId));
@@ -145,6 +148,9 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                     return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        totalPoints = new BigDecimal(df.format(totalPoints));
 
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);

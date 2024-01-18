@@ -13,6 +13,7 @@ import Nadmapa.BytePit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,7 +43,15 @@ public class CodeSubServiceJpa implements CodeSubService {
 
     @Override
     public Set<Long> getSolvedProblemIdsByUserAndCompetition(String username, Long competitionId) {
-        return cr.findDistinctProblemIdsByUsernameAndCompetitionId(username, competitionId); //ovo se salje na front da bi se moglo onemogucit ponovnu predaju istog zadatka
+        Competition c = competitionService.getCompetition(String.valueOf(competitionId));
+        if (!c.getIsvirtual()) {
+            System.out.println(cr.nonVirtual(username, competitionId));
+            return cr.nonVirtual(username, competitionId); //ovo se salje na front da bi se moglo onemogucit ponovnu predaju istog zadatka
+        }
+        else {
+            System.out.println(cr.virtual(username, competitionId));
+            return cr.virtual(username,competitionId);
+        }
     }
 
     @Override

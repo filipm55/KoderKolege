@@ -25,7 +25,7 @@ public interface UserCodeFileRepository extends JpaRepository<CodeSub, Long> {
     List<CodeSub> rjesavani (String username);
 
     @Query(value = "SELECT DISTINCT problem_id FROM code_submissions WHERE username = :username AND competition_id = :competitionId", nativeQuery = true)
-    Set<Long> findDistinctProblemIdsByUsernameAndCompetitionId(String username, Long competitionId);
+    Set<Long> nonVirtual(String username, Long competitionId);
 
     @Query(value = "SELECT * FROM code_submissions WHERE competition_id = :competitionId AND username = :username", nativeQuery = true)
     List<CodeSub> findByCompetitionIdAndUsername(Long competitionId, String username);
@@ -33,4 +33,7 @@ public interface UserCodeFileRepository extends JpaRepository<CodeSub, Long> {
     @Modifying
     @Query(value = "DELETE FROM code_submissions WHERE is_virtual = true", nativeQuery = true)
     void deleteByIsVirtual();
+
+    @Query(value = "SELECT DISTINCT problem_id FROM code_submissions WHERE username = :username AND competition_id = :competitionId AND is_virtual = true", nativeQuery = true)
+    Set<Long> virtual(String username, Long competitionId);
 }
