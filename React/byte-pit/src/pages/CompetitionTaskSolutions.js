@@ -264,7 +264,7 @@ import base64 from 'base-64';
                                                 <td>{user.user.name} {user.user.lastname}</td>
                                                 <td>Postotak točnih primjera: {user.percentage_of_total * 100} %</td>
                                                 <td>Broj bodova: {user.points}</td>
-                                                <td>Vrijeme rješavanja: {user.time/1000}</td>
+                                                <td>Vrijeme izvršavanja: {user.time/1000}</td>
                                                 {isUserInProblem[problem.id] &&
                                                     <td><button id="gumb34" onClick={() => download_solution(problem.id, user.user.id)}>
                                                     Dohvati rješenje
