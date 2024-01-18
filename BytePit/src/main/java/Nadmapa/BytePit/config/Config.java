@@ -12,7 +12,7 @@ public class Config implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://bytepitf.onrender.com"/*"http://localhost:3000"*/)
+                .allowedOrigins("https://bytepitf.onrender.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*") // Allowed request headers
                 .allowCredentials(true);
