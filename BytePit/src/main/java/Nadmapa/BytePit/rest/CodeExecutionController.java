@@ -72,9 +72,14 @@ public class CodeExecutionController {
                 cs.setCompetition(codeSub, competitionId);
             codeSub.setTime(time);
             codeSub.setFileData(file.getBytes());
-            Competition c = comps.getCompetition(String.valueOf(competitionId));
-            if(c.getIsvirtual())
-                codeSub.setIsvirtual(true);
+           if(competitionId!=0){
+               Competition c = comps.getCompetition(String.valueOf(competitionId));
+               if(c.getIsvirtual())
+                   codeSub.setIsvirtual(true);
+           }
+           else {
+               codeSub.setIsvirtual(true);
+           }
             return ces.submit(file, problemId, codeSub);
         } catch (IOException e) {
             throw new RuntimeException("Error in processing file" );

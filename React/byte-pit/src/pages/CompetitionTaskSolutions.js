@@ -79,7 +79,7 @@ import base64 from 'base-64';
         if(problems) {
             //za svaki problem nadi natjecatelje sa 100
             const newUsersByProblem = {};
-            problems.map((problem) => {
+            problems.map( (problem) => {
                 //dohvacamo sve koji su tocno rijesili, to nam sluzi za gumb download
                 //treba jos dohvatiti SVE koji su predali rješenje po zadatku i nparaviti do kraja ovaj prikaz
                 // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
@@ -95,18 +95,17 @@ import base64 from 'base-64';
                     .then(data => {
                         console.log(data);
                         newUsersByProblem[problem.id] = data;
-                            //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
+                        //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
                         if (!userData) {
                             //nije ulogiran
                             problems.map((problem) => [problem.id, false])
                         } else {
-                            const isUserInProblem = data.some((user)=>user.id == userData.id);
+                            const isUserInProblem = data.some((user) => user.id == userData.id);
                             setIsUserInProblem((prev) => ({
                                 ...prev,
                                 [problem.id]: isUserInProblem,
                             }));
                         }
-
 
 
                     })

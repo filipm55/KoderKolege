@@ -170,7 +170,6 @@ useEffect(() => {
     const [currentMinutes, currentSeconds] = currentTime.split(':').map(Number);
 
     const [totalMinutes, totalSeconds] = task.duration.split(':').map(Number);
-
     const passedMinutes = totalMinutes - currentMinutes;
     const passedSeconds = totalSeconds - currentSeconds;
 
@@ -179,7 +178,7 @@ useEffect(() => {
 
       const formData = new FormData();
       formData.append('file', uploadedFile);
-      formData.append('time', 1)
+      formData.append('time', 1);
       formData.append('user', userData.username);
       formData.append('problem', task.id)
       formData.append('competition_id', "0")
