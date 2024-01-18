@@ -35,11 +35,16 @@ const Home = () => {
                 Dobrodošli na BytePit, mjesto gdje strast prema programiranju susreće izazov i zajedništvo. Ova platforma pruža prostor za istraživanje, učenje i natjecanje u svijetu programskog inženjerstva. Bez obzira jeste li iskusni programer ili tek započinjete svoje putovanje, BytePit vam nudi priliku da rješavate zadatke, sudjelujete u natjecanjima i povezujete se s zajednicom entuzijasta.Slobodno istražujte zadatke, pregledavajte kalendar natjecanja i pratite svoj napredak. Ukoliko ste spremni na izazov, sudjelujte u natjecanjima i testirajte svoje vještine programiranja. BytePit čeka da otkrijete svijet mogućnosti koje programsko inženjerstvo donosi.Registrirajte se i pridružite se zajednici programera. Uživajte u programiranju, učenju i natjecanjima na BytePit platformi!
             </div>}
             <div id="kategorije27">
-                <Link to='/practice' id="link27"><div className='kat27'>
+                {isLoggedIn && <Link to='/practice' id="link27"><div className='kat27'>
                     <ComputerIcon id="ikon27" className='ikona27'/>
                     Vježbaj programiranje
                     <p className='p27'>Usavrši svoje vještine rješavanjem zadataka, a za pravi izazov pokreni virtualno natjecanje!</p>
-                </div></Link>
+                </div></Link>}
+                {!isLoggedIn && <div className='kat27'>
+                    <ComputerIcon id="ikon27" className='ikona27'/>
+                    Vježbaj programiranje
+                    <p className='p27'>Usavrši svoje vještine rješavanjem zadataka, a za pravi izazov pokreni virtualno natjecanje!</p>
+                </div>}
                 <a href="#akt27" id="link27"><div className='kat27'>
                     <EmojiEventsIcon id="ikon27" className='ikona27'/>
                     Sudjeluj u natjecanjima!
