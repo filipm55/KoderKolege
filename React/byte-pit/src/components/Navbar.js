@@ -35,6 +35,10 @@ const Navbar = () => {
 
   const logout = () => {
     cookies.remove('jwt_authorization');
+    const allCookies = cookies.getAll();
+    Object.keys(allCookies).forEach(cookieName => {
+      cookies.remove(cookieName);
+    });
     setJwtToken(null);
     localStorage.clear();
     window.location.href = '/login';
