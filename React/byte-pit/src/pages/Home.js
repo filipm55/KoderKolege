@@ -24,7 +24,7 @@ const Home = () => {
         }
     }, [jwtToken]);
 
-  const {data:competitions, error} = useFetch('https://bytepitb.onrender.com/competitions');
+  const {data:competitions, error} = useFetch('https://bytepitb-myjy.onrender.com//competitions');
   var mapa = new Map();
   return  (
     <div id="body27">

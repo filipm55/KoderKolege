@@ -11,7 +11,7 @@ import Cookies from 'universal-cookie';
 const Competition = () => {
   const { competitionId, taskId } = useParams();
   const [fetchError, setFetchError] = useState(false);
-  const {data:competition, error} = useFetch(`https://bytepitb.onrender.com/competitions/competition/${competitionId}`);
+  const {data:competition, error} = useFetch(`https://bytepitb-myjy.onrender.com//competitions/competition/${competitionId}`);
   const [competitionInfo, setCompetitionInfo] = useState(null);
   const [task, setTask] = useState(null);
 
@@ -33,7 +33,7 @@ const Competition = () => {
     console.log(competition);
 
   useEffect(() => {
-    fetch(`https://bytepitb.onrender.com/competitions/${competitionId}`)
+    fetch(`https://bytepitb-myjy.onrender.com//competitions/${competitionId}`)
       .then((response) => {
         if (response.ok) {
 
@@ -63,7 +63,7 @@ const Competition = () => {
         setIsLoggedIn(true);
         const fetchData = async () => {
             try {
-                const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
+                const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setUserData(data);
@@ -81,7 +81,7 @@ const Competition = () => {
     const fetchTaskById = async () => {
 
             try {
-                const response = await fetch(`https://bytepitb.onrender.com/problems/${taskId}`);
+                const response = await fetch(`https://bytepitb-myjy.onrender.com//problems/${taskId}`);
                 const task = await response.json();
                 setTask(task);
 
@@ -101,7 +101,7 @@ const Competition = () => {
 
       try {
         if(userData) {
-          const response = await fetch(`https://bytepitb.onrender.com/problems/${competitionId}/${userData.username}`);
+          const response = await fetch(`https://bytepitb-myjy.onrender.com//problems/${competitionId}/${userData.username}`);
           const solvedTasks = await response.json();
           setSolvedTasks(solvedTasks);
           console.log(solvedTasks)
@@ -117,7 +117,7 @@ const Competition = () => {
 const fetchTime = async () => {
   try {
     if(userData) {
-      const response = await fetch(`https://bytepitb.onrender.com/competitions/${competitionId}/competitors/${userData.id}/time`);
+      const response = await fetch(`https://bytepitb-myjy.onrender.com//competitions/${competitionId}/competitors/${userData.id}/time`);
       const timeResponse = await response.json();
       setTime(timeResponse);
       console.log(timeResponse);
@@ -144,7 +144,7 @@ const fetchTime = async () => {
             const newClassName = "TempClass" + taskId;
             newSolution = solution.replace(oldClassName, newClassName);
         }
-      const response = await fetch(`https://bytepitb.onrender.com/solution/${taskId}`, {
+      const response = await fetch(`https://bytepitb-myjy.onrender.com//solution/${taskId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -215,7 +215,7 @@ const fetchTime = async () => {
 
 
 
-      const submitResponse = await fetch(`https://bytepitb.onrender.com/submit/${taskId}`, {
+      const submitResponse = await fetch(`https://bytepitb-myjy.onrender.com//submit/${taskId}`, {
         method: 'POST',
         body: formData,
       });
@@ -236,7 +236,7 @@ const fetchTime = async () => {
 
       
         try {
-          const response = await fetch(`https://bytepitb.onrender.com/rank/${competitionId}/${userData.username}`, {
+          const response = await fetch(`https://bytepitb-myjy.onrender.com//rank/${competitionId}/${userData.username}`, {
               method: 'POST'
           });
   

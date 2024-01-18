@@ -37,7 +37,7 @@ import base64 from 'base-64';
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
+                    const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data); // Set user data fetched from the backend
@@ -55,7 +55,7 @@ import base64 from 'base-64';
 
     useEffect(() => {
         // svi zadaci s natjecanja
-        fetch(`https://bytepitb.onrender.com/competitions/${id}`)
+        fetch(`https://bytepitb-myjy.onrender.com//competitions/${id}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -86,7 +86,7 @@ import base64 from 'base-64';
                     // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
                     // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
                     //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
-                    fetch(`https://bytepitb.onrender.com/usersolutions/${id}/${problem.id}`)
+                    fetch(`https://bytepitb-myjy.onrender.com//usersolutions/${id}/${problem.id}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -133,7 +133,7 @@ import base64 from 'base-64';
                 // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
                 //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
                 //console.log(id, problem.id);
-                fetch(`https://bytepitb.onrender.com/allsolutions/${id}/${problem.id}`)
+                fetch(`https://bytepitb-myjy.onrender.com//allsolutions/${id}/${problem.id}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -203,7 +203,7 @@ import base64 from 'base-64';
     };
 
     const download_solution=(problemid, userid)=>{
-        fetch(`https://bytepitb.onrender.com/allusersubs/${id}/${problemid}/${userid}`)
+        fetch(`https://bytepitb-myjy.onrender.com//allusersubs/${id}/${problemid}/${userid}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

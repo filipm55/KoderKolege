@@ -38,7 +38,7 @@ const AddTask = () => {
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
+                    const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data); // Set user data fetched from the backend
@@ -83,7 +83,7 @@ const AddTask = () => {
         };
 
         console.log(JSON.stringify(requestData));
-        fetch('https://bytepitb.onrender.com/problems', {
+        fetch('https://bytepitb-myjy.onrender.com//problems', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

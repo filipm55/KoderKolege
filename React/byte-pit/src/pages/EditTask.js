@@ -43,7 +43,7 @@ const EditTask = () => {
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
+                    const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data); // Set user data fetched from the backend
@@ -59,7 +59,7 @@ const EditTask = () => {
     }, [jwtToken]);
 
     //inicijalizacija podataka za formu
-    const {data:task, error} = useFetch(`https://bytepitb.onrender.com/problems/${id}`);
+    const {data:task, error} = useFetch(`https://bytepitb-myjy.onrender.com//problems/${id}`);
 
     useEffect(() => {
         // Your code here will execute only once on the first page load
@@ -105,7 +105,7 @@ const EditTask = () => {
         };
 
         console.log(JSON.stringify(requestData));
-        fetch(`https://bytepitb.onrender.com/problems/${id}`, {
+        fetch(`https://bytepitb-myjy.onrender.com//problems/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

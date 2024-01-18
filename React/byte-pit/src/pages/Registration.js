@@ -44,8 +44,8 @@ const Registration = () => {
                 image: file
             };
 
-            // sendData('https://bytepitb.onrender.com/users', user);
-            fetch('https://bytepitb.onrender.com/users', {
+            // sendData('https://bytepitb-myjy.onrender.com//users', user);
+            fetch('https://bytepitb-myjy.onrender.com//users', {
                 method: 'POST',
                 body: formData,
             }).then(response => {
