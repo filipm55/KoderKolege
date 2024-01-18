@@ -18,7 +18,7 @@ const Navbar = () => {
 
       const fetchData = async () => {
         try {
-          const url = `http://localhost:8080/users/${jwtToken}`;
+          const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data); 
