@@ -167,12 +167,12 @@ public class CodeExecutionController {
         List<CodeSubDTO> codeSubDTOs = codeSubs.stream()
                 .map(codeSub -> new CodeSubDTO(
                         codeSub.getUser(),
-                        codeSub.getPoints().multiply(BigDecimal.valueOf(0.9)).add(codeSub.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - codeSub.getTime())/(double) totalTime))).setScale(2, RoundingMode.HALF_UP),
+                        codeSub.getPoints().multiply(BigDecimal.valueOf(0.9)).add(codeSub.getPoints().multiply(BigDecimal.valueOf(0.1 * (totalTime - codeSub.getTime())/(double) totalTime))).setScale(4, RoundingMode.HALF_EVEN),
                         codeSub.getTime(),
                         codeSub.getPercentage_of_total()
-                ))
+                )
+                )
                 .collect(Collectors.toList());
-
 
         return codeSubDTOs;
     }
