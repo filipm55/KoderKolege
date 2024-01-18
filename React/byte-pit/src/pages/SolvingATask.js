@@ -240,7 +240,7 @@ useEffect(() => {
             className="user-input-textarea"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Enter input here..."
+            placeholder="Enter input here (if there are multiple elements write them in the same line separated by a space) "
             rows={5}
         ></textarea>
 

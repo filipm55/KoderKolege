@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -83,7 +84,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
 
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
         totalPoints = new BigDecimal(df.format(totalPoints));
 
         List<Object[]> previousCompetitionRanks = compRankRepository.getCompetitionRanking(competitionId);
