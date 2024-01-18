@@ -76,48 +76,51 @@ import base64 from 'base-64';
     //mozda ipak bolje da se sve samo jednom fetcha?
 
     useEffect(() => {
-        if(problems) {
-            //za svaki problem nadi natjecatelje sa 100
-            const newUsersByProblem = {};
-            problems.map( (problem) => {
-                //dohvacamo sve koji su tocno rijesili, to nam sluzi za gumb download
-                //treba jos dohvatiti SVE koji su predali rješenje po zadatku i nparaviti do kraja ovaj prikaz
-                // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
-                // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
-                //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
-                fetch(`http://localhost:8080/usersolutions/${id}/${problem.id}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log(data);
-                        newUsersByProblem[problem.id] = data;
-                        //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
-                        if (!userData) {
-                            //nije ulogiran
-                            problems.map((problem) => [problem.id, false])
-                        } else {
-                            const isUserInProblem = data.some((user) => user.id == userData.id);
-                            setIsUserInProblem((prev) => ({
-                                ...prev,
-                                [problem.id]: isUserInProblem,
-                            }));
-                        }
+        const fetchData = async () => {
+            if (problems) {
+                //za svaki problem nadi natjecatelje sa 100
+                const newUsersByProblem = {};
+                problems.map((problem) => {
+                    //dohvacamo sve koji su tocno rijesili, to nam sluzi za gumb download
+                    //treba jos dohvatiti SVE koji su predali rješenje po zadatku i nparaviti do kraja ovaj prikaz
+                    // za drugi prikaz sve koji su ikad predali rjesenje na ovom natjecanju
+                    // i onda sva rjesenja zadatka s odredenog natjecanja koja je neki user nekada predao
+                    //nekako napraviti funkcije koje fetchaju razlicitu stvar ovisno o odabranoj opciji (Umozda neki usestateovi koje suprotni gumbi mijenjaju)
+                    fetch(`http://localhost:8080/usersolutions/${id}/${problem.id}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                            //newUsersByProblem[problem.id] = data;
+                            //provjeri je li user medu onima koji su skroz tocno rijesili zadatak
+                            if (!userData) {
+                                console.log('nema logina')
+                                //nije ulogiran
+                                problems.map((problem) => newUsersByProblem[problem.id, false])
+                                //svi su false ako nije ulogiran
+                            } else {
+                                const isUserInProblem = data.some((user) => user.id === userData.id);
+                                console.log('tu sam, ' + isUserInProblem)
+                                newUsersByProblem[problem.id] = isUserInProblem;
+                            }
 
 
-                    })
-                    .catch(error => {
-                        console.error('Error fetching problems:', error);
-                        // Handle error here
-                    });
-            })
-            setUsers100(newUsersByProblem);
-            //console.log(users100);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching problems:', error);
+                            // Handle error here
+                        });
+                })
+                setUsers100(newUsersByProblem);
+                //console.log(users100);
+            }
         }
-    }, [problems]);
+        fetchData();
+    }, [problems, userData]);
 
     useEffect(()=> {
 
@@ -264,8 +267,8 @@ import base64 from 'base-64';
                                                 <td>{user.user.name} {user.user.lastname}</td>
                                                 <td>Postotak točnih primjera: {user.percentage_of_total * 100} %</td>
                                                 <td>Broj bodova: {user.points}</td>
-                                                <td>Vrijeme izvršavanja: {user.time/1000}</td>
-                                                {isUserInProblem[problem.id] &&
+                                                <td>Vrijeme rješavanja: {user.time/1000}</td>
+                                                {users100[problem.id] &&
                                                     <td><button id="gumb34" onClick={() => download_solution(problem.id, user.user.id)}>
                                                     Dohvati rješenje
                                                 </button></td>}
