@@ -59,7 +59,19 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             return Collections.emptyList();
         }
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
-        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = submissions.stream()
+
+        List<CodeSub> virtualSubmissions;
+        List<CodeSub> nonVirtualSubmissions;
+
+        virtualSubmissions = submissions.stream()
+                .filter((codeSub) -> !codeSub.isVirtualNull() && codeSub.isVirtual())
+                .collect(Collectors.toList());
+
+        nonVirtualSubmissions = submissions.stream()
+                .filter(codeSub->  codeSub.isVirtualNull() || !codeSub.isVirtual())
+                .collect(Collectors.toList());
+
+        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = nonVirtualSubmissions.stream()
                 .filter(submission -> submission.getPoints() != null)
                 .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
                 .collect(Collectors.toSet());
@@ -97,9 +109,24 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             dto.setRank(((Long) rankRecord[3]).intValue()); // Safely converts Long to Integer
             virtualCompetitionRanks.add(dto);
         }
+        //System.out.println("IZBRISO SAM GA ? : " + virtualCompetitionRanks.removeIf(dto -> dto.getUsername().equals(username)));
+
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);
         userRankDto.setUsername(username);
+
+        pointsTimeSet = virtualSubmissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
+                .collect(Collectors.toSet());
+
+        totalPoints = pointsTimeSet.stream()
+                .map(pair -> {
+                    BigDecimal points = pair.getKey();
+                    int time = pair.getValue();
+                    return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         userRankDto.setPoints(totalPoints);
         int userRank = 1;
         for (VirtualCompRankDTO rankDto : virtualCompetitionRanks) {
@@ -110,6 +137,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             }
         }
         userRankDto.setRank(userRank);
+        System.out.println("DODO SAM OVOG TU: " + userRankDto);
         virtualCompetitionRanks.add(userRank - 1, userRankDto);
         for (int i = userRank; i < virtualCompetitionRanks.size(); i++) {
             VirtualCompRankDTO dto = virtualCompetitionRanks.get(i);

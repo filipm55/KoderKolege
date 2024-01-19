@@ -64,4 +64,12 @@ public class CodeSub {
     public void setPoints(BigDecimal points) {
         this.points = points;
     }
+
+    public boolean isVirtualNull(){
+        return isvirtual==null;
+    }
+
+    public boolean isVirtual() {
+        return isvirtual;
+    }
 }
