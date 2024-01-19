@@ -304,7 +304,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 		
 		\noindent{	
 		UML-dijagram stanja je ponašajni UML-dijagram kojim se prikazuje
-		diskretno ponašanje objekta ili sustava putem prelazaka izmedu konačnog broja stanja, a često se za cjelokupni model stanja i prijelaza između stanja koristi izraz stroj stanja. Ova vrsta dijagrama se koristi za modeliranje ponašanja entiteta tijekom vremena, naglašavajući odgovor na dogadaje i okidače. Na dijagramu stanja, slika \ref{fig:dijagramstanja} prikazane su sve funkcionalnosti kojima natjecatelj može pristupiti.\\
+		diskretno ponašanje objekta ili sustava putem prelazaka između konačnog broja stanja, a često se za cjelokupni model stanja i prijelaza između stanja koristi izraz stroj stanja. Ova vrsta dijagrama se koristi za modeliranje ponašanja entiteta tijekom vremena, naglašavajući odgovor na dogadaje i okidače. Na dijagramu stanja, slika \ref{fig:dijagramstanja} prikazane su sve funkcionalnosti kojima natjecatelj može pristupiti.\\
 		
 		Proces kreće prijavom korisnika ulogom natjecatelja. Na početnoj stranici natjecatelj može pristupiti aktivnom natjecanju, otići na kalendar natjecanja, pregled profila korisnika, stranicu za vježbu ili stranicu s rezultatima. U bilo kojem slučaju korisnik može doći u stanje "Početna stranica", "Kalendar natjecanja", "Korisnici", "Vježba", "Rezultati". Iz svih se stanja može odjaviti.\\
 		
@@ -347,10 +347,10 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 		\section{Dijagram komponenti}
 		
 		\noindent{
-			UML-dijagrami komponenti su vrsta strukturnih UML-dijagrama koji prikazuju organizaciju i odnose komponenti koje čine programsku potporu. Pružaju vizualni prikaz arhitekture sustava, naglašavajuci modularnu strukturu i interakcije između komponenti. Dijagram komponenti na slici \ref{fig:dijagramkomp} opisuje organizaciju i međuovisnost
+			UML-dijagrami komponenti su vrsta strukturnih UML-dijagrama koji prikazuju organizaciju i odnose komponenti koji čine programsku potporu. Pružaju vizualni prikaz arhitekture sustava, naglašavajući modularnu strukturu i interakcije između komponenti. Dijagram komponenti na slici \ref{fig:dijagramkomp} opisuje organizaciju i međuovisnost
 			komponenti, interne strukture i odnose prema okolini. 
 			
-			U web aplikaciji BytePit postoje dvije velike komponente: Frontend - React i Backend - Spring Boot. Te dvije komponente kumuniciraju preko sučelja REST\_API koje je zaduženo za komunikaciju frontend dijela aplikacije s backend dijelom aplikacije. U React komponenti sučelje REST\_API spaja se na komponentu React view koja komunicira s ostalim Frontend komponentama. Sve frontend komponente ovise o komponenti ReactJS koja je zadužena za dohvaćanje React biblioteka. S druge strane, u komponenti Spring Boot REST\_API je spojeno na komponentu Rest Controller koji je glavna komponenta za backend dio aplikacije. Sučelje JPA s vezom "ball and soccet" povezuje komponente Repository i JPA repository, JPA repository omogučuje komunikaciju s bazom podataka. Web aplikacija se spaja na vanjeske komponente: web preglednik preko sučelja HTTP\_Request koji podržava HTTP protokol i sve njegove operacije (Get, Post, Put, Delete), također na bazu podataka preko sučelja postgreSQL.
+			U web aplikaciji BytePit postoje dvije velike komponente: Frontend - React i Backend - Spring Boot. Te dvije komponente komuniciraju preko sučelja REST\_API koje je zaduženo za komunikaciju frontend dijela aplikacije s backend dijelom aplikacije. U React komponenti sučelje REST\_API spaja se na komponentu React view koja komunicira s ostalim Frontend komponentama. Sve frontend komponente ovise o komponenti ReactJS koja je zadužena za dohvaćanje React biblioteka. S druge strane, u komponenti Spring Boot REST\_API je spojeno na komponentu Rest Controller koji je glavna komponenta za backend dio aplikacije. Sučelje JPA s vezom "ball and soccet" povezuje komponente Repository i JPA repository, JPA repository omogućuje komunikaciju s bazom podataka. Web aplikacija se spaja na vanjske komponente: web preglednik preko sučelja HTTP\_Request koji podržava HTTP protokol i sve njegove operacije (Get, Post, Put, Delete), također na bazu podataka preko sučelja postgreSQL.
 		
 			\begin{figure}[H]
 				\includegraphics[scale=0.4]{slike/Dijagram komponenti}
