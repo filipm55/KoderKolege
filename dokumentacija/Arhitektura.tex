@@ -262,7 +262,7 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 				Lako je uočljivo da većina njih u nazivu sadrži naziv entiteta iz baze, te riječi Service i Controller. 
 			}\\
 				\begin{figure}[H]
-				\includegraphics[scale=0.1]{slike/dijagramrazreda2}
+				\includegraphics[scale=0.1]{slike/klase}
 				%veličina slike u odnosu na originalnu datoteku i pozicija slike
 				\centering
 				\caption{Dijagram razreda: razredi koji predstavljaju strukturu baze}
@@ -273,25 +273,29 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 				 Razredi User, Competition, Image i Problem sa slike \ref{fig:dr2} preslikavaju atribute svakog od entiteta iz baze. Razred User predstavlja registriranog korisnika, čiji UserType može biti COMPETITOR, COMPETITION LEADER i ADMIN (samo jedan, glavni korisnik), a koji pri registraciji unosi podatke prikazane na dijagramu (koji su vlastiti atributi razreda User). Razred Problem predstavlja zadatak koji je korisnik s tipom voditelj unio u sustav: na dijagramu se vidi ta poveznica. Jedna ili više instanci razreda Problem je dio Natjecanja tj. razreda Competition. Jedan korisnik može sudjelovati na više natjecanja, kao što i na jednom natjecanju sudjeluje jedan ili više korisnika. 
 				Tu je i razred Image koji služi za pohranu slike u bazu podataka. 		
 					
-				Razredi imena Service služe za baratanje objektima razreda User, Competition itd. Razredi imena Controller obrađuju HTTP zahtjeve poslane na server i vraćaju zatražene podatke u .json obliku. 	
+				Razredi imena Service (slika \ref{fig:dr}) služe za baratanje objektima razreda User, Competition itd. Razredi imena Controller (slika \ref{fig:dr1}) obrađuju HTTP zahtjeve poslane na server i vraćaju zatražene podatke u .json obliku. 	
 				
 				 Strelice sa slike na jednostavan i intuitivan način prikazuju poveznice između razreda User, UserController i UserService. Metode koje su u razredima implementirane služe za baratanje entitetima u bazi: primarno su to razredi koji u svome nazivu sadrže 'Service' kao što je prije rečeno. Razred UserController oslanja se na ta dva prethodno navedena razreda da bi mogao ispuniti zaprimljene HTTP zahtjeve, bilo da je to samo informacija o korisnicima ili izmjena podataka.
 				 
-				 	Slika \ref{fig:dr1} prikazuje još neke Controller i Service razrede koji povezuju bazu i server. Prikazan je TokenService razred koji omogućava autentifikaciju korisnika, a time sadrži i informacije o njegovim ovlastima u aplikaciji. 
+				 Prikazan je i TokenService razred koji omogućava autentifikaciju korisnika, a time sadrži i informacije o njegovim ovlastima u aplikaciji. 
 			}\\
 			
 			
-			
-		
-			
-			
-			\begin{figure}[H]
-				\includegraphics[scale=0.2]{slike/dijagramrazreda1}
-				%veličina slike u odnosu na originalnu datoteku i pozicija slike
-				\centering
-				\caption{Dijagram razreda: ostali razredi Controller i Service te konfiguracija}
+			\begin{figure}
+			\centering
+			\begin{minipage}[b]{0.45\textwidth}
+				\includegraphics[width=\textwidth]{slike/controlleri}
+				\caption{Dijagram razreda: razredi Controller}
 				\label{fig:dr1}
+			\end{minipage}
+			\hfill
+			\begin{minipage}[b]{0.45\textwidth}
+				\includegraphics[width=\textwidth]{slike/services}
+				\caption{Dijagram razreda: razredi Service}
+					\label{fig:dr}
+			\end{minipage}
 			\end{figure}
+			
 			
 			
 			
