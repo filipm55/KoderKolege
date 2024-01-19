@@ -28,15 +28,9 @@
 	
 		\section{Ispitivanje programskog rješenja}
 			
-			\textbf{\textit{dio 2. revizije}}\\
-	
 			
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
-			
-			
-			
-			\subsection{Ispitivanje sustava}
+					
 			
 						\textbf{Test 1: Osnovne funkcije razreda User.}\\
 			U ovom testu provjeravamo hoće li naš razred u konstruktoru dobro "zapamtiti" vrijednosti parametara, koje kasnije dohvaćamo get metodama. Primjer korištenja je pri registraciji.
@@ -221,16 +215,46 @@
 				}
 			\end{lstlisting}
 			
-			
+		\subsection{Ispitivanje sustava}			
+			 			
+			 \textbf{Test 1: Ispravan Login}\\
+			 \textbf{Ulaz:} "fm1234" "1234" 
+			 \textbf{Očekivani izlaz:} preusmjeravanje na početnu stranicu 
 			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
-			
-			\eject 
+			 \begin{figure}[H]
+			 	\includegraphics[scale=0.2]{slike/ispitTest1}
+			 	%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\centering
+			 	\caption{Ispravan Login}
+			 	\label{fig:ispitest1}
+			 \end{figure}
+			 
+			 
+			 \textbf{Test 2: Neispravan Login}\\
+			 \textbf{Ulaz:} "fm" "1234" 
+			 \textbf{Očekivani izlaz:} neispravno korisnicko ime ili lozinka. 
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[scale=0.2]{slike/ispitTest2}
+			 	%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\centering
+			 	\caption{Ispravan Login}
+			 	\label{fig:ispitest2}
+			 \end{figure}
+			 
+			 \textbf{Test 3: Stvaranje zadatka za vježbu}\\
+			 \textbf{Ulaz:} "Zadatak 1" 5 "30:00 PM" "Napisati program koji unosi niz cijelih brojeva i ispisuje sve brojeve koji su djeljivi sa zadanim brojem." "1 2 3 4 5  2" "2 4"
+			 \textbf{Očekivani izlaz:} Preusmjeravanje stranicu za vježbu. 
+			 
+			 \begin{figure}[H]
+			 	\includegraphics[scale=0.2]{slike/ispitTest3}
+			 	%veličina slike u odnosu na originalnu datoteku i pozicija slike
+			 	\centering
+			 	\caption{Kreiranje zadatka za vježbu}
+			 	\label{fig:ispitest3}
+			 \end{figure}
+			 
+			 
 		
 		
 		\section{Dijagram razmještaja}
