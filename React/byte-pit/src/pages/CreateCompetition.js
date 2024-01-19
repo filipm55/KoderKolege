@@ -30,7 +30,7 @@ const CreateCompetition = () => {
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
+                    const url = `https://bytepitb-myjy.onrender.com/users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data); // Set user data fetched from the backend
@@ -46,7 +46,7 @@ const CreateCompetition = () => {
     }, [jwtToken]);
 
     //svi zadaci koji mogu biti izabrani su u data
-    const {data:problems, error} = useFetch('https://bytepitb-myjy.onrender.com//problems');
+    const {data:problems, error} = useFetch('https://bytepitb-myjy.onrender.com/problems');
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];

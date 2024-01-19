@@ -33,7 +33,7 @@ const Competition = () => {
     console.log(competition);
 
   useEffect(() => {
-    fetch(`https://bytepitb-myjy.onrender.com//competitions/${competitionId}`)
+    fetch(`https://bytepitb-myjy.onrender.com/competitions/${competitionId}`)
       .then((response) => {
         if (response.ok) {
 
