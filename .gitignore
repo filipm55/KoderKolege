@@ -1,9 +1,1 @@
-*.aux
-*.log
-*.lof
-*.out
-*.gz
-*.toc
-node_modules
-target
-.idea
+

@@ -39,8 +39,7 @@ public class RegistrationController {
             else model.addAttribute("confirmationMessage", "Vaša registracija je uspješno potvrđena. Sada još samo pričekajte da admin učini isto.");
             System.out.println("User: " + user);
 
-            if(user.getUserType()== UserType.COMPETITION_LEADER){
-                System.out.println("trebo bi se vracat sad mail??");
+            if(user.getUserType()== UserType.COMPETITION_LEADER && user.getConfirmedByAdmin()){
                 emailservice.sendSimpleEmail(user.getEmail(),"Admin vam je potvrdio registraciju","Sada ste voditelj");
             }
             // Prikazivanje stranice s porukom potvrde

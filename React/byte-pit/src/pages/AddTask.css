@@ -1,0 +1,109 @@
+div#addTask {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 96vw;
+    height: fit-content;
+    margin-left: 2.5vw;
+}
+
+form#addTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: fit-content;
+    border: 0px;
+    margin-top: -10px;
+    margin-left: 2px;
+    font-size: 1.5rem;
+}
+
+
+
+div.input {
+    margin-top: 10px;
+    margin-bottom: 1rem;
+}
+
+button#addTask {
+    font-size: 1.5rem;
+    justify-self: center;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    color: black;
+    margin-left: 0px;
+}
+
+button#addTask:hover {
+    background-color: rgb(69, 69, 241);
+    color:white;
+}
+
+div#pic {
+    margin-left: 50px;
+    height: 46em;
+    width: 70vw;
+    background-image: url("../../public/pictures/pic3.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 70px;
+}
+
+div#uredenje {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+div#uredenje #addTask {
+    margin-bottom: -1rem;
+}
+
+div#pic2 {
+    margin-left: 50px;
+    height: 46em;
+    width: 70vw;
+    background-image: url("../../public/pictures/pic5.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 7rem;
+}
+
+
+label {
+    color: rgb(43, 40, 40);
+    font-weight: normal;
+}
+
+button#dodavanje:hover {
+    background-color: rgb(69, 69, 241);
+    color:white;
+    border-radius: 3px;
+    border: 0.5px solid black;
+}
+
+h2#novizd {
+    font-size: 6vh;
+}
+
+input, textarea, select, button {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 1.5rem;
+}
+
+
+@media screen and (max-width: 767px) {
+    div#pic {
+        width: 0px;
+    }
+
+
+}

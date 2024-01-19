@@ -17,8 +17,10 @@ const Registration = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [klik, setKlik] = useState(false);
 
     const submitFja = async (e) => {
+        setKlik(true);
         setErrorMessage('')
         e.preventDefault();
         checkEmail(email);
@@ -41,10 +43,9 @@ const Registration = () => {
                 userType: role,
                 image: file
             };
-            console.log(JSON.stringify(user));
 
             // sendData('http://localhost:8080/users', user);
-            fetch('https://bytepitb.onrender.com/users', {
+            fetch('http://localhost:8080/users', {
                 method: 'POST',
                 body: formData,
             }).then(response => {
@@ -114,10 +115,10 @@ const Registration = () => {
         };
 
         return (
-            <div className="wrapper">
-                <h2>Registracija</h2>
-
-                <form onSubmit={submitFja}>
+            <div>
+            {<div className="wrapper">
+                {!errorMessage && !message && !klik && <h2 className='slova20'>Registracija</h2>}
+                {!errorMessage && !message && !klik && <form className='form20' onSubmit={submitFja}>
 
                     <div className='kucica'><label>Ime:</label>
                         <input className='top' type="text" value={name} required
@@ -155,9 +156,20 @@ const Registration = () => {
                     </div>
                     {isError && <p className='fileError'>{errorMsg}</p>}
                     <button className='submitGumb'>Registriraj me!</button>
-                </form>
-                {errorMessage && <div className="warning">{errorMessage}</div>}
-                {message && <div className="success">{message}</div>}
+                </form>}
+                {klik && !errorMessage && !message && <div><h1>Loading...</h1></div>}
+                 {errorMessage && <div className="competition-container">
+                    <div className="competition-details">
+                        <p className="competition-disclaimer" id="pristup">{errorMessage}</p>
+                        <button className='submit-button' onClick={() => {window.location.href = '/registration';}}>Pokušaj ponovo</button>
+                </div></div>}
+                {message && <div className="competition-container">
+                    <div className="competition-details">
+                        <p className="competition-disclaimer" id="pristup" style={{color:"black"}}>{message}</p>
+                        <button className='submit-button' onClick={() => {window.location.href = '/login';}}>Prijavi se!</button>
+                </div></div>}
+                
+            </div>}
             </div>
         );
     };

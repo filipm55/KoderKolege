@@ -1,0 +1,116 @@
+/* Common styles for #popis */
+#popis11 {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+   height: fit-content;
+   margin-top: 20px;
+}
+
+/* Styles for .zadatcitezine */
+.zadatcitezine {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 90%; /* Adjusted width for mobile */
+   margin: 0 auto; /* Centering the element */
+}
+
+
+.popisZad {
+   border-collapse: collapse;
+   list-style-type: none;
+}
+
+div#sortovi91 {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-content: center;
+   align-items: center;
+   margin-bottom: -1.5rem;
+ }
+
+#sel91 {
+   height: fit-content;
+}
+
+td , #k{
+   text-align: center;
+   font-size: 1.5rem;
+}
+
+
+table {
+   width: 90%; /* Adjusted width for mobile */
+   border: 1px solid darkgray;
+   margin: 20px auto; /* Centering the table */
+}
+
+
+tr#vrh {
+   background-color: rgba(169, 169, 169, 0.667);
+   border: none;
+}
+
+
+tr#vrh td {
+   border: none;
+   font-size: 3vh; /* Adjusted font size for mobile */
+}
+
+tr {
+   border: 1px solid darkgray;
+   background-color: white;
+}
+
+
+td.tName {
+   text-align: left;
+   padding-left: 9px;
+}
+
+
+.taskName {
+   text-decoration: none;
+   color: black;
+}
+
+
+.taskName:hover,
+#korisnik:hover {
+   text-decoration: underline;
+   color: rgb(46, 46, 203);
+}
+
+
+div#naslovSort {
+   display: flex;
+   flex-direction: row; /* Adjusted for mobile */
+   width: 85%; /* Adjusted width for mobile */
+   margin: 0 auto; /* Centering the element */
+   margin-bottom: -1rem;
+   justify-content: space-between; /* Adjusted for mobile */
+   align-items: center; /* Adjusted for mobile */
+}
+
+#korisnik {
+   text-decoration: none;
+   color: black;
+   font-size: 1.5rem; 
+}
+
+#tezina11 {
+   margin-bottom: -1.3rem;
+   font-size: 1.1rem;
+}
+
+#zdzvj {
+   font-size: 2.6rem;
+}
+
+#zeleno {
+   color: #45a049;
+   font-weight: bold;
+}

@@ -1,7 +1,10 @@
 package Nadmapa.BytePit.service.impl;
 
+import Nadmapa.BytePit.domain.CodeSub;
 import Nadmapa.BytePit.domain.User;
+import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.domain.UserType;
+import Nadmapa.BytePit.repository.UserCodeFileRepository;
 import Nadmapa.BytePit.repository.UserRepository;
 
 import Nadmapa.BytePit.service.UserService;
@@ -24,6 +27,9 @@ public class UserServiceJpa implements UserService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private UserCodeFileRepository codesubrepo;
 
     @Override
     public List<User> listAll(){
@@ -48,6 +54,15 @@ public class UserServiceJpa implements UserService {
     @Override
     public Optional<User> getUserById(Long id) {
         return userRepo.findById(id);
+    }
+    @Override
+    public List<CodeSub> rjesavani(String username) {
+        return codesubrepo.rjesavani(username);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 
     @Override
@@ -81,11 +96,11 @@ public class UserServiceJpa implements UserService {
         logger.debug("Checking email and username existence...");
         if (userRepo.existsByEmail(user.getEmail())) {
             logger.warn("User with email already exists: {}", user.getEmail());
-            throw new RequestDeniedException("vec postoji natjecatelj s tim mailom");
+            throw new RequestDeniedException("Već postoji natjecatelj s tim mailom!");
         }
         if (userRepo.existsByUsername(user.getUsername())) {
             logger.warn("User with username already exists: {}", user.getUsername());
-            throw new RequestDeniedException("vec postoji natjecatelj s tim usernameom");
+            throw new RequestDeniedException("Već postoji natjecatelj s tim usernameom!");
         }
 
         logger.debug("Saving user...");
@@ -101,6 +116,7 @@ public class UserServiceJpa implements UserService {
             if(user.getConfirmed() && user.getUserType()== UserType.COMPETITOR ) return 1;
             else if (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType()== UserType.COMPETITION_LEADER )return 1;
             else if(user.getUserType()==UserType.ADMIN) return 1;
+            else if(user.getUserType()==  UserType.COMPETITION_LEADER  && user.getConfirmed() && !user.getConfirmedByAdmin()) return 2;
             else return 0;
         }
         return -1;

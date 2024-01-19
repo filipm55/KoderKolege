@@ -1,17 +1,13 @@
 
 footer {
-    background-color:#645e5e;
     color: white;
-    padding: '20px 0';
-    text-align: 'center';
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-height: 35px ;
+    background: linear-gradient(to right, #b2a7a7, #786a6a); /* Gradient background */
+    box-shadow: 1px 2px 3px rgba(88, 59, 59, 0.1); /* Subtle box shadow */
 }
 
 .container {
     display: flex;
     align-items: center;
-    padding-left: 45%;
+    justify-content: center;
+    height: fit-content;
 }

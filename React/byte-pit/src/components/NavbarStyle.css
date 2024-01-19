@@ -1,50 +1,51 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #645e5e;
-    color: #fff;
-    padding: 10px 20px;
-  }
+  background: linear-gradient(to right, #8f8282, #6b5b5b); /* Gradient background */
+  box-shadow: 1px 2px 3px rgba(88, 59, 59, 0.1); /* Subtle box shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 5px 30px;
+  font-size: 1.4rem;
+}
+
+.omotac {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
   
-  .left {
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    justify-self:flex-start;
-  }
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.middle {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
   
-  .menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 20px;
-    max-width: 50px;
-    display: none;
-  }
   
   .logo {
-    max-width: 60px;
-  }
-  
-  .right {
-    display: flex;
-    align-items: center;
-    padding-left: 25px;
-  }
-  
-  .middle {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-end;
+    max-width: 30px;
+    margin-right: 7px;
   }
   
   
   .nav-link {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     margin: 10px;
-  }
+    transition: color 0.3s ease; /* Adding smooth color transition */
+    font-size: 1.4rem;
+}
   
   .middle-link {
     margin: 8px;
@@ -52,22 +53,71 @@
   
   .nav-link:hover {
     text-decoration: underline;
-  }
-  
-  @media only screen and (max-width: 1024px) {
-    .middle {
-      display: none;
-    }
-    .menu-icon {
-      display:inline
-    }
-  }
-  
-  div.omotac {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    color: #d3cccc; /* Change color on hover */
   }
 
- 
+  .nav-link-log {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid #000000;
+    border-radius: 7px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .nav-link-log:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center; 
+    
+  }
+  
+  .logoUser {
+    max-width: 13px; 
+    margin-right: 3px; 
+    margin-left: 5px;
+
+  }
+
+
+  
+div#imeLink {
+  color: black;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .omotac {
+    order: 3;
+    margin-top: 10px;
+  }
+
+  .left, .middle, .right {
+    flex-direction: row;
+    margin: 10px 0;
+  }
+
+  .nav-link, .nav-link-log {
+    margin: 5px 5px;
+  }
+
+  .nav-link-log {
+    margin: 5px 1rem;
+  }
+
+  .logo {
+    margin: 0;
+  }
+}

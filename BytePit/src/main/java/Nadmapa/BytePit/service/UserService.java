@@ -1,5 +1,7 @@
 package Nadmapa.BytePit.service;
 
+import Nadmapa.BytePit.domain.CodeSub;
+import Nadmapa.BytePit.domain.Problem;
 import Nadmapa.BytePit.domain.User;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
@@ -24,4 +26,8 @@ public interface UserService {
 
 
     Optional<User> getUserById(Long id);
+
+    User findByUsername(String admin);
+
+    List<CodeSub> rjesavani(String username);
 }

@@ -1,0 +1,94 @@
+/* JoinACompetition.css */
+
+/* JoinACompetition.css */
+
+/* Style for the competition container */
+.competition-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+  }
+  
+  /* Style for the competition details */
+  .competition-details {
+    text-align: center;
+    border: 2px solid #ccc; /* Border style */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px; /* Padding around the content */
+    max-width: 400px; /* Maximum width */
+    margin: 50px auto 0; /* Updated margin to reduce top space */
+    background-color: #f9f9f9; /* Background color */
+  }
+  #napomene{
+    max-width: 80vw;
+    width:80vw;
+  }
+  
+  /* Style for the competition disclaimer paragraph */
+  .competition-disclaimer {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  /* Style for the start button */
+  .start-button {
+    padding: 15px 25px;
+    background-color: #70c873;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .start-button:hover {
+    background-color: #45a049;
+  }
+  
+  
+  /* Style for the competition details */
+  .competition-details {
+    text-align: center;
+    border: 2px solid #ccc; /* Border style */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px; /* Padding around the content */
+    max-width: 400px; /* Maximum width */
+    margin: 0 auto; /* Center the box horizontally */
+    background-color: #f9f9f9; /* Background color */
+  }
+  
+  /* Style for the competition disclaimer paragraph */
+  .competition-disclaimer {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  /* Style for the start button */
+  .start-button {
+    padding: 15px 25px;
+    background-color: #70c873;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .start-button:hover {
+    background-color: #45a049;
+  }
+  
+
+  p#pristup {
+    color: rgb(219, 32, 32);
+  }

@@ -1,8 +1,8 @@
 package Nadmapa.BytePit.rest;
 
-import Nadmapa.BytePit.domain.Image;
-import Nadmapa.BytePit.domain.User;
-import Nadmapa.BytePit.domain.UserType;
+import Nadmapa.BytePit.domain.*;
+import Nadmapa.BytePit.repository.UserRepository;
+import Nadmapa.BytePit.service.CompetitionService;
 import Nadmapa.BytePit.service.ImageService;
 import Nadmapa.BytePit.service.UserService;
 import Nadmapa.BytePit.service.impl.EmailSenderService;
@@ -17,9 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,6 +31,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private CompetitionService competitionService;
 
     @Autowired
     private EmailSenderService emailservice;
@@ -41,15 +41,61 @@ public class UserController {
     public UserController(UserRegistrationService registrationService) {
         this.registrationService = registrationService;
     }
+    @GetMapping("/getAllResults/{id}")
+    public List<Object[]> getAllResultsFromUser(@PathVariable Long id){
+
+        Optional<User> userOptional = userService.getUserById(id);
+        List<Object[]> returnValue = new LinkedList<>();
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            Map<Competition, Integer> mapa = user.getCompetitionPlacements();
+            Map<Competition, Integer> filtriranaMapa = mapa.entrySet()
+                    .stream()
+                    .filter(entry -> entry.getValue() <= 3)
+                    .collect(Collectors.toMap(entry -> entry.getKey(), (value) -> value.getValue()));
+            filtriranaMapa.entrySet().stream().forEach((entry) -> {
+                Object[]  podaci = new Object[3];
+                podaci[0] = entry.getKey().getName();
+
+                if(entry.getKey().getTrophyPicture()!=null) podaci[1] = entry.getKey().getTrophyPicture().getData();
+                else podaci[1] = null;
+
+                podaci[2] = entry.getValue();
+                System.out.println(podaci.toString());
+                returnValue.add(podaci);
+            });
+            System.out.println(returnValue.toString());
+            return returnValue;
+
+        }
+        return null;
+    }
+    @GetMapping("/byId/{id}")
+    public User getUserById(@PathVariable Long id) {
+       Optional<User> user = userService.getUserById(id);
+       if(user.isPresent()){
+           return user.get();
+       }
+       else return null;
+    }
 
     @GetMapping("")
     public List<User> listConfirmedUsers() {
         List<User> allUsers = userService.listAll();
         return allUsers.stream()
-                .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed() && user.getConfirmedByAdmin() && user.getUserType() == UserType.COMPETITION_LEADER))
+                .filter(user -> (user.getConfirmed() && user.getUserType() == UserType.COMPETITOR) || (user.getConfirmed()  && user.getUserType() == UserType.COMPETITION_LEADER))
                 .collect(Collectors.toList());
     }
+    @GetMapping("/getadmin")
+    public ResponseEntity<User> getAdminUser() {
+        User adminUser = userService.findByUsername("admin");
 
+        if (adminUser != null) {
+            return ResponseEntity.ok(adminUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping("")
     public ResponseEntity<String> createUser(
@@ -89,7 +135,7 @@ public class UserController {
             if (user.getUserType() == UserType.COMPETITOR) {
                 message += "\n" +
                         "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                        "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
+                        "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
@@ -98,21 +144,14 @@ public class UserController {
 
             } else message += "\n" +
                     "Molimo Vas da potvrdite račun preko ovog linka \n" +
-                    "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
+                    "http://localhost:8080/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
                     "Radujemo se našoj suradnji\n" +
                     "Tim BytePit";
 
 
             emailservice.sendSimpleEmail(user.getEmail(), message, "Potvrda registracije");
-            if (user.getUserType() == UserType.COMPETITION_LEADER) {
-                String adminmail = "bytepit.noreply@gmail.com";
-                String message2 = "Želimo li potvrditi " + user.getName() + " da bude voditelj?" +
-                        "https://bytepitb.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + adminmail +
-                        "\n" +
-                        "Moramo potvrditi u roku od 7 dana.";
-                emailservice.sendSimpleEmail(adminmail, message2, "Netko želi biti voditelj");
-            }
+
         }
         logger.info("Response from userService: {}", response);
         return response;
@@ -136,12 +175,14 @@ public class UserController {
                                              @RequestParam("lastname") String lastname,
                                              @RequestParam("username") String username,
                                              @RequestParam("email") String email,
-                                             @RequestParam("userType") String userType) {
-        System.out.println("OVDJE SAM: " + id);
+                                             @RequestParam("userType") String userType,
+                                             @RequestParam("password") String password,
+
+                                             @RequestParam("image") MultipartFile file) throws IOException {
 
 
         Optional<User> optionalUser = userService.getUserById(id);
-
+        boolean imageChanged = false;
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             String stariEmail = user.getEmail();
@@ -159,6 +200,9 @@ public class UserController {
             if (!email.equals(user.getEmail())) {
                 user.setEmail(email);
             }
+            if(!password.equals("") && !password.equals(user.getPassword())){
+                user.setPassword(password);
+            }
             if (!userType.toString().equals(user.getUserType().toString())) {
                 switch (userType) {
                     case "COMPETITOR":
@@ -170,11 +214,19 @@ public class UserController {
                         break;
                 }
             }
+            if(!file.isEmpty() && !file.getBytes().equals(user.getImage().getData())){
+                user.getImage().setData(file.getBytes());
+                imageChanged=true;
+            }
 
             try{
                 userService.saveUser(user);
             }catch(Exception e){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Neuspješan update korisnika s ID-om: " + id);
+            }
+            String izmjenjenaSlika = "\n\tSlika profila vam nije promijenjena.";
+            if(imageChanged){
+                izmjenjenaSlika = "\n\tUz to, vaša slika profila je promijenjena.";
             }
             emailservice.sendSimpleEmail(stariEmail,"Poštovani,\n" +
                     "Administrator je izmjenio vaše podatke.\n" +
@@ -183,12 +235,35 @@ public class UserController {
                     "\n\tPrezime: " + user.getLastname() +
                     "\n\tKorisničko ime:" + user.getUsername() +
                     "\n\tEmail: " + user.getEmail() +
-                    "\n\tTip: "+ user.getUserType().toString()
+                    "\n\tTip: "+ user.getUserType().toString() + izmjenjenaSlika
                     ,"Izmjenjeni osobni podaci!");
             return ResponseEntity.ok("Uspješan update podataka korisnika s ID-om: " + id);
         }
 
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Korisnik s ID-om : " + id +" nije pronađen u bazi");
+    }
+    @GetMapping ("/allactivity/{id}")     // statistika za odredenog usera
+    public Map<String, Object> getStats(@PathVariable Long id) {
+        Map<String, Object> map = new HashMap<>();
+        userService.getUserById(id).ifPresent(user -> {
+
+            int ukbroj = userService.rjesavani(user.getUsername()).size();
+            List<CodeSub> svisubmitovi = userService.rjesavani(user.getUsername());
+            double zbroj = 0;
+            int ukBrojStoPostotnih = ukbroj;
+            for (CodeSub codeSub : svisubmitovi) {
+                zbroj += codeSub.getPercentage_of_total();
+                if(codeSub.getPercentage_of_total() <1){
+                    ukBrojStoPostotnih--;
+                }
+            }
+            double prosjek = zbroj / ukbroj * 100;
+            if (ukbroj == 0) prosjek = 0;
+            map.put("ukbroj", ukbroj);
+            map.put("prosjek", prosjek);
+            map.put("stoPostotni",ukBrojStoPostotnih);
+        });
+        return map;
     }
 }

@@ -3,7 +3,9 @@ import useFetch from "../useFetch";
 import './Tasks.css';
 import Cookies from 'universal-cookie';
 import React, { useState, useEffect } from 'react';
-
+import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from '@mui/icons-material/Person';
+import FilterVintageIcon from '@mui/icons-material/FilterVintage';
 
 const Users = () => {
     var [promjena, setPromjena] = useState(false);
@@ -20,12 +22,31 @@ const Users = () => {
     const [email, setEmail] = useState('');
     const [role, setRole] = useState('');
     const [userData, setUserData] = useState(null);
+    const [isError, setIsError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+    const emptyBlob = new Blob([''], { type: 'text/plain' });
+    const [file, setFile] = useState(emptyBlob);
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+
+        // Checking if the file type is allowed or not
+        const allowedTypes = ["image/jpeg"]; // STAVIO SAM SAMO JPEG JER JE ZIVOT TAK JEDNOSTAVNIJI ZA RADIT SA SLIKOM, Mislav, MOZDA U ONE DODATNE FUNKCIONALNOST TREBA UPISAT
+        if (!allowedTypes.includes(selectedFile?.type)) {
+            setIsError(true);
+            setErrorMsg("Only JPEG");
+            return;
+        }
+
+        setIsError(false);
+        setFile(selectedFile);
+    };
 
     useEffect(() => {
         if (jwtToken) {    
           const fetchData = async () => {
             try {
-              const url = `https://bytepitb.onrender.com/users/${jwtToken}`;
+              const url = `http://localhost:8080/users/${jwtToken}`;
               const response = await fetch(url);
               const data = await response.json();
               setUserData(data); // Set user data fetched from the backend
@@ -41,8 +62,9 @@ const Users = () => {
       }, [jwtToken]);
 
     //funkcija koja salje bazi zahtjev za brisanjem korisnika sa id-em id
+
     var obrisiKorisnika = (id) => {
-        fetch(`https://bytepitb.onrender.com/users/${id}`, {
+        fetch(`http://localhost:8080/users/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -55,18 +77,17 @@ const Users = () => {
             .then(data => {
                 // Ovdje možete obraditi odgovor od servera (ako je potrebno)
                 console.log('Uspjeh:', data);
+                window.location.href = '/users'; // Redirect to the login page
             })
             .catch(error => {
                 // Uhvatite i obradite bilo kakve greške prilikom slanja zahtjeva
                 console.error('Greška prilikom slanja DELETE zahtjeva:', error);
             });
 
-            window.location.href = '/users'; // Redirect to the login page
-
     };
 
 
-    const {data:users, error} = useFetch('https://bytepitb.onrender.com/users')
+    const {data:users, error} = useFetch('http://localhost:8080/users')
     //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //na svakom profilu moraju biti zadaci koje je objavio u obliku popisa, backend u odgovoru na ovaj zahtjev mora poslati uz podatke o autoru i podatke o
     //imenima zadataka te id-u zadatka (ako mu je to jedinstveni identifikator
@@ -101,19 +122,45 @@ const Users = () => {
         formData.append('username', username);
         formData.append('email', email);
         formData.append('userType', role);
+        formData.append('image', file);
+        formData.append('password','');
+        console.log(username+name+surname+email+role)
+        console.log(formData.get('name'))
 
-        fetch(`https://bytepitb.onrender.com/users/${id}`, {
+        fetch(`http://localhost:8080/users/${id}`, {
             method: 'PUT',
             body: formData,
         }).then(response => {
             console.log("USPJEH");
+           // window.location.href = '/users'; // Redirect to the login page
         }).catch(error => {
             console.log("NEUSPJEH");
         });
-        window.location.href = '/users'; // Redirect to the login page
+
 
 
     }
+
+    var handleConfirmation = (confirmationHash) => {
+        const email = encodeURIComponent("bytepit.noreply@gmail.com");
+        const url = `http://localhost:8080/confirm-registration?hash=${confirmationHash}&email=${email}`;
+
+        fetch(url, {
+            method: 'GET'
+        }).then(response => {
+            console.log("USPJEH");
+            //window.location.href = '/users'; // Redirect to the login page
+        }).catch(error => {
+            console.log("NEUSPJEH");
+        });
+
+        window.location.reload();
+
+
+
+    }
+
+
 
     var proba = (id) => { // SAMO DA ISPROBAM MOGU LI SE PROMIJENITI PODACI, RADI, VI TREBATE SAMO OSIGURAT OVAJ DIO SA formDATA  DA TO PROCITA SA FRONTENDA
         // IZ NEKOG RAZLOGA NE RADI KADA SE BUTTON NALAZI UNUTAR "nestajuciForm", A KAD SAM GA STAVIO VAN ONDA RADI
@@ -124,7 +171,7 @@ const Users = () => {
         formData.append('email', "probniMail1@das.com");
 
 
-        fetch(`https://bytepitb.onrender.com/users/${id}`, {
+        fetch(`http://localhost:8080/users/${id}`, {
             method: 'PUT',
             body: formData,
         }).then(response => {
@@ -135,6 +182,8 @@ const Users = () => {
     }
 
 
+
+
     return (
         <div className="wrrapper">
             { error && <div>{ error }</div> }
@@ -142,52 +191,63 @@ const Users = () => {
             <div className="task-list">
             
                 {users.map(user => (
+                    user.userType === "COMPETITION_LEADER"  && !user.confirmedByAdmin && userData && userData.userType!="ADMIN" ? (null ): ( //SAMO ADMIN MOZE VIDIT NE POTVRDENE KORISNIKE
                     <div className="task" key={user.id} >
                         <div className="naslov">
-                            <Link className = "imeiprezime" to={'/users/'+user.id}><h2>{ user.name + ' ' + user.lastname }</h2></Link>
-                            {userData && userData.userType==="ADMIN" && (
+                        <Link className = "imeiprezime" to={'/users/'+user.id}>
+                            <h2 id="poseban">{ user.name + ' ' + user.lastname }</h2></Link>
+                            {userData && (userData.userType==="ADMIN" || userData.id==user.id) && (
                             <div className="gumbici">
-                                { <button onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>}
-                                {<button className="urediKorisnikeGumb" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                                {<button className="zadmina blueButton" onClick={() => urediKorisnike(user.username, user.name, user.lastname, user.email, user.userType)}>Uredi korisnika</button>}
+                                {/*<button  className="zadmina redButton" onClick={() => obrisiKorisnika(user.id)}>Obriši korisnika</button>*/}
+                                {user.userType === "COMPETITION_LEADER" && !user.confirmedByAdmin &&(
+                                    <button className="zadmina greenButton" onClick={() => handleConfirmation(user.confirmationHash)}>Potvrdi</button>
+                                )}
                             </div>
                             )}
                         </div>
-                        <hr/>
                         <div className="info">
                             <div className="tekstDio">
-                                <h3 className="podaciokorisniku">Podaci o korisniku: </h3>
                                 {!mapa.get(user.username)  && 
                                     <div className="nekidio">
-                                        <p>Email:  {user.email}</p>
-                                        <p>Korisničko ime:  {user.username}</p>
-                                        <p>Uloga:  {user.userType}</p>
+                                       {/* <p className="podatak"> <EmailIcon className="ikona"/> {user.email}</p>*/}
+                                        <p className="podatak"><PersonIcon className="ikona"/> {user.username}</p>
+                                        <p className="podatak"><FilterVintageIcon className="ikona"></FilterVintageIcon> 
+                                        {user.userType === 'COMPETITOR' ? ("NATJECATELJ") : ("VODITELJ NATJECANJA")}</p>
                                     </div>
                                  }
                                 {mapa.get(user.username) &&
                                 <form className="nestajuciForm">
-                                    <div className="kucica">
+                                    <div>
+                                    <div className="kucica4">
                                         <p>Ime: <input type = "text" defaultValue={user.name} onChange={(e) => setName(e.target.value)}></input></p>
                                     </div>
-                                    <div className="kucica">
+                                    <div className="kucica4">
                                     <p>Prezime: <input type = "text" defaultValue={user.lastname} onChange={(e) => setSurname(e.target.value)}></input></p>
                                     </div>
-                                    <p>Email: <input type = "text" defaultValue={user.email} length = "20" onChange={(e) => setEmail(e.target.value)}></input></p>
-                                    <p>Korisničko ime: <input type = "text" defaultValue ={user.username} onChange={(e) => setUsername(e.target.value)}></input> </p>
-                                    <div className='izbor'><label>Uloga:</label>
-                                    <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
-                                                            onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>
-                                    <input type="radio" id="voditelj" name="uloga" checked={role === 'COMPETITION_LEADER'}
-                                                            onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
+                                    
+                                        <div className='kucica'><label>Osobna fotografija: </label><input type="file" name="datoteka"
+                                                                                                         onChange={handleFileChange}/>
+                                        </div>
+                                        {isError && <p className='fileError'>{errorMsg}</p>}
+                                    {userData.userType==="ADMIN" && <div className='izbor'><label>Uloga:</label>
+                                        <input type="radio" id="natjecatelj" name="uloga" checked={role === 'COMPETITOR'}
+                                                                onChange={() => setRole('COMPETITOR')}/><p>natjecatelj</p>
+                                        <input type="radio" id="voditelj" name="uloga" checked={role === 'COMPETITION_LEADER'}
+                                                                onChange={() => setRole('COMPETITION_LEADER')}/><p>voditelj</p>
+                                    </div>}
                                     </div>
-                                    <button onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+                                    <button type="button" id="spremime" onClick={() => urediKorisnika(user.username, user.id)}>Spremi promjene</button>
+
+                                    
                                 </form>}
                             </div>
-                            <p> <img
-                                src={`data:image/jpeg;base64,${user.image.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
+                            <p> <img className="profile"
+                                src={`data:image/jpeg;base64,${user.image?.data}`} //basicly jer znamo da je slika jpeg uzimamo njezine bajtove i pretvaramo ih u sliku
                                 alt="User Image"
                             /></p>
                         </div>
-                    </div>
+                    </div> )
                 ))}
             </div> }
         </div>

@@ -7,7 +7,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 document.title = 'BytePit';
 root.render(
   <React.StrictMode>
-
     <App />
   </React.StrictMode>
 );

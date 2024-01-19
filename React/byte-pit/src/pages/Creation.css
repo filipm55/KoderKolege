@@ -1,0 +1,161 @@
+body{
+    background: linear-gradient(135deg, #f5f4f4, #dcdcdc); /* White to gray gradient */
+}
+
+div.body1 {
+    max-width: 100vw;
+    height: 80vh;
+    margin-top: -21px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+hr.crta {
+    display: block;
+    height: 1px;
+    width: 100vw;
+    border-top: 1px solid white;
+    margin: 1em 0;
+    padding: 0;
+  }
+
+h1.naslov {
+    color:white;
+    font-size: 10vh;
+}
+
+div.kategorije {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100vw;
+    height: 60vh;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.kat {
+    border-radius: 0.7rem;
+    width: 27vw;
+    height: 40vh;
+    display: flex;
+    margin: 0 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding-top: 10px;
+    text-decoration: none;
+
+}
+
+.link {
+    text-decoration: none;
+}
+
+div.kat {
+    border-radius: 0.7rem;
+    width: 27vw;
+    height: 43vh;
+    display: flex;
+    margin: 0 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Smooth transition */
+    border: 1px solid transparent; /* Initially no border */
+    transform: scale(1); /* Initial scale */
+  }
+
+  h3.nas {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  p.opis {
+    width: 20vw;
+  }
+
+  p#prvi {
+    margin-bottom: -2.2rem;
+  }
+
+  p#treci {
+    margin-bottom: -2.3rem;
+  }
+  p#drugi {
+    margin-bottom: -1rem;
+  }
+  p#cetvrti {
+    margin-bottom: -2.3rem;
+  }
+
+  div#poseban{
+    margin-left: 3.2rem;
+  }
+
+  div#poseban2 {
+    margin-left: 3rem;
+  }
+
+  div.opisKat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .ikona {
+
+  }
+  
+  div.kat:hover {
+    border-bottom: 3px solid lightgrey;
+    border-left: 2px solid rgba(211, 211, 211, 0.45);
+    border-right: 2px solid lightgray;
+    transform: scale(1.05) translateY(-5px); /* Scale and move the element */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Add a stronger box shadow */
+  }
+
+div.kat h3 {
+    font-size: 5vh;
+    color:rgb(112, 112, 112);
+}
+
+div.kat p {
+    margin-top: -10px;
+}
+
+
+
+@media screen and (max-width: 767px) {
+    h1.naslov {
+        font-size: 4vh;
+    }
+    div.kategorije{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    div.kategorije div, div.kat {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 1rem;
+    }
+
+    div.kat h3 {
+        font-size: 4vh;
+    }
+
+    div.kat p {
+        margin-top: 0;
+    }
+}

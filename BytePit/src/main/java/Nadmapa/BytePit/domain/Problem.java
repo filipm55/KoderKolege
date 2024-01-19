@@ -1,5 +1,6 @@
 package Nadmapa.BytePit.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -15,15 +16,16 @@ public class Problem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @OneToOne
-    private User problemMaker;
+    @Column(name="problem_maker_id",length=255)
+    @JsonProperty("problemMaker")
+    private String problemMakerId;
     @Getter @Setter
     private String title;
 
     @Getter @Setter
     private int points;
     @Getter @Setter
-    private Duration duration;
+    private String duration;
     @Getter @Setter
     private String text;
     @ElementCollection
@@ -36,22 +38,35 @@ public class Problem {
 
     Ovo će omogućiti čuvanje mape u bazi podataka. */
     @Getter @Setter
-    private boolean isPrivate;
+    private Boolean isPrivate;
     @Getter @Setter
     private ProblemType problemType;
 
-    public Problem(User problemMaker, String title, int points, Duration duration, String text, String[] inputExample, String[] outputExample, boolean isPrivate, ProblemType problemType) {
+    public Problem(String problemMakerId, String title, int points, String duration, String text,Map<String, String> inputOutputExamples, Boolean isPrivate, ProblemType problemType) {
         Assert.hasText(title, "Problem must have a title");
         Assert.notNull(duration, "Problem must have a duration");
         Assert.hasText(text, "Problem must have a text");
-        Assert.notEmpty(inputExample, "Problem must have at least one input+output example");
-        Assert.notEmpty(outputExample, "Problem must have at least one input+output example");
-        this.problemMaker=problemMaker;
+        Assert.notEmpty(inputOutputExamples, "Problem must have at least one input+output example");
+        this.problemMakerId=problemMakerId;
         this.title = title;
         this.points = points;
-        this.duration = duration;
+
+        this.duration=duration;
+        this.inputOutputExamples=inputOutputExamples;
+//        String[] parts = duration.split(":");
+//
+//        // Convert to Duration
+//        try {
+//            long minutes = Long.parseLong(parts[0]);
+//            long seconds = Long.parseLong(parts[1]);
+//
+//
+//            this.duration = Duration.ofMinutes(minutes).plusSeconds(seconds);
+//        }catch(Error e)   {
+//            System.out.println("Krivo zadano trajanje");
+//        }
         this.text = text;
-        addInputOutputExamples(inputExample, outputExample);
+        //addInputOutputExamples(inputExample, outputExample);
         this.isPrivate = isPrivate;
         this.problemType = problemType;
     }
@@ -82,6 +97,73 @@ public class Problem {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProblemMaker() {
+        return problemMakerId;
+    }
+
+    public void setProblemMaker(String problemMaker) {
+        this.problemMakerId = problemMaker;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setInputOutputExamples(Map<String, String> inputOutputExamples) {
+        this.inputOutputExamples = inputOutputExamples;
+    }
+
+    public Boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public ProblemType getProblemType() {
+        return problemType;
+    }
+
+    public void setProblemType(ProblemType problemType) {
+        this.problemType = problemType;
+    }
 
     @Override
     public String toString() {

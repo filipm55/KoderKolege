@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity(name = "USER")
 @Table(name= "Users")
@@ -37,13 +39,23 @@ public class User {
    private String confirmationHash;
 
    private boolean confirmed;
-
+   @Getter @Setter
    private boolean confirmedByAdmin;
 
 
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "image_id", referencedColumnName = "id")
    private Image image; // MAX SIZE 1048576 bytes !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (probo sam promijenit u fileuploadConfig al to ne radi ;_;)
+
+   @Getter @Setter
+   @ElementCollection(fetch = FetchType.EAGER)
+   @CollectionTable(
+           name = "user_competition_placement",
+           joinColumns = @JoinColumn(name = "user_id")
+   )
+   @MapKeyJoinColumn(name = "competition_id")
+   @Column(name = "placement")
+   private Map<Competition, Integer> competitionPlacements;
 
    @Enumerated(EnumType.STRING)
    private UserType userType;
@@ -60,6 +72,7 @@ public class User {
 
 
       this.userType = pronadiUserType(userType);
+      this.competitionPlacements = new HashMap<>();
    }
 
    private UserType pronadiUserType(String userType) {
@@ -114,5 +127,13 @@ public class User {
               ", email='" + email + '\'' +
               ", userType='" + userType.toString() + '\'' +
               '}';
+   }
+
+   public String getUsername() {
+      return username;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
    }
 }
