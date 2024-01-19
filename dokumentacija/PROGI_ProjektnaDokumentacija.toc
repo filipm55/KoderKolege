@@ -10,7 +10,7 @@
 \contentsline {subsubsection}{1) Registracija korisnika}{23}{subsubsection*.4}%
 \contentsline {subsubsection}{2) Pregled i uređivanje korisnika}{24}{subsubsection*.5}%
 \contentsline {subsubsection}{3) Virtualno natjecanje}{25}{subsubsection*.6}%
-\contentsline {section}{\numberline {3.2}Ostali zahtjevi}{26}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Ostali zahtjevi}{25}{section.3.2}%
 \contentsline {chapter}{\numberline {4}Arhitektura i dizajn sustava}{27}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Baza podataka}{28}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Opis tablica}{28}{subsection.4.1.1}%
