@@ -10,11 +10,27 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Dijagram obrasca uporabe, funkcionalnost reg. i nereg. korisnika}}{21}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Dijagram obrasca uporabe, funkcionalnost voditelja, natjecatelja i administratora}}{22}{figure.3.2}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Sekvencijski dijagram registracije novog korisnika}}{24}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Sekvencijski dijagram pregleda i uređivanja korisnika}}{25}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Sekvencijski dijagram virtualnog natjecanja}}{26}{figure.3.5}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Sekvencijski dijagram pregleda i uređivanja korisnika}}{24}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Sekvencijski dijagram virtualnog natjecanja}}{25}{figure.3.5}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Er dijagram baze podataka}}{31}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Dijagram razreda: razredi koji predstavljaju strukturu baze}}{32}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Dijagram razreda: ostali razredi Controller i Service te konfiguracija}}{33}{figure.4.3}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Er dijagram baze podataka}}{33}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Dijagram razreda: razredi koji predstavljaju strukturu baze}}{34}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Dijagram razreda: razredi Controller}}{35}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Dijagram razreda: razredi Service}}{35}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Dijagram stanja}}{37}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Dijagram aktivnosti}}{38}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Dijagram komponenti}}{39}{figure.4.7}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Uspješno izvedeni testovi}}{46}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Ne uspješno izvedeni testovi}}{47}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Ispravan Login}}{48}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Ispravan Login}}{48}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Kreiranje zadatka za vježbu}}{49}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Dijagram razmještaja}}{50}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Environment Varijable u IDE-u}}{51}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Environment Varijable za backend}}{54}{figure.5.8}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Postavke baze podataka na renderu}}{55}{figure.5.9}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Putanja za Dockerfile}}{55}{figure.5.10}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Build Command za Node environment}}{56}{figure.5.11}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Environment Varijable za frontend }}{56}{figure.5.12}%
 \addvspace {10\p@ }
