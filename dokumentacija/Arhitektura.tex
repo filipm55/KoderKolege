@@ -270,8 +270,8 @@ Text Transfer Protocol) zahtjeve od klijenta (preglednika) koji sadrže informac
 			\end{figure}
 			
 			\noindent{
-				 Razredi User, Competition, Image i Problem sa slike \ref{fig:dr2} preslikavaju atribute svakog od entiteta iz baze. Razred User predstavlja registriranog korisnika, čiji UserType može biti COMPETITOR, COMPETITION LEADER i ADMIN (samo jedan, glavni korisnik), a koji pri registraciji unosi podatke prikazane na dijagramu (koji su vlastiti atributi razreda User). Razred Problem predstavlja zadatak koji je korisnik s tipom voditelj unio u sustav: na dijagramu se vidi ta poveznica. Jedna ili više instanci razreda Problem je dio Natjecanja tj. razreda Competition. Jedan korisnik može sudjelovati na više natjecanja, kao što i na jednom natjecanju sudjeluje jedan ili više korisnika. 
-				Tu je i razred Image koji služi za pohranu slike u bazu podataka. 		
+				 Razredi User, Competition, Image, CodeSub i Problem sa slike \ref{fig:dr2} preslikavaju atribute svakog od entiteta iz baze. Razred User predstavlja registriranog korisnika, čiji UserType može biti COMPETITOR, COMPETITION LEADER i ADMIN (samo jedan, glavni korisnik), a koji pri registraciji unosi podatke prikazane na dijagramu (koji su vlastiti atributi razreda User). Razred Problem predstavlja zadatak koji je korisnik s tipom voditelj unio u sustav: na dijagramu se vidi ta poveznica. Jedna ili više instanci razreda Problem je dio Natjecanja tj. razreda Competition. Jedan korisnik može sudjelovati na više natjecanja, kao što i na jednom natjecanju sudjeluje jedan ili više korisnika. 
+				Tu je i razred Image koji služi za pohranu slike u bazu podataka, te razred CodeSub koji prati predaju rješenja zadataka te njihovo bodovanje. 		
 					
 				Razredi imena Service (slika \ref{fig:dr}) služe za baratanje objektima razreda User, Competition itd. Razredi imena Controller (slika \ref{fig:dr1}) obrađuju HTTP zahtjeve poslane na server i vraćaju zatražene podatke u .json obliku. 	
 				
