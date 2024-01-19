@@ -97,6 +97,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             dto.setRank(((Long) rankRecord[3]).intValue()); // Safely converts Long to Integer
             virtualCompetitionRanks.add(dto);
         }
+        virtualCompetitionRanks.removeIf(dto -> dto.getUsername().equals(username));
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);
         userRankDto.setUsername(username);
