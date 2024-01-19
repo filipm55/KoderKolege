@@ -18,7 +18,7 @@
 \contentsline {section}{\numberline {4.2}Dijagram razreda}{34}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Dijagram stanja}{36}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Dijagram aktivnosti}{37}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Dijagram komponenti}{40}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Dijagram komponenti}{39}{section.4.5}%
 \contentsline {chapter}{\numberline {5}Implementacija i korisničko sučelje}{41}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Korištene tehnologije i alati}{41}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Ispitivanje programskog rješenja}{42}{section.5.2}%
