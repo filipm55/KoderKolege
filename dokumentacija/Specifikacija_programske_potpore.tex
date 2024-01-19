@@ -594,7 +594,7 @@
 				Nakon što korisnik unese navedene podatke, šalje zahtjev za registraciju putem korisničkog sučelja. Nakon toga, poslužitelj provjerava unesene podatke. Provjerava  se dostupnost e-mail adrese i korisničkog imena u bazi podataka. U slučaju da su e-mail adresa ili korisničko ime već zauzeti, poslužitelj obavještava korisnika da registracija nije uspjela.
 				U slučaju da su e-mail ili korisničko ime adresa dostupni, korisniku se šalje zahtjev za potvrdom registracije putem e-maila. Korisnik potvrđuje registraciju - podaci se trajno pohranjuju u bazu podataka, a poslužitelj obavještava korisnika da je registracija uspješna.
 				
-				U slučaju da se korisnik registrira kao "voditelj natjecanja," tada se e-mail zahtjev za potvrdom registracije šalje i administratoru. 
+				U slučaju da se korisnik registrira kao "voditelj natjecanja," tada administrator mora u aplikaciji potvrditi novog voditelja. 
 				
 				\textbf{Slika dijagrama:}
 				\begin{figure}[H]
@@ -608,12 +608,7 @@
 				\subsubsection{2) Pregled i uređivanje korisnika}
 				
 				\textbf{Opis dijagrama:}
-				Administrator šalje zahtjev za pregled korisnika i njihovih podataka tako da klikne na link "Pregled svih korisnika". Poslužitelj šalje upit bazi podataka za podatke registriranih korisnika, a baza podataka vraća podatke o registriranim korisnicima. Otvara se stranica s popisom registriranih korisnika i njihovim podacima koje je moguće urediti ili izbrisati. Kada administrator pošalje zahtjev za izmjenom podataka nekog korisnika, baza podataka provjerava je li narušen integritet jedinstvenosti, odnosno je li administrator promijenio korisničko ime u drugo korisničko ime koje već postoji u bazi podataka. Iz ovog scenarija proizlaze dva slučaja:
-				
-				\begin{enumerate}
-					    \item Promjenom nije narušen integritet - novi podaci se pohranjuju u bazu podataka. Administratoru se javlja da je promjena uspješna, te se istovremeno šalje e-mail putem mail-poslužitelja korisniku s njegovim novim podacima.
-						\item Promjenom je narušen integritet - administratoru se javlja da promjena nije uspjela (korisničko ime već postoji u bazi podataka).
-				\end{enumerate}
+				Administrator šalje zahtjev za pregled korisnika i njihovih podataka tako da klikne na link "Pregled svih korisnika". Poslužitelj šalje upit bazi podataka za podatke registriranih korisnika, a baza podataka vraća podatke o registriranim korisnicima. Otvara se stranica s popisom registriranih korisnika i njihovim podacima koje je moguće urediti ili izbrisati. Kada administrator pošalje zahtjev za izmjenom podataka, podatci se uspješno pohranjuju u bazi podataka te se prikazuju na stranici. 
 					
 					\textbf{Slika dijagrama:}
 					\begin{figure}[H]
