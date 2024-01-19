@@ -120,7 +120,7 @@ const User = () => {
         //setPromjena(true);
     }
 
-    const {data:users, error} = useFetch('https://bytepitb-myjy.onrender.com//users');
+    const {data:users, error} = useFetch('https://bytepitb-myjy.onrender.com/users');
     if (users) {
         users.map(u => {
             if(u.id == id) {
