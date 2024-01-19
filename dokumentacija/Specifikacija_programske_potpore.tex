@@ -21,19 +21,19 @@
 	\item  \underbar{Neregistrirani korisnik (inicijator) može:}
 	
 	\begin{packed_enum}
-		
-		\item pregledavati programske zadatke objavljene na stranici
 		\item vidjeti kalendar s dostupnim natjecanjima
-		\item pregledavati profile drugih korisnika (natjecatelja i vodietelja natjecanja)
-		\item sortirati učitane zadatke na profilu voditelja natjecanja
-		\item poslati zahtjev za registracijom za koji mora priložiti sljedeće informacije: uloga za koju se prijavljuje (voditelj natjecanja ili natjecatelj), korisničko ime,
-		fotografija, lozinka, ime, prezime i email adresa
+		\item poslati zahtjev za registracijom 
+		\item vidjeti rezultate prethodno održanih natjecanja
 		
 	\end{packed_enum}
 	
-	\item \underbar{Natjecatelj (inicijator) može:}
+		\item  \underbar{Registrirani korisnik (inicijator) može:}
+	
 	\begin{packed_enum}
-		
+		\item pregledavati programske zadatke objavljene na stranici
+		\item pristupiti aktivnim i virtualnim natjecanjima
+		\item uređivati svoj profil
+		\item pregledavati profile drugih korisnika (natjecatelja i voditelja natjecanja)		
 		\item za vrijeme trajanja natjecanja:
 		\begin{packed_enum}
 			\item vidjeti aktualne zadatke
@@ -57,7 +57,6 @@
 			\item odabirom prošlog natjecanja iz kalendara
 			\item odabirom opcije rješavanja nasumičnih zadataka iz prethodnih natjecanja
 		\end{packed_enum}
-		
 	\end{packed_enum}
 	
 	\item \underbar{Voditelj natjecanja (inicijator) može:}
@@ -79,7 +78,7 @@
 	\item \underbar{Administrator (inicijator) može:}
 	\begin{packed_enum}
 		
-		\item vidjeti popis svih registriranih korisnika i njihovih osobnih podataka
+		\item vidjeti popis svih registriranih korisnika (potvrđenih i nepotvrđenih) i njihovih osobnih podataka
 		\item mijenjati dodijeljena prava registriranim korisnicima
 		\item mijenjati osobne podatke registriranih korisnika
 		\item potvrditi/odbiti registracijski zahtjev za ulogu voditelja
@@ -92,10 +91,12 @@
 	\begin{packed_enum}
 		
 		\item pohranjuje sve podatke o registriranim korisnicima
-		\item briše podatke o korisnicima koji nisu potvredili registracijski mail unutar 24 sata 
+		\item briše podatke o korisnicima koji nisu potvrdili registracijski mail unutar 24 sata 
 		\item briše podatke o voditeljima koje nije potvrdio administrator unutar 7 dana
 		\item pohranjuje opise svih zadataka i njihova rješenja
-		\item pohranjuje sve podatke o već završenim natjecanjima i njihove rang liste
+		\item pohranjuje sve podatke o natjecanjima i njihove rang liste
+		\item pohranjuje sva rješenja koja su korisnici učitali tijekom pravog natjecanja
+		\item pohranjuje sve statistike vezane uz korisnike i natjecanja
 		
 	\end{packed_enum}
 \end{packed_enum}
@@ -118,7 +119,7 @@
 						
 						\item[] \begin{packed_enum}
 							\item Korisnik odabire opciju za registraciju
-							\item Otvara se forma u koji upisuje podatke:
+							\item Otvara se obrazac u koji upisuje podatke:
 							\item[] \begin{packed_enum}
 								
 								\item korisničko ime
@@ -149,8 +150,7 @@
 							\item[2.f]Korisnik se registrira kao "voditelj natjecanja"
 							\item[] \begin{packed_enum}
 								
-								\item Administrator dobiva poruku u kojoj (ne)potvrđuje registraciju
-															
+								\item Administratoru je omogućena potvrda korisnika na njegovom profilu
 							\end{packed_enum}
 							\item[5.a] Korisnik ne potvrđuje email unutar 24 sata
 							\item[] \begin{packed_enum}
@@ -166,7 +166,7 @@
 						\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Neregistrirani korisnik
+						\item \textbf{Glavni sudionik: }Neprijavljeni korisnik
 						\item  \textbf{Cilj:} Dobiti pristup korisničkom sustavu
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Registracija
@@ -186,12 +186,9 @@
 							
 							\item[3.a] Neispravno korisničko ime ili lozinka
 							\item[] \begin{packed_enum}
-								
 								\item Korisnik dobiva poruku o neispravnom korisničkom imenu ili lozinki
 							\end{packed_enum}
-							
-							
-							
+						
 						\end{packed_item}
 					\end{packed_item}
 					
@@ -199,32 +196,20 @@
 					\noindent \underbar{\textbf{UC3 - Pregled zadataka za vježbu}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled svih zadataka u aplikaciji
+						\item \textbf{Glavni sudionik: }Registrirani korisnik
+						\item  \textbf{Cilj:} Pregled svih javnih zadataka
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Preduvjet:} korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item Korisnik odabire opciju Zadatci za vježbu
+							\item Korisnik odabire opciju Vježba -> Zadaci za vježbu
 							\item Otvara se stranica s popisom svih zadataka
 							\item Korisnik odabire zadatak
 							\item Otvara se stranica sa odabranim zadatkom te se prikazuje tekst zadatka 
 						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[4.a] Neregistrirani korisnik želi predati rješenje zadatka 
-							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva poruku da je za nastavak potrebna registracija
-								
-							\end{packed_enum}
-							
-						\end{packed_item}
+			
 					\end{packed_item}
 					
 					
@@ -242,81 +227,59 @@
 							\item Korisnik odabire opciju kalendar 
 							\item Otvara se stranica sa prikazom mjesečnog kalendara 
 							
-						\end{packed_enum}
+						\end{packed_enum}					
 						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.a] Neregistrirani korisni želi pristupiti natjecanju
-							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva poruku da je za nastavak potrebna registracija 
-								
-							\end{packed_enum}
-							
-							
-						\end{packed_item}
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC5 - Pregled svih korisnika}}
+					\noindent \underbar{\textbf{UC5 - Pregled profila korisnika}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Korisnik
+						\item \textbf{Glavni sudionik: }Registrirani korisnik
 						\item  \textbf{Cilj:} Pregled pojedinog korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Preduvjet:} korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item Korisnik odabire opciju korisnici 
-							\item Korisniku se nude dvije opcije:
-							\item[] \begin{packed_enum}
-								
-								\item Natjecatelji
-								\item Voditelji
-								
-							\end{packed_enum}
-						\end{packed_enum}						
-					\end{packed_item}
-					
-					
-					\noindent \underbar{\textbf{UC6 - Pregled svih natjecatelja}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled podataka pojedinog natjecatelja
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item UC5 - Pregled svih korisnika
-							\item Korisnik odabire opciju natjecatelji
-							\item Korisnik dobije listu svih natjecatelja
+						\begin{packed_enum}
+							\item Korisnik odabire opciju korisnici 		
+							\item Korisniku je prikazana lista profila svih korisnika
 						\end{packed_enum}	
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC7 - Podatci o natjecatelju}}
+						\noindent \underbar{\textbf{UC6 - Pregled rezultata natjecanja}}
 					\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled podataka pojedinog natjecatelja
+						\item  \textbf{Cilj:} Pregled rezultata prethodno održanog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Preduvjet:}/
+						\item  \textbf{Opis osnovnog tijeka:}
+						\begin{packed_enum}
+						\item Korisnik odabire opciju rezultati 		
+						\item Korisniku je prikazana lista prethodnih natjecanja s opcijama Pogledaj ljestvicu! i Pogledaj rješenja!
+						\end{packed_enum}	
+						
+					\end{packed_item}	
+
+					
+					
+					
+					\noindent \underbar{\textbf{UC7 - Profil natjecatelja}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Registrirani korisnik
+						\item  \textbf{Cilj:} Pregled profila natjecatelja
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet: korisnik je prijavljen} /
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item UC6 - Pregled svih natjecatelja
-							\item Korisnik odabire profil natjecatelja
-							\item Prikazuju se podatci o natjecatelju:
+							\item UC5 - Pregled profila korisnika
+							\item Korisnik odabire profil korisnika s ulogom natjecatelja
+							\item Prikazuje se profil natjecatelja:
 								\item[] \begin{packed_enum}
-								
 								\item Statistika o broju točno riješenih zadataka
 								\item Statistika o broju isprobanih zadataka 
 								\item Pehari za osvojena natjecanja
@@ -326,39 +289,22 @@
 					\end{packed_item}
 					
 										
-					\noindent \underbar{\textbf{UC8 - Pregled svih voditelja}}
+				
+					
+						\noindent \underbar{\textbf{UC8 - Pregled profila voditelja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled podataka pojedinog voditelja
+						\item \textbf{Glavni sudionik: }Registrirani korisnik
+						\item  \textbf{Cilj:} Pregled profila korisnika s ulogom voditelja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
+						\item  \textbf{Preduvjet:} korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item UC5 - Pregled svih korisnika
-							\item Korisnik odabire opciju voditelji
-							\item Korisnik dobije listu svih voditelja
-							
-						\end{packed_enum}					
-					\end{packed_item}
-					
-					
-						\noindent \underbar{\textbf{UC9 - Podatci o voditelju}}
-					\begin{packed_item}
-						
-						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled podataka pojedinog voditelja
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} /
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							
-							\item UC8 - Pregled svih voditelja
-							\item Korisnik odabire profil voditelja
-							\item Prikazuju se podatci o voditelju:
+							\item UC5 - Pregled profila korisnika
+							\item Korisnik odabire profil korisnika sulogom voditelja
+							\item Prikazuje se profil voditelju:
 							\item[] \begin{packed_enum}
 								
 								\item Svi objavljeni zadatci voditelja
@@ -369,80 +315,102 @@
 						\end{packed_enum}
 					\end{packed_item}
 					
+						\noindent \underbar{\textbf{UC9 - Pregled rang liste natjecanja}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregled rang lise prethodno održanog natjecanja
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:}
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item UC6 - Pregled rezultata natjecanja
+							\item Korisnik odabire opciju Pogledaj ljestvicu za odabrano natjecanje
+							\item Korisnik dobije listu s bodovima, rangom te imenima svih sudionika
+						\end{packed_enum}					
+					\end{packed_item}
+					
+					
 					
 					\noindent \underbar{\textbf{UC10 - Sudjelovanje u natjecanju}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Natjecatelj
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
 						\item  \textbf{Cilj:} Natjecanje
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj 
+						\item  \textbf{Preduvjet:}  korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Natjecatelj odabire aktivno natjecanje
+							\item Natjecatelj odabire aktivno natjecanje na početnoj stranici
 							\item Otvara se stranica s natjecanjem
 							\item U trenutku početka natjecanja, svi zadaci postaju vidljivi
 							\item Natjecatelj rješava zadatke unutar vremenskog ograničenja
 							\item Natjecatelj predaje rješenja zadataka
 							
 						\end{packed_enum}
+						\item  \textbf{Opis mogućih odstupanja:}
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Pokušaj pristupa aktivnom natjecanju 2. put
+							\item[] \begin{packed_enum}
+								\item Korisnik dobiva poruku o nemogućnosti pristupa natjecanju dva puta.
+							\end{packed_enum}
+							
+						\end{packed_item}
 					\end{packed_item}
 
 
-					\noindent \underbar{\textbf{UC11 - Pregled rješenosti drugih natjecatelja}}
+					\noindent \underbar{\textbf{UC11 - Pregled rješenja sudionika natjecanja}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: }Natjecatelj
-						\item  \textbf{Cilj:} Pregled rješenja i statistika drugih natjecatelja 
+						\item \textbf{Glavni sudionik: }korisnik
+						\item  \textbf{Cilj:} Pregled rješenja i statistika svih natjecatelja koji su sudjelovali u odabranom natjecanju
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Natjecatelj pristupio natjecanju
+						\item  \textbf{Preduvjet:} 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item Natjecatelj otvara pojedini zadatak 
+							\item UC6 - Pregled rezultata natjecanja
+							\item Korisnik odabire opciju Pogledaj rješenja! za odabrano natjecanje
 							\item Prikazuju se sljedeći podatci:
 							 \item[] \begin{packed_enum}
-							 	
-							 	\item Svi natjecatelji koji su učitali neko rješenje
-							 	\item Broj točnih primjera natjecatelja
-							 	\item Prosječno vrijeme izvršavanja po primjeru 
-							 	\item Gumb za dohvat učitanog rječenja
-							 	
+							 	\item klikom na zadatak
+							 	 \item[] \begin{packed_enum}
+							 	 	\item Svi natjecatelji koji su učitali neko rješenje za pojedini zadatak
+							 	 	\item Broj točnih primjera za svakog natjecatelja
+							 	 	\item Vrijeme rješavanja po natjecatelju
+							 	 	\end{packed_enum}
+							 	 \item klikom na Po korisnicima
+							 	 \item[] \begin{packed_enum}
+							 	 	\item Popis svih natjecatelja koji su učitali bar neko rješenje na natjecanju
+							 	 	\item popis svih zadataka koje je pojedini korisnik učitao
+							 	 \end{packed_enum}
 							 \end{packed_enum}
 						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[2.d] Natjecatelj nije u potpunosti točno riješio zadatak 
-							\item[] \begin{packed_enum}
-								
-								\item Sustav onemogućuje gumb
-								
-							\end{packed_enum}	
-						\end{packed_item}
 					\end{packed_item}
 
 
 					\noindent \underbar{\textbf{UC12 - Virtualno natjecanje}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Natjecatelj
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
 						\item  \textbf{Cilj:} Simulacija natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Natjecatelj odabire opciju virtualno natjecanje
+							\item Natjecatelj odabire opciju vježba
+							\item Natjecatelj odabire opciju Virtualno natjecanje
 							\item Natjecatelju se otvaraju dvije opcije:
 							\item[] \begin{packed_enum}
 								
-								\item Prethodno natjecanje
-								\item Nasumično odabrani zadaci 
+								\item Odabir prošlog natjecanja
+								\item Nasumično generirano natjecanje
 								
 							\end{packed_enum}
 						\end{packed_enum}
@@ -453,35 +421,35 @@
 					\noindent \underbar{\textbf{UC13 - Prethodno natjecanje}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Natjecatelj
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
 						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							\item UC12 - Virtualno natjecanje
-							\item Natjecatelj odabire opciju Prethodno natjecanje
-							\item Preusmjeravanje na kalendar 
+							\item Natjecatelj odabire opciju Odabir prošlog natjecanja
+							\item Otvara se kalendar 
 							\item Natjecatelj bira natjecanje
 							\item Natjecatelja se po završetku natjecanja rangira u odnosu na službene retultate originalnog natjecanja
 									
 						\end{packed_enum}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC14 - Nasumično odabrani zadatci}}
+					\noindent \underbar{\textbf{UC14 - Nasumično generirano natjecanje}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Natjecatelj
-						\item  \textbf{Cilj:} Simulacija prethodnog natjecanja
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
+						\item  \textbf{Cilj:} Simulacija  natjecanja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Prijavljeni korisnik: natjecatelj
+						\item  \textbf{Preduvjet:}  korisnik je prijavljen
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							\item UC12 - Virtualno natjecanje
-							\item Natjecatelj odabire opciju Nasumično odabrani zadaci
-							\item Aplikacija ravnomjerno odabire zadatke po težini
+							\item Natjecatelj odabire opciju Nasumično generirano natjecanje
+							\item Aplikacija nasumično odabire pet zadataka
 							
 						\end{packed_enum}
 					\end{packed_item}
@@ -490,20 +458,20 @@
 					\noindent \underbar{\textbf{UC15 - Rješavanje zadataka za vježbu}}
 					\begin{packed_item}
 						
-						\item \textbf{Glavni sudionik: } Natjecatelj
+						\item \textbf{Glavni sudionik: } Registrirani korisnik
 						\item  \textbf{Cilj:} Vježbanje zadataka za natjecanje
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  / 
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Natjecatelj odabire opciju zadatci za vježbu
+							\item Korisnik odabire opciju vježba
+							\item Korisnik odabire opciju Zadaci za vježbu
 							\item Otvara se stranica s popisom svih zadataka
 							\item Korisnik odabire zadatak	
 							\item Otvara se stranica sa zadatkom
-							\item Natjecatelj može pogledati rješenje zadatka		
-							\item Nakon rješavanja, natjecatelj odabire opciju za evaluaciju rješenja
-							\item Natjecatelj dobiva informaciju o točnosti svog rješenja
+							\item Korisnik učitava svoje rješenje
+							\item Korisnik odabire opciju Predaj te dobiva povratnu informaciju o točnosti svog rješenja
 						\end{packed_enum}				
 					\end{packed_item}
 					
@@ -513,13 +481,14 @@
 						
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Napraviti natjecanje za korisnike 
-						\item  \textbf{Sudionici:} Natjecatelji, baza podataka
-						\item  \textbf{Preduvjet:} Prijavljeni korisnik: voditelj
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} korisnik je prijavljen kao voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 							
-							\item Voditelj odabire opciju izrade natjecanja
+							\item Voditelj odabire opciju Kreiraj sadržaj
+							\item Voditelj odabire opciju Kreiraj natjecanje
 							\item Odabire vrijeme početka i završetka natjecanja
 							\item Bira broj zadataka 
 							\item Unosi tekst zadatka
@@ -534,51 +503,34 @@
 						\item \textbf{Glavni sudionik: }Voditelj
 						\item  \textbf{Cilj:} Ispraviti pogreške ili dodati zadatke
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Prijavljeni korisnik: voditelj
+						\item  \textbf{Preduvjet:}korisnik je prijavljen kao voditelj
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							
-							\item Voditelj odabire opciju uredi natjecanje 
-							\item Otvara se lista natjecanja koje je voditelj izradio 
-							\item Voditelj odabire željeno natjecanje 
+							\item UC8 - Pregled profila voditelja
+							\item Voditelj odabire opciju Uredi natjecanje na svom profilu pored odabranog natjecanja					
 							\item Voditelj radi promjene 
 							\item Sprema promjene 
 						\end{packed_enum}
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC18 - Pregled i uređivanje korisničkih podataka}}
+					\noindent \underbar{\textbf{UC18 - Uređivanje korisničkih podataka}}
 						\begin{packed_item}
 						
 						\item \textbf{Glavni sudionik: } Administrator
 						\item  \textbf{Cilj:} Učinkovita administracija i održavanje sustava
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:}  Korisnik: administrator 
+						\item  \textbf{Preduvjet:}  korisnik je prijavljen kao administrator
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Administrator odabire opciju za pregled svih registriranih korisnika
-							\item Otvara se stranica s popisom svih registriranih korisnika i njihovih podataka
+							\item UC5 - Pregled profila korisnika
+							\item Administrator odabire opciju uredi korisnika
 							\item Administrator mijenja podatke ili prava korisnika
 							\item Sprema promjene			
 							\item Korisniku se šalje mail o promijeni njegovih podataka.
 						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-							
-							\item[3.a]Administrator narušava integritet jedinstvenosti (npr. mijenja korisničko ime u već postojeće)
-							\item[] \begin{packed_enum}
-								
-								\item Administrator dobiva poruku da je korisničko ime već u uporabi
-								\item Traži se ponovni upis podataka
-								
-							\end{packed_enum}
-								
-							\end{packed_item}
-							
 						\end{packed_item}
 						
 					\noindent \underbar{\textbf{UC19 - Uređivanje svih natjecanja/zadataka}}
@@ -587,15 +539,14 @@
 							\item \textbf{Glavni sudionik: } Administrator
 							\item  \textbf{Cilj:} Ispravljanje grešaka ili nesporazuma u natjecanju
 							\item  \textbf{Sudionici:} Baza podataka
-							\item  \textbf{Preduvjet:}  Korisnik: administrator 
+							\item  \textbf{Preduvjet:} korisnik je prijavljen kao administrator
 							\item  \textbf{Opis osnovnog tijeka:}
 							
 							\item[] \begin{packed_enum}
-								\item Administrator odabire opciju za pregled svih natjecanja
-								\item Otvara se stranica s popisom svih natjecanja
-								\item Administrator odabire natjecanje		
-								\item Otvaraju se podaci o natjecanju i popis zadataka tog natjecanja
-								\item Administrator uređuje podatke o natjecanju ili zadatke tog natjecanja
+								\item UC8 - Pregled profila voditelja
+								\item Odabir polja uredi zadatak ili uredi natjecanje
+								\item Administrator odabire zadatak/natjecanje		
+								\item Administrator uređuje zadatak/natjecanje
 								\item Administrator sprema promjene
 							\end{packed_enum}					
 						\end{packed_item}
