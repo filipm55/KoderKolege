@@ -1,38 +1,38 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.24)  19 JAN 2024 15:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.28)  19 JAN 2024 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **PROGI_ProjektnaDokumentacija.tex
 (./PROGI_ProjektnaDokumentacija.tex
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-10-10>
+L3 programming layer <2023-10-23>
 (c:/texlive/2023/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2023/05/17 v1.4n Standard LaTeX document class
 (c:/texlive/2023/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count185
-\c@chapter=\count186
-\c@section=\count187
-\c@subsection=\count188
-\c@subsubsection=\count189
-\c@paragraph=\count190
-\c@subparagraph=\count191
-\c@figure=\count192
-\c@table=\count193
+\c@part=\count186
+\c@chapter=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
 )
 (c:/texlive/2023/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2023/09/29 v3.95 The Babel package
-\babel@savecnt=\count194
+Package: babel 2023/10/25 v3.96 The Babel package
+\babel@savecnt=\count195
 \U@D=\dimen141
 \l@unhyphenated=\language89
 
 (c:/texlive/2023/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count195
+\bbl@dirlevel=\count196
 
 (c:/texlive/2023/texmf-dist/tex/generic/babel-croatian/croatian.ldf
 Language: croatian 2014/03/31 v1.3m Croatian support from the babel system
@@ -73,14 +73,14 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (c:/texlive/2023/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count196
+\inf@bad=\count197
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count197
-\leftroot@=\count198
+\uproot@=\count198
+\leftroot@=\count199
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count199
-\DOTSCASE@=\count266
+\classnum@=\count266
+\DOTSCASE@=\count267
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -93,20 +93,20 @@ LaTeX Info: Redefining \Bigg on input line 725.
 \big@size=\dimen144
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count267
+\macc@depth=\count268
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count268
+\c@MaxMatrixCols=\count269
 \dotsspace@=\muskip16
-\c@parentequation=\count269
-\dspbrk@lvl=\count270
+\c@parentequation=\count270
+\dspbrk@lvl=\count271
 \tag@help=\toks19
-\row@=\count271
-\column@=\count272
-\maxfields@=\count273
+\row@=\count272
+\column@=\count273
+\maxfields@=\count274
 \andhelp@=\toks20
 \eqnshift@=\dimen145
 \alignsep@=\dimen146
@@ -217,7 +217,7 @@ th.
 \MDodotkern=\muskip19
 )
 (c:/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty
-Package: titlesec 2023/10/17 v2.15 Sectioning titles
+Package: titlesec 2023/10/27 v2.16 Sectioning titles
 \ttl@box=\box54
 \beforetitleunit=\skip53
 \aftertitleunit=\skip54
@@ -247,25 +247,25 @@ MM)
 
 (c:/texlive/2023/texmf-dist/tex/latex/lastpage/lastpagemodern.sty
 Package: lastpagemodern 2023-10-14 v2.0e Refers to last page's name (HMM; JPG)
-\c@lastpagecount=\count274
+\c@lastpagecount=\count275
 ) 
 )) (c:/texlive/2023/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count275
+\etb@tempcnta=\count276
 )
 (c:/texlive/2023/texmf-dist/tex/latex/tabularray/tabularray.sty
 (c:/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-10-10 L3 programming layer (loader) 
+Package: expl3 2023-10-23 L3 programming layer (loader) 
 
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-10-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count276
+File: l3backend-pdftex.def 2023-10-23 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count277
 \l__pdf_internal_box=\box57
 ))
 Package: tabularray 2023-03-01 v2023A Typeset tabulars and arrays with LaTeX3
-\l__tblr_a_int=\count277
-\l__tblr_c_int=\count278
-\l__tblr_r_int=\count279
+\l__tblr_a_int=\count278
+\l__tblr_c_int=\count279
+\l__tblr_r_int=\count280
 \l__tblr_d_dim=\dimen159
 \l__tblr_h_dim=\dimen160
 \l__tblr_o_dim=\dimen161
@@ -280,25 +280,25 @@ Package: tabularray 2023-03-01 v2023A Typeset tabulars and arrays with LaTeX3
 \l__tblr_b_box=\box59
 \l__tblr_c_box=\box60
 \l__tblr_d_box=\box61
-\g__tblr_table_count_int=\count280
-\c@rownum=\count281
-\c@colnum=\count282
-\c@rowcount=\count283
-\c@colcount=\count284
+\g__tblr_table_count_int=\count281
+\c@rownum=\count282
+\c@colnum=\count283
+\c@rowcount=\count284
+\c@colcount=\count285
 \abovesep=\dimen169
 \belowsep=\dimen170
 \leftsep=\dimen171
 \rightsep=\dimen172
-\g_tblr_level_int=\count285
-\g__tblr_data_row_key_count_int=\count286
-\g__tblr_data_column_key_count_int=\count287
-\g__tblr_data_cell_key_count_int=\count288
-\g__tblr_array_int=\count289
-\l__tblr_key_count_int=\count290
-\l__tblr_key_quotient_int=\count291
-\l__tblr_key_quotient_two_int=\count292
-\l__tblr_key_remainder_int=\count293
-\g__tblr_data_str_value_count_int=\count294
+\g_tblr_level_int=\count286
+\g__tblr_data_row_key_count_int=\count287
+\g__tblr_data_column_key_count_int=\count288
+\g__tblr_data_cell_key_count_int=\count289
+\g__tblr_array_int=\count290
+\l__tblr_key_count_int=\count291
+\l__tblr_key_quotient_int=\count292
+\l__tblr_key_quotient_two_int=\count293
+\l__tblr_key_remainder_int=\count294
+\g__tblr_data_str_value_count_int=\count295
 \rulewidth=\dimen173
 \l__tblr_strut_dp_dim=\dimen174
 \l__tblr_strut_ht_dim=\dimen175
@@ -320,11 +320,11 @@ Package: tabularray 2023-03-01 v2023A Typeset tabulars and arrays with LaTeX3
 \l__tblr_table_middlefoot_box=\box70
 \l__tblr_table_lastfoot_box=\box71
 \l__tblr_remain_height_dim=\dimen183
-\l__tblr_long_from_int=\count295
-\l__tblr_long_to_int=\count296
-\l__tblr_curr_i_int=\count297
-\l__tblr_prev_i_int=\count298
-\l__tblr_table_page_int=\count299
+\l__tblr_long_from_int=\count296
+\l__tblr_long_to_int=\count297
+\l__tblr_curr_i_int=\count298
+\l__tblr_prev_i_int=\count299
+\l__tblr_table_page_int=\count300
 \l__tblr_table_head_box=\box72
 \l__tblr_table_foot_box=\box73
 \l__tblr_table_head_foot_dim=\dimen184
@@ -382,7 +382,7 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 \XKV@tempa@toks=\toks27
 
 (c:/texlive/2023/texmf-dist/tex/generic/xkeyval/keyval.tex))
-\XKV@depth=\count300
+\XKV@depth=\count301
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (c:/texlive/2023/texmf-dist/tex/latex/adjustbox/adjcalc.sty
@@ -433,12 +433,12 @@ File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 
 (c:/texlive/2023/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count301
+\c@checkoddpage=\count302
 )
 (c:/texlive/2023/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box83
-\sift@deathcycles=\count302
+\sift@deathcycles=\count303
 \@vwid@loff=\dimen271
 \@vwid@roff=\dimen272
 ))
@@ -451,9 +451,9 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (c:/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count303
-\Gm@cntv=\count304
-\c@Gm@tempcnt=\count305
+\Gm@cnth=\count304
+\Gm@cntv=\count305
+\c@Gm@tempcnt=\count306
 \Gm@bindingoffset=\dimen273
 \Gm@wd@mp=\dimen274
 \Gm@odd@mp=\dimen275
@@ -466,10 +466,10 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 )
 (c:/texlive/2023/texmf-dist/tex/latex/kpfonts/kpfonts.sty
 Package: kpfonts  2023/01/18 v3.35
-\c@mv@rm=\count306
-\c@mv@boldrm=\count307
-\c@mv@sf=\count308
-\c@mv@boldsf=\count309
+\c@mv@rm=\count307
+\c@mv@boldrm=\count308
+\c@mv@sf=\count309
+\c@mv@boldsf=\count310
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 377.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/txr/m/n --> OT1/jkp/m/n on input line 377.
@@ -799,7 +799,7 @@ LaTeX Font Info:    Redeclaring math symbol \n@tch@r on input line 1601.
 LaTeX Info: Redefining \not on input line 1603.
 )
 (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
+Package: hyperref 2023-10-21 v7.01c Hypertext links for LaTeX
 
 (c:/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
@@ -834,7 +834,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
 (c:/texlive/2023/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-08-07 v2.53 Cross-referencing by name of section
+Package: nameref 2023-10-05 v2.54 Cross-referencing by name of section
 
 (c:/texlive/2023/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
@@ -845,41 +845,41 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (c:/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count310
+\c@section@level=\count311
 )
 \@linkdim=\dimen281
-\Hy@linkcounter=\count311
-\Hy@pagecounter=\count312
+\Hy@linkcounter=\count312
+\Hy@pagecounter=\count313
 
 (c:/texlive/2023/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-10-21 v7.01c Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
 (c:/texlive/2023/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count313
+\Hy@SavedSpaceFactor=\count314
 
 (c:/texlive/2023/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-10-21 v7.01c Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4167.
-Package hyperref Info: Link nesting OFF on input line 4172.
-Package hyperref Info: Hyper index ON on input line 4175.
-Package hyperref Info: Plain pages OFF on input line 4182.
-Package hyperref Info: Backreferencing OFF on input line 4187.
+Package hyperref Info: Hyper figures OFF on input line 4168.
+Package hyperref Info: Link nesting OFF on input line 4173.
+Package hyperref Info: Hyper index ON on input line 4176.
+Package hyperref Info: Plain pages OFF on input line 4183.
+Package hyperref Info: Backreferencing OFF on input line 4188.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4434.
-\c@Hy@tempcnt=\count314
+Package hyperref Info: Bookmarks ON on input line 4435.
+\c@Hy@tempcnt=\count315
 
 (c:/texlive/2023/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip20
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4772.
+LaTeX Info: Redefining \url on input line 4773.
 \XeTeXLinkMargin=\dimen282
 
 (c:/texlive/2023/texmf-dist/tex/generic/bitset/bitset.sty
@@ -889,37 +889,37 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count315
+\Fld@menulength=\count316
 \Field@Width=\dimen283
 \Fld@charsize=\dimen284
-Package hyperref Info: Hyper figures OFF on input line 6051.
-Package hyperref Info: Link nesting OFF on input line 6056.
-Package hyperref Info: Hyper index ON on input line 6059.
-Package hyperref Info: backreferencing OFF on input line 6066.
-Package hyperref Info: Link coloring OFF on input line 6071.
-Package hyperref Info: Link coloring with OCG OFF on input line 6076.
-Package hyperref Info: PDF/A mode OFF on input line 6081.
+Package hyperref Info: Hyper figures OFF on input line 6052.
+Package hyperref Info: Link nesting OFF on input line 6057.
+Package hyperref Info: Hyper index ON on input line 6060.
+Package hyperref Info: backreferencing OFF on input line 6067.
+Package hyperref Info: Link coloring OFF on input line 6072.
+Package hyperref Info: Link coloring with OCG OFF on input line 6077.
+Package hyperref Info: PDF/A mode OFF on input line 6082.
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count316
-\c@Item=\count317
-\c@Hfootnote=\count318
+\Hy@abspage=\count317
+\c@Item=\count318
+\c@Hfootnote=\count319
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2023-07-08 v7.01b Hyperref driver for pdfTeX
+File: hpdftex.def 2023-10-21 v7.01c Hyperref driver for pdfTeX
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count319
-\c@bookmark@seq@number=\count320
+\Fld@listcount=\count320
+\c@bookmark@seq@number=\count321
 
 (c:/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
@@ -947,7 +947,7 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 )
 (c:/texlive/2023/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count321
+\c@float@type=\count322
 \float@exts=\toks29
 \float@box=\box84
 \@float@everytoks=\toks30
@@ -959,23 +959,23 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 \@float@every@table=\toks31
 
 (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count322
+\lst@mode=\count323
 \lst@gtempboxa=\box86
 \lst@token=\toks32
-\lst@length=\count323
+\lst@length=\count324
 \lst@currlwidth=\dimen285
-\lst@column=\count324
-\lst@pos=\count325
+\lst@column=\count325
+\lst@pos=\count326
 \lst@lostspace=\dimen286
 \lst@width=\dimen287
-\lst@newlines=\count326
-\lst@lineno=\count327
+\lst@newlines=\count327
+\lst@lineno=\count328
 \lst@maxwidth=\dimen288
 
 (c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count328
-\lst@skipnumbers=\count329
+\c@lstnumber=\count329
+\lst@skipnumbers=\count330
 \lst@framebox=\box87
 )
 (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
@@ -1043,16 +1043,16 @@ LaTeX Font Info:    ... okay on input line 104.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count330
+\scratchcounter=\count331
 \scratchdimen=\dimen289
 \scratchbox=\box88
-\nofMPsegments=\count331
-\nofMParguments=\count332
+\nofMPsegments=\count332
+\nofMParguments=\count333
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count333
+\MPscratchCnt=\count334
 \MPscratchDim=\dimen290
-\MPnumerator=\count334
-\makeMPintoPDFobject=\count335
+\MPnumerator=\count335
+\makeMPintoPDFobject=\count336
 \everyMPtoPDFconversion=\toks34
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1102,7 +1102,7 @@ Package hyperref Info: Link coloring ON on input line 104.
 \@outlinefile=\write3
 \openout3 = `PROGI_ProjektnaDokumentacija.out'.
 
-\c@lstlisting=\count336
+\c@lstlisting=\count337
 LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
 116.
 
@@ -2154,9 +2154,9 @@ l.256 			\eject
 File: slike/klase.png Graphic file (type png)
 <use slike/klase.png>
 Package pdftex.def Info: slike/klase.png  used on input line 265.
-(pdftex.def)             Requested size: 595.05786pt x 362.7765pt.
+(pdftex.def)             Requested size: 476.02814pt x 290.21013pt.
 
-Overfull \hbox (159.44707pt too wide) in paragraph at lines 265--268
+Overfull \hbox (40.41734pt too wide) in paragraph at lines 265--268
  [][] 
  []
 
@@ -2178,18 +2178,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.2})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.275 					
-            <./slike/klase.png (PNG copy)>]
+l.278 				 S
+            trelice sa slike na jednostavan i intuitivan način prikazuju po...
+ <./slike/klase.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 280--282
 
  []
 
-<slike/controlleri.png, id=526, 1911.14pt x 1630.09pt>
+<slike/controlleri.png, id=528, 1911.14pt x 1630.09pt>
 File: slike/controlleri.png Graphic file (type png)
 <use slike/controlleri.png>
 Package pdftex.def Info: slike/controlleri.png  used on input line 287.
 (pdftex.def)             Requested size: 196.02351pt x 167.19724pt.
-<slike/services.png, id=527, 1891.065pt x 1676.2625pt>
+<slike/services.png, id=529, 1891.065pt x 1676.2625pt>
 File: slike/services.png Graphic file (type png)
 <use slike/services.png>
 Package pdftex.def Info: slike/services.png  used on input line 293.
@@ -2264,6 +2265,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [36]
+Overfull \hbox (5.76968pt too wide) in paragraph at lines 337--338
+[]\OT1/jkp/m/n/12 Dijagram ak-tiv-nosti je vr-sta UML-dijagrama koja se u pro-g
+ram-skom in[]zenjerstvu
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2277,16 +2283,16 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.339 			
+l.340 			
           <./slike/dijagram stanja.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
+Underfull \hbox (badness 10000) in paragraph at lines 341--343
 
  []
 
 <slike/dijagram aktivnosti.png, id=552, 737.75626pt x 800.23969pt>
 File: slike/dijagram aktivnosti.png Graphic file (type png)
 <use slike/dijagram aktivnosti.png>
-Package pdftex.def Info: slike/dijagram aktivnosti.png  used on input line 345.
+Package pdftex.def Info: slike/dijagram aktivnosti.png  used on input line 346.
 
 (pdftex.def)             Requested size: 368.87723pt x 400.11887pt.
 
@@ -2302,9 +2308,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.352 			\eject
+l.353 			\eject
                 <./slike/Dijagram aktivnosti.png>]
-Overfull \hbox (0.30878pt too wide) in paragraph at lines 359--360
+Overfull \hbox (0.30878pt too wide) in paragraph at lines 360--361
 \OT1/jkp/m/n/12 Bac-kend - Spring Boot. Te dvije kom-po-nente ku-mu-ni-ci-raju 
 preko su[]celja REST[]API
  []
@@ -2312,11 +2318,11 @@ preko su[]celja REST[]API
 <slike/Dijagram komponenti.png, id=560, 1187.18532pt x 603.75563pt>
 File: slike/Dijagram komponenti.png Graphic file (type png)
 <use slike/Dijagram komponenti.png>
-Package pdftex.def Info: slike/Dijagram komponenti.png  used on input line 362.
+Package pdftex.def Info: slike/Dijagram komponenti.png  used on input line 363.
 
 (pdftex.def)             Requested size: 474.8657pt x 241.49797pt.
 
-Overfull \hbox (39.25491pt too wide) in paragraph at lines 362--365
+Overfull \hbox (39.25491pt too wide) in paragraph at lines 363--366
  [][] 
  []
 
@@ -2750,7 +2756,7 @@ enddocument/afterlastpage: lastpage setting LastPage.
 (./Dodatak.aux))
  ***********
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-10-10>
+L3 programming layer <2023-10-23>
  ***********
 Package rerunfilecheck Info: File `PROGI_ProjektnaDokumentacija.out' has not ch
 anged.
@@ -2758,16 +2764,16 @@ anged.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 355 ({)
+### simple group (level 1) entered at line 356 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 19997 strings out of 474504
- 345863 string characters out of 5756725
- 2060043 words of memory out of 5000000
- 41252 multiletter control sequences out of 15000+600000
+ 19997 strings out of 474398
+ 345851 string characters out of 5754205
+ 2064036 words of memory out of 5000000
+ 41358 multiletter control sequences out of 15000+600000
  634337 words of font info for 201 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,13n,115p,1229b,2392s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,13n,115p,1229b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
@@ -2778,7 +2784,7 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (58 pages, 6965132 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (58 pages, 6965151 bytes).
 PDF statistics:
  927 PDF objects out of 1000 (max. 8388607)
  800 compressed objects within 8 object streams
