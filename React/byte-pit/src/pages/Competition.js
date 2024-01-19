@@ -101,7 +101,8 @@ const Competition = () => {
 
       try {
         if(userData) {
-          const response = await fetch(`https://bytepitb-myjy.onrender.com/problems/${competitionId}/${userData.username}`);
+          const username=userData.username;
+          const response = await fetch(`https://bytepitb-myjy.onrender.com/problems/${competitionId}/${username}`);
           const solvedTasks = await response.json();
           setSolvedTasks(solvedTasks);
           console.log(solvedTasks)
@@ -117,7 +118,8 @@ const Competition = () => {
 const fetchTime = async () => {
   try {
     if(userData) {
-      const response = await fetch(`https://bytepitb-myjy.onrender.com/competitions/${competitionId}/competitors/${userData.id}/time`);
+      const userid=userData.id;
+      const response = await fetch(`https://bytepitb-myjy.onrender.com/competitions/${competitionId}/competitors/${userid}/time`);
       const timeResponse = await response.json();
       setTime(timeResponse);
       console.log(timeResponse);
