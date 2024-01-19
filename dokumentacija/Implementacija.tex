@@ -29,8 +29,6 @@
 		\section{Ispitivanje programskog rješenja}
 			
 			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
 	
 			
 			\subsection{Ispitivanje komponenti}
@@ -40,7 +38,190 @@
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
+						\textbf{Test 1: Osnovne funkcije razreda User.}\\
+			U ovom testu provjeravamo hoće li naš razred u konstruktoru dobro "zapamtiti" vrijednosti parametara, koje kasnije dohvaćamo get metodama. Primjer korištenja je pri registraciji.
+			\begin{lstlisting}
+				@Test
+				void getterTest(){
+					User user = new User("korisnik1", "ime", "prezime", "lozinka", "ime.prezime@gmail.com", null, "COMPETITOR");
+					assertEquals("korisnik1", user.getUsername());
+					assertEquals("ime", user.getName());
+					assertEquals("prezime", user.getLastname());
+					assertEquals("lozinka", user.getPassword());
+					assertEquals("ime.prezime@gmail.com", user.getEmail());
+					assertEquals(null, user.getImage());
+					assertEquals(UserType.COMPETITOR, user.getUserType());	
+				}
+			\end{lstlisting}
+			
+			\textbf{Test 2: Osnove funkcije razreda Problem i Competition}\\
+			U ovom primjeru provjeravamo možemo li stvoriti novi problem (zadatak), novi competition (natjecanje) te možemo li dodati problem u competition. Primjer korištenja je pri stvaranju natjecanja, odabiremo koji zadatci će biti dio tog natjecanja.
+			\begin{lstlisting}
+				@Test
+				void competitionGetProblemsTest(){
+					Map<String,String> mapa = new HashMap<>();
+					mapa.put("ulaz", "izlaz");
+					
+					Problem problem = new Problem("1", "naslov", 5, "10:00", "text" , mapa, false, ProblemType.HARD);
+					User user = new User("korisnik1", "ime", "prezime", "lozinka", "ime.prezime@gmail.com", null, "COMPETITION_LEADER");
+					Set<Problem> set = new HashSet<>();
+					set.add(problem);
+					Competition competition = new Competition(user, LocalDateTime.now(), LocalDateTime.now(), set, null, false, false);
+					assertEquals(set, competition.getProblems());
+				}
+			\end{lstlisting}
+			
+			\textbf{Test 3: Provjera sličice pehara.}\\
+			U ovom primjeru provjeravamo slučaj kada neko natjecanje nema sličicu trofeja. Primjer korištenja je pri prikaza statistike natjecatelja. U slučaju da nema sličice pehara, prikazuje se "default" ikona pehara.
+			\begin{lstlisting}
+				@Test
+				void competitionNoTrophyPictureThrowsTest(){
+					Map<String,String> mapa = new HashMap<>();
+					mapa.put("ulaz", "izlaz");
+					
+					Problem problem = new Problem("1", "naslov", 5, "10:00", "text" , mapa, false, ProblemType.HARD);
+					User user = new User("korisnik1", "ime", "prezime", "lozinka", "ime.prezime@gmail.com", null, "COMPETITION_LEADER");
+					Set<Problem> set = new HashSet<>();
+					set.add(problem);
+					Competition competition = new Competition(user, LocalDateTime.now(), LocalDateTime.now(), set, null, false, false);
+					assertThrows(NullPointerException.class, () ->  competition.getTrophyPicture().getData());
+				}
+			\end{lstlisting}
+			
+			\textbf{Test 4: Provjera kompleksnijih funkcija sustava.}\\
+			U ovom primjeru provjeravamo može li baza podataka dohvatiti nekog korisnika. Provjeru radimo uspoređivanjem savedUser.id (nalazi se u bazi podataka) i jsonNode.get("id"). JsonNode je objekt koji predstavlja odgovor na naš get zahtjev na server, ta metoda bi trebala iz baze podataka dohvatiti korisnika s id-em. Nakon dohvata korisnika provjeravamo je li get metoda vratila točan podatak. 
+			\begin{lstlisting}
+				@Test
+				@DirtiesContext
+				void testGetUserById() throws Exception{
+					User user = new User("korisnik1", "ime", "prezime", "lozinka", "ime.prezime@gmail.com", null, "COMPETITION_LEADER");
+					userRepository.delete(user);
+					User savedUser = userRepository.save(user);
+					MvcResult result = mockMvc.perform(get("/users/byId/{id}", savedUser.getId()))
+					.andExpect(status().isOk())
+					.andReturn();
+					userRepository.deleteById(savedUser.getId());
+					
+					ObjectMapper objectMapper = new ObjectMapper();
+					JsonNode jsonNode = objectMapper.readTree(result.getResponse().getContentAsString());
+					
+					assertEquals(savedUser.getId(), jsonNode.get("id").asLong());
+				}
+			\end{lstlisting}
+			
+			\textbf{Test 5: Provjera put metode pri stvaranju korisnika.}\\
+			U ovom primjeru provjeravamo, slično kao u prošlom primjeru, hoće li get metoda vratiti dobrog korisnika. Korisnika ne upisujemo direktno u bazu v
+			\begin{lstlisting}
+				@Test
+				@DirtiesContext
+				void createUserTest() throws Exception{
+					MockMultipartFile file = new MockMultipartFile(
+					"image",           // Parametar "image" iz metode
+					"filename.jpg",    // Naziv datoteke
+					MediaType.IMAGE_JPEG_VALUE, // Tip datoteke
+					"file content".getBytes()   
+					);
+					
+					MvcResult resultFromCreateUser = mockMvc.perform(MockMvcRequestBuilders.multipart("/users")
+					.file(file)
+					.param("name", "ime2")
+					.param("lastname", "prezime2")
+					.param("username", "korisnik2")
+					.param("email", "ime.prezime2@gmail.com")
+					.param("password", "lozinka2")
+					.param("userType", "COMPETITION_LEADER"))
+					
+					.andExpect(status().isOk())
+					.andReturn();
+					
+					User userFromDatabase = userRepository.findByUsername("korisnik2");
+					
+					MvcResult resultFromGetUser = mockMvc.perform(get("/users/byId/{id}", userFromDatabase.getId()))
+					.andExpect(status().isOk())
+					.andReturn();
+					
+					
+					ObjectMapper objectMapper = new ObjectMapper();
+					JsonNode jsonNode = objectMapper.readTree(resultFromGetUser.getResponse().getContentAsString());
+					userRepository.delete(userFromDatabase);
+					assertEquals(userFromDatabase.getId(), jsonNode.get("id").asLong());
+				}
+			\end{lstlisting}
+			
+			\textbf{Test 6: Provjera uvjete za stvaranje korisnika.}\\
+			U ovom primjeru pokušavamo stvoriti dva korisnika s istim korisničkim imenom (što narušava integritet baze podataka) te provjeravamo hoće li nam server to dopustiti ili vratiti pogrešku. Primjer korištenja je pri prijavi korisnika.
+			\begin{lstlisting}
+				@Test
+				void uniqueUsernameTest() throws  Exception{
+					MockMultipartFile file = new MockMultipartFile(
+					"image",           // Parametar "image" iz metode
+					"filename.jpg",    // Naziv datoteke
+					MediaType.IMAGE_JPEG_VALUE, // Tip datoteke
+					"file content".getBytes()   
+					);
+					
+					MvcResult resultFromCreateUser = mockMvc.perform(MockMvcRequestBuilders.multipart("/users")
+					.file(file)
+					.param("name", "ime3")
+					.param("lastname", "prezime3")
+					.param("username", "korisnik3")
+					.param("email", "ime.prezime3@gmail.com")
+					.param("password", "lozinka3")
+					.param("userType", "COMPETITION_LEADER"))
+					
+					.andExpect(status().isOk())
+					.andReturn();
+					MvcResult resultFromCreateUser2 = mockMvc.perform(MockMvcRequestBuilders.multipart("/users")
+					.file(file)
+					.param("name", "ime3")
+					.param("lastname", "prezime3")
+					.param("username", "korisnik3")
+					.param("email", "ime.prezime4@gmail.com")
+					.param("password", "lozinka3")
+					.param("userType", "COMPETITION_LEADER"))
+					.andReturn();
+					ObjectMapper objectMapper = new ObjectMapper();
+					User userKojegBrisem = userRepository.findByUsername("korisnik3");
+					userRepository.deleteById(userKojegBrisem.getId());
+					assertTrue(resultFromCreateUser2.getResponse().getStatus() == 400);
+					
+				}	
+			\end{lstlisting}
+			
+			Primjer svih uspješno izvršenih testova:
+			\begin{figure}[H]
+				\includegraphics[scale=0.6]{slike/test1}
+				%veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\centering
+				\caption{Uspješno izvedeni testovi}
+				\label{fig:uspjeh}
+			\end{figure}
+			
+			Uzmimo za primjer Test 1, u slučaju da želimo simulirati pogrešno izršen test, umjesto koriskičkog imena "korisnik1" postat ćemo "korisnik"
+			Primjer neuspješno izvršenog testa:
+			\begin{figure}[H]
+				\includegraphics[scale=0.6]{slike/test2}
+				%veličina slike u odnosu na originalnu datoteku i pozicija slike
+				\centering
+				\caption{Ne uspješno izvedeni testovi}
+				\label{fig:neuspjeh}
+			\end{figure}
+			
+			\begin{lstlisting}
+				@Test
+				void getterTest(){
+					User user = new User("korisnik1", "ime", "prezime", "lozinka", "ime.prezime@gmail.com", null, "COMPETITOR");
+					assertEquals("korisnik", user.getUsername());
+					assertEquals("ime", user.getName());
+					assertEquals("prezime", user.getLastname());
+					assertEquals("lozinka", user.getPassword());
+					assertEquals("ime.prezime@gmail.com", user.getEmail());
+					assertEquals(null, user.getImage());
+					assertEquals(UserType.COMPETITOR, user.getUserType());	
+				}
+			\end{lstlisting}
+			
+			
 			 
 			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
 			 \begin{itemize}
