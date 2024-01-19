@@ -12,6 +12,14 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "code_submissions")
 public class CodeSub {
+
+    public boolean isVirtual() {
+        return isvirtual;
+    }
+
+    public boolean isVirtualNull(){
+        return isvirtual==null;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

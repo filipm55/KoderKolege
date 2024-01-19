@@ -59,7 +59,19 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             return Collections.emptyList();
         }
         List<CodeSub> submissions = codeSubRepository.findByCompetitionIdAndUsername(competitionId, username);
-        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = submissions.stream()
+
+        List<CodeSub> virtualSubmissions;
+        List<CodeSub> nonVirtualSubmissions;
+
+        virtualSubmissions = submissions.stream()
+                .filter((codeSub) -> !codeSub.isVirtualNull() && codeSub.isVirtual())
+                .collect(Collectors.toList());
+
+        nonVirtualSubmissions = submissions.stream()
+                .filter(codeSub->  codeSub.isVirtualNull() || !codeSub.isVirtual())
+                .collect(Collectors.toList());
+
+        Set<AbstractMap.SimpleEntry<BigDecimal, Integer>> pointsTimeSet = nonVirtualSubmissions.stream()
                 .filter(submission -> submission.getPoints() != null)
                 .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
                 .collect(Collectors.toSet());
@@ -102,6 +114,19 @@ public class CompSubmitServiceJpa implements CompSubmitService {
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);
         userRankDto.setUsername(username);
+
+        pointsTimeSet = virtualSubmissions.stream()
+                .filter(submission -> submission.getPoints() != null)
+                .map(submission -> new AbstractMap.SimpleEntry<>(submission.getPoints(), submission.getTime()))
+                .collect(Collectors.toSet());
+
+        totalPoints = pointsTimeSet.stream()
+                .map(pair -> {
+                    BigDecimal points = pair.getKey();
+                    int time = pair.getValue();
+                    return points.multiply(BigDecimal.valueOf(0.9)).add(points.multiply(BigDecimal.valueOf(0.1 * (totalTime - time) / (double) totalTime)));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         userRankDto.setPoints(totalPoints);
         int userRank = 1;
         for (VirtualCompRankDTO rankDto : virtualCompetitionRanks) {
