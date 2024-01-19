@@ -135,7 +135,7 @@ public class UserController {
             if (user.getUserType() == UserType.COMPETITOR) {
                 message += "\n" +
                         "Hvala vam što ste se registrirali. Vaš račun je još samo potrebno aktivirati preko priloženog linka i onda ste spremni za izazove natjecateljskog programiranja!\n" +
-                        "https://bytepitb-myjy.onrender.com//confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
+                        "https://bytepitb-myjy.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n" +
                         "Sretno kod rješavanja zadataka i neka kodovi budu u vašu korist!\n" +
                         "\n" +
                         "Tim BytePit" +
@@ -144,7 +144,7 @@ public class UserController {
 
             } else message += "\n" +
                     "Molimo Vas da potvrdite račun preko ovog linka \n" +
-                    "https://bytepitb-myjy.onrender.com//confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
+                    "https://bytepitb-myjy.onrender.com/confirm-registration?hash=" + user.getConfirmationHash() + "&email=" + user.getEmail() + "\n\n" +
                     "Međutim fali nam još samo jedan korak do cilja.Molimo pričekajte da Vas administrator potvrdi kao voditelja.\n" +
                     "Radujemo se našoj suradnji\n" +
                     "Tim BytePit";
