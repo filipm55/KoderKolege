@@ -97,7 +97,8 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             dto.setRank(((Long) rankRecord[3]).intValue()); // Safely converts Long to Integer
             virtualCompetitionRanks.add(dto);
         }
-        virtualCompetitionRanks.removeIf(dto -> dto.getUsername().equals(username));
+        System.out.println("IZBRISO SAM GA ? : " + virtualCompetitionRanks.removeIf(dto -> dto.getUsername().equals(username)));
+
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);
         userRankDto.setUsername(username);
@@ -111,6 +112,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
             }
         }
         userRankDto.setRank(userRank);
+        System.out.println("DODO SAM OVOG TU: " + userRankDto);
         virtualCompetitionRanks.add(userRank - 1, userRankDto);
         for (int i = userRank; i < virtualCompetitionRanks.size(); i++) {
             VirtualCompRankDTO dto = virtualCompetitionRanks.get(i);
