@@ -105,7 +105,7 @@ const CreateCompetition = () => {
         formData.append('isvirtual',Boolean(false));
         console.log(formData);
 
-        fetch('https://bytepitb-myjy.onrender.com//competitions', {
+        fetch('https://bytepitb-myjy.onrender.com/competitions', {
             method: 'POST',
             body: formData,
         }).then(response => {

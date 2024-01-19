@@ -83,7 +83,7 @@ const AddTask = () => {
         };
 
         console.log(JSON.stringify(requestData));
-        fetch('https://bytepitb-myjy.onrender.com//problems', {
+        fetch('https://bytepitb-myjy.onrender.com/problems', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

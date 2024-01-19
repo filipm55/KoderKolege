@@ -55,7 +55,7 @@ const Cal = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error} = useFetch('https://bytepitb-myjy.onrender.com//competitions');
+    const {data:competitions, error} = useFetch('https://bytepitb-myjy.onrender.com/competitions');
 
     function getRandomHexColor() {
         // Generate random RGB components

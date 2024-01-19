@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://bytepitb-myjy.onrender.com//",
+      target: "https://bytepitb-myjy.onrender.com/",
       changeOrigin: true,
       onProxyRes: function (proxyRes, req, res) {
         res.setHeader('Access-Control-Allow-Origin', 'https://bytepit-gxla.onrender.com/');

@@ -11,13 +11,13 @@ const Rank = () => {
     const [userData, setUserData] = useState(null);
     const cookies = new Cookies();
     const jwtToken = cookies.get('jwt_authorization');
-    const {data:competition, error} = useFetch(`https://bytepitb-myjy.onrender.com//competitions/competition/${competitionId}`);
+    const {data:competition, error} = useFetch(`https://bytepitb-myjy.onrender.com/competitions/competition/${competitionId}`);
 
     useEffect(() => {
         if (jwtToken) {
             const fetchData = async () => {
                 try {
-                    const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
+                    const url = `https://bytepitb-myjy.onrender.com/users/${jwtToken}`;
                     const response = await fetch(url);
                     const data = await response.json();
                     setUserData(data);
@@ -32,7 +32,7 @@ const Rank = () => {
 
     useEffect(() => {
         const fetchRanking = async () => {
-            const response = await fetch(`https://bytepitb-myjy.onrender.com//competitions/rank/${competitionId}`, {
+            const response = await fetch(`https://bytepitb-myjy.onrender.com/competitions/rank/${competitionId}`, {
                 method: 'POST',
             });
             const data = await response.json();

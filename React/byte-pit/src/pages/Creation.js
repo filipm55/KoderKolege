@@ -10,7 +10,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const Creation = () => {
 
-     const {data:tasks, error} =useFetch('https://bytepitb-myjy.onrender.com//problems');
+     const {data:tasks, error} =useFetch('https://bytepitb-myjy.onrender.com/problems');
 //u link ubaciti link za dohvat podataka o pojedinom zadatku
     //backend mora provjeravati i povezivati autora i zadatak?? moramo imat sa zadatka link na korisnika koji ga je objavio i obratno,
     // pri zahtjevu za dohvatom podataka o zadatku moraju tu biti i podaci o autoru (bar id i ime i prezime)
@@ -22,7 +22,7 @@ const Creation = () => {
         if (jwtToken) {    
           const fetchData = async () => {
             try {
-              const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
+              const url = `https://bytepitb-myjy.onrender.com/users/${jwtToken}`;
               const response = await fetch(url);
               const data = await response.json();
               setUserData(data); // Set user data fetched from the backend

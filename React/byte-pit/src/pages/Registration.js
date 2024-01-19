@@ -45,7 +45,7 @@ const Registration = () => {
             };
 
             // sendData('https://bytepitb-myjy.onrender.com//users', user);
-            fetch('https://bytepitb-myjy.onrender.com//users', {
+            fetch('https://bytepitb-myjy.onrender.com/users', {
                 method: 'POST',
                 body: formData,
             }).then(response => {

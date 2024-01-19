@@ -105,7 +105,7 @@ const EditTask = () => {
         };
 
         console.log(JSON.stringify(requestData));
-        fetch(`https://bytepitb-myjy.onrender.com//problems/${id}`, {
+        fetch(`https://bytepitb-myjy.onrender.com/problems/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

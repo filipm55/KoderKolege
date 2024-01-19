@@ -215,7 +215,7 @@ const fetchTime = async () => {
 
 
 
-      const submitResponse = await fetch(`https://bytepitb-myjy.onrender.com//submit/${taskId}`, {
+      const submitResponse = await fetch(`https://bytepitb-myjy.onrender.com/submit/${taskId}`, {
         method: 'POST',
         body: formData,
       });
@@ -236,7 +236,7 @@ const fetchTime = async () => {
 
       
         try {
-          const response = await fetch(`https://bytepitb-myjy.onrender.com//rank/${competitionId}/${userData.username}`, {
+          const response = await fetch(`https://bytepitb-myjy.onrender.com/rank/${competitionId}/${userData.username}`, {
               method: 'POST'
           });
   

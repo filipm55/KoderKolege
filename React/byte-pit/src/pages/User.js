@@ -46,7 +46,7 @@ const User = () => {
 
       const fetchData = async () => {
         try {
-          const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
+          const url = `https://bytepitb-myjy.onrender.com/users/${jwtToken}`;
           const response = await fetch(url);
           const data = await response.json();
           setUserData(data); // Set user data fetched from the backend
@@ -75,7 +75,7 @@ const User = () => {
 
     formData.append('password',password)
 
-    fetch(`https://bytepitb-myjy.onrender.com//users/${id}`, {
+    fetch(`https://bytepitb-myjy.onrender.com/users/${id}`, {
         method: 'PUT',
         body: formData,
     }).then(response => {
@@ -86,7 +86,7 @@ const User = () => {
     });
     }
     var obrisiKorisnika = (id) => {
-        fetch(`https://bytepitb-myjy.onrender.com//users/${id}`, {
+        fetch(`https://bytepitb-myjy.onrender.com/users/${id}`, {
             method: 'DELETE'
         })
             .then(response => {
@@ -132,11 +132,11 @@ const User = () => {
     }
     
     const { data: tasks, error: tasksError } = useFetch(
-      `https://bytepitb-myjy.onrender.com//problems/byMakerId/${id}`
+      `https://bytepitb-myjy.onrender.com/problems/byMakerId/${id}`
     );
 
     useEffect(() => {
-          fetch(`https://bytepitb-myjy.onrender.com//users/getAllResults/${id}`, {
+          fetch(`https://bytepitb-myjy.onrender.com/users/getAllResults/${id}`, {
             method: 'GET',
         }).then(response => {
             const contentType = response.headers.get('content-type');
@@ -162,7 +162,7 @@ const User = () => {
 
         
     const { data: stats, error: statsError } = useFetch(
-        `https://bytepitb-myjy.onrender.com//users/allactivity/${id}`
+        `https://bytepitb-myjy.onrender.com/users/allactivity/${id}`
       );
 
     const handleSortingChange = (e) => {
@@ -185,7 +185,7 @@ const User = () => {
 
     var mapa = new Map();
 
-    const {data:competitions, error2} = useFetch('https://bytepitb-myjy.onrender.com//competitions');
+    const {data:competitions, error2} = useFetch('https://bytepitb-myjy.onrender.com/competitions');
 
     function getRandomHexColor() {
         // Generate random RGB components

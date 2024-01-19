@@ -36,7 +36,7 @@ const SolvingATask = () => {
   useEffect(() => {
     const fetchTaskById = async () => {
       try {
-        const response = await fetch(`https://bytepitb-myjy.onrender.com//problems/${id}`);
+        const response = await fetch(`https://bytepitb-myjy.onrender.com/problems/${id}`);
         const task = await response.json();
 
         const [minutes, seconds] = task.duration.split(':');
@@ -72,7 +72,7 @@ useEffect(() => {
           if (jwtToken) {
               const fetchData = async () => {
                   try {
-                      const url = `https://bytepitb-myjy.onrender.com//users/${jwtToken}`;
+                      const url = `https://bytepitb-myjy.onrender.com/users/${jwtToken}`;
                       const response = await fetch(url);
                       const data = await response.json();
                       setUserData(data);
@@ -115,7 +115,7 @@ useEffect(() => {
             newSolution = solution.replace(oldClassName, newClassName);
         }
 
-      const response = await fetch(`https://bytepitb-myjy.onrender.com//solution/${id}`, {
+      const response = await fetch(`https://bytepitb-myjy.onrender.com/solution/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ useEffect(() => {
       formData.append('problem', task.id)
       formData.append('competition_id', "0")
 
-      const submitResponse = await fetch(`https://bytepitb-myjy.onrender.com//submit/${id}`, {
+      const submitResponse = await fetch(`https://bytepitb-myjy.onrender.com/submit/${id}`, {
         method: 'POST',
         body: formData,
       });
