@@ -197,10 +197,8 @@ class BytePitApplicationTests {
 						.param("userType", "COMPETITION_LEADER"))
 				.andReturn();
 		ObjectMapper objectMapper = new ObjectMapper();
-
-		//JsonNode jsonNode = objectMapper.readTree(resultFromCreateUser.getResponse().getContentAsString());
-		//userRepository.deleteById(jsonNode.get("id").asLong());
-
+		User userKojegBrisem = userRepository.findByUsername("korisnik3");
+		userRepository.deleteById(userKojegBrisem.getId());
 		assertTrue(resultFromCreateUser2.getResponse().getStatus() == 400);
 
 	}
