@@ -152,7 +152,7 @@ public class CompSubmitServiceJpa implements CompSubmitService {
 
         DecimalFormat df = new DecimalFormat("#.##");
         totalPoints = new BigDecimal(df.format(totalPoints));
-        virtualCompetitionRanks.removeIf(dto -> dto.getUsername().equals(username));
+
         VirtualCompRankDTO userRankDto = new VirtualCompRankDTO();
         userRankDto.setCompId(competitionId);
         userRankDto.setUsername(username);
