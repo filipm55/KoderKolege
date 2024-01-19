@@ -275,6 +275,8 @@ public class CompetitionController {
             //System.out.println(competitionId + " " + competition);
             LocalDateTime now = LocalDateTime.now();
             if(competition.getDateTimeOfBeginning().isAfter(now)){
+                System.out.println("matea je dodala ovo, sad: " + LocalDateTime.now());
+                System.out.println("vrijeme početka ntejcanja: "+competition.getDateTimeOfBeginning());
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
             Set<Problem> problems = competition.getProblems();
