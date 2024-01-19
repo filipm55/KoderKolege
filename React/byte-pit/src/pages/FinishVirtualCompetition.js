@@ -72,7 +72,7 @@ const FinishVirtualCompetition = () => {
                         [
                             <tr key={index}>
                                 <td>{row.rank}</td> {/* Rank */}
-                                <td><Link to={'/users/' + row.id}>{row.username}</Link></td>
+                                <td>{row.username}</td>
                                 <td>{row.points}</td> {/* Points */}
                             </tr>
                         ]
