@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.30)  18 JAN 2024 12:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.28)  19 JAN 2024 12:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1504,12 +1504,6 @@ dok vo-di-te-lja do-datno potvr[]duje
  []
 
 
-Overfull \hbox (21.40094pt too wide) in paragraph at lines 22--23
-[]\OT1/jkp/b/it/12 Voditelj \OT1/jkp/m/n/12 ima ve[]ce ov-lasti od na-tje-ca-te
--lja. U nje-go-vim ru-kama le[]zi za-da-tak u[]citavanja
- []
-
-
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
 (fancyhdr)                \setlength{\headheight}{14.49998pt}.
@@ -1523,39 +1517,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 26--28
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--32
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--36
-
- []
-
-<slike/edgar1.png, id=172, 963.6pt x 463.404pt>
-File: slike/edgar1.png Graphic file (type png)
-<use slike/edgar1.png>
-Package pdftex.def Info: slike/edgar1.png  used on input line 40.
-(pdftex.def)             Requested size: 385.43317pt x 185.35832pt.
-
-Overfull \hbox (12.96082pt too wide) in paragraph at lines 37--45
-\OT1/jkp/m/n/12 Ve[]c pos-toje[]ca apli-ka-cija vrlo sli[]cna ovoj je Ed-gar ko
-ji se ko-risti na FER-u za provo[]denje
- []
-
-
-Overfull \hbox (3.46416pt too wide) in paragraph at lines 37--45
-\OT1/jkp/m/n/12 is-pita i la-bo-ra-to-rij-skih vje[]zbi. S ob-zi-rom na to da j
-e svrha te apli-ka-cije ipak druga[]cija
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--45
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
@@ -1568,15 +1540,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 46--49
+<slike/edgar1.png, id=178, 963.6pt x 463.404pt>
+File: slike/edgar1.png Graphic file (type png)
+<use slike/edgar1.png>
+Package pdftex.def Info: slike/edgar1.png  used on input line 41.
+(pdftex.def)             Requested size: 385.43317pt x 185.35832pt.
+
+Overfull \hbox (12.96082pt too wide) in paragraph at lines 38--46
+\OT1/jkp/m/n/12 Ve[]c pos-toje[]ca apli-ka-cija vrlo sli[]cna ovoj je Ed-gar ko
+ji se ko-risti na FER-u za provo[]denje
+ []
+
+
+Overfull \hbox (3.46416pt too wide) in paragraph at lines 38--46
+\OT1/jkp/m/n/12 is-pita i la-bo-ra-to-rij-skih vje[]zbi. S ob-zi-rom na to da j
+e svrha te apli-ka-cije ipak druga[]cija
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--46
 
  []
 
-<slike/edgar3.png, id=182, 963.6pt x 452.673pt>
-File: slike/edgar3.png Graphic file (type png)
-<use slike/edgar3.png>
-Package pdftex.def Info: slike/edgar3.png  used on input line 55.
-(pdftex.def)             Requested size: 385.43317pt x 181.066pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--50
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1590,15 +1580,20 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.61 		
+l.50 		
         <./slike/edgar1.png>]
-<slike/edgar2.png, id=192, 963.6pt x 464.718pt>
+<slike/edgar3.png, id=190, 963.6pt x 452.673pt>
+File: slike/edgar3.png Graphic file (type png)
+<use slike/edgar3.png>
+Package pdftex.def Info: slike/edgar3.png  used on input line 56.
+(pdftex.def)             Requested size: 385.43317pt x 181.066pt.
+<slike/edgar2.png, id=191, 963.6pt x 464.718pt>
 File: slike/edgar2.png Graphic file (type png)
 <use slike/edgar2.png>
-Package pdftex.def Info: slike/edgar2.png  used on input line 63.
+Package pdftex.def Info: slike/edgar2.png  used on input line 64.
 (pdftex.def)             Requested size: 385.43317pt x 185.88391pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--73
+Underfull \hbox (badness 10000) in paragraph at lines 71--74
 
  []
 
@@ -1615,23 +1610,23 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.73 		
+l.74 		
        
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.73 		
+l.74 		
         <./slike/edgar3.png> <./slike/edgar2.png>]
-<slike/cf1.png, id=203, 707.64375pt x 563.10374pt>
+<slike/cf1.png, id=202, 707.64375pt x 563.10374pt>
 File: slike/cf1.png Graphic file (type png)
 <use slike/cf1.png>
-Package pdftex.def Info: slike/cf1.png  used on input line 75.
+Package pdftex.def Info: slike/cf1.png  used on input line 76.
 (pdftex.def)             Requested size: 283.05249pt x 225.2375pt.
-<slike/cf2.png, id=204, 729.47531pt x 632.3625pt>
+<slike/cf2.png, id=203, 729.47531pt x 632.3625pt>
 File: slike/cf2.png Graphic file (type png)
 <use slike/cf2.png>
-Package pdftex.def Info: slike/cf2.png  used on input line 83.
+Package pdftex.def Info: slike/cf2.png  used on input line 84.
 (pdftex.def)             Requested size: 291.78496pt x 252.94052pt.
 
 
@@ -1647,9 +1642,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.89 		
+l.90 		
         <./slike/cf1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 90--93
+Underfull \hbox (badness 10000) in paragraph at lines 91--94
 
  []
 
@@ -1666,7 +1661,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5})
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.94 		\eject
+l.95 		\eject
               <./slike/cf2.png>])
 \openout2 = `Specifikacija_programske_potpore.aux'.
 
@@ -2747,7 +2742,7 @@ Here is how much of TeX's memory you used:
  41344 multiletter control sequences out of 15000+600000
  634337 words of font info for 201 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 86i,13n,115p,1223b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,13n,115p,1229b,2394s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
@@ -2758,7 +2753,7 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (56 pages, 6663552 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (56 pages, 6664132 bytes).
 PDF statistics:
  910 PDF objects out of 1000 (max. 8388607)
  785 compressed objects within 8 object streams
