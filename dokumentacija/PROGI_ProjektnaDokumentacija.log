@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.28)  19 JAN 2024 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.28)  19 JAN 2024 15:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2683,7 +2683,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 58--59
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
 
  []
 
@@ -2703,7 +2712,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[54]
+[55]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2712,8 +2721,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[55]
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
@@ -2726,7 +2735,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[56] 
+[57] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PROGI_ProjektnaDokumentacija.aux (./Dnevnik_promjena_dokumentacije.aux)
 (./Opis_projektnog_zadatka.aux) (./Specifikacija_programske_potpore.aux)
@@ -2745,8 +2754,8 @@ anged.
 ### simple group (level 1) entered at line 351 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 19980 strings out of 474398
- 345672 string characters out of 5754205
+ 19984 strings out of 474398
+ 345703 string characters out of 5754205
  2063036 words of memory out of 5000000
  41344 multiletter control sequences out of 15000+600000
  634337 words of font info for 201 fonts, out of 8000000 for 9000
@@ -2762,10 +2771,10 @@ dist/fonts/type1/public/kpfonts/jkpmi.pfb><c:/texlive/2023/texmf-dist/fonts/typ
 e1/public/kpfonts/jkpmit8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/k
 pfonts/jkpmn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/kpfonts/jkptt
 mn8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on PROGI_ProjektnaDokumentacija.pdf (57 pages, 6665462 bytes).
+Output written on PROGI_ProjektnaDokumentacija.pdf (58 pages, 6666508 bytes).
 PDF statistics:
- 918 PDF objects out of 1000 (max. 8388607)
- 792 compressed objects within 8 object streams
- 356 named destinations out of 1000 (max. 500000)
+ 926 PDF objects out of 1000 (max. 8388607)
+ 799 compressed objects within 8 object streams
+ 360 named destinations out of 1000 (max. 500000)
  324 words of extra memory for PDF output out of 10000 (max. 10000000)
 
